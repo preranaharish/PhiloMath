@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:background="@drawable/back"-->
+<!--    tools:context=".Word_Result">-->
+<!--    <ScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent">-->
+
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent">-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:focusableInTouchMode="true"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cv_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:contentPaddingBottom="1dp"
+            app:contentPaddingRight="2dp"
+            app:contentPaddingLeft="2dp"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="5dp"
+            android:soundEffectsEnabled="true"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            app:cardUseCompatPadding="true"
+            >
+            <!--    <android.support.constraint.ConstraintLayout-->
+            <!--        android:layout_width="match_parent"-->
+            <!--        android:layout_height="match_parent">-->
+            <!--        <TextView-->
+            <!--            android:id="@+id/tv_profession"-->
+            <!--            android:layout_width="wrap_content"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:layout_marginLeft="8dp"-->
+            <!--            android:layout_marginEnd="5dp"-->
+            <!--            android:layout_marginStart="5dp"-->
+            <!--            android:text="TextView"-->
+            <!--            android:layout_marginBottom="8dp"-->
+            <!--            android:paddingBottom="1dp"-->
+            <!--            app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--            app:layout_constraintTop_toBottomOf="@+id/tv_phone" />-->
+
+            <TextView
+                android:id="@+id/letter"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginBottom="100dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/oval"
+                android:gravity="center"
+                android:maxHeight="2dp"
+                android:textColor="@android:color/white"
+                android:textSize="35dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/word"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="60dp"
+                android:paddingTop="20dp"
+                android:text="Word"
+                android:textAllCaps="true"
+                android:textSize="24dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/meaning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="100dp"
+                android:paddingTop="30dp"
+                android:text="Meaning"
+                android:paddingBottom="15dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="19dp"
+              />
+            //app:layout_constraintLeft_toLeftOf="parent"
+            //app:layout_constraintTop_toTopOf="parent" />
+
+
+            <!--    <TextView-->
+            <!--        android:id="@+id/meaning"-->
+            <!--        android:layout_width="match_parent"-->
+            <!--        android:layout_height="180dp"-->
+            <!--    android:textColor="@android:color/black"-->
+            <!--        android:text="Meaning"-->
+            <!--        android:gravity="center"-->
+            <!--        android:textStyle="bold"-->
+            <!--        android:textSize="30dp"-->
+            <!--        />-->
+            <!--    <TextView-->
+            <!--        android:layout_width="match_parent"-->
+            <!--        android:layout_height="100dp"-->
+            <!--        android:layout_below="@id/meaning"-->
+            <!--        android:text="Example"-->
+            <!--        android:id="@+id/example"-->
+            <!--        android:textSize="25dp"-->
+
+
+            <!--        android:gravity="center"-->
+
+            <!--        android:textColor="@android:color/black"-->
+            <!--        />-->
+
+            <!--    <android.support.v7.widget.CardView-->
+            <!--        xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
+            <!--        android:id="@+id/card_view"-->
+            <!--        android:layout_below="@+id/example"-->
+            <!--        android:layout_gravity="center"-->
+            <!--        android:layout_width="200dp"-->
+            <!--        android:layout_height="100dp"-->
+            <!--        app:cardUseCompatPadding="true"-->
+            <!--        android:background="@drawable/back"-->
+            <!--        card_view:cardCornerRadius="4dp">-->
+
+            <!--        <TextView-->
+            <!--            android:id="@+id/info_text"-->
+            <!--            android:text="CAT"-->
+            <!--            android:textSize="20dp"-->
+
+            <!--            android:textAlignment="center"-->
+            <!--            android:background="@drawable/back"-->
+            <!--            android:textColor="@android:color/black"-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="match_parent" />-->
+            <!--        <TextView-->
+            <!--            android:layout_width="wrap_content"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:layout_gravity="center"-->
+            <!--            android:text="25%"-->
+            <!--            android:textColor="@android:color/black"-->
+            <!--            android:textSize="25dp"/>-->
+            <!--    </android.support.v7.widget.CardView>-->
+            <!--    <android.support.v7.widget.CardView-->
+            <!--        xmlns:card_view="http://schemas.android.com/apk/res-auto"-->
+            <!--        android:id="@+id/card_view1"-->
+            <!--      android:layout_toRightOf="@+id/card_view"-->
+            <!--        android:layout_below="@+id/example"-->
+            <!--        android:layout_width="match_parent"-->
+            <!--        android:layout_height="100dp"-->
+            <!--        app:cardUseCompatPadding="true"-->
+            <!--        android:background="@drawable/back"-->
+            <!--        card_view:cardCornerRadius="4dp">-->
+
+            <!--        <TextView-->
+            <!--            android:id="@+id/info_text1"-->
+            <!--            android:text="GRE"-->
+            <!--            android:textSize="20dp"-->
+            <!--            android:background="@drawable/back"-->
+            <!--            android:textAlignment="center"-->
+            <!--            android:textColor="@android:color/black"-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="match_parent" />-->
+            <!--        <TextView-->
+            <!--            android:layout_width="wrap_content"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:layout_gravity="center"-->
+            <!--            android:text="75%"-->
+            <!--            android:textColor="@android:color/black"-->
+            <!--            android:textSize="25dp"/>-->
+            <!--    </android.support.v7.widget.CardView>-->
+            <!--    <TextView-->
+            <!--        android:layout_below="@id/card_view"-->
+            <!--        android:layout_width="match_parent"-->
+            <!--        android:layout_height="70dp"-->
+            <!--        android:text="Synonyms:"-->
+            <!--        android:textSize="30dp"-->
+            <!--        android:id="@+id/synonym"-->
+            <!--        android:textColor="@android:color/black"/>-->
+
+            <!--    <TextView-->
+            <!--        android:layout_width="match_parent"-->
+            <!--        android:layout_height="70dp"-->
+            <!--        android:layout_below="@+id/synonym"-->
+            <!--        android:text="Importance Probability"-->
+            <!--        android:textColor="@android:color/black"-->
+            <!--        android:id="@+id/imp"-->
+            <!--        android:background="@drawable/rounded_edittext"-->
+            <!--        android:gravity="center"/>-->
+            <!--    <EditText-->
+            <!--        android:layout_width="match_parent"-->
+            <!--        android:layout_height="50dp"-->
+            <!--        android:layout_below="@id/imp"-->
+            <!--        android:id="@+id/addition_note"-->
+            <!--        android:textColor="@android:color/white"-->
+            <!--        android:hint="Additional notes of User"-->
+            <!--        android:textColorHint="@android:color/white"-->
+            <!--        android:textStyle="italic"-->
+            <!--        />-->
+            <!--    <Button-->
+            <!--        android:layout_width="match_parent"-->
+            <!--        android:layout_height="match_parent"-->
+            <!--        android:layout_below="@id/addition_note"-->
+            <!--        android:text="SAVE"-->
+            <!--        android:id="@+id/btnSave1"-->
+            <!--        />-->
+            <!--    </RelativeLayout>-->
+            <!--    </ScrollView>-->
+            <!--    </android.support.constraint.ConstraintLayout>-->
+
+        </android.support.v7.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/example"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:paddingTop="10dp"
+            android:text="Example"
+            android:textAllCaps="false"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            android:layout_below="@+id/cv_user"/>
+
+        <TextView
+            android:id="@+id/examplesentence"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:paddingTop="10dp"
+            android:text="The example sentence of the word"
+            android:textAllCaps="false"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:layout_below="@+id/example"/>
+
+        <TextView
+            android:id="@+id/synonyms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:paddingTop="25dp"
+            android:text="Synonyms"
+            android:textAllCaps="false"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            android:layout_below="@+id/examplesentence"/>
+        <TextView
+            android:id="@+id/synonymsword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="10dp"
+            android:paddingTop="10dp"
+            android:text="Synonym1, Synonym2,Synonym3"
+            android:textAllCaps="false"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:layout_below="@+id/synonyms"/>
+
+        <ImageView
+            android:id="@+id/edit"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/synonymsword"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="46dp"
+            android:layout_marginBottom="100dp"
+            android:maxHeight="2dp"
+            android:src="@drawable/editicon" />
+
+        <EditText
+            android:id="@+id/editbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Additional Details"
+            android:layout_below="@+id/synonymsword"
+            android:layout_toRightOf="@+id/edit"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:focusedByDefault="false"
+            android:maxHeight="400dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CLICK ON THE EXAM FOR DETAILED ANALYSIS OF THE WORD"
+            android:layout_below="@+id/editbox"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textColor="@android:color/holo_red_light"/>
+
+
+
+    <ProgressBar
+        android:id="@+id/CAT"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/editbox"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="55dp"
+        android:max="100"
+        android:progress="50"
+        android:progressDrawable="@drawable/circular"
+        android:clickable="true"
+        android:onClick="TakeToGraph"
+        android:secondaryProgress="100" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editbox"
+        android:text="50"
+        android:textSize="25dp"
+        android:id="@+id/tv"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="90dp"
+        android:layout_marginLeft="100dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/CAT"
+        android:text="CAT"
+        android:id="@+id/cattext"
+        android:textSize="15dp"
+        android:layout_marginLeft="115dp"
+        android:layout_marginTop="10dp"/>
+    <ProgressBar
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:id="@+id/gre"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_below="@id/editbox"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="55dp"
+        android:max="100"
+        android:progress="50"
+        android:progressDrawable="@drawable/circular1"
+        android:secondaryProgress="100"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/CAT"
+        android:text="GRE/GMAT"
+        android:textSize="15dp"
+        android:layout_marginLeft="265dp"
+        android:layout_marginTop="10dp"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/cattext"
+            android:text="SAVE"
+            android:textColor="@android:color/white"
+            android:id="@+id/btnSave1"/>
+</RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

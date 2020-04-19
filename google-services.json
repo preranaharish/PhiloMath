@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "631805374046",
+    "firebase_url": "https://philomath-7b2c7.firebaseio.com",
+    "project_id": "philomath-7b2c7",
+    "storage_bucket": "philomath-7b2c7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:631805374046:android:80be0b91360066a8dbcecf",
+        "android_client_info": {
+          "package_name": "com.rahulbuilds.philomath"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "631805374046-f1csjibbhjaupdh392dfgvhl089e7t60.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAhG8eIC6UdVbq8Jbl-vTyKzOed-l5YVA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "631805374046-f1csjibbhjaupdh392dfgvhl089e7t60.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

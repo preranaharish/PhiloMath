@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Philomath</string>
+
+    <string name="sett_reminder_header">Set Notifications</string>
+    <string name="sett_reminder_label">Notify Me</string>
+    <string name="sett_reminder_desc">We will remind you the entiries of new words you Learnt!!! Keep Learning :)</string>
+    <string name="sett_reminder_time_label">Set Reminder Time</string>
+    <string name="sett_reminder_time_content">8 : 00 PM</string>
+
+</resources>
