@@ -1,22 +1,13 @@
 package com.rahulbuilds.philomath;
-import android.support.v7.app.AppCompatActivity;
-import android.widget.EditText;
 
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.rahulbuilds.philomath.DBHelper;
-import com.rahulbuilds.philomath.MainActivity;
-import com.rahulbuilds.philomath.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,13 +19,8 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
-
-public class add extends AppCompatActivity {
-    EditText name;
-    EditText meaning;
-    EditText Examples;
-    Button saveBtn;
-    Intent intent;
+public class HomeScreen extends AppCompatActivity {
+    TextView w1,w2,w3,w4;
     String myurl;
     String def;
     CharSequence text;
@@ -45,46 +31,67 @@ public class add extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add);
-         text = getIntent()
-                .getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT);
-
-        name = (EditText)findViewById(R.id.txtName);
-        name.setText(text);
-        meaning = (EditText)findViewById(R.id.txtLocation);
-        Examples = (EditText)findViewById(R.id.examples);
-        saveBtn = (Button)findViewById(R.id.btnSave);
-
-        saveBtn.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.activity_home_screen);
+       w1=(TextView)findViewById(R.id.word1);
+       w2=(TextView)findViewById(R.id.word2);
+       w3=(TextView)findViewById(R.id.word3);
+       w4=(TextView)findViewById(R.id.word4);
+       w1.setText("Ostentatious");
+       w2.setText("Sacrosanct");
+       w3.setText("Ostensible");
+       w4.setText("Catastrophic");
+        Button button = (Button)findViewById(R.id.skip);
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String word1 = name.getText().toString()+"\n";
-                String mean1 = meaning.getText().toString();
-                if(word1.equals("\n") | mean1.isEmpty()){
-                    Toast.makeText(getApplicationContext(),"Provide word and meaning",Toast.LENGTH_LONG).show();
-                }
-                else {
-                    DBHelper dbHandler = new DBHelper(add.this);
-                    dbHandler.insertUserDetails(word1, mean1,Examples.getText().toString());
-                    intent = new Intent(add.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                    Toast.makeText(getApplicationContext(), "Word Registered", Toast.LENGTH_SHORT).show();
-                }
+                Skip(v);
             }
         });
     }
-    public void clicked(View view){
-
-        String word1 = name.getText().toString();
+    public void Skip(View view){
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+    public void card1(View view){
+        String word1 = w1.getText().toString();
         if(word1.isEmpty()){
-            Toast.makeText(getApplicationContext(),"Provide word to search",Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_LONG).show();
         }
         else{
-            Toast.makeText(this,"Searching "+word1.toUpperCase()+ " in Oxford Dictonary",Toast.LENGTH_LONG).show();
-            new CallbackTask().execute(dictionaryEntries(word1));
+            Toast.makeText(this,"Revealing "+word1.toUpperCase()+ "Please Wait",Toast.LENGTH_LONG).show();
+            new HomeScreen.CallbackTask().execute(dictionaryEntries(word1));
         }
-
+    }
+    public void card2(View view){
+        String word1 = w2.getText().toString();
+        if(word1.isEmpty()){
+            Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_LONG).show();
+        }
+        else{
+            Toast.makeText(this,"Revealing "+word1.toUpperCase()+ "Please Wait",Toast.LENGTH_LONG).show();
+            new HomeScreen.CallbackTask().execute(dictionaryEntries(word1));
+        }
+    }
+    public void card3(View view){
+        String word1 = w3.getText().toString();
+        if(word1.isEmpty()){
+            Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_LONG).show();
+        }
+        else{
+            Toast.makeText(this,"Revealing "+word1.toUpperCase()+ " please Wait",Toast.LENGTH_LONG).show();
+            new HomeScreen.CallbackTask().execute(dictionaryEntries(word1));
+        }
+    }
+    public void card4(View view){
+        String word1 = w4.getText().toString();
+        if(word1.isEmpty()){
+            Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_LONG).show();
+        }
+        else{
+            Toast.makeText(this,"Revealing "+word1.toUpperCase()+ "Please Wait",Toast.LENGTH_LONG).show();
+            new HomeScreen.CallbackTask().execute(dictionaryEntries(word1));
+        }
     }
     private String dictionaryEntries(String word) {
         final String language = "en-gb";
@@ -140,13 +147,11 @@ public class add extends AppCompatActivity {
                 JSONObject jsonObject4 = js3.getJSONObject(0);
                 JSONArray js4 = jsonObject4.getJSONArray("definitions");
                 def = js4.getString(0);
-                meaning.setText(def);
                 try {
                     JSONObject jsonObject5 = js3.getJSONObject(0);
                     JSONArray js5 = jsonObject5.getJSONArray("examples");
                     JSONObject jsonObject6 = js5.getJSONObject(0);
                     def1 = jsonObject6.getString("text");
-                    Examples.setText(def1);
                     JSONArray js6 = jsonObject5.getJSONArray("synonyms");
                     try {
                         JSONObject jsonObject7 = js6.getJSONObject(0);
@@ -177,8 +182,8 @@ public class add extends AppCompatActivity {
                 if(synonyms==null){
                     synonyms="synonyms not found";
                 }
-                Intent intent = new Intent(add.this, Word_Result.class);
-                intent.putExtra("word",name.getText().toString());
+                Intent intent = new Intent(HomeScreen.this, Word_Result.class);
+                intent.putExtra("word",w1.getText().toString());
                 intent.putExtra("meaning",def);
                 intent.putExtra("example",def1);
                 intent.putExtra("synonyms",synonyms);
@@ -188,7 +193,6 @@ public class add extends AppCompatActivity {
                 intent.putExtra("synonyms_array3",synonyms_array[2]);
                 intent.putExtra("synonyms_array4",synonyms_array[3]);
                 startActivity(intent);
-                finish();
 
             }catch(JSONException e){
                 e.printStackTrace();
@@ -197,5 +201,4 @@ public class add extends AppCompatActivity {
             System.out.println(result);
         }
     }
-
 }

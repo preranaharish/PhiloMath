@@ -96,11 +96,7 @@ public class Word_Result extends AppCompatActivity {
         mProgress.setSecondaryProgress(100); // Secondary Progress
         mProgress.setMax(100); // Maximum Progress
         mProgress.setProgressDrawable(drawable);
-
-      ObjectAnimator animation = ObjectAnimator.ofInt(mProgress, "progress", 0, 100);
-        animation.setDuration(10000);
-        animation.setInterpolator(new DecelerateInterpolator());
-        animation.start();
+        
 
         tv = (TextView) findViewById(R.id.tv);
         new Thread(new Runnable() {

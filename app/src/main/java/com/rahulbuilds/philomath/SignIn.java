@@ -14,8 +14,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -77,7 +79,10 @@ public class SignIn extends AppCompatActivity {
         };
         signInButton = (SignInButton) findViewById(R.id.sign_in_button);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestId()
+                .requestIdToken("62767728397-r1n46d335nppbu24olhp7j4r35lrpveo.apps.googleusercontent.com")
+                .requestScopes(new Scope(Scopes.PLUS_LOGIN))
+                .requestScopes(new Scope(Scopes.PLUS_ME))
                 .requestEmail()
                 .build();
 
