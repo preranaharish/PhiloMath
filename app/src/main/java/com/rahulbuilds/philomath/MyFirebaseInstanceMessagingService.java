@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -27,7 +28,6 @@ public class MyFirebaseInstanceMessagingService extends FirebaseMessagingService
             String title,message,img_url;
             title = remoteMessage.getData().get("title");
             message = remoteMessage.getData().get("message");
-            img_url = remoteMessage.getData().get("img_url");
             Intent intent = new Intent(this, MainActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
             Uri sounduri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
@@ -37,21 +37,14 @@ public class MyFirebaseInstanceMessagingService extends FirebaseMessagingService
             notification_Builder.setContentIntent(pendingIntent);
             notification_Builder.setSound(sounduri);
             notification_Builder.setSmallIcon(R.drawable.icon);
-            ImageRequest imageRequest = new ImageRequest(img_url, new Response.Listener<Bitmap>() {
-                @Override
-                public void onResponse(Bitmap response) {
-                notification_Builder.setStyle(new NotificationCompat.BigPictureStyle().bigPicture(response));
-                    NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                    notificationManager.notify(0, notification_Builder.build());
-                }
-            }, 0, 0, null, Bitmap.Config.RGB_565, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-
-                }
-            });
-
 
         }
+    }
+    @Override
+    public void onNewToken(String token) {
+       Log.d("Token:",token);
+        // If you want to send messages to this application instance or
+        // manage this apps subscriptions on the server side, send the
+        // Instance ID token to your app server.
     }
 }
