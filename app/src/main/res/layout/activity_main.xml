@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/back"
     tools:context="com.rahulbuilds.philomath.MainActivity">
 
     <include
@@ -40,7 +41,7 @@
             android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp"
             android:layout_marginTop="2dp"
-            android:layoutAnimation="@anim/layout_animation_fall_down">
+            android:layoutAnimation="@anim/animation_recycler">
 
         </android.support.v7.widget.RecyclerView>
 

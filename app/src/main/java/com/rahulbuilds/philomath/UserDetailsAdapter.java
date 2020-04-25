@@ -99,9 +99,8 @@ public class UserDetailsAdapter extends RecyclerView.Adapter<UserDetailsAdapter.
                                 String word = userDetails.getName();
                                 Intent intent = new Intent("message_subject_intent");
                                 intent.putExtra("name" , String.valueOf(word));
+                                intent.putExtra("pos",position);
                                 LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
-                                notifyDataSetChanged();
-                                notifyItemChanged(position);
                                 break;
                         }
                         return false;
