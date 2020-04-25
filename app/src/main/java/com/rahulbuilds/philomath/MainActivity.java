@@ -142,6 +142,11 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemL
         });
         layoutManager = new LinearLayoutManager(this);
         userAdapter = new UserDetailsAdapter(userDetailsList,this);
+        final LayoutAnimationController controller =
+                AnimationUtils.loadLayoutAnimation(this, R.anim.animation_recycler);
+
+        recyclerView.setLayoutAnimation(controller);
+        recyclerView.scheduleLayoutAnimation();
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(userAdapter);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener()
@@ -261,16 +266,21 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemL
         @Override
         public void onReceive(Context context, Intent intent) {
             String name= intent.getStringExtra("name");
-            delete(name);
+            int position = intent.getIntExtra("pos",0);
+            delete(name,position);
         }
     };
-    public void delete(String word){
+    public void delete(String word,int pos){
              DBHelper dbHandler = new DBHelper(MainActivity.this);
            SQLiteDatabase sqlDB = dbHandler.getWritableDatabase();
               Cursor cursor = sqlDB.rawQuery("Delete FROM words WHERE name = ?", new String[]{ word });
         if (cursor != null && cursor.moveToFirst()) {
                 }
+
+
+        userAdapter.notifyItemRemoved(pos);
         userAdapter.notifyDataSetChanged();
+    
              Toast.makeText(MainActivity.this,word.toUpperCase() +"  will be deleted",Toast.LENGTH_LONG).show();
     }
 

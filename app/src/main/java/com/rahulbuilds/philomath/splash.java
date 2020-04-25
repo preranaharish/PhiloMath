@@ -15,7 +15,7 @@ public class splash extends AppCompatActivity {
             public void run() {
                 try {
                     Thread.sleep(1500);
-                    Intent intent = new Intent(splash.this,MainActivity.class);
+                    Intent intent = new Intent(splash.this,HomeScreen.class);
                     startActivity(intent);
                     finish();
                 }catch (InterruptedException e){
