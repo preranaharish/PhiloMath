@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        recyclerView = (RecyclerView) findViewById(R.id.rv_users);
+        recyclerView = (RecyclerView) findViewById(R.id.rv_users1);
          toolbar = findViewById(R.id.tool_bar);
         toolbar.setTitle("Philomath");
         setSupportActionBar(toolbar);
@@ -280,7 +280,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemL
 
         userAdapter.notifyItemRemoved(pos);
         userAdapter.notifyDataSetChanged();
-    
+
              Toast.makeText(MainActivity.this,word.toUpperCase() +"  will be deleted",Toast.LENGTH_LONG).show();
     }
 

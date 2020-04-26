@@ -68,6 +68,7 @@ public class SignIn extends AppCompatActivity {
                         SharedPreferences prefs = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
                         SharedPreferences.Editor editor = prefs.edit();
                         editor.putString(KEY_NAME, username);
+                        editor.putString("Email",umail);
                         editor.apply();
 
                     }
@@ -113,6 +114,13 @@ public class SignIn extends AppCompatActivity {
         mAuth.addAuthStateListener(mAuthlistener);
 
     }
+    private void signOut() {
+        // Firebase sign out
+        mAuth.signOut();
+
+        // Google sign out
+
+    }
 
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleapiclient);
@@ -153,5 +161,7 @@ public class SignIn extends AppCompatActivity {
                     }
                 });
 
+
     }
+
 }

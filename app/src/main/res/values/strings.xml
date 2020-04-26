@@ -6,5 +6,18 @@
     <string name="sett_reminder_desc">We will remind you the entiries of new words you Learnt!!! Keep Learning :)</string>
     <string name="sett_reminder_time_label">Set Reminder Time</string>
     <string name="sett_reminder_time_content">8 : 00 PM</string>
+    <string name="title_activity_list_of_words">ListOfWords</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Philomath</string>
+    <string name="menu_gallery">Quiz</string>
+    <string name="menu_slideshow">Highscore</string>
+
+    <string name="home_second">Home Second</string>
 
 </resources>

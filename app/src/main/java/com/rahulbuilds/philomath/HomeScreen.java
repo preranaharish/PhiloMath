@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,7 +51,7 @@ public class HomeScreen extends AppCompatActivity {
         });
     }
     public void Skip(View view){
-        Intent intent = new Intent(this,MainActivity.class);
+        Intent intent = new Intent(this,ListOfWords.class);
         startActivity(intent);
         finish();
     }

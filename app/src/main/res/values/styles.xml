@@ -56,6 +56,12 @@
         <item name="colorControlHighlight">@color/colorAccent</item>
         <item name="colorAccent">@color/colorPrimary</item>
     </style>
+    <style name="NoActionBar" parent="Theme.AppCompat">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
 </resources>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/quizbg"
+    tools:context="com.rahulbuilds.philomath.MainQuiz">
+
+    <TextView
+        android:id="@+id/text_view_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Score: 0"
+        android:textColor="@android:color/holo_red_light"
+        android:freezesText="true"/>
+
+    <TextView
+        android:id="@+id/text_view_question_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_view_score"
+        android:text="Question: 1/x"
+        android:textColor="@android:color/holo_red_dark"
+        android:freezesText="true"/>
+
+    <TextView
+        android:id="@+id/text_view_countdown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:text="00:30"
+        android:textColor="@android:color/holo_green_light"
+        android:textSize="40sp"
+        android:freezesText="true"/>
+    <TextView
+        android:id="@+id/text_view_question"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:maxLines = "100"
+
+        android:scrollbars = "vertical"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/text_view_countdown"
+        android:freezesText="true"
+        android:text="Here will be the question text\nHere will be the question text\nHere will be the question text"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:textSize="25dp" />
+
+
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_below="@+id/text_view_question"
+        android:background="#66000000">
+
+        <RadioButton
+            android:id="@+id/radio_button1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:freezesText="true"
+            android:paddingTop="10dp"
+            android:text="Option 1"
+            android:textColor="#ffb300"
+            android:buttonTint="#e75748"
+            android:textStyle="bold"
+            android:textSize="30sp" />
+
+        <RadioButton
+            android:id="@+id/radio_button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Option 2"
+            android:freezesText="true"
+            android:paddingTop="10dp"
+            android:textColor="#ffb300"
+            android:buttonTint="#e75748"
+            android:textStyle="bold"
+            android:textSize="30sp"/>
+
+        <RadioButton
+            android:id="@+id/radio_button3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:freezesText="true"
+            android:paddingTop="10dp"
+            android:text="Option 3"
+            android:textColor="#ffb300"
+            android:buttonTint="#e75748"
+            android:textStyle="bold"
+            android:textSize="30sp" />
+
+    </RadioGroup>
+
+
+    <Button
+        android:id="@+id/button_confirm_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/text_view_countdown"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/text_view_countdown"
+        android:background="@drawable/gradient3"
+        android:text="Confirm"
+        android:textStyle="bold" />
+</RelativeLayout>
