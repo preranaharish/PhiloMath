@@ -10,7 +10,7 @@
     <color name="colorControlHighlight">#ff726f</color>
     <color name="colorButtonNormal">#f70d1a</color>
     <color name="colorButtonActivated">#f70d1a</color>
-
+    <color name="colorButtonWhite">#FBF7F8</color>
     <!--switch color-->
 
     <color name="thumb_active">#069ECF</color>

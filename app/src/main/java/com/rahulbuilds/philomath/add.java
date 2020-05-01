@@ -51,9 +51,9 @@ public class add extends AppCompatActivity {
 
         name = (EditText)findViewById(R.id.txtName);
         name.setText(text);
-        meaning = (EditText)findViewById(R.id.txtLocation);
-        Examples = (EditText)findViewById(R.id.examples);
-        saveBtn = (Button)findViewById(R.id.btnSave);
+//        meaning = (EditText)findViewById(R.id.txtLocation);
+//        Examples = (EditText)findViewById(R.id.examples);
+//        saveBtn = (Button)findViewById(R.id.btnSave);
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
