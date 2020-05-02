@@ -70,12 +70,15 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemL
     private RecyclerView recyclerView;
     private RecyclerView.Adapter userAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    String wordname,Example,sy1,sy2,sy3,sy4,note,meaning;
     List<UserDetails> userDetailsList;
     String TAG = "RemindMe";
     LocalData localData;
     FloatingActionButton add1;
     LinearLayout linearlayout;
+    SQLiteDatabase sqlDB;
     Intent intent;
+    String synonym;
     SwitchCompat reminderSwitch;
     TextView tvTime;
     private TextToSpeech mTTS;
@@ -101,13 +104,12 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recyclerView = (RecyclerView) findViewById(R.id.rv_users1);
-         toolbar = findViewById(R.id.tool_bar);
-        toolbar.setTitle("Philomath");
-        setSupportActionBar(toolbar);
         DBHelper db = new DBHelper(this);
         SQLiteDatabase userList= db.getReadableDatabase();
         SharedPreferences prefs = getSharedPreferences(TAG, MODE_PRIVATE);
         int restoredText = prefs.getInt("set", 0);
+        DBHelper dbHandler = new DBHelper(MainActivity.this);
+        sqlDB = dbHandler.getWritableDatabase();
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("message_subject_intent"));
         userDetailsList = new ArrayList<UserDetails>();
         userDetailsList.clear();
@@ -227,29 +229,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemL
             }
         });*/
 
-        inputSearch = (EditText) findViewById(R.id.search);
-        inputSearch.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
-                // When user changed the Text
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
-                                          int arg3) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable arg0) {
-                // TODO Auto-generated method stub
-            }
-        });
-
-
-
 
     }
 
@@ -288,9 +267,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemL
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id){
-            case R.id.search_menu:
-                linearlayout.setVisibility(View.VISIBLE);
-                return true;
             case R.id.Share:
                 if (isStoragePermissionGranted()){
                     if(Backup.exportDB(MainActivity.this)){
@@ -353,6 +329,33 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemL
     @Override
     public void onItemLongClicked(int position) {
         String word=userDetailsList.get(position).getName();
+        Cursor cursor = sqlDB.rawQuery("SELECT * FROM words WHERE name = ?", new String[]{ word });
+        if (cursor != null && cursor.moveToFirst()) {
+            String wordna = cursor.getString(cursor.getColumnIndex("name"));
+            String Meaning = cursor.getString(cursor.getColumnIndex("Meaning"));
+            String example = cursor.getString(cursor.getColumnIndex("Examples"));
+            String synonym1 = cursor.getString(cursor.getColumnIndex("synonym1"));
+            String synonym2 = cursor.getString(cursor.getColumnIndex("synonym2"));
+            String synonym3 = cursor.getString(cursor.getColumnIndex("synonym3"));
+            String synonym4 = cursor.getString(cursor.getColumnIndex("synonym4"));
+            String additionalnote = cursor.getString(cursor.getColumnIndex("Note"));
+            Log.d("title",wordna);
+            Log.d("Content",    Meaning);
+            wordname=wordna;
+            meaning=Meaning;
+            Example=example;
+            sy1=synonym1;
+            sy2=synonym2;
+            sy3=synonym3;
+            sy4=synonym4;
+            note=additionalnote;
+            if(sy1=="Not found" | sy1==null){
+                synonym="Not found";
+            }
+            else{
+                synonym=sy1+','+sy2+','+sy3+','+','+sy4;
+            }
+        }
         String meaning=userDetailsList.get(position).getAddress();
         String ex=userDetailsList.get(position).getProfessiion();
         Intent intent = new Intent(MainActivity.this, Word_Result.class);
@@ -360,6 +363,12 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemL
         intent.putExtra("meaning",meaning);
         intent.putExtra("example",ex);
         intent.putExtra("visibility",0);
+        intent.putExtra("synonyms",synonym);
+        intent.putExtra("synonyms_array1",sy1);
+        intent.putExtra("synonyms_array2",sy2);
+        intent.putExtra("synonyms_array3",sy3);
+        intent.putExtra("synonyms_array4",sy4);
+        intent.putExtra("note",note);
         startActivity(intent);
 
     }
