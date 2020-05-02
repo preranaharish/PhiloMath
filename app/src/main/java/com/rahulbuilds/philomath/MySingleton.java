@@ -17,9 +17,9 @@ public class MySingleton {
     public static String msg;
     public static String tip;
     public static String uid;
-    public static String questions[];
-    public static String options[][];
-    public static int answers[];
+    public static String questions[]=new String[5];
+    public static String options[][]=new String[5][3];
+    public static int answers[]=new int[5];
     private static MySingleton mInstance;
     public static String name;
     public static String email;

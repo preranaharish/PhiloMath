@@ -22,6 +22,11 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String KEY_NAME = "name";
     private static final String KEY_LOC = "Meaning";
     private static final String KEY_EXM = "Examples";
+    private static final String SYN1= "synonym1";
+    private static final String SYN2= "synonym2";
+    private static final String SYN3= "synonym3";
+    private static final String SYN4= "synonym4";
+    private static final String NOTE= "Note";
     public DBHelper(Context context){
         super(context,DB_NAME, null, DB_VERSION);
     }
@@ -29,7 +34,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db){
         db.execSQL(
                 "create table words " +
-                        "(id integer primary key, name text,Meaning text,Examples text)"
+                        "(id integer primary key, name text,Meaning text,Examples text,synonym1 text,synonym2 text,synonym3 text,synonym4 text,Note text)"
         );
     }
     @Override
@@ -42,7 +47,7 @@ public class DBHelper extends SQLiteOpenHelper {
     // **** CRUD (Create, Read, Update, Delete) Operations ***** //
 
     // Adding new User Details
-    void insertUserDetails(String name, String location,String examples){
+    void insertUserDetails(String name, String location,String examples,String sy1,String sy2,String sy3,String sy4,String note){
         //Get the Data Repository in write mode
         SQLiteDatabase db = this.getWritableDatabase();
         //Create a new map of values, where column names are the keys
@@ -50,6 +55,11 @@ public class DBHelper extends SQLiteOpenHelper {
         cValues.put(KEY_NAME, name);
         cValues.put(KEY_LOC, location);
         cValues.put(KEY_EXM, examples);
+        cValues.put(SYN1, sy1);
+        cValues.put(SYN2, sy2);
+        cValues.put(SYN3, sy3);
+        cValues.put(SYN4, sy4);
+        cValues.put(NOTE, note);
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(TABLE_Users,null, cValues);
         Log.d("ROWid:",""+newRowId);
@@ -69,6 +79,14 @@ public class DBHelper extends SQLiteOpenHelper {
             user.put("Meaning",cursor.getString(cursor.getColumnIndex(KEY_LOC)));
             Log.d("Examples",cursor.getString(cursor.getColumnIndex(KEY_EXM)));
             user.put("Examples",cursor.getString(cursor.getColumnIndex(KEY_EXM)));
+            Log.d("Synonym1",cursor.getString(cursor.getColumnIndex(SYN1)));
+            user.put("synonym1",cursor.getString(cursor.getColumnIndex(SYN1)));
+            Log.d("Synonym2",cursor.getString(cursor.getColumnIndex(SYN2)));
+            user.put("synonym2",cursor.getString(cursor.getColumnIndex(SYN2)));
+            Log.d("Synonym3",cursor.getString(cursor.getColumnIndex(SYN3)));
+            user.put("synonym3",cursor.getString(cursor.getColumnIndex(SYN3)));
+            Log.d("Synonym4",cursor.getString(cursor.getColumnIndex(SYN4)));
+            user.put("synonym4",cursor.getString(cursor.getColumnIndex(SYN4)));
             userList.add(user);
         }
         return  userList;

@@ -1,4 +1,6 @@
 package com.rahulbuilds.philomath;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 
@@ -11,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -21,6 +24,7 @@ import com.rahulbuilds.philomath.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -41,6 +45,10 @@ public class add extends AppCompatActivity {
     String synonyms;
     String def1;
     String word;
+    TextView b1,b2,b3;
+    String senderFirstLetter;
+    String Recents[]=new String[3];
+    Button recent1,recent2,recent3;
     String[] synonyms_array = new String[4];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,29 +59,62 @@ public class add extends AppCompatActivity {
 
         name = (EditText)findViewById(R.id.txtName);
         name.setText(text);
-        meaning = (EditText)findViewById(R.id.txtLocation);
-        Examples = (EditText)findViewById(R.id.examples);
-        saveBtn = (Button)findViewById(R.id.btnSave);
-
-        saveBtn.setOnClickListener(new View.OnClickListener() {
+       b1=(TextView)findViewById(R.id.B);
+       b2=(TextView)findViewById(R.id.B1);
+       b3=(TextView)findViewById(R.id.B2);
+       recent1=(Button)findViewById(R.id.recent1);
+       recent2=(Button)findViewById(R.id.recent2);
+       recent3=(Button)findViewById(R.id.recent3);
+        DBHelper dbHelper = new DBHelper(add.this);
+        SQLiteDatabase db=dbHelper.getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT * FROM " + "words" + " ORDER by "+ "id" +" DESC LIMIT 3;" , null);
+        if(c.getCount()>2) {
+            int i = 0;
+            if (c.moveToFirst()) {
+                do {
+                    Recents[i] = c.getString(c.getColumnIndex("name"));
+                    i = i + 1;
+                } while (c.moveToNext());
+            }
+            db.close();
+            senderFirstLetter = (String) Recents[0].subSequence(0, 1);
+            senderFirstLetter = senderFirstLetter.toUpperCase();
+            b1.setText(senderFirstLetter);
+            recent1.setText(Recents[0]);
+            senderFirstLetter = (String) Recents[1].subSequence(0, 1);
+            senderFirstLetter = senderFirstLetter.toUpperCase();
+            b2.setText(senderFirstLetter);
+            recent2.setText(Recents[1]);
+            senderFirstLetter = (String) Recents[2].subSequence(0, 1);
+            senderFirstLetter = senderFirstLetter.toUpperCase();
+            b3.setText(senderFirstLetter);
+            recent3.setText(Recents[2]);
+        }
+        recent1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String word1 = name.getText().toString()+"\n";
-                String mean1 = meaning.getText().toString();
-                if(word1.equals("\n") | mean1.isEmpty()){
-                    Toast.makeText(getApplicationContext(),"Provide word and meaning",Toast.LENGTH_LONG).show();
-                }
-                else {
-                    DBHelper dbHandler = new DBHelper(add.this);
-                    dbHandler.insertUserDetails(word1, mean1,Examples.getText().toString());
-                    intent = new Intent(add.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                    Toast.makeText(getApplicationContext(), "Word Registered", Toast.LENGTH_SHORT).show();
-                }
+                String rec1= (String) recent1.getText();
+                name.setText(rec1);
             }
         });
+recent2.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        String rec2= (String) recent2.getText();
+        name.setText(rec2);
     }
+});
+recent3.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        String rec3= (String) recent3.getText();
+        name.setText(rec3);
+    }
+});
+    }
+
+
+
     public void clicked(View view){
 
         String word1 = name.getText().toString();
@@ -140,13 +181,11 @@ public class add extends AppCompatActivity {
                 JSONObject jsonObject4 = js3.getJSONObject(0);
                 JSONArray js4 = jsonObject4.getJSONArray("definitions");
                 def = js4.getString(0);
-                meaning.setText(def);
                 try {
                     JSONObject jsonObject5 = js3.getJSONObject(0);
                     JSONArray js5 = jsonObject5.getJSONArray("examples");
                     JSONObject jsonObject6 = js5.getJSONObject(0);
                     def1 = jsonObject6.getString("text");
-                    Examples.setText(def1);
                     JSONArray js6 = jsonObject5.getJSONArray("synonyms");
                     try {
                         JSONObject jsonObject7 = js6.getJSONObject(0);
@@ -164,7 +203,9 @@ public class add extends AppCompatActivity {
                     }
                     catch (Exception j){
                         Toast.makeText(getApplicationContext(),"Synonoyms not found",Toast.LENGTH_LONG).show();
-
+                        for(int i=0;i<4;i++){
+                            synonyms_array[i]="Not found";
+                        }
                     }
 
                 }

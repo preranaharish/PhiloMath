@@ -5,14 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/back"
     tools:context="com.rahulbuilds.philomath.MainActivity">
 
-    <include
-        android:id="@+id/tool_bar"
-        layout="@layout/activity_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
 
     <FrameLayout

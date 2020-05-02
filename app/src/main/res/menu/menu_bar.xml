@@ -4,12 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.rahulbuilds.philomath.MainActivity">
     <item
-        android:id="@+id/search_menu"
-        android:enabled="true"
-        android:icon="@android:drawable/ic_menu_search"
-        android:title="Search"
-        app:showAsAction="ifRoom" />
-    <item
         android:id="@+id/Share"
         android:enabled="true"
         android:icon="@android:drawable/ic_menu_save"

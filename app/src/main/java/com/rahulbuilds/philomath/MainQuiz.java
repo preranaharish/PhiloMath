@@ -225,35 +225,7 @@ public class MainQuiz extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             String data="";
-            int tmp;
-            Long tsLong = System.currentTimeMillis()/1000;
-
-            try {
-                URL url = new URL("http://educart.xyz/catch-Score.php");
-                String urlParams = "userid="+MySingleton.uid+"&score="+score;
-
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-                httpURLConnection.setDoOutput(true);
-                OutputStream os = httpURLConnection.getOutputStream();
-                os.write(urlParams.getBytes());
-                os.flush();
-                os.close();
-                InputStream is = httpURLConnection.getInputStream();
-                while((tmp=is.read())!=-1){
-                    data+= (char)tmp;
-                }
-                is.close();
-                httpURLConnection.disconnect();
-
-                return data;
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-                return "Exception: "+e.getMessage();
-            } catch (IOException e) {
-                e.printStackTrace();
-                return "Exception: "+e.getMessage();
-            }
+return data;
         }
         @Override
         protected void onPreExecute() {
@@ -261,7 +233,7 @@ public class MainQuiz extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             if(s.equals("")){
-                s="Your HighScore Submitted Successfully.";
+                s="You have scored:"+score+" out of 5";
                 Intent intent = new Intent(MainQuiz.this,MainActivity.class);
                 startActivity(intent);
                 finish();

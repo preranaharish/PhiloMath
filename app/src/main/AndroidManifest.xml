@@ -19,7 +19,8 @@
             android:name=".ListOfWords"
             android:label="@string/title_activity_list_of_words"
             android:theme="@style/NoActionBar"></activity>
-        <activity android:name=".HomeScreen" />
+        <activity android:name=".HomeScreen"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity android:name=".Analytics" />
         <activity
             android:name=".SignIn"
@@ -35,11 +36,11 @@
             android:theme="@style/Theme.AppCompat" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat" />
         <activity
             android:name=".add"
             android:label="Philomath Save"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/Theme.AppCompat">
             <intent-filter>
                 <action android:name="android.intent.action.PROCESS_TEXT" />
 

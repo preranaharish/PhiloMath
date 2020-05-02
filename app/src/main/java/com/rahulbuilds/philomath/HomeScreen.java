@@ -2,6 +2,7 @@ package com.rahulbuilds.philomath;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -34,65 +35,72 @@ public class HomeScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
-       w1=(TextView)findViewById(R.id.word1);
-       w2=(TextView)findViewById(R.id.word2);
-       w3=(TextView)findViewById(R.id.word3);
-       w4=(TextView)findViewById(R.id.word4);
-       w1.setText("Ostentatious");
-       w2.setText("Sacrosanct");
-       w3.setText("Ostensible");
-       w4.setText("Catastrophic");
-        Button button = (Button)findViewById(R.id.skip);
-        button.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fl =(FloatingActionButton)findViewById(R.id.skip);
+        fl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Skip(v);
+                Intent intent = new Intent(HomeScreen.this,MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
+       w1=(TextView)findViewById(R.id.w1);
+       w2=(TextView)findViewById(R.id.w2);
+       w3=(TextView)findViewById(R.id.w3);
+       w4=(TextView)findViewById(R.id.w4);
+//       w1.setText("Ostentatious");
+//       w2.setText("Sacrosanct");
+//       w3.setText("Ostensible");
+//       w4.setText("Catastrophic");
+//        Button button = (Button)findViewById(R.id.skip);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Skip(v);
+//            }
+//        });
     }
     public void Skip(View view){
-        Intent intent = new Intent(this,ListOfWords.class);
-        startActivity(intent);
-        finish();
+
     }
     public void card1(View view){
-        String word1 = w1.getText().toString();
-        if(word1.isEmpty()){
+       word = w1.getText().toString();
+        if(word.isEmpty()){
             Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_LONG).show();
         }
         else{
-            Toast.makeText(this,"Revealing "+word1.toUpperCase()+ "Please Wait",Toast.LENGTH_LONG).show();
-            new HomeScreen.CallbackTask().execute(dictionaryEntries(word1));
+            Toast.makeText(this,"Revealing "+word.toUpperCase()+ "Please Wait",Toast.LENGTH_LONG).show();
+            new HomeScreen.CallbackTask().execute(dictionaryEntries(word));
         }
     }
     public void card2(View view){
-        String word1 = w2.getText().toString();
-        if(word1.isEmpty()){
+        word = w2.getText().toString();
+        if(word.isEmpty()){
             Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_LONG).show();
         }
         else{
-            Toast.makeText(this,"Revealing "+word1.toUpperCase()+ "Please Wait",Toast.LENGTH_LONG).show();
-            new HomeScreen.CallbackTask().execute(dictionaryEntries(word1));
+            Toast.makeText(this,"Revealing "+word.toUpperCase()+ "Please Wait",Toast.LENGTH_LONG).show();
+            new HomeScreen.CallbackTask().execute(dictionaryEntries(word));
         }
     }
     public void card3(View view){
-        String word1 = w3.getText().toString();
-        if(word1.isEmpty()){
+       word = w3.getText().toString();
+        if(word.isEmpty()){
             Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_LONG).show();
         }
         else{
-            Toast.makeText(this,"Revealing "+word1.toUpperCase()+ " please Wait",Toast.LENGTH_LONG).show();
-            new HomeScreen.CallbackTask().execute(dictionaryEntries(word1));
+            Toast.makeText(this,"Revealing "+word.toUpperCase()+ " please Wait",Toast.LENGTH_LONG).show();
+            new HomeScreen.CallbackTask().execute(dictionaryEntries(word));
         }
     }
     public void card4(View view){
-        String word1 = w4.getText().toString();
-        if(word1.isEmpty()){
+        word = w4.getText().toString();
+        if(word.isEmpty()){
             Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_LONG).show();
         }
         else{
-            Toast.makeText(this,"Revealing "+word1.toUpperCase()+ "Please Wait",Toast.LENGTH_LONG).show();
-            new HomeScreen.CallbackTask().execute(dictionaryEntries(word1));
+            Toast.makeText(this,"Revealing "+word.toUpperCase()+ "Please Wait",Toast.LENGTH_LONG).show();
+            new HomeScreen.CallbackTask().execute(dictionaryEntries(word));
         }
     }
     private String dictionaryEntries(String word) {
@@ -171,7 +179,9 @@ public class HomeScreen extends AppCompatActivity {
                     }
                     catch (Exception j){
                         Toast.makeText(getApplicationContext(),"Synonoyms not found",Toast.LENGTH_LONG).show();
-
+                        for(int i=0;i<4;i++){
+                            synonyms_array[i]="Not found";
+                        }
                     }
 
                 }
@@ -185,7 +195,7 @@ public class HomeScreen extends AppCompatActivity {
                     synonyms="synonyms not found";
                 }
                 Intent intent = new Intent(HomeScreen.this, Word_Result.class);
-                intent.putExtra("word",w1.getText().toString());
+                intent.putExtra("word",word);
                 intent.putExtra("meaning",def);
                 intent.putExtra("example",def1);
                 intent.putExtra("synonyms",synonyms);

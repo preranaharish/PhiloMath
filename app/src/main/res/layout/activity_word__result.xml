@@ -15,6 +15,7 @@
 <!--        android:layout_height="match_parent">-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/relative"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:focusableInTouchMode="true"
@@ -97,8 +98,13 @@
                 android:layout_marginBottom="10dp"
                 android:textSize="19dp"
               />
-            //app:layout_constraintLeft_toLeftOf="parent"
-            //app:layout_constraintTop_toTopOf="parent" />
+         <ImageButton
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_gravity="right"
+             android:src="@drawable/ic_volume_up_black_24dp"
+             android:onClick="Phoneitc"
+             />
 
 
             <!--    <TextView-->
@@ -281,10 +287,10 @@
             android:layout_marginTop="46dp"
             android:layout_marginBottom="100dp"
             android:maxHeight="2dp"
-            android:src="@drawable/editicon" />
+            android:src="@drawable/pencil" />
 
         <EditText
-            android:id="@+id/editbox"
+            android:id="@+id/Additionalnote"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Additional Details"
@@ -300,7 +306,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="CLICK ON THE EXAM FOR DETAILED ANALYSIS OF THE WORD"
-            android:layout_below="@+id/editbox"
+            android:layout_below="@+id/Additionalnote"
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:layout_marginLeft="20dp"
@@ -314,7 +320,7 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="200dp"
         android:layout_height="100dp"
-        android:layout_below="@id/editbox"
+        android:layout_below="@id/Additionalnote"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="55dp"
         android:max="100"
@@ -326,7 +332,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editbox"
+        android:layout_below="@+id/Additionalnote"
         android:text="50"
         android:textSize="25dp"
         android:id="@+id/tv"
@@ -349,7 +355,7 @@
         android:layout_height="100dp"
         android:id="@+id/gre"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_below="@id/editbox"
+        android:layout_below="@id/Additionalnote"
         android:layout_marginLeft="200dp"
         android:layout_marginTop="55dp"
         android:max="100"
@@ -364,15 +370,14 @@
         android:textSize="15dp"
         android:layout_marginLeft="265dp"
         android:layout_marginTop="10dp"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_below="@+id/cattext"
-            android:text="SAVE"
-            android:textColor="@android:color/white"
-            android:id="@+id/btnSave1"/>
+
 </RelativeLayout>
     </ScrollView>
-
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="SAVE"
+        android:textColor="@android:color/white"
+        android:id="@+id/btnSave1"/>
 </RelativeLayout>

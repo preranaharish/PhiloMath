@@ -49,7 +49,7 @@ import java.util.Locale;
 import static com.rahulbuilds.philomath.SignIn.SHARED_PREFS;
 
 public class ListOfWords extends AppCompatActivity implements RecyclerViewItemListener{
-
+    SQLiteDatabase sqlDB;
     private AppBarConfiguration mAppBarConfiguration;
 String usernametext,emailtext;
     private RecyclerView recyclerView;
@@ -58,6 +58,7 @@ String usernametext,emailtext;
     List<UserDetails> userDetailsList;
     String TAG = "RemindMe";
     LocalData localData;
+    String synonym;
     FloatingActionButton add1;
     LinearLayout linearlayout;
     Intent intent;
@@ -73,7 +74,7 @@ String usernametext,emailtext;
     LinearLayout ll_set_time, ll_terms;
 FloatingActionButton fab;
     int hour, min;
-
+String wordname,Example,sy1,sy2,sy3,sy4,note,meaning;
     ClipboardManager myClipboard;
     public final static String EXTRA_MESSAGE = "MESSAGE";
     private ListView obj;
@@ -89,6 +90,10 @@ FloatingActionButton fab;
         usernametext = prefs.getString("keyname", "Unknown");
         emailtext = prefs.getString("Email", "Unknown");
         recyclerView = (RecyclerView) findViewById(R.id.rv_users);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.scheduleLayoutAnimation();
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(userAdapter);
         DBHelper db = new DBHelper(this);
         SQLiteDatabase userList = db.getReadableDatabase();
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("message_subject_intent"));
@@ -123,13 +128,9 @@ FloatingActionButton fab;
                 }
             });
             layoutManager = new LinearLayoutManager(this);
-            userAdapter = new UserDetailsAdapter(userDetailsList, this);
-            final LayoutAnimationController controller =
-                    AnimationUtils.loadLayoutAnimation(this, R.anim.animation_recycler);
-
-            recyclerView.setLayoutAnimation(controller);
             recyclerView.scheduleLayoutAnimation();
             recyclerView.setLayoutManager(layoutManager);
+            userAdapter = new UserDetailsAdapter(userDetailsList, this);
             recyclerView.setAdapter(userAdapter);
             recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
                 @Override
@@ -148,21 +149,6 @@ FloatingActionButton fab;
                     super.onScrollStateChanged(recyclerView, newState);
                 }
             });
-            localData = new LocalData(getApplicationContext());
-
-            myClipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-
-            //reminderSwitch = (SwitchCompat) findViewById(R.id.timerSwitch);
-
-            hour = localData.get_hour();
-
-            min = localData.get_min();
-//            if(restoredText==0){
-////reminderSwitch.setChecked(false);
-//            }
-//            else {
-//                // reminderSwitch.setChecked(true);
-//            }
             mTTS = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
                 @Override
                 public void onInit(int status) {
@@ -179,6 +165,22 @@ FloatingActionButton fab;
                     }
                 }
             });
+            localData = new LocalData(getApplicationContext());
+
+            myClipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+
+            //reminderSwitch = (SwitchCompat) findViewById(R.id.timerSwitch);
+
+            hour = localData.get_hour();
+
+            min = localData.get_min();
+//            if(restoredText==0){
+////reminderSwitch.setChecked(false);
+//            }
+//            else {
+//                // reminderSwitch.setChecked(true);
+//            }
+
             DrawerLayout drawer = findViewById(R.id.drawer_layout);
             NavigationView navigationView = findViewById(R.id.nav_view);
             // Passing each menu ID as a set of Ids because each
@@ -191,7 +193,11 @@ FloatingActionButton fab;
             NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
             NavigationUI.setupWithNavController(navigationView, navController);
 
-        }}
+        }
+        DBHelper dbHandler = new DBHelper(ListOfWords.this);
+         sqlDB = dbHandler.getWritableDatabase();
+
+    }
         @Override
         public boolean onSupportNavigateUp () {
             TextView username = (TextView) findViewById(R.id.username);
@@ -242,6 +248,33 @@ FloatingActionButton fab;
     @Override
     public void onItemLongClicked(int position) {
         String word=userDetailsList.get(position).getName();
+        Cursor cursor = sqlDB.rawQuery("SELECT * FROM words WHERE name = ?", new String[]{ word });
+        if (cursor != null && cursor.moveToFirst()) {
+            String wordna = cursor.getString(cursor.getColumnIndex("name"));
+            String Meaning = cursor.getString(cursor.getColumnIndex("Meaning"));
+            String example = cursor.getString(cursor.getColumnIndex("Examples"));
+            String synonym1 = cursor.getString(cursor.getColumnIndex("synonym1"));
+            String synonym2 = cursor.getString(cursor.getColumnIndex("synonym2"));
+            String synonym3 = cursor.getString(cursor.getColumnIndex("synonym3"));
+            String synonym4 = cursor.getString(cursor.getColumnIndex("synonym4"));
+            String additionalnote = cursor.getString(cursor.getColumnIndex("Note"));
+            Log.d("title",wordna);
+            Log.d("Content",    Meaning);
+            wordname=wordna;
+            meaning=Meaning;
+            Example=example;
+            sy1=synonym1;
+            sy2=synonym2;
+            sy3=synonym3;
+            sy4=synonym4;
+            note=additionalnote;
+            if(sy1=="Not found" | sy1==null){
+                synonym="Not found";
+            }
+            else{
+                synonym=sy1+' '+sy2+' '+sy3+' '+' '+sy4;
+            }
+        }
         String meaning=userDetailsList.get(position).getAddress();
         String ex=userDetailsList.get(position).getProfessiion();
         Intent intent = new Intent(ListOfWords.this, Word_Result.class);
@@ -249,6 +282,12 @@ FloatingActionButton fab;
         intent.putExtra("meaning",meaning);
         intent.putExtra("example",ex);
         intent.putExtra("visibility",0);
+        intent.putExtra("synonyms",synonym);
+        intent.putExtra("synonyms_array1",sy1);
+        intent.putExtra("synonyms_array2",sy2);
+        intent.putExtra("synonyms_array3",sy3);
+        intent.putExtra("synonyms_array4",sy4);
+        intent.putExtra("note",note);
         startActivity(intent);
 
     }
