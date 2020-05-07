@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +45,7 @@ public class add extends AppCompatActivity {
     CharSequence text;
     String synonyms;
     String def1;
+    ProgressBar Progress;
     String word;
     TextView b1,b2,b3;
     String senderFirstLetter;
@@ -141,6 +143,7 @@ recent3.setOnClickListener(new View.OnClickListener() {
             final String app_id = "7c39cce3";
             final String app_key = "5a5aae6addef9d704c567a8c152211f7";
             try {
+
                 URL url = new URL(myurl);
                 HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
                 urlConnection.setRequestProperty("Accept","application/json");

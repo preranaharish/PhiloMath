@@ -39,10 +39,7 @@
             app:contentPaddingLeft="2dp"
             app:cardCornerRadius="4dp"
             app:cardElevation="5dp"
-            android:soundEffectsEnabled="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            app:cardUseCompatPadding="true"
+           app:cardUseCompatPadding="true"
             >
             <!--    <android.support.constraint.ConstraintLayout-->
             <!--        android:layout_width="match_parent"-->
@@ -305,10 +302,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CLICK ON THE EXAM FOR DETAILED ANALYSIS OF THE WORD"
+            android:text="Here is the Detailed anyalysis of the word with respect to exam"
             android:layout_below="@+id/Additionalnote"
             android:layout_marginTop="10dp"
             android:gravity="center"
+           android:visibility="visible"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:textColor="@android:color/holo_red_light"/>
@@ -368,10 +366,21 @@
         android:layout_below="@id/CAT"
         android:text="GRE/GMAT"
         android:textSize="15dp"
+        android:id="@+id/gmat"
         android:layout_marginLeft="265dp"
         android:layout_marginTop="10dp"/>
 
+        <com.github.mikephil.charting.charts.HorizontalBarChart
+            android:id="@+id/barchart"
+            android:layout_width="match_parent"
+            android:layout_height="800dp"
+            android:visibility="gone"
+            android:layout_below="@id/gmat"/>
+
+
+
 </RelativeLayout>
+
     </ScrollView>
     <Button
         android:layout_width="match_parent"
