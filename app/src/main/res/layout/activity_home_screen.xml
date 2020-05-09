@@ -71,22 +71,23 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="50dp"
                                 android:layout_marginTop="50dp"
                                 android:text="BENEVOLENT"
                                 android:id="@+id/w1"
+                                android:gravity="center"
                                 android:textColor="#ffffff"
-                                android:textSize="40dp" />
+                                android:textSize="30dp" />
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="80dp"
                                 android:layout_marginTop="100dp"
+                                android:paddingTop="10dp"
                                 android:text="/bI`nev(a)l(a)nt/"
                                 android:textColor="#ffffff"
+                                android:gravity="center"
                                 android:textSize="25dp"
                                 android:textStyle="italic" />
 
@@ -104,31 +105,37 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:text="adjective"
                 android:textSize="15dp"
                 android:textStyle="italic" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
+
                 android:text="well meaning and kindly"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:textColor="#ffffff"
                 android:textSize="18dp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:text="he was something of a benevolent despot"
                 android:textSize="15dp" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="270dp"
+                android:layout_gravity="right"
                 android:layout_marginTop="10dp"
                 android:text="LEARN MORE"
                 android:onClick="card1"/>
@@ -160,23 +167,25 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="50dp"
+
                                 android:layout_marginTop="50dp"
                                 android:text="ACQUISITION"
                                 android:textColor="#ffffff"
                                 android:id="@+id/w2"
-                                android:textSize="40dp" />
+                                android:gravity="center"
+                                android:textSize="30dp" />
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="80dp"
                                 android:layout_marginTop="100dp"
                                 android:text="/akwI`zIf(a)n/"
                                 android:textColor="#ffffff"
                                 android:textSize="25dp"
+                                android:paddingTop="10dp"
+                                android:gravity="center"
                                 android:textStyle="italic" />
 
 
@@ -192,33 +201,38 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="left"
                 android:layout_marginTop="10dp"
                 android:text="noun"
                 android:textSize="15dp"
                 android:textStyle="italic" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:text="an asset or object bought or obtained ,typically by a library or museum"
                 android:textColor="#ffffff"
                 android:textSize="18dp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:text="The legacy will be used for new acquisitions"
                 android:textSize="15dp" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="270dp"
                 android:layout_marginTop="10dp"
                 android:text="LEARN MORE"
+                android:layout_gravity="right"
                 android:onClick="card2"/>
 
             <android.support.v7.widget.CardView
@@ -249,23 +263,24 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
+                                android:gravity="center"
                                 android:layout_marginTop="50dp"
                                 android:text="QUINTESSENTIAL"
                                 android:textColor="#ffffff"
                                 android:id="@+id/w3"
-                                android:textSize="40dp" />
+                                android:textSize="30dp" />
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="80dp"
+                                android:gravity="center"
                                 android:layout_marginTop="100dp"
                                 android:text="/kwIntI`senf(a)l/"
                                 android:textColor="#ffffff"
                                 android:textSize="25dp"
+                                android:paddingTop="10dp"
                                 android:textStyle="italic" />
 
                            </RelativeLayout>
@@ -278,31 +293,36 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
+                android:layout_gravity="left"
                 android:text="adjective"
                 android:textSize="15dp"
                 android:textStyle="italic" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
+               android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:text="representing the most perfecr or typical example of a quality or class"
                 android:textColor="#ffffff"
                 android:textSize="18dp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:text="He was the quintessential tough guy-strong,silent and self-contained"
                 android:textSize="15dp" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="270dp"
+                android:layout_gravity="right"
                 android:layout_marginTop="10dp"
                 android:text="LEARN MORE"
                 android:onClick="card3"/>
@@ -334,21 +354,22 @@
                             android:orientation="vertical">
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="10dp"
+                                android:gravity="center"
                                 android:layout_marginTop="50dp"
                                 android:text="PROCRASTINATE"
                                 android:id="@+id/w4"
                                 android:textColor="#ffffff"
-                                android:textSize="40dp" />
+                                android:textSize="30dp" />
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="80dp"
                                 android:layout_marginTop="100dp"
                                 android:text="/pra(u)krastIneIt/"
+                                android:paddingTop="10dp"
+                                android:gravity="center"
                                 android:textColor="#ffffff"
                                 android:textSize="25dp"
                                 android:textStyle="italic" />
@@ -364,31 +385,36 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="left"
                 android:layout_marginTop="10dp"
                 android:text="verb"
                 android:textSize="15dp"
                 android:textStyle="italic" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:text="delay or postone action"
                 android:textColor="#ffffff"
                 android:textSize="18dp" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:text="If I didnt procrastinate so much, I could get more done"
                 android:textSize="15dp" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="270dp"
+                android:layout_gravity="right"
                 android:layout_marginTop="10dp"
                 android:text="LEARN MORE"
                 android:onClick="card4"/>

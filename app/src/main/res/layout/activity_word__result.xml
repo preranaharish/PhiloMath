@@ -99,7 +99,7 @@
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_gravity="right"
-             android:src="@drawable/ic_volume_up_black_24dp"
+             app:srcCompat="@drawable/ic_volume_up_black_24dp"
              android:onClick="Phoneitc"
              />
 
@@ -284,7 +284,7 @@
             android:layout_marginTop="46dp"
             android:layout_marginBottom="100dp"
             android:maxHeight="2dp"
-            android:src="@drawable/pencil" />
+            app:srcCompat="@drawable/pencil" />
 
         <EditText
             android:id="@+id/Additionalnote"

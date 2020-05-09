@@ -1,7 +1,11 @@
 package com.rahulbuilds.philomath;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.icu.util.Calendar;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +26,8 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
+
+
 public class HomeScreen extends AppCompatActivity {
     TextView w1,w2,w3,w4;
     String myurl;
@@ -36,10 +42,37 @@ public class HomeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
         FloatingActionButton fl =(FloatingActionButton)findViewById(R.id.skip);
+        SharedPreferences sharedPreferences = getSharedPreferences("Streaks", Context.MODE_PRIVATE);
+        SharedPreferences.Editor prefEditor = sharedPreferences.edit();
+        Calendar c = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            c = Calendar.getInstance();
+
+
+        int thisDay = c.get(Calendar.DAY_OF_YEAR); // GET THE CURRENT DAY OF THE YEAR
+
+        int lastDay = sharedPreferences.getInt("datekey", 0); //If we don't have a saved value, use 0.
+
+        int counterOfConsecutiveDays = sharedPreferences.getInt("datecounter", 0); //If we don't have a saved value, use 0.
+
+        if(lastDay == thisDay -1){
+            // CONSECUTIVE DAYS
+            counterOfConsecutiveDays = counterOfConsecutiveDays + 1;
+
+            prefEditor.putInt("datekey", thisDay);
+
+            prefEditor.putInt("datecounter", counterOfConsecutiveDays);
+            prefEditor.commit();
+        } else {
+
+            prefEditor.putInt("datekey", thisDay);
+
+            prefEditor.putInt("datecounter", 1).commit();
+        }}
         fl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeScreen.this,MainActivity.class);
+                Intent intent = new Intent(HomeScreen.this,ListOfWords.class);
                 startActivity(intent);
                 finish();
             }

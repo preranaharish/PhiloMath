@@ -3,6 +3,7 @@ package com.rahulbuilds.philomath;
 import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.LocalBroadcastManager;
@@ -10,8 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 
-import android.annotation.TargetApi;
-import android.app.TimePickerDialog;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
@@ -19,52 +18,29 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
-import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
-import android.view.GestureDetector;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 
-
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-
-import static java.security.AccessController.getContext;
 
 public class MainActivity extends AppCompatActivity implements RecyclerViewItemListener {
     private RecyclerView recyclerView;
@@ -317,6 +293,11 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemL
         }
 
         super.onDestroy();
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        return false;
     }
 
     @Override

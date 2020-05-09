@@ -183,7 +183,7 @@ public class Word_Result extends AppCompatActivity {
                     DBHelper dbHandler = new DBHelper(Word_Result.this);
                     note=additionalnote.getText().toString();
                     dbHandler.insertUserDetails(word1, mean1,example,synonym1,synonym2,synonym3,synonym4,note);
-                    Intent intent = new Intent(Word_Result.this, MainActivity.class);
+                    Intent intent = new Intent(Word_Result.this, ListOfWords.class);
                     startActivity(intent);
                     finish();
                     Toast.makeText(getApplicationContext(), "Word Saved", Toast.LENGTH_SHORT).show();

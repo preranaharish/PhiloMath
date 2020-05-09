@@ -234,7 +234,7 @@ return data;
         protected void onPostExecute(String s) {
             if(s.equals("")){
                 s="You have scored:"+score+" out of 5";
-                Intent intent = new Intent(MainQuiz.this,MainActivity.class);
+                Intent intent = new Intent(MainQuiz.this,ListOfWords.class);
                 startActivity(intent);
                 finish();
             }

@@ -25,6 +25,7 @@
                 android:backgroundTint="@android:color/white"
                 android:drawablePadding="50dp"
                 android:ems="10"
+                android:focusedByDefault="true"
                 android:gravity="left"
                 android:paddingLeft="25dp"
                 android:paddingTop="5dp"
@@ -39,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/trendingcard"
                 android:layout_toRightOf="@+id/txtName"
-                android:src="@drawable/ic_search_black_24dp"
+                app:srcCompat="@drawable/ic_search_black_24dp"
                 android:clickable="true"
                 android:onClick="clicked"
                 android:backgroundTint="@android:color/transparent"/>
@@ -52,6 +53,8 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
+              android:foregroundGravity="center"
+                app:cardElevation="10dp"
                 app:cardCornerRadius="20dp">
 
                 <RelativeLayout
@@ -65,7 +68,7 @@
                         android:layout_width="35dp"
                         android:layout_height="35dp"
                         android:maxHeight="2dp"
-                        android:src="@drawable/ic_trending_up_black_24dp"
+                        app:srcCompat="@drawable/ic_trending_up_black_24dp"
                         android:layout_marginLeft="18dp"
                         android:layout_marginTop="15dp"/>
 
@@ -91,7 +94,7 @@
                         android:layout_below="@+id/secTxt"
                         android:layout_marginTop="15dp"
                         android:text="Hello1"
-                        android:layout_marginLeft="30dp"
+                        android:layout_marginLeft="10dp"
                         android:theme="@style/PrimaryFlatButton" />
                     <Button
                         android:layout_width="wrap_content"
@@ -99,7 +102,7 @@
                         android:layout_below="@+id/secTxt"
                         android:layout_marginTop="15dp"
                         android:text="Hello2"
-                        android:layout_marginLeft="130dp"
+                        android:layout_marginLeft="100dp"
                         android:theme="@style/PrimaryFlatButton" />
                     <Button
                         android:layout_width="wrap_content"
@@ -107,7 +110,8 @@
                         android:layout_below="@+id/secTxt"
                         android:layout_marginTop="15dp"
                         android:text="Hello3"
-                        android:layout_marginLeft="230dp"
+                        android:layout_marginLeft="210dp"
+                        android:layout_marginRight="10dp"
                         android:theme="@style/PrimaryFlatButton" />
                     <Button
                         android:layout_width="wrap_content"
@@ -115,7 +119,7 @@
                         android:layout_below="@+id/secTxt"
                         android:layout_marginTop="70dp"
                         android:text="Hello4"
-                        android:layout_marginLeft="30dp"
+                        android:layout_marginLeft="10dp"
                         android:theme="@style/PrimaryFlatButton" />
                     <Button
                         android:layout_width="wrap_content"
@@ -123,7 +127,7 @@
                         android:layout_below="@+id/secTxt"
                         android:layout_marginTop="70dp"
                         android:text="Hello5"
-                        android:layout_marginLeft="130dp"
+                        android:layout_marginLeft="100dp"
                         android:theme="@style/PrimaryFlatButton" />
                     <Button
                         android:id="@+id/hello4"
@@ -132,7 +136,8 @@
                         android:layout_below="@+id/secTxt"
                         android:layout_marginTop="70dp"
                         android:text="Hello6"
-                        android:layout_marginLeft="230dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="210dp"
                         android:theme="@style/PrimaryFlatButton" />
 
                 </RelativeLayout>
@@ -145,6 +150,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
+                android:foregroundGravity="center"
                 app:cardCornerRadius="20dp">
 
                 <RelativeLayout
@@ -157,7 +163,7 @@
                         android:layout_width="35dp"
                         android:layout_height="35dp"
                         android:maxHeight="2dp"
-                        android:src="@drawable/ic_history_black_24dp"
+                        app:srcCompat="@drawable/ic_history_black_24dp"
                         android:layout_marginLeft="18dp"
                         android:layout_marginTop="25dp"/>
                     <TextView
@@ -281,15 +287,6 @@
                         android:theme="@style/PrimaryFlatButton" />
                 </RelativeLayout>
             </android.support.v7.widget.CardView>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:textColor="@android:color/white"
-                android:layout_below="@+id/quiz"
-                android:text="- The beauty of learning is that, no one can take it away from you"
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"/>
 
         </RelativeLayout>
     </ScrollView>

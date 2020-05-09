@@ -12,8 +12,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
@@ -48,7 +53,7 @@ import java.util.Locale;
 
 import static com.rahulbuilds.philomath.SignIn.SHARED_PREFS;
 
-public class ListOfWords extends AppCompatActivity implements RecyclerViewItemListener{
+public class ListOfWords extends AppCompatActivity implements RecyclerViewItemListener,NavigationView.OnNavigationItemSelectedListener{
     SQLiteDatabase sqlDB;
     private AppBarConfiguration mAppBarConfiguration;
 String usernametext,emailtext;
@@ -59,6 +64,8 @@ String usernametext,emailtext;
     String TAG = "RemindMe";
     LocalData localData;
     String synonym;
+    int daycounter;
+    DrawerLayout drawer;
     FloatingActionButton add1;
     LinearLayout linearlayout;
     Intent intent;
@@ -113,7 +120,9 @@ String wordname,Example,sy1,sy2,sy3,sy4,note,meaning;
                 userDetailsList.add(userDetailsItem);
 
 
-            }
+            }}
+            SharedPreferences sharedPreferences = getSharedPreferences("Streaks", Context.MODE_PRIVATE);
+             daycounter = sharedPreferences.getInt("datecounter",0);
             Toolbar toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
             toolbar.inflateMenu(R.menu.settings_menu);
@@ -181,8 +190,10 @@ String wordname,Example,sy1,sy2,sy3,sy4,note,meaning;
 //                // reminderSwitch.setChecked(true);
 //            }
 
-            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+             drawer =(DrawerLayout) findViewById(R.id.drawer_layout);
+
             NavigationView navigationView = findViewById(R.id.nav_view);
+
             // Passing each menu ID as a set of Ids because each
             // menu should be considered as top level destinations.
             mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -192,8 +203,9 @@ String wordname,Example,sy1,sy2,sy3,sy4,note,meaning;
             NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
             NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
             NavigationUI.setupWithNavController(navigationView, navController);
+            navigationView.setNavigationItemSelectedListener(this);
 
-        }
+
         DBHelper dbHandler = new DBHelper(ListOfWords.this);
          sqlDB = dbHandler.getWritableDatabase();
 
@@ -204,11 +216,39 @@ String wordname,Example,sy1,sy2,sy3,sy4,note,meaning;
             username.setText(usernametext);
             TextView email = (TextView) findViewById(R.id.email);
             email.setText(emailtext);
+            TextView streakhead =(TextView) findViewById(R.id.streakhead1);
+            TextView streaks =(TextView) findViewById(R.id.streak1);
+            String days =Integer.toString(daycounter);
+            streaks.setText(days);
+            if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.N) {
+                streakhead.setVisibility(View.INVISIBLE);
+                streaks.setVisibility(View.INVISIBLE);
+            }
+
             NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
             return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                     || super.onSupportNavigateUp();
 
         }
+
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        // Handle navigation view item clicks here.
+        switch (item.getItemId()) {
+
+            case R.id.nav_gallery: {
+               Intent intent = new Intent(this,MainQuiz.class);
+               startActivity(intent);
+                break;
+            }
+        }
+        //close navigation drawer
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+
     public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
