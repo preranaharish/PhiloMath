@@ -29,10 +29,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom|right"
         android:layout_margin="16dp"
-        android:background="#f70d1a"
+        android:background="#58CEF4"
         android:contentDescription="Add new word"
         android:src="@drawable/ic_action_name"
-        app:backgroundTint="#f70d1a"
+        app:backgroundTint="#58CEF4"
         app:fabSize="normal" />
 
     <android.support.v7.widget.RecyclerView
