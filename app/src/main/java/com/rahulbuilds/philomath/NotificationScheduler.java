@@ -217,7 +217,7 @@ public class NotificationScheduler
         Log.d("count:","no:"+count);
         SQLiteDatabase sqlDB = dbHandler.getWritableDatabase();
 
-        Cursor cursor = sqlDB.rawQuery("SELECT * FROM words WHERE id = ?", new String[]{ val });
+        Cursor cursor = sqlDB.rawQuery("SELECT * FROM " + "words" + " ORDER by RANDOM()  LIMIT 3;" , null);
 
         if (cursor != null && cursor.moveToFirst()) {
             String title1 = cursor.getString(cursor.getColumnIndex("name"));

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <Preference
+        android:title="Notification"
+        android:key="notification"
+        android:summary="Vibration,Tone"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        />
+    <Preference
+        android:title="Words Backup/Restore Settings"
+        android:key="backup"
+        android:summary="Backup ,Restore"
+        android:icon="@drawable/ic_settings_backup_restore_black_24dp"/>
+    <Preference
+        android:title="Help"
+        android:key="notification"
+        android:summary="Contact Us"
+        android:icon="@drawable/ic_help_black_24dp"
+
+        />
+</PreferenceScreen>
