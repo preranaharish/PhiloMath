@@ -1,7 +1,9 @@
 package com.rahulbuilds.philomath;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
+import android.view.ViewGroup;
 import android.widget.EditText;
 
 import android.content.Intent;
@@ -13,11 +15,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.github.mikephil.charting.utils.Utils;
 import com.rahulbuilds.philomath.DBHelper;
 import com.rahulbuilds.philomath.MainActivity;
 import com.rahulbuilds.philomath.R;
@@ -29,6 +33,7 @@ import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -67,10 +72,12 @@ public class add extends AppCompatActivity {
        recent1=(Button)findViewById(R.id.recent1);
        recent2=(Button)findViewById(R.id.recent2);
        recent3=(Button)findViewById(R.id.recent3);
+       for(int i=0;i<3;i++){
+           Recents[i]="empty";
+       }
         DBHelper dbHelper = new DBHelper(add.this);
         SQLiteDatabase db=dbHelper.getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM " + "words" + " ORDER by "+ "id" +" DESC LIMIT 3;" , null);
-        if(c.getCount()>2) {
             int i = 0;
             if (c.moveToFirst()) {
                 do {
@@ -81,17 +88,38 @@ public class add extends AppCompatActivity {
             db.close();
             senderFirstLetter = (String) Recents[0].subSequence(0, 1);
             senderFirstLetter = senderFirstLetter.toUpperCase();
-            b1.setText(senderFirstLetter);
-            recent1.setText(Recents[0]);
+            if(Recents[0]=="empty")
+            {
+                b1.setVisibility(View.INVISIBLE);
+                recent1.setVisibility(View.INVISIBLE);
+            }
+            else {
+                b1.setText(senderFirstLetter);
+                recent1.setText(Recents[0]);
+            }
             senderFirstLetter = (String) Recents[1].subSequence(0, 1);
             senderFirstLetter = senderFirstLetter.toUpperCase();
-            b2.setText(senderFirstLetter);
-            recent2.setText(Recents[1]);
+            if(Recents[1]=="empty")
+            {
+                b2.setVisibility(View.INVISIBLE);
+                recent2.setVisibility(View.INVISIBLE);
+            }
+            else {
+                b2.setText(senderFirstLetter);
+                recent2.setText(Recents[1]);
+            }
             senderFirstLetter = (String) Recents[2].subSequence(0, 1);
             senderFirstLetter = senderFirstLetter.toUpperCase();
-            b3.setText(senderFirstLetter);
-            recent3.setText(Recents[2]);
-        }
+            if(Recents[2]=="empty")
+            {
+                b3.setVisibility(View.INVISIBLE);
+                recent3.setVisibility(View.INVISIBLE);
+            }
+            else {
+                b3.setText(senderFirstLetter);
+                recent3.setText(Recents[2]);
+            }
+
         recent1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,6 +161,9 @@ recent3.setOnClickListener(new View.OnClickListener() {
         final String language = "en-gb";
         final String word_id = word.toLowerCase();
         return "https://od-api.oxforddictionaries.com:443/api/v2/entries/" + language + "/" + word_id;
+    }
+    private String wordcomparision(String word1 ,String word2,String word3,String word4 ){
+        return "http://47.254.82.40/words/syn?name="+word1+"&words="+word2+"&words="+word3+"&words="+word4;
     }
     private class CallbackTask extends AsyncTask<String, Integer, String> {
 
@@ -197,12 +228,13 @@ recent3.setOnClickListener(new View.OnClickListener() {
                         JSONObject jsonObject10 = js6.getJSONObject(3);
                         synonyms = jsonObject7.getString("text");
                         synonyms_array[0]=jsonObject7.getString("text");
-                        synonyms+=", "+jsonObject8.getString("text");
+                        synonyms+=", "+"\n"+jsonObject8.getString("text");
                         synonyms_array[1]=jsonObject8.getString("text");
-                        synonyms+=", "+jsonObject9.getString("text");
+                        synonyms+=", "+"\n"+jsonObject9.getString("text");
                         synonyms_array[2]=jsonObject9.getString("text");
-                        synonyms+=", "+jsonObject10.getString("text");
+                        synonyms+=", "+"\n"+jsonObject10.getString("text");
                         synonyms_array[3]=jsonObject10.getString("text");
+                        new CallbackTask1().execute(wordcomparision( synonyms_array[0], synonyms_array[1], synonyms_array[2], synonyms_array[3]));
                     }
                     catch (Exception j){
                         Toast.makeText(getApplicationContext(),"Synonoyms not found",Toast.LENGTH_LONG).show();
@@ -235,6 +267,48 @@ recent3.setOnClickListener(new View.OnClickListener() {
                 finish();
 
             }catch(JSONException e){
+                e.printStackTrace();
+                Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_SHORT).show();
+            }
+            System.out.println(result);
+        }
+    }
+
+    private class CallbackTask1 extends AsyncTask<String, Integer, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            myurl=params[0];
+            //TODO: replace with your own app id and app key
+            try {
+
+                URL url = new URL(myurl);
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestProperty("Accept","application/json");
+                // read the output from the server
+                BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                StringBuilder stringBuilder = new StringBuilder();
+
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    stringBuilder.append(line + "\n");
+                }
+
+                return stringBuilder.toString();
+
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                return e.toString();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            try{
+              Log.d("api result:",result);
+            }catch(Exception e){
                 e.printStackTrace();
                 Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_SHORT).show();
             }

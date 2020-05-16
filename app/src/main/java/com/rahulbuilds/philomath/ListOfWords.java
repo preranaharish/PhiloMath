@@ -36,6 +36,7 @@ import androidx.navigation.ui.NavigationUI;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.Button;
@@ -46,6 +47,8 @@ import android.widget.SeekBar;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.github.mikephil.charting.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,18 +99,24 @@ String wordname,Example,sy1,sy2,sy3,sy4,note,meaning;
         SharedPreferences prefs = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         usernametext = prefs.getString("keyname", "Unknown");
         emailtext = prefs.getString("Email", "Unknown");
+        int restoredText = prefs.getInt("set", 0);
         recyclerView = (RecyclerView) findViewById(R.id.rv_users);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.scheduleLayoutAnimation();
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(userAdapter);
+        NotificationScheduler.setReminder(ListOfWords.this, AlarmReceiver.class, 10, 30);
+        Log.d(TAG, "Yes: Reminder set");
+        TextView tv = (TextView)findViewById(R.id.newtext);
         DBHelper db = new DBHelper(this);
         SQLiteDatabase userList = db.getReadableDatabase();
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("message_subject_intent"));
         userDetailsList = new ArrayList<UserDetails>();
         userDetailsList.clear();
         Cursor c1 = userList.query("words", null, null, null, null, null, null);
-
+        if (c1.getCount()==0){
+            tv.setVisibility(View.VISIBLE);
+        }
         if (c1 != null && c1.getCount() != 0) {
             userDetailsList.clear();
             while (c1.moveToNext()) {
@@ -183,12 +192,6 @@ String wordname,Example,sy1,sy2,sy3,sy4,note,meaning;
             hour = localData.get_hour();
 
             min = localData.get_min();
-//            if(restoredText==0){
-////reminderSwitch.setChecked(false);
-//            }
-//            else {
-//                // reminderSwitch.setChecked(true);
-//            }
 
              drawer =(DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -204,7 +207,6 @@ String wordname,Example,sy1,sy2,sy3,sy4,note,meaning;
             NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
             NavigationUI.setupWithNavController(navigationView, navController);
             navigationView.setNavigationItemSelectedListener(this);
-
 
         DBHelper dbHandler = new DBHelper(ListOfWords.this);
          sqlDB = dbHandler.getWritableDatabase();
@@ -358,4 +360,24 @@ String wordname,Example,sy1,sy2,sy3,sy4,note,meaning;
             //resume tasks needing this permission
         }
     }
+
+            public void onCheckedChanged(boolean isChecked) {
+                localData.setReminderStatus(isChecked);
+                if (isChecked) {
+                    SharedPreferences.Editor editor = getSharedPreferences(TAG, MODE_PRIVATE).edit();
+                    editor.putInt("set", 1);
+                    editor.apply();
+                    Log.d(TAG, "onCheckedChanged: true");
+                    NotificationScheduler.setReminder(ListOfWords.this, AlarmReceiver.class, 10, 30);
+                    Log.d(TAG, "Yes: Reminder set");
+                } else {
+                    SharedPreferences.Editor editor = getSharedPreferences(TAG, MODE_PRIVATE).edit();
+                    editor.putInt("set", 0);
+                    editor.apply();
+                    Log.d(TAG, "onCheckedChanged: false");
+                    NotificationScheduler.cancelReminder(ListOfWords.this, AlarmReceiver.class);
+                }
+
+            }
+
 }

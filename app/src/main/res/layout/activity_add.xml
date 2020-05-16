@@ -25,6 +25,8 @@
             android:backgroundTint="@android:color/white"
             android:drawablePadding="50dp"
             android:ems="10"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:focusedByDefault="true"
             android:gravity="left"
             android:paddingLeft="25dp"
@@ -49,6 +51,10 @@
 
         />
     </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -311,7 +317,7 @@
             android:visibility="visible" />
 
     </RelativeLayout>
-    <!--    </ScrollView>-->
+    </ScrollView>
 
 </LinearLayout>
 
