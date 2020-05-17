@@ -85,8 +85,8 @@ public class NotificationScheduler
 
         Calendar calendar5 = Calendar.getInstance();
         Calendar setcalendar5 = Calendar.getInstance();
-        setcalendar5.set(Calendar.HOUR_OF_DAY,19);
-        setcalendar5.set(Calendar.MINUTE,32);
+        setcalendar5.set(Calendar.HOUR_OF_DAY,22);
+        setcalendar5.set(Calendar.MINUTE,42);
         setcalendar5.set(Calendar.SECOND,0);
 
 
@@ -205,7 +205,7 @@ public class NotificationScheduler
 
         String countQuery = "SELECT  * FROM " + TABLE_Users;
         SQLiteDatabase db = dbHandler.getReadableDatabase();
-        Cursor cursor1 = db.rawQuery(countQuery, null);
+        Cursor cursor1 = db.rawQuery("SELECT * FROM " + "words" + " ORDER by RANDOM()  LIMIT 1;",null);
         int count = cursor1.getCount();
         if (count <= 1){
             random = 1;
@@ -217,7 +217,7 @@ public class NotificationScheduler
         Log.d("count:","no:"+count);
         SQLiteDatabase sqlDB = dbHandler.getWritableDatabase();
 
-        Cursor cursor = sqlDB.rawQuery("SELECT * FROM " + "words" + " ORDER by RANDOM()  LIMIT 3;" , null);
+        Cursor cursor = sqlDB.rawQuery("SELECT * FROM " + "words" + " ORDER by RANDOM()  LIMIT 1;" , null);
 
         if (cursor != null && cursor.moveToFirst()) {
             String title1 = cursor.getString(cursor.getColumnIndex("name"));
@@ -240,10 +240,10 @@ public class NotificationScheduler
         PendingIntent pendingIntent = stackBuilder.getPendingIntent(DAILY_REMINDER_REQUEST_CODE, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
-
+        String channnelid = "Rahul_01";
         Notification notification = builder.setContentTitle(title)
                 .setContentText(content)
-
+                .setChannelId(channnelid)
                 .setAutoCancel(true)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(content))
                 .setSmallIcon(R.drawable.icon)

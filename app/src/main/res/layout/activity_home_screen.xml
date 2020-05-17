@@ -130,7 +130,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:text="he was something of a benevolent despot"
-                android:textSize="15dp" />
+                android:textSize="16dp" />
 
             <Button
                 android:layout_width="wrap_content"
