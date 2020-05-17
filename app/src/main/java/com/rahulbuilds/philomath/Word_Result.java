@@ -131,7 +131,7 @@ public class Word_Result extends AppCompatActivity {
                 horizontalChart.getXAxis().setTextSize(30);
                 horizontalChart.animateXY(5000, 5000);
                 horizontalChart.invalidate();
-
+                horizontalChart.setHorizontalScrollBarEnabled(true);
             horizontalChart.setVisibility(View.VISIBLE);
             }
         }
@@ -276,7 +276,7 @@ public class Word_Result extends AppCompatActivity {
     private ArrayList getData(){
         ArrayList<BarEntry> entries = new ArrayList<>();
         entries.add(new BarEntry(0f, 30f));
-        entries.add(new BarEntry(1f, 80f));
+        entries.add(new BarEntry(1f, 100f));
         entries.add(new BarEntry(2f, 60f));
         entries.add(new BarEntry(3f, 50f));
         return entries;

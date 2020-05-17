@@ -85,8 +85,8 @@ public class NotificationScheduler
 
         Calendar calendar5 = Calendar.getInstance();
         Calendar setcalendar5 = Calendar.getInstance();
-        setcalendar5.set(Calendar.HOUR_OF_DAY,22);
-        setcalendar5.set(Calendar.MINUTE,42);
+        setcalendar5.set(Calendar.HOUR_OF_DAY,18);
+        setcalendar5.set(Calendar.MINUTE,30);
         setcalendar5.set(Calendar.SECOND,0);
 
 
@@ -240,10 +240,10 @@ public class NotificationScheduler
         PendingIntent pendingIntent = stackBuilder.getPendingIntent(DAILY_REMINDER_REQUEST_CODE, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
-        String channnelid = "Rahul_01";
+
         Notification notification = builder.setContentTitle(title)
                 .setContentText(content)
-                .setChannelId(channnelid)
+
                 .setAutoCancel(true)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(content))
                 .setSmallIcon(R.drawable.icon)

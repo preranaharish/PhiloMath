@@ -59,7 +59,7 @@ import static com.rahulbuilds.philomath.SignIn.SHARED_PREFS;
 public class ListOfWords extends AppCompatActivity implements RecyclerViewItemListener,NavigationView.OnNavigationItemSelectedListener{
     SQLiteDatabase sqlDB;
     private AppBarConfiguration mAppBarConfiguration;
-    String usernametext,emailtext;
+String usernametext,emailtext;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter userAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -82,9 +82,9 @@ public class ListOfWords extends AppCompatActivity implements RecyclerViewItemLi
     SimpleAdapter adapter;
     ListView lv;
     LinearLayout ll_set_time, ll_terms;
-    FloatingActionButton fab;
+FloatingActionButton fab;
     int hour, min;
-    String wordname,Example,sy1,sy2,sy3,sy4,note,meaning;
+String wordname,Example,sy1,sy2,sy3,sy4,note,meaning;
     ClipboardManager myClipboard;
     public final static String EXTRA_MESSAGE = "MESSAGE";
     private ListView obj;
@@ -130,108 +130,108 @@ public class ListOfWords extends AppCompatActivity implements RecyclerViewItemLi
 
 
             }}
-        SharedPreferences sharedPreferences = getSharedPreferences("Streaks", Context.MODE_PRIVATE);
-        daycounter = sharedPreferences.getInt("datecounter",0);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.inflateMenu(R.menu.settings_menu);
-        fab = findViewById(R.id.add);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            SharedPreferences sharedPreferences = getSharedPreferences("Streaks", Context.MODE_PRIVATE);
+             daycounter = sharedPreferences.getInt("datecounter",0);
+            Toolbar toolbar = findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            toolbar.inflateMenu(R.menu.settings_menu);
+            fab = findViewById(R.id.add);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-                Intent intent = new Intent(ListOfWords.this, add.class);
-                startActivity(intent);
+                    Intent intent = new Intent(ListOfWords.this, add.class);
+                    startActivity(intent);
 
-            }
-        });
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.scheduleLayoutAnimation();
-        recyclerView.setLayoutManager(layoutManager);
-        userAdapter = new UserDetailsAdapter(userDetailsList, this);
-        recyclerView.setAdapter(userAdapter);
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                if (dy > 0 || dy < 0 && fab.isShown()) {
-                    fab.hide();
                 }
-            }
-
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    fab.show();
-                }
-
-                super.onScrollStateChanged(recyclerView, newState);
-            }
-        });
-        mTTS = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if (status == TextToSpeech.SUCCESS) {
-                    int result = mTTS.setLanguage(Locale.ENGLISH);
-
-                    if (result == TextToSpeech.LANG_MISSING_DATA
-                            || result == TextToSpeech.LANG_NOT_SUPPORTED) {
-                        Log.e("TTS", "Language not supported");
-                    } else {
+            });
+            layoutManager = new LinearLayoutManager(this);
+            recyclerView.scheduleLayoutAnimation();
+            recyclerView.setLayoutManager(layoutManager);
+            userAdapter = new UserDetailsAdapter(userDetailsList, this);
+            recyclerView.setAdapter(userAdapter);
+            recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    if (dy > 0 || dy < 0 && fab.isShown()) {
+                        fab.hide();
                     }
-                } else {
-                    Log.e("TTS", "Initialization failed");
                 }
-            }
-        });
-        localData = new LocalData(getApplicationContext());
 
-        myClipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                @Override
+                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                        fab.show();
+                    }
 
-        //reminderSwitch = (SwitchCompat) findViewById(R.id.timerSwitch);
+                    super.onScrollStateChanged(recyclerView, newState);
+                }
+            });
+            mTTS = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+                @Override
+                public void onInit(int status) {
+                    if (status == TextToSpeech.SUCCESS) {
+                        int result = mTTS.setLanguage(Locale.ENGLISH);
 
-        hour = localData.get_hour();
+                        if (result == TextToSpeech.LANG_MISSING_DATA
+                                || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                            Log.e("TTS", "Language not supported");
+                        } else {
+                        }
+                    } else {
+                        Log.e("TTS", "Initialization failed");
+                    }
+                }
+            });
+            localData = new LocalData(getApplicationContext());
 
-        min = localData.get_min();
+            myClipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
 
-        drawer =(DrawerLayout) findViewById(R.id.drawer_layout);
+            //reminderSwitch = (SwitchCompat) findViewById(R.id.timerSwitch);
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
+            hour = localData.get_hour();
 
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
-                .setDrawerLayout(drawer)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
-        navigationView.setNavigationItemSelectedListener(this);
+            min = localData.get_min();
+
+             drawer =(DrawerLayout) findViewById(R.id.drawer_layout);
+
+            NavigationView navigationView = findViewById(R.id.nav_view);
+
+            // Passing each menu ID as a set of Ids because each
+            // menu should be considered as top level destinations.
+            mAppBarConfiguration = new AppBarConfiguration.Builder(
+                    R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                    .setDrawerLayout(drawer)
+                    .build();
+            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+            NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+            NavigationUI.setupWithNavController(navigationView, navController);
+            navigationView.setNavigationItemSelectedListener(this);
 
         DBHelper dbHandler = new DBHelper(ListOfWords.this);
-        sqlDB = dbHandler.getWritableDatabase();
+         sqlDB = dbHandler.getWritableDatabase();
 
     }
-    @Override
-    public boolean onSupportNavigateUp () {
-        TextView username = (TextView) findViewById(R.id.username);
-        username.setText(usernametext);
-        TextView email = (TextView) findViewById(R.id.email);
-        email.setText(emailtext);
-        TextView streakhead =(TextView) findViewById(R.id.streakhead1);
-        TextView streaks =(TextView) findViewById(R.id.streak1);
-        String days =Integer.toString(daycounter);
-        streaks.setText(days);
-        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.N) {
-            streakhead.setVisibility(View.INVISIBLE);
-            streaks.setVisibility(View.INVISIBLE);
+        @Override
+        public boolean onSupportNavigateUp () {
+            TextView username = (TextView) findViewById(R.id.username);
+            username.setText(usernametext);
+            TextView email = (TextView) findViewById(R.id.email);
+            email.setText(emailtext);
+            TextView streakhead =(TextView) findViewById(R.id.streakhead1);
+            TextView streaks =(TextView) findViewById(R.id.streak1);
+            String days =Integer.toString(daycounter);
+            streaks.setText(days);
+            if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.N) {
+                streakhead.setVisibility(View.INVISIBLE);
+                streaks.setVisibility(View.INVISIBLE);
+            }
+
+            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+            return NavigationUI.navigateUp(navController, mAppBarConfiguration)
+                    || super.onSupportNavigateUp();
+
         }
-
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
-
-    }
 
 
     @Override
@@ -240,8 +240,8 @@ public class ListOfWords extends AppCompatActivity implements RecyclerViewItemLi
         switch (item.getItemId()) {
 
             case R.id.nav_gallery: {
-                Intent intent = new Intent(this,MainQuiz.class);
-                startActivity(intent);
+               Intent intent = new Intent(this,MainQuiz.class);
+               startActivity(intent);
                 break;
             }
         }
@@ -361,23 +361,23 @@ public class ListOfWords extends AppCompatActivity implements RecyclerViewItemLi
         }
     }
 
-    public void onCheckedChanged(boolean isChecked) {
-        localData.setReminderStatus(isChecked);
-        if (isChecked) {
-            SharedPreferences.Editor editor = getSharedPreferences(TAG, MODE_PRIVATE).edit();
-            editor.putInt("set", 1);
-            editor.apply();
-            Log.d(TAG, "onCheckedChanged: true");
-            NotificationScheduler.setReminder(ListOfWords.this, AlarmReceiver.class, 10, 30);
-            Log.d(TAG, "Yes: Reminder set");
-        } else {
-            SharedPreferences.Editor editor = getSharedPreferences(TAG, MODE_PRIVATE).edit();
-            editor.putInt("set", 0);
-            editor.apply();
-            Log.d(TAG, "onCheckedChanged: false");
-            NotificationScheduler.cancelReminder(ListOfWords.this, AlarmReceiver.class);
-        }
+            public void onCheckedChanged(boolean isChecked) {
+                localData.setReminderStatus(isChecked);
+                if (isChecked) {
+                    SharedPreferences.Editor editor = getSharedPreferences(TAG, MODE_PRIVATE).edit();
+                    editor.putInt("set", 1);
+                    editor.apply();
+                    Log.d(TAG, "onCheckedChanged: true");
+                    NotificationScheduler.setReminder(ListOfWords.this, AlarmReceiver.class, 10, 30);
+                    Log.d(TAG, "Yes: Reminder set");
+                } else {
+                    SharedPreferences.Editor editor = getSharedPreferences(TAG, MODE_PRIVATE).edit();
+                    editor.putInt("set", 0);
+                    editor.apply();
+                    Log.d(TAG, "onCheckedChanged: false");
+                    NotificationScheduler.cancelReminder(ListOfWords.this, AlarmReceiver.class);
+                }
 
-    }
+            }
 
 }
