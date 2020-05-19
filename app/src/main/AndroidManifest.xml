@@ -36,6 +36,10 @@
             android:name=".Word_Result"
             android:theme="@style/Theme.AppCompat" />
         <activity
+            android:name=".MainQuiz"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:ignore="DuplicateActivity" />
+        <activity
             android:name=".MainActivity"
             android:theme="@style/Theme.AppCompat" />
         <activity

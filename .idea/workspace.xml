@@ -43,7 +43,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Android_ARMv7a_Nougat" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_27" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -191,26 +191,6 @@
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/rahulbuilds/philomath/NotificationScheduler.java</url>
-          <line>203</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/rahulbuilds/philomath/NotificationScheduler.java</url>
-          <line>205</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/rahulbuilds/philomath/NotificationScheduler.java</url>
-          <line>206</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/rahulbuilds/philomath/ListOfWords.java</url>
-          <line>107</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/rahulbuilds/philomath/add.java</url>
           <line>78</line>
           <option name="timeStamp" value="8" />
@@ -224,12 +204,6 @@
           <url>file://$PROJECT_DIR$/app/src/main/java/com/rahulbuilds/philomath/add.java</url>
           <line>282</line>
           <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/rahulbuilds/philomath/NotificationScheduler.java</url>
-          <line>200</line>
-          <properties class="com.rahulbuilds.philomath.NotificationScheduler" method="showNotification" />
-          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
