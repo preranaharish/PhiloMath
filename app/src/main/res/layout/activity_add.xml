@@ -1,72 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <!--    <ScrollView-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content">-->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:background="@drawable/search_gradient"
-        >
-
-        <EditText
-            android:id="@+id/txtName"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center"
-            android:layout_marginTop="35dp"
-            android:background="@drawable/curson_color"
-            android:backgroundTint="@android:color/white"
-            android:drawablePadding="50dp"
-            android:ems="10"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:focusedByDefault="true"
-            android:gravity="left"
-            android:paddingLeft="25dp"
-            android:paddingTop="5dp"
-            android:hint="Enter a word"
-            android:textColor="@android:color/black"
-            android:textColorHint="@android:color/darker_gray"
-            android:textSize="25dp"
-            />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:layout_marginLeft="-57dp"
-            android:layout_toRightOf="@+id/txtName"
-            android:backgroundTint="@android:color/transparent"
-            android:clickable="true"
-            android:onClick="clicked"
-            app:srcCompat="@drawable/ic_search_black_24dp" />
-
-
-        />
-    </RelativeLayout>
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
     <ScrollView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
     <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        >
+        android:layout_width="match_parent"
+        android:layout_height="400dp">
+        <LinearLayout
+            android:background="@drawable/search_gradient"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:orientation="vertical">
 
+            <ImageView
+                android:layout_marginTop="35dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/icon"/>
+            <EditText
+                android:id="@+id/txtName"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:background="@drawable/curson_color"
+                android:backgroundTint="@android:color/white"
+                android:drawablePadding="50dp"
+                android:ems="10"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:focusedByDefault="true"
+                android:elevation="10dp"
+                android:drawableRight="@drawable/ic_search_black_24dp"
+                android:clickable="true"
+                android:onClick="clicked"
+                android:paddingRight="15dp"
+                android:paddingBottom="5dp"
+                android:gravity="left"
+                android:paddingLeft="25dp"
+                android:paddingTop="5dp"
+                android:hint="Enter a word"
+                android:textColor="@android:color/black"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="25dp"
+                />
+
+         <!--   <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="300dp"
+                android:layout_marginTop="-50dp"
+               android:padding="10dp"
+                android:contextClickable="true"
+                android:elevation="1dp"
+                android:layout_toRightOf="@+id/txtName"
+                android:backgroundTint="@android:color/transparent"
+                android:clickable="true"
+                android:onClick="clicked"
+                app:srcCompat="@drawable/ic_search_black_24dp" />-->
+
+        </LinearLayout>
         <android.support.v7.widget.CardView
+            android:layout_marginTop="210dp"
             android:id="@+id/trendingcard"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:layout_marginTop="30dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
+
             android:foregroundGravity="center"
             app:cardElevation="10dp"
             app:cardCornerRadius="20dp">
@@ -156,460 +167,157 @@
 
             </RelativeLayout>
         </android.support.v7.widget.CardView>
-        <android.support.v7.widget.CardView
-            android:id="@+id/recentcard"
-            android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:layout_below="@+id/trendingcard"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:foregroundGravity="center"
-            app:cardCornerRadius="20dp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/recent"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:maxHeight="2dp"
-                    app:srcCompat="@drawable/ic_history_black_24dp"
-                    android:layout_marginLeft="18dp"
-                    android:layout_marginTop="25dp"/>
-                <TextView
-                    android:id="@+id/thirdTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_toRightOf="@+id/recent"
-                    android:gravity="center"
-                    android:paddingTop="10dp"
-                    android:text="Recent"
-                    android:textColor="@android:color/white"
-                    android:textColorHint="@android:color/darker_gray"
-                    android:textSize="20dp"
-                    android:visibility="visible" />
 
 
-                <TextView
-                    android:id="@+id/B"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_below="@+id/thirdTxt"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginTop="43dp"
-                    android:background="@drawable/square"
-                    android:gravity="center"
-                    android:maxHeight="2dp"
-                    android:text="B"
-                    android:textColor="#5880f4"
-                    android:textSize="30dp"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/recent1"
-                    android:layout_width="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/thirdTxt"
-                    android:layout_toRightOf="@+id/B"
-                    android:layout_marginTop="40dp"
-                    android:text="Benevolent"
-                    android:layout_marginLeft="10dp"
-                    android:theme="@style/PrimaryFlatButton" />
-
-                <!--    <View-->
-                <!--        android:layout_width="match_parent"-->
-                <!--        android:layout_below="@+id/recent1"-->
-                <!--        android:layout_marginTop="10dp"-->
-                <!--        android:layout_marginLeft="140dp"-->
-                <!--        android:layout_marginRight="20dp"-->
-                <!--        android:layout_height="0.1dp"-->
-                <!--        android:background="#c0c0c0"-->
-                <!--        android:backgroundTint="#1FFFFFFF"-->
-                <!--        />-->
-
-
-                <TextView
-                    android:id="@+id/B1"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:maxHeight="2dp"
-                    android:background="@drawable/square"
-                    android:layout_below="@+id/B"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginTop="40dp"
-                    android:text="B"
-                    android:textColor="#5880f4"
-                    android:textSize="30dp"
-                    android:textStyle="bold"
-                    android:gravity="center"/>
-
-                <Button
-                    android:id="@+id/recent2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/recent1"
-                    android:layout_toRightOf="@+id/B"
-                    android:layout_marginTop="42dp"
-                    android:text="Benevolent"
-                    android:layout_marginLeft="10dp"
-                    android:theme="@style/PrimaryFlatButton" />
-
-                <!--    <View-->
-                <!--        android:layout_width="match_parent"-->
-                <!--        android:layout_below="@+id/recent2"-->
-                <!--        android:layout_marginTop="10dp"-->
-                <!--        android:layout_marginLeft="140dp"-->
-                <!--        android:layout_marginRight="20dp"-->
-                <!--        android:layout_height="0.1dp"-->
-                <!--        android:background="#1FFFFFFF"-->
-                <!--        />-->
-
-                <TextView
-                    android:id="@+id/B2"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:maxHeight="2dp"
-                    android:background="@drawable/square"
-                    android:layout_below="@+id/B1"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginTop="40dp"
-                    android:text="B"
-                    android:textColor="#5880f4"
-                    android:textSize="30dp"
-                    android:textStyle="bold"
-                    android:gravity="center"
-                    />
-
-                <Button
-                    android:id="@+id/recent3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/recent2"
-                    android:layout_toRightOf="@+id/B"
-                    android:layout_marginTop="45dp"
-                    android:text="Benevolent"
-                    android:layout_marginLeft="10dp"
-                    android:theme="@style/PrimaryFlatButton" />
-            </RelativeLayout>
-        </android.support.v7.widget.CardView>
-
-        <TextView
-            android:id="@+id/powered"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="70dp"
-            android:layout_below="@+id/recentcard"
-            android:paddingTop="10dp"
-            android:text="Powered By Oxford Dictionary"
-            android:textColor="#ffffff"
-            android:textColorHint="@android:color/darker_gray"
-            android:textSize="20dp"
-            android:visibility="visible" />
 
     </RelativeLayout>
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/recentcard"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_below="@+id/trendingcard"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:foregroundGravity="center"
+        app:cardCornerRadius="20dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/recent"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:maxHeight="2dp"
+                app:srcCompat="@drawable/ic_history_black_24dp"
+                android:layout_marginLeft="18dp"
+                android:layout_marginTop="25dp"/>
+
+            <TextView
+                android:id="@+id/thirdTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@+id/recent"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:text="Recent"
+                android:textColor="@android:color/white"
+                android:textColorHint="@android:color/darker_gray"
+                android:textSize="20dp"
+                android:visibility="visible" />
+
+
+            <TextView
+                android:id="@+id/B"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/thirdTxt"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="43dp"
+                android:background="@drawable/square"
+                android:gravity="center"
+                android:maxHeight="2dp"
+                android:text="B"
+                android:textColor="#5880f4"
+                android:textSize="30dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/recent1"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/thirdTxt"
+                android:layout_toRightOf="@+id/B"
+                android:layout_marginTop="40dp"
+                android:text="Benevolent"
+                android:layout_marginLeft="10dp"
+                android:theme="@style/PrimaryFlatButton" />
+
+
+
+            <TextView
+                android:id="@+id/B1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:maxHeight="2dp"
+                android:background="@drawable/square"
+                android:layout_below="@+id/B"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="40dp"
+                android:text="B"
+                android:textColor="#5880f4"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:gravity="center"/>
+
+            <Button
+                android:id="@+id/recent2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/recent1"
+                android:layout_toRightOf="@+id/B"
+                android:layout_marginTop="42dp"
+                android:text="Benevolent"
+                android:layout_marginLeft="10dp"
+                android:theme="@style/PrimaryFlatButton" />
+
+
+
+            <TextView
+                android:id="@+id/B2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:maxHeight="2dp"
+                android:background="@drawable/square"
+                android:layout_below="@+id/B1"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="40dp"
+                android:text="B"
+                android:textColor="#5880f4"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                />
+
+            <Button
+                android:id="@+id/recent3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/recent2"
+                android:layout_toRightOf="@+id/B"
+                android:layout_marginTop="43dp"
+                android:text="Benevolent"
+                android:layout_marginLeft="10dp"
+                android:theme="@style/PrimaryFlatButton" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+    <TextView
+        android:id="@+id/powered"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="70dp"
+        android:layout_below="@+id/recentcard"
+        android:paddingTop="10dp"
+        android:text="Powered By Oxford Dictionary"
+        android:textColor="#ffffff"
+        android:textColorHint="@android:color/darker_gray"
+        android:textSize="20dp"
+        android:visibility="visible" />
+
+</LinearLayout>
     </ScrollView>
 
 </LinearLayout>
 
-<!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--    android:orientation="vertical"-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="match_parent">-->
 
-<!--    <ScrollView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content">-->
-<!--        <RelativeLayout-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="match_parent"-->
-<!--            >-->
-
-
-<!--            <EditText-->
-<!--                android:id="@+id/txtName"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="50dp"-->
-<!--                android:layout_centerHorizontal="true"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:layout_marginTop="35dp"-->
-<!--                android:background="@drawable/curson_color"-->
-<!--                android:backgroundTint="@android:color/white"-->
-<!--                android:drawablePadding="50dp"-->
-<!--                android:ems="10"-->
-<!--                android:focusedByDefault="true"-->
-<!--                android:gravity="left"-->
-<!--                android:paddingLeft="25dp"-->
-<!--                android:paddingTop="5dp"-->
-<!--                android:hint="Enter a word"-->
-<!--                android:textColor="@android:color/background_light"-->
-<!--                android:textColorHint="@android:color/darker_gray"-->
-<!--                android:textSize="25dp"-->
-<!--                />-->
-
-<!--            <ImageButton-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_above="@+id/trendingcard"-->
-<!--                android:layout_toRightOf="@+id/txtName"-->
-<!--                app:srcCompat="@drawable/ic_search_black_24dp"-->
-<!--                android:clickable="true"-->
-<!--                android:onClick="clicked"-->
-<!--                android:backgroundTint="@android:color/transparent"/>-->
-
-<!--            <android.support.v7.widget.CardView-->
-<!--                android:id="@+id/trendingcard"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="180dp"-->
-<!--                android:layout_below="@+id/txtName"-->
-<!--                android:layout_marginTop="30dp"-->
-<!--                android:layout_marginLeft="30dp"-->
-<!--                android:layout_marginRight="30dp"-->
-<!--              android:foregroundGravity="center"-->
-<!--                app:cardElevation="10dp"-->
-<!--                app:cardCornerRadius="20dp">-->
-
-<!--                <RelativeLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-
-<!--                    >-->
-
-<!--                    <ImageView-->
-<!--                        android:id="@+id/trending"-->
-<!--                        android:layout_width="35dp"-->
-<!--                        android:layout_height="35dp"-->
-<!--                        android:maxHeight="2dp"-->
-<!--                        app:srcCompat="@drawable/ic_trending_up_black_24dp"-->
-<!--                        android:layout_marginLeft="18dp"-->
-<!--                        android:layout_marginTop="15dp"/>-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/secTxt"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_gravity="right"-->
-<!--                        android:layout_marginLeft="10dp"-->
-<!--                        android:layout_marginTop="10dp"-->
-<!--                        android:layout_toRightOf="@+id/trending"-->
-<!--                        android:gravity="center"-->
-<!--                        android:paddingTop="10dp"-->
-<!--                        android:text="Trending"-->
-<!--                        android:textColor="@android:color/white"-->
-<!--                        android:textColorHint="@android:color/darker_gray"-->
-<!--                        android:textSize="20dp"-->
-<!--                        android:visibility="visible" />-->
-
-<!--                    <Button-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_below="@+id/secTxt"-->
-<!--                        android:layout_marginTop="15dp"-->
-<!--                        android:text="Hello1"-->
-<!--                        android:layout_marginLeft="10dp"-->
-<!--                        android:theme="@style/PrimaryFlatButton" />-->
-<!--                    <Button-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_below="@+id/secTxt"-->
-<!--                        android:layout_marginTop="15dp"-->
-<!--                        android:text="Hello2"-->
-<!--                        android:layout_marginLeft="100dp"-->
-<!--                        android:theme="@style/PrimaryFlatButton" />-->
-<!--                    <Button-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_below="@+id/secTxt"-->
-<!--                        android:layout_marginTop="15dp"-->
-<!--                        android:text="Hello3"-->
-<!--                        android:layout_marginLeft="210dp"-->
-<!--                        android:layout_marginRight="10dp"-->
-<!--                        android:theme="@style/PrimaryFlatButton" />-->
-<!--                    <Button-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_below="@+id/secTxt"-->
-<!--                        android:layout_marginTop="70dp"-->
-<!--                        android:text="Hello4"-->
-<!--                        android:layout_marginLeft="10dp"-->
-<!--                        android:theme="@style/PrimaryFlatButton" />-->
-<!--                    <Button-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_below="@+id/secTxt"-->
-<!--                        android:layout_marginTop="70dp"-->
-<!--                        android:text="Hello5"-->
-<!--                        android:layout_marginLeft="100dp"-->
-<!--                        android:theme="@style/PrimaryFlatButton" />-->
-<!--                    <Button-->
-<!--                        android:id="@+id/hello4"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_below="@+id/secTxt"-->
-<!--                        android:layout_marginTop="70dp"-->
-<!--                        android:text="Hello6"-->
-<!--                        android:layout_marginRight="10dp"-->
-<!--                        android:layout_marginLeft="210dp"-->
-<!--                        android:theme="@style/PrimaryFlatButton" />-->
-
-<!--                </RelativeLayout>-->
-<!--            </android.support.v7.widget.CardView>-->
-<!--            <android.support.v7.widget.CardView-->
-<!--                android:id="@+id/quiz"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="350dp"-->
-<!--                android:layout_below="@+id/trendingcard"-->
-<!--                android:layout_marginTop="20dp"-->
-<!--                android:layout_marginLeft="30dp"-->
-<!--                android:layout_marginRight="30dp"-->
-<!--                android:foregroundGravity="center"-->
-<!--                app:cardCornerRadius="20dp">-->
-
-<!--                <RelativeLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:orientation="vertical">-->
-
-<!--                    <ImageView-->
-<!--                        android:id="@+id/recent"-->
-<!--                        android:layout_width="35dp"-->
-<!--                        android:layout_height="35dp"-->
-<!--                        android:maxHeight="2dp"-->
-<!--                        app:srcCompat="@drawable/ic_history_black_24dp"-->
-<!--                        android:layout_marginLeft="18dp"-->
-<!--                        android:layout_marginTop="25dp"/>-->
-<!--                    <TextView-->
-<!--                        android:id="@+id/thirdTxt"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_gravity="right"-->
-<!--                        android:layout_marginLeft="10dp"-->
-<!--                        android:layout_marginTop="20dp"-->
-<!--                        android:layout_toRightOf="@+id/recent"-->
-<!--                        android:gravity="center"-->
-<!--                        android:paddingTop="10dp"-->
-<!--                        android:text="Recent"-->
-<!--                        android:textColor="@android:color/white"-->
-<!--                        android:textColorHint="@android:color/darker_gray"-->
-<!--                        android:textSize="20dp"-->
-<!--                        android:visibility="visible" />-->
-
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/B"-->
-<!--                        android:layout_width="50dp"-->
-<!--                        android:layout_height="50dp"-->
-<!--                        android:layout_below="@+id/thirdTxt"-->
-<!--                        android:layout_marginLeft="50dp"-->
-<!--                        android:layout_marginTop="43dp"-->
-<!--                        android:background="@drawable/square"-->
-<!--                        android:gravity="center"-->
-<!--                        android:maxHeight="2dp"-->
-<!--                        android:text="B"-->
-<!--                        android:textColor="@android:color/holo_orange_dark"-->
-<!--                        android:textSize="30dp"-->
-<!--                        android:textStyle="bold" />-->
-
-<!--                    <Button-->
-<!--                        android:id="@+id/recent1"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_below="@+id/thirdTxt"-->
-<!--                        android:layout_toRightOf="@+id/B"-->
-<!--                        android:layout_marginTop="40dp"-->
-<!--                        android:text="Benevolent"-->
-<!--                        android:layout_marginLeft="10dp"-->
-<!--                        android:theme="@style/PrimaryFlatButton" />-->
-
-<!--                    &lt;!&ndash;    <View&ndash;&gt;-->
-<!--                    &lt;!&ndash;        android:layout_width="match_parent"&ndash;&gt;-->
-<!--                    &lt;!&ndash;        android:layout_below="@+id/recent1"&ndash;&gt;-->
-<!--                    &lt;!&ndash;        android:layout_marginTop="10dp"&ndash;&gt;-->
-<!--                    &lt;!&ndash;        android:layout_marginLeft="140dp"&ndash;&gt;-->
-<!--                    &lt;!&ndash;        android:layout_marginRight="20dp"&ndash;&gt;-->
-<!--                    &lt;!&ndash;        android:layout_height="0.1dp"&ndash;&gt;-->
-<!--                    &lt;!&ndash;        android:background="#c0c0c0"&ndash;&gt;-->
-<!--                    &lt;!&ndash;        android:backgroundTint="#1FFFFFFF"&ndash;&gt;-->
-<!--                    &lt;!&ndash;        />&ndash;&gt;-->
-
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/B1"-->
-<!--                        android:layout_width="50dp"-->
-<!--                        android:layout_height="50dp"-->
-<!--                        android:maxHeight="2dp"-->
-<!--                        android:background="@drawable/square"-->
-<!--                        android:layout_below="@+id/B"-->
-<!--                        android:layout_marginLeft="50dp"-->
-<!--                        android:layout_marginTop="40dp"-->
-<!--                        android:text="B"-->
-<!--                        android:textColor="@android:color/holo_orange_dark"-->
-<!--                        android:textSize="30dp"-->
-<!--                        android:textStyle="bold"-->
-<!--                        android:gravity="center"/>-->
-
-<!--                    <Button-->
-<!--                        android:id="@+id/recent2"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_below="@+id/recent1"-->
-<!--                        android:layout_toRightOf="@+id/B"-->
-<!--                        android:layout_marginTop="42dp"-->
-<!--                        android:text="Benevolent"-->
-<!--                        android:layout_marginLeft="10dp"-->
-<!--                        android:theme="@style/PrimaryFlatButton" />-->
-
-<!--                    &lt;!&ndash;    <View&ndash;&gt;-->
-<!--                    &lt;!&ndash;        android:layout_width="match_parent"&ndash;&gt;-->
-<!--                    &lt;!&ndash;        android:layout_below="@+id/recent2"&ndash;&gt;-->
-<!--                    &lt;!&ndash;        android:layout_marginTop="10dp"&ndash;&gt;-->
-<!--                    &lt;!&ndash;        android:layout_marginLeft="140dp"&ndash;&gt;-->
-<!--                    &lt;!&ndash;        android:layout_marginRight="20dp"&ndash;&gt;-->
-<!--                    &lt;!&ndash;        android:layout_height="0.1dp"&ndash;&gt;-->
-<!--                    &lt;!&ndash;        android:background="#1FFFFFFF"&ndash;&gt;-->
-<!--                    &lt;!&ndash;        />&ndash;&gt;-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/B2"-->
-<!--                        android:layout_width="50dp"-->
-<!--                        android:layout_height="50dp"-->
-<!--                        android:maxHeight="2dp"-->
-<!--                        android:background="@drawable/square"-->
-<!--                        android:layout_below="@+id/B1"-->
-<!--                        android:layout_marginLeft="50dp"-->
-<!--                        android:layout_marginTop="40dp"-->
-<!--                        android:text="B"-->
-<!--                        android:textColor="@android:color/holo_orange_dark"-->
-<!--                        android:textSize="30dp"-->
-<!--                        android:textStyle="bold"-->
-<!--                        android:gravity="center"-->
-<!--                        />-->
-
-<!--                    <Button-->
-<!--                        android:id="@+id/recent3"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_below="@+id/recent2"-->
-<!--                        android:layout_toRightOf="@+id/B"-->
-<!--                        android:layout_marginTop="45dp"-->
-<!--                        android:text="Benevolent"-->
-<!--                        android:layout_marginLeft="10dp"-->
-<!--                        android:theme="@style/PrimaryFlatButton" />-->
-<!--                </RelativeLayout>-->
-<!--            </android.support.v7.widget.CardView>-->
-
-<!--        </RelativeLayout>-->
-<!--    </ScrollView>-->
-
-<!--</RelativeLayout>-->

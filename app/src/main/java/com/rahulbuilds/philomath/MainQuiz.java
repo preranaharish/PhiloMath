@@ -232,8 +232,11 @@ return data;
         }
         @Override
         protected void onPostExecute(String s) {
-            if(s.equals("")){
-                s="You have scored:"+score+" out of 5";
+            if(questionCountTotal==0){
+                s="You should learn at least 10 words to unlock the quiz";
+            }
+            else if(s.equals("")){
+                s="You have scored:"+score+" out of "+questionCountTotal;
                 Intent intent = new Intent(MainQuiz.this,ListOfWords.class);
                 startActivity(intent);
                 finish();

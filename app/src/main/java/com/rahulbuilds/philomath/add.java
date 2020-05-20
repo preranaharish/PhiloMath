@@ -1,8 +1,10 @@
 package com.rahulbuilds.philomath;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
@@ -17,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,8 +38,12 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import javax.net.ssl.HttpsURLConnection;
+
+import static com.rahulbuilds.philomath.SignIn.SHARED_PREFS;
 
 
 public class add extends AppCompatActivity {
@@ -63,7 +70,7 @@ public class add extends AppCompatActivity {
         setContentView(R.layout.activity_add);
          text = getIntent()
                 .getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT);
-
+        CardView c1 = (CardView)findViewById(R.id.recentcard);
         name = (EditText)findViewById(R.id.txtName);
         name.setText(text);
        b1=(TextView)findViewById(R.id.B);
@@ -86,6 +93,9 @@ public class add extends AppCompatActivity {
                 } while (c.moveToNext());
             }
             db.close();
+            if (i==0){
+                c1.setVisibility(View.INVISIBLE);
+            }
             senderFirstLetter = (String) Recents[0].subSequence(0, 1);
             senderFirstLetter = senderFirstLetter.toUpperCase();
             if(Recents[0]=="empty")
@@ -228,11 +238,11 @@ recent3.setOnClickListener(new View.OnClickListener() {
                         JSONObject jsonObject10 = js6.getJSONObject(3);
                         synonyms = jsonObject7.getString("text");
                         synonyms_array[0]=jsonObject7.getString("text");
-                        synonyms+=", "+"\n"+jsonObject8.getString("text");
+                        synonyms+=", "+"\t"+jsonObject8.getString("text");
                         synonyms_array[1]=jsonObject8.getString("text");
                         synonyms+=", "+"\n"+jsonObject9.getString("text");
                         synonyms_array[2]=jsonObject9.getString("text");
-                        synonyms+=", "+"\n"+jsonObject10.getString("text");
+                        synonyms+=", "+"\t"+jsonObject10.getString("text");
                         synonyms_array[3]=jsonObject10.getString("text");
                         new CallbackTask1().execute(wordcomparision( synonyms_array[0], synonyms_array[1], synonyms_array[2], synonyms_array[3]));
                     }
@@ -253,6 +263,15 @@ recent3.setOnClickListener(new View.OnClickListener() {
                 if(synonyms==null){
                     synonyms="synonyms not found";
                 }
+                SimpleDateFormat simpleDate =  new SimpleDateFormat("dd/MM/yyyy");
+                Calendar cal = Calendar.getInstance();
+                String strDt = simpleDate.format(cal.DATE);
+                SharedPreferences prefs = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+                int noofwordstoday=prefs.getInt(strDt,0);
+                noofwordstoday+=1;
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putInt(strDt,noofwordstoday);
+                editor.commit();
                 Intent intent = new Intent(add.this, Word_Result.class);
                 intent.putExtra("word",name.getText().toString());
                 intent.putExtra("meaning",def);

@@ -41,6 +41,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SeekBar;
@@ -48,6 +49,8 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.github.mikephil.charting.utils.Utils;
 
 import java.util.ArrayList;
@@ -91,6 +94,7 @@ String wordname,Example,sy1,sy2,sy3,sy4,note,meaning;
     DBHelper mydb;
     MenuItem search;
     android.support.v7.widget.Toolbar toolbar;
+    String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,14 +103,14 @@ String wordname,Example,sy1,sy2,sy3,sy4,note,meaning;
         SharedPreferences prefs = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         usernametext = prefs.getString("keyname", "Unknown");
         emailtext = prefs.getString("Email", "Unknown");
+        url = prefs.getString("url","Unknown");
+
         int restoredText = prefs.getInt("set", 0);
         recyclerView = (RecyclerView) findViewById(R.id.rv_users);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.scheduleLayoutAnimation();
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(userAdapter);
-        NotificationScheduler.setReminder(ListOfWords.this, AlarmReceiver.class, 10, 30);
-        Log.d(TAG, "Yes: Reminder set");
         TextView tv = (TextView)findViewById(R.id.newtext);
         DBHelper db = new DBHelper(this);
         SQLiteDatabase userList = db.getReadableDatabase();
@@ -199,7 +203,7 @@ String wordname,Example,sy1,sy2,sy3,sy4,note,meaning;
 
             // Passing each menu ID as a set of Ids because each
             // menu should be considered as top level destinations.
-            mAppBarConfiguration = new AppBarConfiguration.Builder(
+            mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.words,
                     R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
                     .setDrawerLayout(drawer)
                     .build();
@@ -207,6 +211,7 @@ String wordname,Example,sy1,sy2,sy3,sy4,note,meaning;
             NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
             NavigationUI.setupWithNavController(navigationView, navController);
             navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getMenu().getItem(0).setChecked(true);
 
         DBHelper dbHandler = new DBHelper(ListOfWords.this);
          sqlDB = dbHandler.getWritableDatabase();
@@ -218,6 +223,7 @@ String wordname,Example,sy1,sy2,sy3,sy4,note,meaning;
             username.setText(usernametext);
             TextView email = (TextView) findViewById(R.id.email);
             email.setText(emailtext);
+            ImageView imgProfilePic = (ImageView)findViewById(R.id.profilepic);
             TextView streakhead =(TextView) findViewById(R.id.streakhead1);
             TextView streaks =(TextView) findViewById(R.id.streak1);
             String days =Integer.toString(daycounter);
@@ -225,6 +231,16 @@ String wordname,Example,sy1,sy2,sy3,sy4,note,meaning;
             if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.N) {
                 streakhead.setVisibility(View.INVISIBLE);
                 streaks.setVisibility(View.INVISIBLE);
+            }
+            try{
+
+                Glide.with(getApplicationContext()).load(url)
+                        .thumbnail(0.5f)
+                        .crossFade()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(imgProfilePic);
+            }catch (Exception e){
+                imgProfilePic.setVisibility(View.INVISIBLE);
             }
 
             NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -239,9 +255,28 @@ String wordname,Example,sy1,sy2,sy3,sy4,note,meaning;
         // Handle navigation view item clicks here.
         switch (item.getItemId()) {
 
+            case R.id.words:{
+                Intent intent3 = new Intent(this,ListOfWords.class);
+                startActivity(intent3);
+                finish();
+                break;
+            }
+
+            case R.id.nav_home:{
+                Intent intent2 = new Intent(this,HomeScreen.class);
+                startActivity(intent2);
+                finish();
+                break;
+            }
+
             case R.id.nav_gallery: {
                Intent intent = new Intent(this,MainQuiz.class);
                startActivity(intent);
+                break;
+            }
+            case R.id.nav_slideshow:{
+                Intent intent1 = new Intent(this,settings_screen.class);
+                startActivity(intent1);
                 break;
             }
         }

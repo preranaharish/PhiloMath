@@ -39,7 +39,7 @@ public class SignIn extends AppCompatActivity {
     public static String username;
     public static String umail;
     public static String url;
-    private FirebaseAuth mAuth;
+    private static FirebaseAuth mAuth;
     public FirebaseUser currentUser;
     private SignInButton signInButton;
     private static final int RC_SIGN_IN = 1;
@@ -69,6 +69,7 @@ public class SignIn extends AppCompatActivity {
                         SharedPreferences.Editor editor = prefs.edit();
                         editor.putString(KEY_NAME, username);
                         editor.putString("Email",umail);
+                        editor.putString("url",url);
                         editor.apply();
 
                     }
@@ -114,10 +115,10 @@ public class SignIn extends AppCompatActivity {
         mAuth.addAuthStateListener(mAuthlistener);
 
     }
-    private void signOut() {
+    public static void signOut() {
         // Firebase sign out
         mAuth.signOut();
-
+        FirebaseAuth.getInstance().signOut();
         // Google sign out
 
     }

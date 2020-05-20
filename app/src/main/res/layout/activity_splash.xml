@@ -18,7 +18,7 @@
         android:layout_marginRight="30dp"
         android:layout_marginTop="20dp"
         android:text="The beauty of learning is that, no one can take it away from you"
-        android:textColor="@android:color/primary_text_dark"
+        android:textColor="@android:color/black"
         android:layout_gravity="bottom"
         android:gravity="center"
         android:textSize="20dp" />

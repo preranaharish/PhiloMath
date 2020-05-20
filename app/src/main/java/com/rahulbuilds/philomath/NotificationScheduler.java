@@ -2,25 +2,34 @@ package com.rahulbuilds.philomath;
 
 import android.app.AlarmManager;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
+import android.widget.RemoteViews;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static android.content.Context.ALARM_SERVICE;
+import static android.content.Context.MODE_PRIVATE;
+import static com.rahulbuilds.philomath.SignIn.SHARED_PREFS;
 
 /**
  * Created by rahul on 09/06/19.
@@ -41,6 +50,11 @@ public class NotificationScheduler
     static final int DAILY_REMINDER_REQUEST_CODE12=111;
     static final int DAILY_REMINDER_REQUEST_CODE13=112;
     static final int DAILY_REMINDER_REQUEST_CODE14=113;
+    private static RemoteViews contentView;
+    private static Notification notification;
+    private static NotificationManager notificationManager;
+    private static final int NotificationID = 1005;
+    private static NotificationCompat.Builder mBuilder;
     public static final String TAG="NotificationScheduler";
     public static  final  int h=8;
     public static final int m=9;
@@ -54,7 +68,7 @@ public class NotificationScheduler
 
         Calendar setcalendar = Calendar.getInstance();
         setcalendar.set(Calendar.HOUR_OF_DAY, 10);
-        setcalendar.set(Calendar.MINUTE, 30);
+        setcalendar.set(Calendar.MINUTE, 00);
         setcalendar.set(Calendar.SECOND, 0);
 
         Calendar calendar1 = Calendar.getInstance();
@@ -65,28 +79,28 @@ public class NotificationScheduler
 
         Calendar calendar2 = Calendar.getInstance();
         Calendar setcalendar2 = Calendar.getInstance();
-        setcalendar2.set(Calendar.HOUR_OF_DAY,12);
-        setcalendar2.set(Calendar.MINUTE,30);
+        setcalendar2.set(Calendar.HOUR_OF_DAY,13);
+        setcalendar2.set(Calendar.MINUTE,00);
         setcalendar2.set(Calendar.SECOND,0);
 
 
         Calendar calendar3 = Calendar.getInstance();
         Calendar setcalendar3 = Calendar.getInstance();
-        setcalendar3.set(Calendar.HOUR_OF_DAY,14);
+        setcalendar3.set(Calendar.HOUR_OF_DAY,17);
         setcalendar3.set(Calendar.MINUTE,30);
         setcalendar3.set(Calendar.SECOND,0);
 
 
         Calendar calendar4 = Calendar.getInstance();
         Calendar setcalendar4 = Calendar.getInstance();
-        setcalendar4.set(Calendar.HOUR_OF_DAY,17);
+        setcalendar4.set(Calendar.HOUR_OF_DAY,19);
         setcalendar4.set(Calendar.MINUTE,30);
         setcalendar4.set(Calendar.SECOND,0);
 
         Calendar calendar5 = Calendar.getInstance();
         Calendar setcalendar5 = Calendar.getInstance();
-        setcalendar5.set(Calendar.HOUR_OF_DAY,18);
-        setcalendar5.set(Calendar.MINUTE,30);
+        setcalendar5.set(Calendar.HOUR_OF_DAY,10);
+        setcalendar5.set(Calendar.MINUTE,00);
         setcalendar5.set(Calendar.SECOND,0);
 
 
@@ -224,6 +238,24 @@ public class NotificationScheduler
             String content1 = cursor.getString(cursor.getColumnIndex("Meaning"));
             title=title1;
             content=content1;
+            SimpleDateFormat format = new SimpleDateFormat("HH", Locale.US);
+            String hour = format.format(new Date());
+            if(hour.equals("10")){
+                SimpleDateFormat simpleDate =  new SimpleDateFormat("dd/MM/yyyy");
+
+                Calendar cal = Calendar.getInstance();
+                String strDt = simpleDate.format(cal.DATE);
+                SharedPreferences prefs = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+                int noofwordstoday=prefs.getInt(strDt,0);
+                if(noofwordstoday<=1){
+                    title="Got busy huh?";
+                    content="I am not your mom to always force you to learn :(";
+                }
+                else {
+                    title = "Congratulations";
+                    content = "You have learnt " + noofwordstoday + " new words today.";
+                }
+            }
             Log.d("title",title1);
             Log.d("Content",    content1);
         }
@@ -250,7 +282,17 @@ public class NotificationScheduler
                 .setContentIntent(pendingIntent).build();
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(DAILY_REMINDER_REQUEST_CODE, notification);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            String channelId = "channel_id";
+            NotificationChannel channel = new NotificationChannel(channelId, "channel name", NotificationManager.IMPORTANCE_HIGH);
+            channel.enableVibration(true);
+            channel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+            notificationManager.createNotificationChannel(channel);
+            builder.setChannelId(channelId);
+        }
+
+        notification = builder.build();
+        notificationManager.notify(NotificationID, notification);
 
     }
 

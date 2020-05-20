@@ -102,7 +102,7 @@ public class HomeScreen extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_LONG).show();
         }
         else{
-            Toast.makeText(this,"Revealing "+word.toUpperCase()+ "Please Wait",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Revealing "+word.toUpperCase()+ " Please Wait",Toast.LENGTH_LONG).show();
             new HomeScreen.CallbackTask().execute(dictionaryEntries(word));
         }
     }
@@ -112,7 +112,7 @@ public class HomeScreen extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_LONG).show();
         }
         else{
-            Toast.makeText(this,"Revealing "+word.toUpperCase()+ "Please Wait",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Revealing "+word.toUpperCase()+ " Please Wait",Toast.LENGTH_LONG).show();
             new HomeScreen.CallbackTask().execute(dictionaryEntries(word));
         }
     }
@@ -122,7 +122,7 @@ public class HomeScreen extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_LONG).show();
         }
         else{
-            Toast.makeText(this,"Revealing "+word.toUpperCase()+ " please Wait",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Revealing "+word.toUpperCase()+ " Please Wait",Toast.LENGTH_LONG).show();
             new HomeScreen.CallbackTask().execute(dictionaryEntries(word));
         }
     }
@@ -132,7 +132,7 @@ public class HomeScreen extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_LONG).show();
         }
         else{
-            Toast.makeText(this,"Revealing "+word.toUpperCase()+ "Please Wait",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"Revealing "+word.toUpperCase()+ " Please Wait",Toast.LENGTH_LONG).show();
             new HomeScreen.CallbackTask().execute(dictionaryEntries(word));
         }
     }

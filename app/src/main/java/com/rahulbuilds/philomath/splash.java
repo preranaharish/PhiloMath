@@ -45,7 +45,7 @@ public class splash extends AppCompatActivity {
         Cursor cursor1 = db1.rawQuery(countQuery, null);
         int count = cursor1.getCount();
         if (count > 4){
-            intent = new Intent(splash.this,MainQuiz.class);
+            intent = new Intent(splash.this,HomeScreen.class);
         }
         else{
             intent = new Intent(splash.this,HomeScreen.class);

@@ -13,6 +13,7 @@ import android.speech.tts.TextToSpeech;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
@@ -102,6 +103,7 @@ public class Word_Result extends AppCompatActivity {
         Word.setText(word);
         TextView Meaning = (TextView)findViewById(R.id.meaning);
         Meaning.setText(meaning);
+        Meaning.setMovementMethod(new ScrollingMovementMethod());
         TextView Example = (TextView)findViewById(R.id.examplesentence);
         Example.setText(example);
         TextView Synonyms= (TextView)findViewById(R.id.synonymsword);
