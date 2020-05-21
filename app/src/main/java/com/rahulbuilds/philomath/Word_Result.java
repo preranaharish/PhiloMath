@@ -39,6 +39,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 
 public class Word_Result extends AppCompatActivity {
     String meaning;
+    TextView tv1;
     private Handler handler = new Handler();
     String word;
     int save_visibility;
@@ -207,9 +208,16 @@ public class Word_Result extends AppCompatActivity {
         mProgress.setSecondaryProgress(100); // Secondary Progress
         mProgress.setMax(100); // Maximum Progress
         mProgress.setProgressDrawable(drawable);
-        
+
+        Drawable drawable1 = res.getDrawable(R.drawable.circular1);
+        final ProgressBar mProgress1 = (ProgressBar) findViewById(R.id.gre);
+        mProgress1.setProgress(importance);   // Main Progress
+        mProgress1.setSecondaryProgress(100); // Secondary Progress
+        mProgress1.setMax(100); // Maximum Progress
+        mProgress1.setProgressDrawable(drawable1);
 
         tv = (TextView) findViewById(R.id.catprobability);
+        tv1=(TextView)findViewById(R.id.tv1);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -224,6 +232,7 @@ public class Word_Result extends AppCompatActivity {
                             // TODO Auto-generated method stub
                             mProgress.setSecondaryProgress(pStatus);
                             tv.setText(importance + "%");
+                            tv1.setText(importance + "%");
 
                         }
                     },1);
