@@ -57,6 +57,7 @@ public class add extends AppCompatActivity {
     CharSequence text;
     String synonyms;
     String def1;
+    int importance;
     ProgressBar Progress;
     String word;
     TextView b1,b2,b3;
@@ -163,6 +164,7 @@ recent3.setOnClickListener(new View.OnClickListener() {
         }
         else{
             Toast.makeText(this,"Searching "+word1.toUpperCase()+ " in Oxford Dictonary",Toast.LENGTH_LONG).show();
+            new CallbackTask1().execute(wordimportance(name.getText().toString()));
             new CallbackTask().execute(dictionaryEntries(word1));
         }
 
@@ -172,8 +174,8 @@ recent3.setOnClickListener(new View.OnClickListener() {
         final String word_id = word.toLowerCase();
         return "https://od-api.oxforddictionaries.com:443/api/v2/entries/" + language + "/" + word_id;
     }
-    private String wordcomparision(String word1 ,String word2,String word3,String word4 ){
-        return "http://47.254.82.40/words/syn?name="+word1+"&words="+word2+"&words="+word3+"&words="+word4;
+    private String wordimportance(String word1){
+        return "https://philomathapp.cf/words/exam?name="+word1;
     }
     private class CallbackTask extends AsyncTask<String, Integer, String> {
 
@@ -244,7 +246,7 @@ recent3.setOnClickListener(new View.OnClickListener() {
                         synonyms_array[2]=jsonObject9.getString("text");
                         synonyms+=", "+"\t"+jsonObject10.getString("text");
                         synonyms_array[3]=jsonObject10.getString("text");
-                        new CallbackTask1().execute(wordcomparision( synonyms_array[0], synonyms_array[1], synonyms_array[2], synonyms_array[3]));
+
                     }
                     catch (Exception j){
                         Toast.makeText(getApplicationContext(),"Synonoyms not found",Toast.LENGTH_LONG).show();
@@ -282,6 +284,7 @@ recent3.setOnClickListener(new View.OnClickListener() {
                 intent.putExtra("synonyms_array2",synonyms_array[1]);
                 intent.putExtra("synonyms_array3",synonyms_array[2]);
                 intent.putExtra("synonyms_array4",synonyms_array[3]);
+                intent.putExtra("imp",importance);
                 startActivity(intent);
                 finish();
 
@@ -327,6 +330,12 @@ recent3.setOnClickListener(new View.OnClickListener() {
             super.onPostExecute(result);
             try{
               Log.d("api result:",result);
+                result.trim();
+                JSONObject jsonObject = new JSONObject(result);
+                String i = jsonObject.getString("total");
+                float inum = Float.parseFloat(i);
+                inum=inum*100;
+                importance = (int)inum;
             }catch(Exception e){
                 e.printStackTrace();
                 Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_SHORT).show();

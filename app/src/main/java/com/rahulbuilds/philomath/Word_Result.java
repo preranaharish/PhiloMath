@@ -49,6 +49,7 @@ public class Word_Result extends AppCompatActivity {
     String[] synonyms_array ;
     private TextToSpeech mTTS;
     int pStatus=0;
+    int importance;
     String note;
     RelativeLayout rl;
     Question1 q;
@@ -72,6 +73,7 @@ public class Word_Result extends AppCompatActivity {
              synonym2=extras.getString("synonyms_array2");
              synonym3=extras.getString("synonyms_array3");
              synonym4=extras.getString("synonyms_array4");
+             importance=extras.getInt("imp");
              if (save_visibility==0){
              note1=extras.getString("note");
              note=note1;
@@ -201,13 +203,13 @@ public class Word_Result extends AppCompatActivity {
         Resources res = getResources();
         Drawable drawable = res.getDrawable(R.drawable.circular);
         final ProgressBar mProgress = (ProgressBar) findViewById(R.id.CAT);
-        mProgress.setProgress(50);   // Main Progress
+        mProgress.setProgress(importance);   // Main Progress
         mProgress.setSecondaryProgress(100); // Secondary Progress
         mProgress.setMax(100); // Maximum Progress
         mProgress.setProgressDrawable(drawable);
         
 
-        tv = (TextView) findViewById(R.id.tv);
+        tv = (TextView) findViewById(R.id.catprobability);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -220,8 +222,8 @@ public class Word_Result extends AppCompatActivity {
                         @Override
                         public void run() {
                             // TODO Auto-generated method stub
-                            mProgress.setProgress(pStatus);
-                            tv.setText(pStatus + "%");
+                            mProgress.setSecondaryProgress(pStatus);
+                            tv.setText(importance + "%");
 
                         }
                     },1);
