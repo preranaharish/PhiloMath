@@ -12,7 +12,7 @@
         android:largeHeap="true"
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat"
+        android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:replace="android:appComponentFactory">
         <activity android:name=".MainQuiz" />
         <activity
@@ -34,10 +34,10 @@
         </activity>
         <activity
             android:name=".Word_Result"
-            android:theme="@style/Theme.AppCompat" />
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat" />
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".add"
             android:label="Philomath Save"
@@ -73,6 +73,10 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
     <permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

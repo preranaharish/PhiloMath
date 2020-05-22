@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,19 +23,32 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
+import android.text.style.StyleSpan;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.data.PieDataSet;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Random;
 import android.speech.tts.TextToSpeech;
 
-import com.github.mikephil.charting.charts.HorizontalBarChart;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.utils.MPPointF;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.formatter.PercentFormatter;
+import com.github.mikephil.charting.data.Entry;
 
 public class Word_Result extends AppCompatActivity {
     String meaning;
@@ -53,7 +67,7 @@ public class Word_Result extends AppCompatActivity {
     Question1 q;
     String options[]=new String[3];
     EditText additionalnote;
-    HorizontalBarChart horizontalChart ;
+    BarChart horizontalChart ;
     String synonym1,synonym2,synonym3,synonym4,note1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,24 +92,7 @@ public class Word_Result extends AppCompatActivity {
 
             //The key argument here must match that used in the other activity
         }
-        horizontalChart = (HorizontalBarChart)findViewById(R.id.barchart);
-        TextView Letter = (TextView)findViewById(R.id.letter);
-        Letter.setText(word);
-        additionalnote=(EditText)findViewById(R.id.Additionalnote);
-        if(save_visibility==0){
-            additionalnote.setText(note1);
-
-        }
-        else{
-        if (additionalnote.getText().toString().isEmpty()){
-            note="No additional note saved";
-        }
-        else{
-        note=additionalnote.getText().toString();
-        }}
-        senderFirstLetter = (String) word.subSequence(0, 1);
-        senderFirstLetter=senderFirstLetter.toUpperCase();
-        Letter.setText(senderFirstLetter);
+        horizontalChart = (BarChart)findViewById(R.id.barchart);
 // To get random color
 
         TextView Word = (TextView)findViewById(R.id.word);
@@ -114,12 +111,31 @@ public class Word_Result extends AppCompatActivity {
                 barDataSet.setBarBorderWidth(0.9f);
                 barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
                 BarData barData = new BarData(barDataSet);
+
                 XAxis xAxis = horizontalChart.getXAxis();
                 xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
                 final String[] months = new String[]{synonym1, synonym2, synonym3,synonym4};
                 IndexAxisValueFormatter formatter = new IndexAxisValueFormatter(months);
                 xAxis.setGranularity(1f);
+                xAxis.setDrawGridLines(false);
                 xAxis.setValueFormatter(formatter);
+
+
+                YAxis leftAxis = horizontalChart.getAxisLeft();
+                leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
+                leftAxis.setSpaceTop(15f);
+                leftAxis.setAxisMinimum(0f);
+
+                YAxis rightAxis = horizontalChart.getAxisRight();
+                rightAxis.setDrawGridLines(false);
+                rightAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
+                rightAxis.setSpaceTop(15f);
+                rightAxis.setAxisMinimum(0f);
+
+//                XYMarkerView mv = new XYMarkerView(this, IndexAxisValueFormatter);
+//                mv.setChartView(chart); // For bounds control
+//                chart.setMarker(mv);
+
                 horizontalChart.setData(barData);
                 horizontalChart.setNoDataTextColor(2);
                 horizontalChart.setFitBars(true);
@@ -129,7 +145,7 @@ public class Word_Result extends AppCompatActivity {
                 horizontalChart.getAxisRight().setAxisLineColor(getResources().getColor(R.color.thumb_inactive));
                 horizontalChart.getXAxis().setTextColor(getResources().getColor(R.color.thumb_inactive));
                 horizontalChart.getXAxis().setTextSize(30);
-                horizontalChart.animateXY(5000, 5000);
+                horizontalChart.animateY(5000);
                 horizontalChart.invalidate();
 
             horizontalChart.setVisibility(View.VISIBLE);
@@ -198,59 +214,161 @@ public class Word_Result extends AppCompatActivity {
 
         Resources res = getResources();
         Drawable drawable = res.getDrawable(R.drawable.circular);
-        final ProgressBar mProgress = (ProgressBar) findViewById(R.id.CAT);
-        mProgress.setProgress(50);   // Main Progress
-        mProgress.setSecondaryProgress(100); // Secondary Progress
-        mProgress.setMax(100); // Maximum Progress
-        mProgress.setProgressDrawable(drawable);
+        PieChart pieChart = (PieChart)findViewById(R.id.CATS);
+        pieChart.setUsePercentValues(true);
+        pieChart.getDescription().setEnabled(false);
+        pieChart.setExtraOffsets(5, 10, 5, 5);
+
+        pieChart.setDragDecelerationFrictionCoef(0.95f);
+
+//        pieChart.setCenterTextTypeface(tfLight);
+        pieChart.setCenterText("CAT");
+        pieChart.setCenterTextColor(Color.WHITE);
+
+        pieChart.setDrawHoleEnabled(true);
+        pieChart.setHoleColor(16777215);
+
+
+        pieChart.setTransparentCircleColor(Color.WHITE);
+        pieChart.setTransparentCircleAlpha(80);
+
+        pieChart.setHoleRadius(60f);
+        pieChart.setTransparentCircleRadius(90f);
+
+        pieChart.setDrawCenterText(true);
+
+        pieChart.setRotationAngle(0);
+        // enable rotation of the pieChart by touch
+        pieChart.setRotationEnabled(true);
+        pieChart.setHighlightPerTapEnabled(true);
+
+        // pieChart.setUnit(" €");
+        // pieChart.setDrawUnitsInChart(true);
+
+        // add a selection listener
+//        pieChart.setOnChartValueSelectedListener(findViewById(R.id.CATS));
+
+        // pieChart.spin(2000, 0, 360);
+
+        Legend l = pieChart.getLegend();
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+        l.setOrientation(Legend.LegendOrientation.VERTICAL);
+        l.setDrawInside(false);
+        l.setXEntrySpace(7f);
+        l.setYEntrySpace(0f);
+        l.setYOffset(0f);
+
+        // entry label styling
+        pieChart.setEntryLabelColor(Color.WHITE);
+//        pieChart.setEntryLabelTypeface(tfRegular);
+        pieChart.setEntryLabelTextSize(12f);
+        PieDataSet pieDataSet = new PieDataSet(
+                getPieData(), "");
+
+        pieDataSet.setDrawIcons(false);
+
+        pieDataSet.setSliceSpace(3f);
+
+        pieDataSet.setIconsOffset(new MPPointF(0, 40));
+        pieDataSet.setSelectionShift(10f);
+        pieDataSet.setFormLineWidth(50f);
+
+
+        ArrayList<Integer> colors = new ArrayList<>();
+
+//        for (int c : ColorTemplate.COLORFUL_COLORS)
+//            colors.add(c);
+//
+//        for (int c : ColorTemplate.JOYFUL_COLORS)
+//            colors.add(c);
+//
+//        for (int c : ColorTemplate.COLORFUL_COLORS)
+//            colors.add(c);
+//
+//        for (int c : ColorTemplate.LIBERTY_COLORS)
+//            colors.add(c);
+//
+//        for (int c : ColorTemplate.PASTEL_COLORS)
+//            colors.add(c);
+
+        colors.add(Color.WHITE);
+        colors.add(getColor(R.color.colorPrimaryDark));
+
+
+        pieDataSet.setColors(colors);
+        //dataSet.setSelectionShift(0f);
+
+        PieData data = new PieData(pieDataSet);
+        data.setValueFormatter(new PercentFormatter(pieChart));
+        data.setValueTextSize(11f);
+        data.setValueTextColor(R.color.colorPrimaryDark);
+//        data.setValueTypeface(tfLight);
+        pieChart.setData(data);
+        pieChart.animateY(1400, Easing.EaseInOutQuad);
+        pieChart.highlightValues(null);
+
+        pieChart.invalidate();
         
 
-        tv = (TextView) findViewById(R.id.tv);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                // TODO Auto-generated method stub
-                while (pStatus < 100) {
-                    pStatus += 1;
+//        tv = (TextView) findViewById(R.id.tv);
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                // TODO Auto-generated method stub
+//                while (pStatus < 100) {
+//                    pStatus += 1;
+//
+//                    handler.postDelayed(new Runnable() {
+//
+//                        @Override
+//                        public void run() {
+//                            // TODO Auto-generated method stub
+//                            mProgress.setProgress(pStatus);
+//                            tv.setText(pStatus + "%");
+//
+//                        }
+//                    },1);
+//                    try {
+//                        // Sleep for 200 milliseconds.
+//                        // Just to display the progress slowly
+//                        Thread.sleep(2); //thread will take approx 1.5 seconds to finish
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//
+//                }
+//            }
+//        }).start();
+//        mTTS = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+//            @Override
+//            public void onInit(int status) {
+//                if (status == TextToSpeech.SUCCESS) {
+//                    int result = mTTS.setLanguage(Locale.ENGLISH);
+//
+//                    if (result == TextToSpeech.LANG_MISSING_DATA
+//                            || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+//                        Log.e("TTS", "Language not supported");
+//                    } else {
+//                    }
+//                } else {
+//                    Log.e("TTS", "Initialization failed");
+//                }
+//            }
+//        });
 
-                    handler.postDelayed(new Runnable() {
+    }
 
-                        @Override
-                        public void run() {
-                            // TODO Auto-generated method stub
-                            mProgress.setProgress(pStatus);
-                            tv.setText(pStatus + "%");
+    private SpannableString generateCenterSpannableText() {
 
-                        }
-                    },1);
-                    try {
-                        // Sleep for 200 milliseconds.
-                        // Just to display the progress slowly
-                        Thread.sleep(2); //thread will take approx 1.5 seconds to finish
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-            }
-        }).start();
-        mTTS = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if (status == TextToSpeech.SUCCESS) {
-                    int result = mTTS.setLanguage(Locale.ENGLISH);
-
-                    if (result == TextToSpeech.LANG_MISSING_DATA
-                            || result == TextToSpeech.LANG_NOT_SUPPORTED) {
-                        Log.e("TTS", "Language not supported");
-                    } else {
-                    }
-                } else {
-                    Log.e("TTS", "Initialization failed");
-                }
-            }
-        });
-
+        SpannableString s = new SpannableString("CAT");
+        s.setSpan(new RelativeSizeSpan(1.7f), 0, 14, 0);
+        s.setSpan(new StyleSpan(Typeface.NORMAL), 3, s.length() - 15, 0);
+        s.setSpan(new ForegroundColorSpan(Color.GRAY), 3, s.length() - 15, 0);
+        s.setSpan(new RelativeSizeSpan(.8f), 3, s.length() - 15, 0);
+        s.setSpan(new StyleSpan(Typeface.ITALIC), s.length() - 3, s.length(), 0);
+        s.setSpan(new ForegroundColorSpan(ColorTemplate.getHoloBlue()), s.length() - 3, s.length(), 0);
+        return s;
     }
 
     public void TakeToGraph(View view){
@@ -281,6 +399,16 @@ public class Word_Result extends AppCompatActivity {
         entries.add(new BarEntry(3f, 50f));
         return entries;
     }
+
+    private ArrayList getPieData(){
+        ArrayList<PieEntry> entries = new ArrayList<>();
+        entries.add(new PieEntry(60f));
+        entries.add(new PieEntry(40f));
+        return entries;
+    }
+
+
+
 
 
 }
