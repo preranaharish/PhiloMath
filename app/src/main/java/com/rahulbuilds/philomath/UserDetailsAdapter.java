@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +33,7 @@ public class UserDetailsAdapter extends RecyclerView.Adapter<UserDetailsAdapter.
     private String senderFirstLetter;
     private TextView senderProfilePic;
     String ex;
+    Button search,speak,delete;
     RecyclerViewItemListener callback;
     public UserDetailsAdapter(List<UserDetails> userDetailsList,RecyclerViewItemListener callback) {
         this.userDetailsList = userDetailsList;
@@ -81,6 +83,50 @@ public class UserDetailsAdapter extends RecyclerView.Adapter<UserDetailsAdapter.
         holder.tvAddress.setText(userDetails.getAddress());
         holder.tvPhone.setText(userDetails.getMobileNo());
         holder.tvProfession.setText("Eg: "+ex+"\n");
+        speak.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final UserDetails userDetails = userDetailsList.get(position);
+                final int userId = userDetails.getUserId();
+
+                String word = userDetails.getName();
+                Intent intent = new Intent("message_subject_intent");
+                intent.putExtra("name" , String.valueOf(word));
+                intent.putExtra("option",1);
+                intent.putExtra("pos",position);
+                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+
+            }
+        });
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final UserDetails userDetails = userDetailsList.get(position);
+                final int userId = userDetails.getUserId();
+                String word = userDetails.getName();
+                Intent intent = new Intent("message_subject_intent");
+                intent.putExtra("name" , String.valueOf(word));
+                intent.putExtra("option",0);
+                intent.putExtra("pos",position);
+                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+            }
+        });
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final UserDetails userDetails = userDetailsList.get(position);
+                final int userId = userDetails.getUserId();
+
+                String word = userDetails.getName();
+                Intent intent = new Intent("message_subject_intent");
+                intent.putExtra("name" , String.valueOf(word));
+                intent.putExtra("pos",position);
+                intent.putExtra("option",2);
+                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+
+            }
+        });
         holder.ivMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -134,6 +180,9 @@ public class UserDetailsAdapter extends RecyclerView.Adapter<UserDetailsAdapter.
             tvPhone = (TextView) itemView.findViewById(R.id.tv_phone);
             tvProfession = (TextView) itemView.findViewById(R.id.tv_profession);
             ivMenu = (ImageView) itemView.findViewById(R.id.iv_menu);
+            speak = (Button)itemView.findViewById(R.id.speakword);
+            search = (Button)itemView.findViewById(R.id.searchword);
+            delete = (Button)itemView.findViewById(R.id.deleteword);
         }
         @Override
         public void onClick(View v) {

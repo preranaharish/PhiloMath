@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/D:/android/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_exit_to_app_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/Applications/Android%20Studio.app/Contents/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_delete_forever_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,9 +28,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="58cef4" />
-                            <entry key="outputName" value="ic_exit_to_app_black_24dp" />
-                            <entry key="sourceFile" value="C:\Users\HP" />
+                            <entry key="color" value="e52424" />
+                            <entry key="outputName" value="ic_delete_forever_black_24dp" />
+                            <entry key="sourceFile" value="$APPLICATION_HOME_DIR$/bin/C:\Users\HP" />
                           </map>
                         </option>
                       </PersistentState>

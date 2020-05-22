@@ -99,7 +99,7 @@ public class NotificationScheduler
 
         Calendar calendar5 = Calendar.getInstance();
         Calendar setcalendar5 = Calendar.getInstance();
-        setcalendar5.set(Calendar.HOUR_OF_DAY,10);
+        setcalendar5.set(Calendar.HOUR_OF_DAY,22);
         setcalendar5.set(Calendar.MINUTE,00);
         setcalendar5.set(Calendar.SECOND,0);
 
@@ -240,7 +240,7 @@ public class NotificationScheduler
             content=content1;
             SimpleDateFormat format = new SimpleDateFormat("HH", Locale.US);
             String hour = format.format(new Date());
-            if(hour.equals("10")){
+            if(hour.equals("22")){
                 SimpleDateFormat simpleDate =  new SimpleDateFormat("dd/MM/yyyy");
 
                 Calendar cal = Calendar.getInstance();

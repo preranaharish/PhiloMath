@@ -285,13 +285,32 @@ String wordname,Example,sy1,sy2,sy3,sy4,note,meaning;
         return true;
     }
 
+    @Override
+    public void onItemClicked(int position) {
+
+    }
+
+    @Override
+    public void onItemLongClicked(int position) {
+
+    }
+
 
     public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String name= intent.getStringExtra("name");
+            int option = intent.getIntExtra("option",0);
             int position = intent.getIntExtra("pos",0);
-            delete(name,position);
+            if(option==0){
+                Search(position);
+            }
+            if(option==1){
+                say(position);
+            }
+            if(option==2) {
+                delete(name, position);
+            }
         }
     };
     public void delete(String word,int pos){
@@ -314,16 +333,15 @@ String wordname,Example,sy1,sy2,sy3,sy4,note,meaning;
         mTTS.setSpeechRate(0.85f);
         mTTS.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
-    @Override
-    public void onItemClicked(int position) {
+    public void say(int position) {
         String word=userDetailsList.get(position).getName();
         String meaning=userDetailsList.get(position).getAddress();
         String ex=userDetailsList.get(position).getProfessiion();
         speak(word);
     }
 
-    @Override
-    public void onItemLongClicked(int position) {
+
+    public void Search(int position) {
         String word=userDetailsList.get(position).getName();
         Cursor cursor = sqlDB.rawQuery("SELECT * FROM words WHERE name = ?", new String[]{ word });
         if (cursor != null && cursor.moveToFirst()) {

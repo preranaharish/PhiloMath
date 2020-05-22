@@ -87,7 +87,7 @@ Switch reminder;
 
             }
         });
-        SharedPreferences prefs = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences(TAG, MODE_PRIVATE);
         int checked = prefs.getInt("set", 1);
         Switch reminderSwitch = (Switch)findViewById(R.id.notify);
         if(checked==1)
@@ -101,7 +101,6 @@ Switch reminder;
                 if (isChecked) {
                     SharedPreferences.Editor editor = getSharedPreferences(TAG, MODE_PRIVATE).edit();
                     editor.putInt("set", 1);
-                    editor.apply();
                     editor.commit();
                     Log.d(TAG, "onCheckedChanged: true");
                     NotificationScheduler.setReminder(settings_screen.this, AlarmReceiver.class, 10, 30);
@@ -110,7 +109,6 @@ Switch reminder;
                 } else {
                     SharedPreferences.Editor editor = getSharedPreferences(TAG, MODE_PRIVATE).edit();
                     editor.putInt("set", 0);
-                    editor.apply();
                     editor.commit();
                     Log.d(TAG, "onCheckedChanged: false");
                     NotificationScheduler.cancelReminder(settings_screen.this, AlarmReceiver.class);

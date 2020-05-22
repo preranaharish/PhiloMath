@@ -21,6 +21,7 @@
         android:layout_height="wrap_content"
       >
 
+
         <ImageView
             android:id="@+id/iv_menu"
             android:layout_width="wrap_content"
@@ -75,6 +76,33 @@
             android:textAllCaps="true"
             android:textSize="20dp"
             android:textStyle="bold" />
+
+        <Button
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_profession"
+            android:drawableLeft="@drawable/ic_volume_up_black_24dp"
+            android:text="Phonetics"
+            android:textSize="10dp"
+            android:id="@+id/speakword"/>
+        <Button
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/speakword"
+            android:layout_below="@id/tv_profession"
+            android:drawableLeft="@drawable/ic_search_black_24dp"
+            android:text="PhiloSearch"
+            android:textSize="10dp"
+            android:id="@+id/searchword"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_delete_forever_black_24dp"
+            android:id="@+id/deleteword"
+            android:gravity="center"
+
+            android:layout_toRightOf="@+id/searchword"
+            android:layout_below="@id/tv_profession"/>
 
 
     </RelativeLayout>
