@@ -6,19 +6,24 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.graphics.drawable.Animatable;
+import android.graphics.drawable.Animatable2;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -49,6 +54,9 @@ import com.github.mikephil.charting.utils.MPPointF;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.data.Entry;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+
 
 public class Word_Result extends AppCompatActivity {
     String meaning;
@@ -104,6 +112,42 @@ public class Word_Result extends AppCompatActivity {
         TextView Synonyms= (TextView)findViewById(R.id.synonymsword);
         Synonyms.setText(synonyms);
         Button Save = (Button)findViewById(R.id.btnSave1);
+        final CardView cardView = (CardView) findViewById(R.id.arrowBtn);
+        final ImageView mImgCheck = (ImageView) findViewById(R.id.btntest);
+        mImgCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((Animatable) mImgCheck.getDrawable()).start();
+            }
+        });
+
+        Button arrowbtn = (Button)findViewById(R.id.btn_arrow);
+        arrowbtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                if(cardView.isShown()){
+                    Animation animSlideDown = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_up);
+                    cardView.startAnimation(animSlideDown);
+                    cardView.setVisibility(View.GONE);
+
+                }
+                else{
+                    Animation animSlideDown = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_down);
+                    cardView.startAnimation(animSlideDown);
+                    cardView.setVisibility(View.VISIBLE);
+
+                }
+
+
+            }
+        });
+
+
+
+
+
+
+
         if(save_visibility==1) {
             Save.setVisibility(View.VISIBLE);
             if(!(synonyms.equals("synonyms not found"))){
@@ -309,6 +353,9 @@ public class Word_Result extends AppCompatActivity {
         pieChart.highlightValues(null);
 
         pieChart.invalidate();
+
+
+
         
 
 //        tv = (TextView) findViewById(R.id.tv);
@@ -406,6 +453,7 @@ public class Word_Result extends AppCompatActivity {
         entries.add(new PieEntry(40f));
         return entries;
     }
+
 
 
 

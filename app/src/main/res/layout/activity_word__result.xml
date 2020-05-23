@@ -128,12 +128,48 @@
             android:text="Synonym1, Synonym2,Synonym3"
             android:textAllCaps="false"
             android:textSize="16dp" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/synonymsword"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:id="@+id/editableframe"
+            >
+            <AutoCompleteTextView
+                android:id="@+id/Additionalnote_new"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="10dp"
+                android:focusedByDefault="false"
+                android:hint="Additional Details"
+                android:letterSpacing=".25"
+                android:layout_gravity="left"
+                />
+            <ImageView
+                android:id="@+id/btntest"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:visibility="visible"
+                android:layout_gravity="right|bottom"
+                android:clickable="true"
+
+                app:srcCompat="@drawable/animated_check" />
+
+
+
+
+        </FrameLayout>
 
         <ImageView
             android:id="@+id/edit"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_below="@+id/synonymsword"
+            android:layout_below="@+id/editableframe"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="46dp"
@@ -145,7 +181,7 @@
             android:id="@+id/Additionalnote"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/synonymsword"
+            android:layout_below="@+id/editableframe"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="40dp"
             android:layout_marginRight="10dp"
@@ -154,17 +190,80 @@
             android:hint="Additional Details"
             android:letterSpacing=".5"
             android:maxHeight="400dp" />
+
+
+
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Here is the Detailed anyalysis of the word with respect to exam"
-            android:layout_below="@+id/Additionalnote"
+            android:layout_below="@+id/btn_arrow"
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:focusedByDefault="false"
             android:visibility="visible"
+            android:id="@+id/addtext"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp" />
+
+
+
+
+
+
+
+
+        <android.support.design.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Additionalnote"
+            android:id="@+id/btn_arrow"
+            app:icon="@drawable/ic_arrow_forward_black_24dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
+            />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/arrowBtn"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:padding="8dp"
+            android:layout_margin="8dp"
+            android:layout_below="@id/btn_arrow"
+            app:cardBackgroundColor="@color/colorPrimaryDark"
+            android:visibility="gone"
+
+
+            >
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="dnfjsdknfjsd"
+                />
+
+
+        </android.support.v7.widget.CardView>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -172,7 +271,7 @@
             android:id="@+id/CATS"
             android:layout_width="200dp"
             android:layout_height="150dp"
-            android:layout_below="@id/Additionalnote"
+            android:layout_below="@id/arrowBtn"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="55dp" />
 <!--    <ProgressBar-->
@@ -190,7 +289,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/Additionalnote"
+        android:layout_below="@+id/arrowBtn"
         android:text=""
         android:textSize="25dp"
         android:id="@+id/tv"
@@ -213,7 +312,7 @@
         android:layout_height="150dp"
         android:id="@+id/gre"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_below="@id/Additionalnote"
+        android:layout_below="@id/arrowBtn"
         android:layout_marginLeft="200dp"
         android:layout_marginTop="55dp"
         android:max="100"
@@ -248,5 +347,7 @@
         android:layout_alignParentBottom="true"
         android:text="SAVE"
         android:textColor="@android:color/white"
-        android:id="@+id/btnSave1"/>
+        android:id="@+id/btnSave1"
+        android:visibility="gone"/>
+
 </RelativeLayout>
