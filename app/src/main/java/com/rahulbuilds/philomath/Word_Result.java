@@ -10,13 +10,19 @@ import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Animatable2;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.VectorDrawable;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
+import android.support.graphics.drawable.VectorDrawableCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.View;
@@ -77,10 +83,12 @@ public class Word_Result extends AppCompatActivity {
     EditText additionalnote;
     BarChart horizontalChart ;
     String synonym1,synonym2,synonym3,synonym4,note1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word__result);
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         rl=(RelativeLayout)findViewById(R.id.relative);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -114,10 +122,34 @@ public class Word_Result extends AppCompatActivity {
         Button Save = (Button)findViewById(R.id.btnSave1);
         final CardView cardView = (CardView) findViewById(R.id.arrowBtn);
         final ImageView mImgCheck = (ImageView) findViewById(R.id.btntest);
+        final ImageView mImgStar = (ImageView)findViewById(R.id.ratingBar3) ;
+        mImgStar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                TODO: Change tint based on the enable/disable
+                DrawableCompat.setTint(
+                        mImgStar.getDrawable(),Color.YELLOW
+
+                );
+            }
+        });
+
+
         mImgCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mImgCheck.setImageResource(R.drawable.animated_check_deactivated);
+                mImgCheck.setClickable(false);
+
+//                mImgStar.setImageDrawable(ResourcesCompat.getDrawable(getResources(),R.drawable.check_mark_deactivated,getTheme()));
+//                DrawableCompat.setTint(
+//                        mImgStar.getDrawable(),Color.YELLOW
+//
+//                );
+//                mImgCheck.setBackgroundColor(0x00000000);
                 ((Animatable) mImgCheck.getDrawable()).start();
+
+
             }
         });
 
@@ -176,10 +208,21 @@ public class Word_Result extends AppCompatActivity {
                 rightAxis.setSpaceTop(15f);
                 rightAxis.setAxisMinimum(0f);
 
+
 //                XYMarkerView mv = new XYMarkerView(this, IndexAxisValueFormatter);
 //                mv.setChartView(chart); // For bounds control
 //                chart.setMarker(mv);
 
+                Legend l = horizontalChart.getLegend();
+                l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+                l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+                l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+                l.setDrawInside(false);
+                l.setXEntrySpace(7f);
+                l.setYEntrySpace(0f);
+                l.setYOffset(0f);
+
+                horizontalChart.setDrawValueAboveBar(false);
                 horizontalChart.setData(barData);
                 horizontalChart.setNoDataTextColor(2);
                 horizontalChart.setFitBars(true);

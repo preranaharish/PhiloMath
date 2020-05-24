@@ -28,10 +28,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/meaningCard"
+            android:layout_margin="8dp"
+            android:padding="8dp"
+            android:fadingEdge="horizontal"
+            app:cardCornerRadius="40dp"
+            android:layout_centerHorizontal="true"
+            android:innerRadius="0dp"
+            android:shape="ring"
+            android:thicknessRatio="1.9"
+            android:elevation="12dp"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="30dp"
             android:id="@+id/linearword"
             android:gravity="center">
             <ImageButton
@@ -55,16 +72,16 @@
             android:text="Lacoste"
             android:textSize="24dp"
              />
-            <RatingBar
+            <ImageButton
                 android:id="@+id/ratingBar3"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
+                android:src="@drawable/star"
                 android:layout_marginLeft="8dp"
+                android:background="#00ffffff"
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
-                android:stepSize="1"
-                android:isIndicator="false"
-                android:numStars="1" />
+                />
         </LinearLayout>
 
             <TextView
@@ -138,74 +155,72 @@
             android:layout_marginRight="8dp"
             android:id="@+id/editableframe"
             >
+
+            <ImageView
+                android:id="@+id/edit"
+                android:layout_width="20dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_gravity="left|bottom"
+                app:srcCompat="@drawable/pencil" />
+
             <AutoCompleteTextView
                 android:id="@+id/Additionalnote_new"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="30dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginRight="10dp"
                 android:focusedByDefault="false"
                 android:hint="Additional Details"
                 android:letterSpacing=".25"
-                android:layout_gravity="left"
+                android:layout_gravity="top|left"
                 />
+
             <ImageView
                 android:id="@+id/btntest"
-                android:layout_width="50dp"
+                android:layout_width="30dp"
                 android:layout_height="50dp"
-                android:visibility="visible"
                 android:layout_gravity="right|bottom"
                 android:clickable="true"
+                android:visibility="visible"
 
-                app:srcCompat="@drawable/animated_check" />
-
-
+                app:srcCompat="@drawable/save_icon" />
 
 
         </FrameLayout>
 
-        <ImageView
-            android:id="@+id/edit"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_below="@+id/editableframe"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="46dp"
-            android:layout_marginBottom="100dp"
-            android:maxHeight="2dp"
-            app:srcCompat="@drawable/pencil" />
+<!--        <ImageView-->
+<!--            android:id="@+id/edit"-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:layout_below="@+id/editableframe"-->
+<!--            android:layout_marginLeft="8dp"-->
+<!--            android:layout_marginRight="8dp"-->
+<!--            android:layout_marginTop="46dp"-->
+<!--            android:layout_marginBottom="100dp"-->
+<!--            android:maxHeight="2dp"-->
+<!--            app:srcCompat="@drawable/pencil" />-->
 
-        <EditText
-            android:id="@+id/Additionalnote"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/editableframe"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginRight="10dp"
-            android:layout_toRightOf="@+id/edit"
-            android:focusedByDefault="false"
-            android:hint="Additional Details"
-            android:letterSpacing=".5"
-            android:maxHeight="400dp" />
-
-
+<!--        <EditText-->
+<!--            android:id="@+id/Additionalnote"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@+id/editableframe"-->
+<!--            android:layout_marginLeft="10dp"-->
+<!--            android:layout_marginTop="40dp"-->
+<!--            android:layout_marginRight="10dp"-->
+<!--            android:layout_toRightOf="@+id/edit"-->
+<!--            android:focusedByDefault="false"-->
+<!--            android:hint="Additional Details"-->
+<!--            android:letterSpacing=".5"-->
+<!--            android:maxHeight="400dp" />-->
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Here is the Detailed anyalysis of the word with respect to exam"
-            android:layout_below="@+id/btn_arrow"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:focusedByDefault="false"
-            android:visibility="visible"
-            android:id="@+id/addtext"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp" />
+
+
+
 
 
 
@@ -217,9 +232,10 @@
         <android.support.design.button.MaterialButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/Additionalnote"
+            android:layout_below="@id/editableframe"
             android:id="@+id/btn_arrow"
             app:icon="@drawable/ic_arrow_forward_black_24dp"
+            android:visibility="gone"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Button"
             />
 
@@ -246,6 +262,8 @@
 
 
         </android.support.v7.widget.CardView>
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
 
 
 
@@ -263,15 +281,25 @@
 
 
 
-
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Here is the Detailed anyalysis of the word with respect to exam"
+            android:layout_below="@+id/meaningCard"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:focusedByDefault="false"
+            android:visibility="visible"
+            android:id="@+id/addtext"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp" />
 
 
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/CATS"
             android:layout_width="200dp"
             android:layout_height="150dp"
-            android:layout_below="@id/arrowBtn"
+            android:layout_below="@id/meaningCard"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="55dp" />
 <!--    <ProgressBar-->
@@ -307,18 +335,6 @@
         android:textSize="15dp"
         android:layout_marginLeft="115dp"
         android:layout_marginTop="10dp"/>
-    <ProgressBar
-        android:layout_width="200dp"
-        android:layout_height="150dp"
-        android:id="@+id/gre"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_below="@id/arrowBtn"
-        android:layout_marginLeft="200dp"
-        android:layout_marginTop="55dp"
-        android:max="100"
-        android:progress="50"
-        android:progressDrawable="@drawable/circular1"
-        android:secondaryProgress="100"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -329,11 +345,15 @@
         android:layout_marginLeft="265dp"
         android:layout_marginTop="10dp"/>
 
+
+
+
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/barchart"
             android:layout_width="match_parent"
             android:layout_height="400dp"
-            android:layout_below="@id/gmat"/>
+            android:layout_below="@id/gmat"
+            />
 
 
 
