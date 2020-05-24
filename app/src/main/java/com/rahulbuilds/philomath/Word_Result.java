@@ -126,7 +126,7 @@ public class Word_Result extends AppCompatActivity {
         mImgStar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                TODO: Change tint based on the enable/disable
+//                TODO: Change tint based on the enable/disable for star fav
                 DrawableCompat.setTint(
                         mImgStar.getDrawable(),Color.YELLOW
 
@@ -138,6 +138,7 @@ public class Word_Result extends AppCompatActivity {
         mImgCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //TODO: this for the save button on click starts thr animation and stays ticked but on change should again turn to save button
                 mImgCheck.setImageResource(R.drawable.animated_check_deactivated);
                 mImgCheck.setClickable(false);
 
@@ -157,6 +158,8 @@ public class Word_Result extends AppCompatActivity {
         arrowbtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                //NOTE: just an idea of expanding card
+
                 if(cardView.isShown()){
                     Animation animSlideDown = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.slide_up);
                     cardView.startAnimation(animSlideDown);
@@ -179,10 +182,11 @@ public class Word_Result extends AppCompatActivity {
 
 
 
-
+        //TODO:remove save button and use the save near additional instead
         if(save_visibility==1) {
             Save.setVisibility(View.VISIBLE);
             if(!(synonyms.equals("synonyms not found"))){
+                //TODO: Barchart need to remove values from bottom and add top
                 BarDataSet barDataSet = new BarDataSet(getData(), "Words");
                 barDataSet.setBarBorderWidth(0.9f);
                 barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
@@ -299,6 +303,8 @@ public class Word_Result extends AppCompatActivity {
             }
         });
 
+
+        //TODO: pie chart 1 need to add another
         Resources res = getResources();
         Drawable drawable = res.getDrawable(R.drawable.circular);
         PieChart pieChart = (PieChart)findViewById(R.id.CATS);
