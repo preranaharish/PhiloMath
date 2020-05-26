@@ -1,28 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
     xmlns:tools="http://schemas.android.com/tools">
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/skip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="55dp"
-        android:layout_margin="16dp"
-        android:layout_alignParentEnd="true"
 
-        android:layout_alignParentBottom="true"
-        android:background="#58CEF4"
-        android:backgroundTint="#58CEF4"
-        android:contentDescription="Add new word"
-        android:src="@drawable/ic_arrow_forward_black_24dp" />
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="0dp"
+        android:layout_marginStart="0dp"
+        android:background="?android:attr/windowBackground"
+        android:layout_gravity="bottom"
+        app:itemBackground="@color/colorPrimary"
+        app:itemIconTint="@android:color/white"
+        app:itemTextColor="@android:color/white"
+        app:menu="@menu/activity_list_of_words_drawer"/>
+
 
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/scrollview1">
 
 
 
@@ -283,7 +292,7 @@
                                 android:paddingTop="10dp"
                                 android:textStyle="italic" />
 
-                           </RelativeLayout>
+                        </RelativeLayout>
 
 
                     </RelativeLayout>
@@ -303,7 +312,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-               android:layout_gravity="center"
+                android:layout_gravity="center"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:text="representing the most perfecr or typical example of a quality or class"
@@ -427,5 +436,4 @@
 
     </ScrollView>
 
-
-</RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

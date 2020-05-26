@@ -243,10 +243,11 @@ public class NotificationScheduler
             if(hour.equals("22")){
                 SimpleDateFormat simpleDate =  new SimpleDateFormat("dd/MM/yyyy");
 
-                Calendar cal = Calendar.getInstance();
-                String strDt = simpleDate.format(cal.DATE);
-                SharedPreferences prefs = context.getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-                int noofwordstoday=prefs.getInt(strDt,0);
+                Calendar calendar=Calendar.getInstance();
+                SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd");
+                String currentTime=sdf.format(calendar.getTime());
+                SharedPreferences prefs = context.getSharedPreferences(currentTime, MODE_PRIVATE);
+                int noofwordstoday=prefs.getInt(currentTime,0);
                 if(noofwordstoday<=1){
                     title="Got busy huh?";
                     content="I am not your mom to always force you to learn :(";

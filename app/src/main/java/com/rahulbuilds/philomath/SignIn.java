@@ -60,6 +60,7 @@ public class SignIn extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if (firebaseAuth.getCurrentUser() != null) {
+
                     currentUser = mAuth.getCurrentUser();
                     if(currentUser != null){
                         username = currentUser.getDisplayName();

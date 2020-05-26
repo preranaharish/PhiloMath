@@ -7,20 +7,25 @@
 
 
 
-        <Switch
-            android:id="@+id/notify"
-            android:layout_width="match_parent"
-            android:layout_height="85dp"
-            android:background="@drawable/cardviewback"
-            android:hint="Notifies the words you learnt regularly"
-            android:drawablePadding="20dp"
-            android:gravity="left|center"
-            android:height="60dp"
-            android:padding="20dp"
-            android:text="NOTIFICATIONS"
-            android:drawableLeft="@drawable/ic_notifications_black_24dp"
-            android:textColor="@android:color/white"
-            android:theme="@style/SCBSwitch" />
+
+    <Switch
+        android:id="@+id/notify"
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:hint="Notifies the words you learnt regularly"
+        android:drawablePadding="20dp"
+        android:gravity="left|center"
+        android:height="60dp"
+        android:padding="20dp"
+        android:text="NOTIFICATIONS"
+        android:drawableLeft="@drawable/ic_notifications_black_24dp"
+        android:textColor="@android:color/white"
+        android:theme="@style/SCBSwitch" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#58CEF4"/>
 
     <Button
         android:id="@+id/Backup"
@@ -32,9 +37,12 @@
         android:gravity="left|center"
         android:height="60dp"
         android:padding="20dp"
-        android:background="@drawable/cardviewback"
+        android:background="@android:color/transparent"
         android:drawableLeft="@drawable/ic_backup_black_24dp" />
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#58CEF4"/>
     <Button
         android:id="@+id/restore"
         android:layout_width="match_parent"
@@ -43,11 +51,15 @@
         android:text="Restore"
         android:drawablePadding="20dp"
         android:gravity="left|center"
+        android:background="@android:color/transparent"
         android:height="60dp"
         android:padding="20dp"
-        android:background="@drawable/cardviewback"
-        android:drawableLeft="@drawable/ic_backup_black_24dp" />
 
+        android:drawableLeft="@drawable/ic_backup_black_24dp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#58CEF4"/>
     <Button
         android:id="@+id/contactus"
         android:layout_width="match_parent"
@@ -55,12 +67,16 @@
         android:paddingTop="2dp"
         android:text="Contact us"
         android:drawablePadding="20dp"
+        android:background="@android:color/transparent"
         android:gravity="left|center"
         android:height="60dp"
         android:padding="20dp"
-        android:background="@drawable/cardviewback"
-        android:drawableLeft="@drawable/ic_help_black_24dp" />
 
+        android:drawableLeft="@drawable/ic_help_black_24dp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#58CEF4"/>
     <Button
         android:id="@+id/logout"
         android:layout_width="match_parent"
@@ -69,10 +85,35 @@
         android:text="Logout"
         android:drawablePadding="20dp"
         android:gravity="left|center"
+        android:background="@android:color/transparent"
         android:height="60dp"
         android:padding="20dp"
-        android:background="@drawable/cardviewback"
+
         android:drawableLeft="@drawable/ic_exit_to_app_black_24dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#58CEF4"/>
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="9"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="0dp"
+        android:layout_marginStart="0dp"
+        android:background="?android:attr/windowBackground"
+        android:layout_gravity="bottom"
+        app:itemBackground="@color/colorPrimary"
+        app:itemIconTint="@android:color/white"
+        app:itemTextColor="@android:color/white"
+        app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
+        app:menu="@menu/activity_list_of_words_drawer"/>
 
 
 </LinearLayout>

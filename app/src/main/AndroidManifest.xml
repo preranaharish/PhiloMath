@@ -35,14 +35,16 @@
         </activity>
         <activity
             android:name=".Word_Result"
-            android:theme="@style/Theme.AppCompat" />
+            android:theme="@style/Theme.AppCompat"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".MainActivity"
             android:theme="@style/Theme.AppCompat" />
         <activity
             android:name=".add"
             android:label="PhiloSearch"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.PROCESS_TEXT" />
 

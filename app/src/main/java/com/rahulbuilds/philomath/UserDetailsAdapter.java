@@ -83,6 +83,13 @@ public class UserDetailsAdapter extends RecyclerView.Adapter<UserDetailsAdapter.
         holder.tvAddress.setText(userDetails.getAddress());
         holder.tvPhone.setText(userDetails.getMobileNo());
         holder.tvProfession.setText("Eg: "+ex+"\n");
+        if(userDetails.getNote()==null){
+            holder.note.setText("User Note: "+ "Not Saved");
+        }
+        if(userDetails.getNote().isEmpty()){
+            holder.note.setText("User Note: "+ "Not Saved");
+        }else{
+        holder.note.setText("User Note: "+userDetails.getNote());}
         speak.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -169,7 +176,7 @@ public class UserDetailsAdapter extends RecyclerView.Adapter<UserDetailsAdapter.
         return userDetailsList.size();
     }
     public class UserViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnLongClickListener {
-        TextView letter, tvName, tvAddress, tvPhone, tvProfession;
+        TextView letter, tvName, tvAddress, tvPhone, tvProfession,note;
         ImageView ivMenu;
         public UserViewHolder(View itemView) {
             super(itemView);
@@ -179,6 +186,7 @@ public class UserDetailsAdapter extends RecyclerView.Adapter<UserDetailsAdapter.
             tvAddress = (TextView) itemView.findViewById(R.id.tv_address);
             tvPhone = (TextView) itemView.findViewById(R.id.tv_phone);
             tvProfession = (TextView) itemView.findViewById(R.id.tv_profession);
+            note = (TextView)itemView.findViewById(R.id.notes);
             ivMenu = (ImageView) itemView.findViewById(R.id.iv_menu);
             speak = (Button)itemView.findViewById(R.id.speakword);
             search = (Button)itemView.findViewById(R.id.searchword);

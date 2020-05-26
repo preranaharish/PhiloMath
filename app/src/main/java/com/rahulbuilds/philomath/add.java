@@ -1,13 +1,21 @@
 package com.rahulbuilds.philomath;
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
-
+import android.support.v7.widget.AppCompatAutoCompleteTextView;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -48,6 +56,7 @@ import static com.rahulbuilds.philomath.SignIn.SHARED_PREFS;
 
 public class add extends AppCompatActivity {
     EditText name;
+    String word1;
     EditText meaning;
     EditText Examples;
     Button saveBtn;
@@ -61,6 +70,7 @@ public class add extends AppCompatActivity {
     ProgressBar Progress;
     String word;
     TextView b1,b2,b3;
+    AutoCompleteTextView actv;
     String senderFirstLetter;
     String Recents[]=new String[3];
     Button recent1,recent2,recent3;
@@ -69,11 +79,23 @@ public class add extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
-         text = getIntent()
-                .getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT);
+        String[] words = {"rahul","rahim","ranjith","random","raja","rani","rocket","roar","rajesh","rajaneeti"};
         CardView c1 = (CardView)findViewById(R.id.recentcard);
-        name = (EditText)findViewById(R.id.txtName);
-        name.setText(text);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                (this,android.R.layout.select_dialog_item,words);
+        //Getting the instance of AutoCompleteTextView
+        actv =  (AutoCompleteTextView) findViewById(R.id.txtName);
+        actv.setThreshold(2);//will start working from first character
+        actv.setAdapter(adapter);//setting the adapter data into the AutoCompleteTextView
+//        text = getIntent()
+//                .getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT);
+//        name.setText(text);
+        actv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clicked();
+            }
+        });
        b1=(TextView)findViewById(R.id.B);
        b2=(TextView)findViewById(R.id.B1);
        b3=(TextView)findViewById(R.id.B2);
@@ -83,6 +105,42 @@ public class add extends AppCompatActivity {
        for(int i=0;i<3;i++){
            Recents[i]="empty";
        }
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.navigationView);
+        bottomNavigationView.setSelectedItemId(R.id.nav_search);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.nav_home:
+                        Intent intent1 = new Intent(add.this,HomeScreen.class);
+                        startActivity(intent1);
+                        finish();
+                        break;
+                    case R.id.nav_list:
+                        Intent intent = new Intent(add.this,ListOfWords.class);
+                        startActivity(intent);
+                        finish();
+                        break;
+
+                    case R.id.nav_search:
+
+                        break;
+
+                    case R.id.nav_quiz:
+                        Intent intent3 = new Intent(add.this,MainQuiz.class);
+                        startActivity(intent3);
+                        finish();
+                        break;
+
+                    case R.id.nav_settings:
+                        Intent intent4 = new Intent(add.this,settings_screen.class);
+                        startActivity(intent4);
+                        finish();
+                        break;
+                }
+                return false;
+            }
+        });
         DBHelper dbHelper = new DBHelper(add.this);
         SQLiteDatabase db=dbHelper.getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM " + "words" + " ORDER by "+ "id" +" DESC LIMIT 3;" , null);
@@ -135,50 +193,57 @@ public class add extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String rec1= (String) recent1.getText();
-                name.setText(rec1);
+                actv.setText(rec1);
             }
         });
 recent2.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
         String rec2= (String) recent2.getText();
-        name.setText(rec2);
+        actv.setText(rec2);
     }
 });
 recent3.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
         String rec3= (String) recent3.getText();
-        name.setText(rec3);
+        actv.setText(rec3);
     }
 });
     }
 
 
 
-    public void clicked(View view){
+    public void clicked(){
 
-        String word1 = name.getText().toString();
+         word1 = actv.getText().toString();
         if(word1.isEmpty()){
             Toast.makeText(getApplicationContext(),"Provide word to search",Toast.LENGTH_LONG).show();
         }
         else{
-            Toast.makeText(this,"Searching "+word1.toUpperCase()+ " in Oxford Dictonary",Toast.LENGTH_LONG).show();
-            new CallbackTask1().execute(wordimportance(name.getText().toString()));
+            new CallbackTask1().execute(wordimportance(word1));
             new CallbackTask().execute(dictionaryEntries(word1));
         }
 
     }
-    private String dictionaryEntries(String word) {
+    public String dictionaryEntries(String word) {
         final String language = "en-gb";
         final String word_id = word.toLowerCase();
         return "https://od-api.oxforddictionaries.com:443/api/v2/entries/" + language + "/" + word_id;
     }
-    private String wordimportance(String word1){
+    public String wordimportance(String word1){
         return "https://philomathapp.cf/words/exam?name="+word1;
     }
-    private class CallbackTask extends AsyncTask<String, Integer, String> {
+    public class CallbackTask extends AsyncTask<String, Integer, String> {
+        ProgressDialog dialog = new ProgressDialog(add.this);
+        protected void onPreExecute() {
 
+            super.onPreExecute();
+            if (!add.this.isFinishing()){
+
+                dialog.setMessage("Searching "+word1+" in Oxford Dictionary...");
+                dialog.show();
+            }}
         @Override
         protected String doInBackground(String... params) {
             myurl=params[0];
@@ -265,17 +330,20 @@ recent3.setOnClickListener(new View.OnClickListener() {
                 if(synonyms==null){
                     synonyms="synonyms not found";
                 }
-                SimpleDateFormat simpleDate =  new SimpleDateFormat("dd/MM/yyyy");
-                Calendar cal = Calendar.getInstance();
-                String strDt = simpleDate.format(cal.DATE);
-                SharedPreferences prefs = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-                int noofwordstoday=prefs.getInt(strDt,0);
+                Calendar calendar=Calendar.getInstance();
+                SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd");
+                String currentTime=sdf.format(calendar.getTime());
+                SharedPreferences prefs = getSharedPreferences(currentTime, MODE_PRIVATE);
+                int noofwordstoday=prefs.getInt(currentTime,0);
                 noofwordstoday+=1;
                 SharedPreferences.Editor editor = prefs.edit();
-                editor.putInt(strDt,noofwordstoday);
+                editor.putInt(currentTime,noofwordstoday);
                 editor.commit();
+                if (this.dialog.isShowing()) {
+                    this.dialog.dismiss();
+                }
                 Intent intent = new Intent(add.this, Word_Result.class);
-                intent.putExtra("word",name.getText().toString());
+                intent.putExtra("word",word1);
                 intent.putExtra("meaning",def);
                 intent.putExtra("example",def1);
                 intent.putExtra("synonyms",synonyms);
@@ -296,8 +364,16 @@ recent3.setOnClickListener(new View.OnClickListener() {
         }
     }
 
-    private class CallbackTask1 extends AsyncTask<String, Integer, String> {
+    public class CallbackTask1 extends AsyncTask<String, Integer, String> {
+        ProgressDialog dialog1 = new ProgressDialog(add.this);
+        protected void onPreExecute() {
 
+            super.onPreExecute();
+            if (!add.this.isFinishing()){
+
+                dialog1.setMessage("Retrieving statistics for "+word1+" from Philomath servers...");
+                dialog1.show();
+            }}
         @Override
         protected String doInBackground(String... params) {
             myurl=params[0];
@@ -336,8 +412,14 @@ recent3.setOnClickListener(new View.OnClickListener() {
                 float inum = Float.parseFloat(i);
                 inum=inum*100;
                 importance = (int)inum;
+                if(dialog1.isShowing()){
+                    dialog1.dismiss();
+                }
             }catch(Exception e){
                 e.printStackTrace();
+                if(dialog1.isShowing()){
+                    dialog1.dismiss();
+                }
                 Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_SHORT).show();
             }
             System.out.println(result);

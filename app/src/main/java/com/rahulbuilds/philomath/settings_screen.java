@@ -7,6 +7,8 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -36,6 +38,41 @@ Switch reminder;
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.navigationView);
+        bottomNavigationView.setSelectedItemId(R.id.nav_settings);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.nav_home:
+                        Intent intent6 = new Intent(settings_screen.this,HomeScreen.class);
+                        startActivity(intent6);
+                        finish();
+                        break;
+                    case R.id.nav_list:
+                        Intent intent = new Intent(settings_screen.this,ListOfWords.class);
+                        startActivity(intent);
+                        finish();
+                        break;
+
+                    case R.id.nav_search:
+                        Intent intent1 = new Intent(settings_screen.this,add.class);
+                        startActivity(intent1);
+                        finish();
+                        break;
+
+                    case R.id.nav_quiz:
+                        Intent intent3 = new Intent(settings_screen.this,MainQuiz.class);
+                        startActivity(intent3);
+                        finish();
+                        break;
+
+                    case R.id.nav_settings:
+                        break;
+                }
+                return false;
+            }
+        });
         final LinearLayout l = (LinearLayout)findViewById(R.id.settings);
         localData = new LocalData(getApplicationContext());
         Button backup = (Button)findViewById(R.id.Backup);

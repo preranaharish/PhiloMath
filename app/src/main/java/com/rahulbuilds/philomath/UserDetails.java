@@ -1,6 +1,6 @@
 package com.rahulbuilds.philomath;
 public class UserDetails {
-    private String name,address,mobileNo,professiion;
+    private String name,address,mobileNo,professiion,note;
     int userId;
     public int getUserId() {
         return userId;
@@ -30,7 +30,11 @@ public class UserDetails {
     public String getProfessiion() {
         return professiion;
     }
+    public String getNote(){
+        return note;
+    }
     public void setProfessiion(String professiion) {
         this.professiion = professiion;
     }
+    public  void setNote(String note){this.note = note;}
 }

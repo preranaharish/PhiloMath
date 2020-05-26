@@ -1,5 +1,7 @@
 package com.rahulbuilds.philomath;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -9,16 +11,19 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.GravityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
@@ -39,11 +44,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -53,9 +60,21 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.github.mikephil.charting.utils.Utils;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+
+import javax.net.ssl.HttpsURLConnection;
 
 import static com.rahulbuilds.philomath.SignIn.SHARED_PREFS;
 
@@ -70,15 +89,36 @@ String usernametext,emailtext;
     String TAG = "RemindMe";
     LocalData localData;
     String synonym;
+    AlertDialog alertDialog;
     int daycounter;
     DrawerLayout drawer;
     FloatingActionButton add1;
     LinearLayout linearlayout;
     Intent intent;
+     int brodcasttriggered=0;
     SwitchCompat reminderSwitch;
     TextView tvTime;
     private TextToSpeech mTTS;
     private SeekBar mSeekBarPitch;
+    EditText name;
+    String word1;
+   String meaning;
+    EditText Examples;
+    Button saveBtn;
+    String myurl;
+    String def;
+    CharSequence text;
+    String synonyms;
+    String def1;
+    int importance;
+    ProgressBar Progress;
+    String word;
+    TextView b1,b2,b3;
+    AutoCompleteTextView actv;
+    String senderFirstLetter;
+    String Recents[]=new String[3];
+    Button recent1,recent2,recent3;
+    String[] synonyms_array = new String[4];
     private SeekBar mSeekBarSpeed;
     private Button mButtonSpeak;
     EditText inputSearch;
@@ -87,7 +127,7 @@ String usernametext,emailtext;
     LinearLayout ll_set_time, ll_terms;
 FloatingActionButton fab;
     int hour, min;
-String wordname,Example,sy1,sy2,sy3,sy4,note,meaning;
+String wordname,Example,sy1,sy2,sy3,sy4,note;
     ClipboardManager myClipboard;
     public final static String EXTRA_MESSAGE = "MESSAGE";
     private ListView obj;
@@ -95,7 +135,7 @@ String wordname,Example,sy1,sy2,sy3,sy4,note,meaning;
     MenuItem search;
     android.support.v7.widget.Toolbar toolbar;
     String url;
-
+BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,6 +151,43 @@ String wordname,Example,sy1,sy2,sy3,sy4,note,meaning;
         recyclerView.scheduleLayoutAnimation();
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(userAdapter);
+         bottomNavigationView = (BottomNavigationView)findViewById(R.id.navigationView);
+        bottomNavigationView.setSelectedItemId(R.id.nav_list);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.nav_home:
+                        Intent intent = new Intent(ListOfWords.this,HomeScreen.class);
+                        startActivity(intent);
+                        finish();
+                        break;
+                    case R.id.nav_list:
+
+                        break;
+
+                    case R.id.nav_search:
+                        Intent intent1 = new Intent(ListOfWords.this,add.class);
+                        startActivity(intent1);
+                        finish();
+                        break;
+
+                    case R.id.nav_quiz:
+                        Intent intent3 = new Intent(ListOfWords.this,MainQuiz.class);
+                        startActivity(intent3);
+                        finish();
+                        break;
+
+                    case R.id.nav_settings:
+                        Intent intent4 = new Intent(ListOfWords.this,settings_screen.class);
+                        startActivity(intent4);
+                        finish();
+                        break;
+                }
+                return false;
+            }
+        });
+
         TextView tv = (TextView)findViewById(R.id.newtext);
         DBHelper db = new DBHelper(this);
         SQLiteDatabase userList = db.getReadableDatabase();
@@ -130,6 +207,7 @@ String wordname,Example,sy1,sy2,sy3,sy4,note,meaning;
                 userDetailsItem.setName(c1.getString(c1.getColumnIndex("name")));
                 userDetailsItem.setAddress(c1.getString(c1.getColumnIndex("Meaning")));
                 userDetailsItem.setProfessiion(c1.getString(c1.getColumnIndex("Examples")));
+                userDetailsItem.setNote(c1.getString(c1.getColumnIndex("Note")));
                 userDetailsList.add(userDetailsItem);
 
 
@@ -157,15 +235,19 @@ String wordname,Example,sy1,sy2,sy3,sy4,note,meaning;
             recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
                 @Override
                 public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                    if (dy > 0 || dy < 0 && fab.isShown()) {
-                        fab.hide();
+                    if (dy > 0 ) {
+                        bottomNavigationView.setVisibility(View.INVISIBLE);
+
+                    }
+                    if(dy<0 ){
+                        bottomNavigationView.setVisibility(View.VISIBLE);
                     }
                 }
 
                 @Override
                 public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                     if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                        fab.show();
+
                     }
 
                     super.onScrollStateChanged(recyclerView, newState);
@@ -199,19 +281,6 @@ String wordname,Example,sy1,sy2,sy3,sy4,note,meaning;
 
              drawer =(DrawerLayout) findViewById(R.id.drawer_layout);
 
-            NavigationView navigationView = findViewById(R.id.nav_view);
-
-            // Passing each menu ID as a set of Ids because each
-            // menu should be considered as top level destinations.
-            mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.words,
-                    R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
-                    .setDrawerLayout(drawer)
-                    .build();
-            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-            NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-            NavigationUI.setupWithNavController(navigationView, navController);
-            navigationView.setNavigationItemSelectedListener(this);
-        navigationView.getMenu().getItem(0).setChecked(true);
 
         DBHelper dbHandler = new DBHelper(ListOfWords.this);
          sqlDB = dbHandler.getWritableDatabase();
@@ -255,7 +324,7 @@ String wordname,Example,sy1,sy2,sy3,sy4,note,meaning;
         // Handle navigation view item clicks here.
         switch (item.getItemId()) {
 
-            case R.id.words:{
+            case R.id.nav_list:{
                 Intent intent3 = new Intent(this,ListOfWords.class);
                 startActivity(intent3);
                 finish();
@@ -299,6 +368,8 @@ String wordname,Example,sy1,sy2,sy3,sy4,note,meaning;
     public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+
+
             String name= intent.getStringExtra("name");
             int option = intent.getIntExtra("option",0);
             int position = intent.getIntExtra("pos",0);
@@ -309,9 +380,10 @@ String wordname,Example,sy1,sy2,sy3,sy4,note,meaning;
                 say(position);
             }
             if(option==2) {
+
                 delete(name, position);
-            }
-        }
+
+        }}
     };
     public void delete(String word,int pos){
         DBHelper dbHandler = new DBHelper(ListOfWords.this);
@@ -345,7 +417,7 @@ String wordname,Example,sy1,sy2,sy3,sy4,note,meaning;
         String word=userDetailsList.get(position).getName();
         Cursor cursor = sqlDB.rawQuery("SELECT * FROM words WHERE name = ?", new String[]{ word });
         if (cursor != null && cursor.moveToFirst()) {
-            String wordna = cursor.getString(cursor.getColumnIndex("name"));
+            word = cursor.getString(cursor.getColumnIndex("name"));
             String Meaning = cursor.getString(cursor.getColumnIndex("Meaning"));
             String example = cursor.getString(cursor.getColumnIndex("Examples"));
             String synonym1 = cursor.getString(cursor.getColumnIndex("synonym1"));
@@ -353,9 +425,9 @@ String wordname,Example,sy1,sy2,sy3,sy4,note,meaning;
             String synonym3 = cursor.getString(cursor.getColumnIndex("synonym3"));
             String synonym4 = cursor.getString(cursor.getColumnIndex("synonym4"));
             String additionalnote = cursor.getString(cursor.getColumnIndex("Note"));
-            Log.d("title",wordna);
+            Log.d("title",word);
             Log.d("Content",    Meaning);
-            wordname=wordna;
+            wordname=word;
             meaning=Meaning;
             Example=example;
             sy1=synonym1;
@@ -372,18 +444,8 @@ String wordname,Example,sy1,sy2,sy3,sy4,note,meaning;
         }
         String meaning=userDetailsList.get(position).getAddress();
         String ex=userDetailsList.get(position).getProfessiion();
-        Intent intent = new Intent(ListOfWords.this, Word_Result.class);
-        intent.putExtra("word",word);
-        intent.putExtra("meaning",meaning);
-        intent.putExtra("example",ex);
-        intent.putExtra("visibility",0);
-        intent.putExtra("synonyms",synonym);
-        intent.putExtra("synonyms_array1",sy1);
-        intent.putExtra("synonyms_array2",sy2);
-        intent.putExtra("synonyms_array3",sy3);
-        intent.putExtra("synonyms_array4",sy4);
-        intent.putExtra("note",note);
-        startActivity(intent);
+        new ListOfWords.CallbackTask1().execute(wordimportance(word));
+        new ListOfWords.CallbackTask().execute(dictionaryEntries(word));
 
     }
     public  boolean isStoragePermissionGranted() {
@@ -432,5 +494,229 @@ String wordname,Example,sy1,sy2,sy3,sy4,note,meaning;
                 }
 
             }
+    public String dictionaryEntries(String word) {
+        this.word=word;
+        final String language = "en-gb";
+        final String word_id = word.toLowerCase();
+        return "https://od-api.oxforddictionaries.com:443/api/v2/entries/" + language + "/" + word;
+    }
+    public String wordimportance(String word1){
+        return "https://philomathapp.cf/words/exam?name="+word1;
+    }
+    public class CallbackTask extends AsyncTask<String, Integer, String> {
+
+        ProgressDialog dialog = new ProgressDialog(ListOfWords.this);
+        protected void onPreExecute() {
+
+            super.onPreExecute();
+            if (!ListOfWords.this.isFinishing()){
+
+                dialog.setMessage("Retrieving statistics for "+word+" from Philomath servers...");
+                dialog.show();
+            }
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            myurl=params[0];
+            //TODO: replace with your own app id and app key
+            final String app_id = "7c39cce3";
+            final String app_key = "5a5aae6addef9d704c567a8c152211f7";
+            try {
+
+                URL url = new URL(myurl);
+                HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
+                urlConnection.setRequestProperty("Accept","application/json");
+                urlConnection.setRequestProperty("app_id",app_id);
+                urlConnection.setRequestProperty("app_key",app_key);
+
+                // read the output from the server
+                BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                StringBuilder stringBuilder = new StringBuilder();
+
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    stringBuilder.append(line + "\n");
+                }
+
+                return stringBuilder.toString();
+
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                return e.toString();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+            super.onPostExecute(result);
+            try{
+                result.trim();
+                JSONObject jsonObject =new JSONObject(result);
+                JSONArray jsonArray = jsonObject.getJSONArray("results");
+                JSONObject jsonObject1 = jsonArray.getJSONObject(0);
+                JSONArray js1 = jsonObject1.getJSONArray("lexicalEntries");
+                JSONObject jsonObject2 =js1.getJSONObject(0);
+                JSONArray js2 = jsonObject2.getJSONArray("entries");
+                JSONObject jsonObject3 = js2.getJSONObject(0);
+                JSONArray js3 = jsonObject3.getJSONArray("senses");
+                JSONObject jsonObject4 = js3.getJSONObject(0);
+                JSONArray js4 = jsonObject4.getJSONArray("definitions");
+                def = js4.getString(0);
+                try {
+                    JSONObject jsonObject5 = js3.getJSONObject(0);
+                    JSONArray js5 = jsonObject5.getJSONArray("examples");
+                    JSONObject jsonObject6 = js5.getJSONObject(0);
+                    def1 = jsonObject6.getString("text");
+                    JSONArray js6 = jsonObject5.getJSONArray("synonyms");
+                    try {
+                        JSONObject jsonObject7 = js6.getJSONObject(0);
+                        JSONObject jsonObject8 = js6.getJSONObject(1);
+                        JSONObject jsonObject9 = js6.getJSONObject(2);
+                        JSONObject jsonObject10 = js6.getJSONObject(3);
+                        synonyms = jsonObject7.getString("text");
+                        synonyms_array[0]=jsonObject7.getString("text");
+                        synonyms+=", "+"\t"+jsonObject8.getString("text");
+                        synonyms_array[1]=jsonObject8.getString("text");
+                        synonyms+=", "+"\n"+jsonObject9.getString("text");
+                        synonyms_array[2]=jsonObject9.getString("text");
+                        synonyms+=", "+"\t"+jsonObject10.getString("text");
+                        synonyms_array[3]=jsonObject10.getString("text");
+
+                    }
+                    catch (Exception j){
+                        Toast.makeText(getApplicationContext(),"Synonoyms not found",Toast.LENGTH_LONG).show();
+                        for(int i=0;i<4;i++){
+                            synonyms_array[i]="Not found";
+                        }
+                    }
+
+                }
+                catch (Exception i){
+                    Toast.makeText(getApplicationContext(),"Example not found",Toast.LENGTH_SHORT).show();
+                }
+                if (def1==null){
+                    def1="Examples not found";
+                }
+                if(synonyms==null){
+                    synonyms="synonyms not found";
+                }
+                SimpleDateFormat simpleDate =  new SimpleDateFormat("dd/MM/yyyy");
+                Calendar cal = Calendar.getInstance();
+                String strDt = simpleDate.format(cal.DATE);
+                strDt=strDt.replaceAll("/","");
+                SharedPreferences prefs = getSharedPreferences(strDt, MODE_PRIVATE);
+                int noofwordstoday=prefs.getInt(strDt,0);
+                noofwordstoday+=1;
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putInt(strDt,noofwordstoday);
+                editor.commit();
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+                Intent intent = new Intent(ListOfWords.this, Word_Result.class);
+                word=word.trim();
+                word=word.toUpperCase();
+                intent.putExtra("word",word);
+                intent.putExtra("meaning",def);
+                intent.putExtra("example",def1);
+                intent.putExtra("synonyms",synonyms);
+                intent.putExtra("visibility",0);
+                intent.putExtra("synonyms_array1",synonyms_array[0]);
+                intent.putExtra("synonyms_array2",synonyms_array[1]);
+                intent.putExtra("synonyms_array3",synonyms_array[2]);
+                intent.putExtra("synonyms_array4",synonyms_array[3]);
+                intent.putExtra("note",note);
+                intent.putExtra("imp",importance);
+                startActivity(intent);
+                finish();
+
+            }catch(JSONException e){
+                e.printStackTrace();
+                if (dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+                Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_SHORT).show();
+            }
+            System.out.println(result);
+        }
+    }
+
+    public class CallbackTask1 extends AsyncTask<String, Integer, String> {
+        ProgressDialog dialog1 = new ProgressDialog(ListOfWords.this);
+        protected void onPreExecute() {
+            super.onPreExecute();
+            if (!ListOfWords.this.isFinishing()){
+                dialog1.setMessage("Retrieving statistics for "+word+" from Philomath servers");
+                dialog1.show();
+            }
+        }
+        @Override
+        protected String doInBackground(String... params) {
+            myurl=params[0];
+            //TODO: replace with your own app id and app key
+            try {
+
+                URL url = new URL(myurl);
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestProperty("Accept","application/json");
+                // read the output from the server
+                BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                StringBuilder stringBuilder = new StringBuilder();
+
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    stringBuilder.append(line + "\n");
+                }
+
+                return stringBuilder.toString();
+
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                return e.toString();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            try{
+                Log.d("api result:",result);
+                result.trim();
+                JSONObject jsonObject = new JSONObject(result);
+                String i = jsonObject.getString("total");
+                float inum = Float.parseFloat(i);
+                inum=inum*100;
+                importance = (int)inum;
+                if (dialog1.isShowing()) {
+                    dialog1.dismiss();
+                    dialog1.cancel();
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+                if (dialog1.isShowing()) {
+                    dialog1.dismiss();
+                    dialog1.cancel();
+                }
+                Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_SHORT).show();
+            }
+            System.out.println(result);
+        }
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
+
+    }
+@Override
+    public void onDestroy(){
+        super.onDestroy();
+    LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
+}
 
 }
