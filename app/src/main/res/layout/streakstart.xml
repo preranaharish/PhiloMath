@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/signupgradient"
+    >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Up For A Learning Challenge??"
+        android:layout_marginTop="40dp"
+        android:textSize="25dp"
+        android:layout_gravity="center"
+        android:textStyle="bold"/>
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/deadline"
+        android:layout_gravity="center"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set a Goal for yourself and keep learning"
+        android:textSize="25dp"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:textAlignment="center"/>
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:text="Challenge Yourself"
+        android:background="@drawable/roundbutton"/>
+
+
+</LinearLayout>
