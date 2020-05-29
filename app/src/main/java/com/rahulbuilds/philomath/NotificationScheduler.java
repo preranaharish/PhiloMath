@@ -248,13 +248,15 @@ public class NotificationScheduler
                 String currentTime=sdf.format(calendar.getTime());
                 SharedPreferences prefs = context.getSharedPreferences(currentTime, MODE_PRIVATE);
                 int noofwordstoday=prefs.getInt(currentTime,0);
-                if(noofwordstoday<=1){
+                SharedPreferences prefer = context.getSharedPreferences("streaks_count",MODE_PRIVATE);
+               int goals = prefer.getInt("streaks_count",0);
+                if(noofwordstoday<goals){
                     title="Got busy huh?";
-                    content="I am not your mom to always force you to learn :(";
+                    content="You missed your goal today by "+(goals-noofwordstoday)+" words";
                 }
                 else {
                     title = "Congratulations";
-                    content = "You have learnt " + noofwordstoday + " new words today.";
+                    content = "You have reached your goals today and learnt " + noofwordstoday + " new words today.";
                 }
             }
             Log.d("title",title1);

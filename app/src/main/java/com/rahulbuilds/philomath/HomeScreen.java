@@ -77,7 +77,7 @@ public class HomeScreen extends AppCompatActivity {
                         break;
 
                     case R.id.nav_quiz:
-                        Intent intent3 = new Intent(HomeScreen.this, MainQuiz.class);
+                        Intent intent3 = new Intent(HomeScreen.this, Quiz_start.class);
                         startActivity(intent3);
                         finish();
                         break;

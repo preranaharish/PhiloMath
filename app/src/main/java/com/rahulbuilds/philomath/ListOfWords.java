@@ -173,7 +173,7 @@ BottomNavigationView bottomNavigationView;
                         break;
 
                     case R.id.nav_quiz:
-                        Intent intent3 = new Intent(ListOfWords.this,MainQuiz.class);
+                        Intent intent3 = new Intent(ListOfWords.this,Quiz_start.class);
                         startActivity(intent3);
                         finish();
                         break;
@@ -303,11 +303,11 @@ BottomNavigationView bottomNavigationView;
             }
             try{
 
-                Glide.with(getApplicationContext()).load(url)
-                        .thumbnail(0.5f)
-                        .crossFade()
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .into(imgProfilePic);
+//                Glide.with(getApplicationContext()).load(url)
+//                        .thumbnail(0.5f)
+//                        .crossFade()
+//                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                        .into(imgProfilePic);
             }catch (Exception e){
                 imgProfilePic.setVisibility(View.INVISIBLE);
             }
@@ -338,8 +338,8 @@ BottomNavigationView bottomNavigationView;
                 break;
             }
 
-            case R.id.nav_gallery: {
-               Intent intent = new Intent(this,MainQuiz.class);
+            case R.id.nav_quiz: {
+               Intent intent = new Intent(this,Quiz_start.class);
                startActivity(intent);
                 break;
             }

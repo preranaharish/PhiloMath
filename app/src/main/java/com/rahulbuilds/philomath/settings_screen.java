@@ -18,13 +18,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 
 import static com.rahulbuilds.philomath.SignIn.SHARED_PREFS;
 
 public class settings_screen extends AppCompatActivity {
+    String usernametext,emailtext,url;
 Switch reminder;
     String TAG = "RemindMe";
     LocalData localData;
@@ -32,11 +39,29 @@ Switch reminder;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_screen);
+        SharedPreferences prefs1 = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        usernametext = prefs1.getString("keyname", "Unknown");
+        emailtext = prefs1.getString("Email", "Unknown");
+        url = prefs1.getString("url","Unknown");
 
         // add back arrow to toolbar
         if (getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
+        TextView username = (TextView) findViewById(R.id.usernames);
+        username.setText(usernametext);
+        TextView email = (TextView) findViewById(R.id.emails);
+        email.setText(emailtext);
+        ImageView imgProfilePic = (ImageView)findViewById(R.id.profilepics);
+        try{
+
+            Glide.with(getApplicationContext()).load(url).apply(new RequestOptions().circleCrop())
+                    .thumbnail(0.8f)
+                    .into(imgProfilePic);
+        }catch (Exception e){
+            imgProfilePic.setVisibility(View.INVISIBLE);
         }
         BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.navigationView);
         bottomNavigationView.setSelectedItemId(R.id.nav_settings);
@@ -160,6 +185,8 @@ Switch reminder;
     public boolean onOptionsItemSelected(MenuItem item) {
         // handle arrow click here
         if (item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent(settings_screen.this,HomeScreen.class);
+            startActivity(intent);
             finish(); // close this activity and return to preview activity (if there is any)
         }
 
@@ -196,4 +223,5 @@ Switch reminder;
     public void logout(){
         SignIn.signOut();
     }
+
 }

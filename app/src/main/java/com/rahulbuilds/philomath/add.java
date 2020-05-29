@@ -43,11 +43,14 @@ import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Scanner;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -68,6 +71,7 @@ public class add extends AppCompatActivity {
     String def1;
     int importance;
     ProgressBar Progress;
+    ArrayList<String>arr=new ArrayList<>();
     String word;
     TextView b1,b2,b3;
     AutoCompleteTextView actv;
@@ -75,14 +79,30 @@ public class add extends AppCompatActivity {
     String Recents[]=new String[3];
     Button recent1,recent2,recent3;
     String[] synonyms_array = new String[4];
+    String[] words = new String[60000];
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
-        String[] words = {"rahul","rahim","ranjith","random","raja","rani","rocket","roar","rajesh","rajaneeti"};
+        String[] word = {"rahul"};
+        try {
+            Scanner scan = new Scanner(getAssets().open("words_english.txt"));
+            int i=0;
+
+            // scan through file to make sure that it holds the text
+            // we think it does, and that scanner works.
+            while (scan.hasNextLine()) {
+                String line = scan.nextLine();
+                line=line.trim();
+                arr.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         CardView c1 = (CardView)findViewById(R.id.recentcard);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                (this,android.R.layout.select_dialog_item,words);
+                (this,android.R.layout.select_dialog_item,arr);
         //Getting the instance of AutoCompleteTextView
         actv =  (AutoCompleteTextView) findViewById(R.id.txtName);
         actv.setThreshold(2);//will start working from first character
@@ -127,7 +147,7 @@ public class add extends AppCompatActivity {
                         break;
 
                     case R.id.nav_quiz:
-                        Intent intent3 = new Intent(add.this,MainQuiz.class);
+                        Intent intent3 = new Intent(add.this,Quiz_start.class);
                         startActivity(intent3);
                         finish();
                         break;
@@ -357,6 +377,9 @@ recent3.setOnClickListener(new View.OnClickListener() {
                 finish();
 
             }catch(JSONException e){
+                if (this.dialog.isShowing()) {
+                    this.dialog.dismiss();
+                }
                 e.printStackTrace();
                 Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_SHORT).show();
             }

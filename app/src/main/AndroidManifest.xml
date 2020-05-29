@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".settings_screen"></activity>
+        <activity android:name=".streak"></activity>
+        <activity android:name=".Quiz_start" />
+        <activity android:name=".settings_screen" />
         <activity android:name=".MainQuiz" />
         <activity
             android:name=".ListOfWords"
@@ -36,7 +38,7 @@
         <activity
             android:name=".Word_Result"
             android:theme="@style/Theme.AppCompat"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".MainActivity"
             android:theme="@style/Theme.AppCompat" />
@@ -79,12 +81,12 @@
     </application>
 
     <permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
 </manifest>
