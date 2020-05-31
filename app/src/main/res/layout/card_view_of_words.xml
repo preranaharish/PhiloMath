@@ -8,20 +8,23 @@
     app:contentPaddingBottom="1dp"
     app:contentPaddingRight="2dp"
     app:contentPaddingLeft="2dp"
-    app:cardCornerRadius="4dp"
+    app:cardCornerRadius="15dp"
     app:cardElevation="5dp"
     android:soundEffectsEnabled="true"
     android:foreground="?attr/selectableItemBackground"
     android:clickable="true"
-    android:background="#081B33"
+
+
     app:cardUseCompatPadding="true"
     >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#152642"
-      >
+        android:layout_height="match_parent"
+        android:background="#CC2C2A2A">
+<!--        android:background="@drawable/cardbackground"-->
+<!--        >-->
+
 
 
         <ImageView
@@ -89,43 +92,60 @@
             android:textStyle="italic"
             android:text="additional note"
             />
-<LinearLayout
-    android:paddingTop="25dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/tv_profession">
-        <Button
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="50dp"
-            android:layout_below="@id/notes"
-            android:drawableLeft="@drawable/ic_volume_up_black_24dp"
-            android:text="Phonetics"
-            android:textSize="10dp"
-            android:background="#040E1A"
-            android:id="@+id/speakword"/>
-        <Button
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="50dp"
-            android:layout_toRightOf="@id/speakword"
-            android:layout_below="@id/notes"
-            android:drawableLeft="@drawable/ic_search_black_24dp"
-            android:text="PhiloSearch"
-            android:textSize="10dp"
-            android:background="#040E1A"
-            android:id="@+id/searchword"/>
-        <Button
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="50dp"
-            android:textSize="10dp"
-            android:background="#040E1A"
-            android:drawableLeft="@drawable/ic_delete_forever_black_24dp"
-            android:id="@+id/deleteword"
+        <LinearLayout
 
-            android:text="delete" />
-</LinearLayout>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_profession"
+            android:paddingBottom="5dp">
+
+<!--            <ImageView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:src="@drawable/ic_volume_up_black_24dp"-->
+<!--                android:layout_marginLeft="270dp"/>-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:src="@drawable/ic_description_black_24dp"-->
+<!--                android:layout_marginLeft="30dp"/>-->
+            <Button
+                android:layout_width="120dp"
+
+                android:layout_height="35dp"
+                android:layout_below="@id/notes"
+                android:text="Phonetics"
+                android:textColor="#000000"
+                android:textSize="10dp"
+                android:textStyle="bold"
+                android:background="@drawable/cardphilosearch"
+                android:id="@+id/speakword"
+                android:visibility="invisible"/>
+            <Button
+                android:layout_width="120dp"
+               android:layout_marginLeft="30dp"
+                android:layout_height="35dp"
+                android:layout_toRightOf="@id/speakword"
+                android:layout_below="@id/notes"
+                android:text="PhiloSearch"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:textSize="10dp"
+                android:background="@drawable/carddelete"
+                android:id="@+id/searchword"
+                android:visibility="invisible"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="50dp"
+                android:textSize="10dp"
+                android:background="@drawable/borderbutton"
+                android:="@drawable/ic_trending_up_black_24dp"
+                android:id="@+id/deleteword"/>
+
+<!--                android:text="delete" />-->
+        </LinearLayout>
 
     </RelativeLayout>
 

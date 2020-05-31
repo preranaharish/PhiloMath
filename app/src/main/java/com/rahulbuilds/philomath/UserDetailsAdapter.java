@@ -119,21 +119,21 @@ public class UserDetailsAdapter extends RecyclerView.Adapter<UserDetailsAdapter.
                 LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
             }
         });
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final UserDetails userDetails = userDetailsList.get(position);
-                final int userId = userDetails.getUserId();
-
-                String word = userDetails.getName();
-                Intent intent = new Intent("message_subject_intent");
-                intent.putExtra("name" , String.valueOf(word));
-                intent.putExtra("pos",position);
-                intent.putExtra("option",2);
-                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
-
-            }
-        });
+//        delete.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                final UserDetails userDetails = userDetailsList.get(position);
+//                final int userId = userDetails.getUserId();
+//
+//                String word = userDetails.getName();
+//                Intent intent = new Intent("message_subject_intent");
+//                intent.putExtra("name" , String.valueOf(word));
+//                intent.putExtra("pos",position);
+//                intent.putExtra("option",2);
+//                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+//
+//            }
+//        });
         holder.ivMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -190,7 +190,7 @@ public class UserDetailsAdapter extends RecyclerView.Adapter<UserDetailsAdapter.
             ivMenu = (ImageView) itemView.findViewById(R.id.iv_menu);
             speak = (Button)itemView.findViewById(R.id.speakword);
             search = (Button)itemView.findViewById(R.id.searchword);
-            delete = (Button)itemView.findViewById(R.id.deleteword);
+            //delete = (Button)itemView.findViewById(R.id.deleteword);
         }
         @Override
         public void onClick(View v) {
