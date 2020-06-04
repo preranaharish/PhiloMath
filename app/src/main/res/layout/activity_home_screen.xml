@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-
-    xmlns:tools="http://schemas.android.com/tools">
+    android:background="#121212"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <FrameLayout
@@ -21,7 +21,6 @@
         android:layout_marginStart="0dp"
         android:background="?android:attr/windowBackground"
         android:layout_gravity="bottom"
-        app:itemBackground="@color/colorPrimary"
         app:itemIconTint="@android:color/white"
         app:itemTextColor="@android:color/white"
         app:menu="@menu/activity_list_of_words_drawer"/>
@@ -55,29 +54,33 @@
 
 
             <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="220dp"
-                app:cardCornerRadius="3dp">
+                android:layout_width="370dp"
 
-                <RelativeLayout
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="3dp"
+                app:cardElevation="1dp"
+
+                android:layout_marginBottom="20dp"
+                android:layout_gravity="center">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/maincardtwo"
+                    android:background="#80121212"
                     android:orientation="vertical">
+                    <LinearLayout
 
-                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginRight="30dp"
-                        android:orientation="horizontal">
+                        android:layout_height="170dp"
+                        android:background="@drawable/maincardtwo"
+                        android:orientation="vertical">
 
-
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
+
+
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -92,7 +95,6 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="100dp"
                                 android:paddingTop="10dp"
                                 android:text="/bI`nev(a)l(a)nt/"
                                 android:textColor="#ffffff"
@@ -103,330 +105,435 @@
 
 
 
-                        </RelativeLayout>
+                        </LinearLayout>
 
+                    </LinearLayout>
 
-                    </RelativeLayout>
-
-                </RelativeLayout>
-            </android.support.v7.widget.CardView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:text="adjective"
-                android:textSize="15dp"
-                android:textStyle="italic" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:text="well meaning and kindly"
-                android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:textColor="#ffffff"
-                android:textSize="18dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:text="he was something of a benevolent despot"
-                android:textSize="16dp" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginTop="10dp"
-                android:text="LEARN MORE"
-                android:onClick="card1"/>
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="220dp"
-                android:layout_marginTop="10dp"
-                app:cardCornerRadius="3dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/maincardfour"
-                    android:orientation="vertical">
-
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginRight="30dp"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
-
-                        <RelativeLayout
+                        <TextView
                             android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:text="adjective"
+                            android:textSize="15dp"
+                            android:textStyle="italic" />
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:text="well meaning and kindly"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:textColor="#ffffff"
+                            android:textSize="18dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:text="he was something of a benevolent despot"
+                            android:textSize="16dp" />
+
+                        <Button
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_marginTop="10dp"
+
+                            android:text="LEARN MORE"
+                            android:onClick="card1"/>
+<!--                        <android.support.design.widget.FloatingActionButton-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="end"-->
+<!--                            android:background="#58CEF4"-->
+<!--                            android:contentDescription="Add new word"-->
+<!--                            android:src="@drawable/ic_action_name"-->
+<!--                            />-->
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                app:cardCornerRadius="3dp"
+                app:cardElevation="1dp"
+
+                android:layout_gravity="center">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#80121212"
+                    android:orientation="vertical">
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="170dp"
+                        android:background="@drawable/maincardfour"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-
                                 android:layout_marginTop="50dp"
                                 android:text="ACQUISITION"
-                                android:textColor="#ffffff"
                                 android:id="@+id/w2"
                                 android:gravity="center"
+                                android:textColor="#ffffff"
                                 android:textSize="30dp" />
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="100dp"
+                                android:paddingTop="10dp"
                                 android:text="/akwI`zIf(a)n/"
                                 android:textColor="#ffffff"
-                                android:textSize="25dp"
-                                android:paddingTop="10dp"
                                 android:gravity="center"
+                                android:textSize="25dp"
                                 android:textStyle="italic" />
 
 
 
-                        </RelativeLayout>
+
+                        </LinearLayout>
 
 
-                    </RelativeLayout>
 
-                </RelativeLayout>
-            </android.support.v7.widget.CardView>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_gravity="left"
-                android:layout_marginTop="10dp"
-                android:text="noun"
-                android:textSize="15dp"
-                android:textStyle="italic" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:text="an asset or object bought or obtained ,typically by a library or museum"
-                android:textColor="#ffffff"
-                android:textSize="18dp" />
+                    </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:text="The legacy will be used for new acquisitions"
-                android:textSize="15dp" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="LEARN MORE"
-                android:layout_gravity="right"
-                android:onClick="card2"/>
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_height="220dp"
-                app:cardCornerRadius="3dp"
-                >
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/maincardthree"
-                    android:orientation="vertical">
-
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginRight="30dp"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
+
+                        <TextView
+                                       android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="10dp"
+                                       android:layout_gravity="left"
+                                       android:layout_marginTop="10dp"
+                                        android:text="noun"
+                                       android:textSize="15dp"
+                                        android:textStyle="italic" />
+
+                                   <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                       android:layout_gravity="center"
+                                        android:layout_marginLeft="20dp"
+                                       android:layout_marginRight="20dp"
+                                        android:text="an asset or object bought or obtained ,typically by a library or museum"
+                                       android:textColor="#ffffff"
+                                        android:textSize="18dp" />
+
+                                   <TextView
+                                       android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                       android:layout_marginLeft="20dp"
+                                        android:layout_marginRight="20dp"
+                                        android:text="The legacy will be used for new acquisitions"
+                                       android:textSize="15dp" />
+
+                                    <Button
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:text="LEARN MORE"
+                                        android:layout_gravity="right"
+                                        android:onClick="card2"/>
 
 
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                app:cardCornerRadius="3dp"
+                app:cardElevation="1dp"
+
+                android:layout_gravity="center">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#80121212"
+                    android:orientation="vertical">
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="170dp"
+                        android:background="@drawable/maincardthree"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:gravity="center"
                                 android:layout_marginTop="50dp"
                                 android:text="QUINTESSENTIAL"
-                                android:textColor="#ffffff"
                                 android:id="@+id/w3"
+                                android:gravity="center"
+                                android:textColor="#ffffff"
                                 android:textSize="30dp" />
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:layout_marginTop="100dp"
+                                android:paddingTop="10dp"
                                 android:text="/kwIntI`senf(a)l/"
                                 android:textColor="#ffffff"
+                                android:gravity="center"
                                 android:textSize="25dp"
-                                android:paddingTop="10dp"
                                 android:textStyle="italic" />
 
-                        </RelativeLayout>
+                        </LinearLayout>
 
+                    </LinearLayout>
 
-                    </RelativeLayout>
-
-                </RelativeLayout>
-            </android.support.v7.widget.CardView>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="left"
-                android:text="adjective"
-                android:textSize="15dp"
-                android:textStyle="italic" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:text="representing the most perfecr or typical example of a quality or class"
-                android:textColor="#ffffff"
-                android:textSize="18dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:text="He was the quintessential tough guy-strong,silent and self-contained"
-                android:textSize="15dp" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginTop="10dp"
-                android:text="LEARN MORE"
-                android:onClick="card3"/>
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
-                android:layout_height="220dp"
-                app:cardCornerRadius="3dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/maincardback"
-                    android:orientation="vertical">
-
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginRight="30dp"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
-
-                        <RelativeLayout
+                        <TextView
                             android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_gravity="left"
+                            android:text="adjective"
+                            android:textSize="15dp"
+                            android:textStyle="italic" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:text="representing the most perfecr or typical example of a quality or class"
+                            android:textColor="#ffffff"
+                            android:textSize="18dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:text="He was the quintessential tough guy-strong,silent and self-contained"
+                            android:textSize="15dp" />
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_marginTop="10dp"
+                            android:text="LEARN MORE"
+                            android:onClick="card3"/>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="370dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                app:cardCornerRadius="3dp"
+                app:cardElevation="1dp"
+                android:layout_gravity="center">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#80121212"
+                    android:orientation="vertical">
+                    <LinearLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="170dp"
+                        android:background="@drawable/maincardback"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:gravity="center"
                                 android:layout_marginTop="50dp"
                                 android:text="PROCRASTINATE"
                                 android:id="@+id/w4"
+                                android:gravity="center"
                                 android:textColor="#ffffff"
                                 android:textSize="30dp" />
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="100dp"
-                                android:text="/pra(u)krastIneIt/"
                                 android:paddingTop="10dp"
-                                android:gravity="center"
+                                android:text="/pra(u)krastIneIt/"
                                 android:textColor="#ffffff"
+                                android:gravity="center"
                                 android:textSize="25dp"
                                 android:textStyle="italic" />
 
+                        </LinearLayout>
 
-                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_gravity="left"
+                            android:layout_marginTop="10dp"
+                            android:text="verb"
+                            android:textSize="15dp"
+                            android:textStyle="italic" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:text="delay or postone action"
+                            android:textColor="#ffffff"
+                            android:textSize="18dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="20dp"
+                            android:text="If I didnt procrastinate so much, I could get more done"
+                            android:textSize="15dp" />
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_marginTop="10dp"
+                            android:text="LEARN MORE"
+                            android:onClick="card4"/>
 
 
-                    </RelativeLayout>
+                    </LinearLayout>
 
-                </RelativeLayout>
+                </LinearLayout>
+
+
             </android.support.v7.widget.CardView>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_gravity="left"
-                android:layout_marginTop="10dp"
-                android:text="verb"
-                android:textSize="15dp"
-                android:textStyle="italic" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:text="delay or postone action"
-                android:textColor="#ffffff"
-                android:textSize="18dp" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:text="If I didnt procrastinate so much, I could get more done"
-                android:textSize="15dp" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginTop="10dp"
-                android:text="LEARN MORE"
-                android:onClick="card4"/>
+
+
+            <!--            <android.support.v7.widget.CardView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_height="220dp"-->
+<!--                app:cardCornerRadius="3dp">-->
+
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:background="@drawable/maincardback"-->
+<!--                    android:orientation="vertical">-->
+
+<!--                    <RelativeLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginLeft="30dp"-->
+<!--                        android:layout_marginTop="20dp"-->
+<!--                        android:layout_marginRight="30dp"-->
+<!--                        android:orientation="horizontal">-->
+
+
+<!--                        <RelativeLayout-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:orientation="vertical">-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:gravity="center"-->
+<!--                                android:layout_marginTop="50dp"-->
+<!--                                android:text="PROCRASTINATE"-->
+<!--                                android:id="@+id/w4"-->
+<!--                                android:textColor="#ffffff"-->
+<!--                                android:textSize="30dp" />-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginTop="100dp"-->
+<!--                                android:text="/pra(u)krastIneIt/"-->
+<!--                                android:paddingTop="10dp"-->
+<!--                                android:gravity="center"-->
+<!--                                android:textColor="#ffffff"-->
+<!--                                android:textSize="25dp"-->
+<!--                                android:textStyle="italic" />-->
+
+
+<!--                        </RelativeLayout>-->
+
+
+<!--                    </RelativeLayout>-->
+
+<!--                </RelativeLayout>-->
+<!--            </android.support.v7.widget.CardView>-->
+
 
 
 

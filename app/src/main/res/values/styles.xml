@@ -10,7 +10,7 @@
         <item name="android:statusBarColor">@color/colorPrimary</item>
         <item name="android:navigationBarColor">@color/colorPrimary</item>
         <item name="android:background">@color/colorBackground</item>
-        <item name="colorSurface">@color/colorSurface</item>
+
 
 
     </style>

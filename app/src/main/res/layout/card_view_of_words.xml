@@ -9,7 +9,7 @@
     app:contentPaddingRight="2dp"
     app:contentPaddingLeft="2dp"
     app:cardCornerRadius="15dp"
-    app:cardElevation="5dp"
+    app:cardElevation="1dp"
     android:soundEffectsEnabled="true"
     android:foreground="?attr/selectableItemBackground"
     android:clickable="true"
@@ -21,7 +21,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#CC2C2A2A">
+        android:background="#80121212">
 <!--        android:background="@drawable/cardbackground"-->
 <!--        >-->
 
@@ -99,17 +99,19 @@
             android:layout_below="@+id/tv_profession"
             android:paddingBottom="5dp">
 
-<!--            <ImageView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:src="@drawable/ic_volume_up_black_24dp"-->
-<!--                android:layout_marginLeft="270dp"/>-->
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_volume_up_black_24dp"
 
-<!--            <ImageView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:src="@drawable/ic_description_black_24dp"-->
-<!--                android:layout_marginLeft="30dp"/>-->
+                android:layout_marginLeft="280dp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_description_black_24dp"
+               android:layout_marginLeft="20dp"
+                />
             <Button
                 android:layout_width="120dp"
 
@@ -135,14 +137,14 @@
                 android:background="@drawable/carddelete"
                 android:id="@+id/searchword"
                 android:visibility="invisible"/>
-            <Button
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="50dp"
-                android:textSize="10dp"
-                android:background="@drawable/borderbutton"
-                android:="@drawable/ic_trending_up_black_24dp"
-                android:id="@+id/deleteword"/>
+<!--            <Button-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:textSize="10dp"-->
+<!--                android:background="@drawable/borderbutton"-->
+<!--                android:="@drawable/ic_trending_up_black_24dp"-->
+<!--                android:id="@+id/deleteword"/>-->
 
 <!--                android:text="delete" />-->
         </LinearLayout>
