@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/D:/android/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_description_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/D:/android/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_delete_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,8 +28,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="39caff" />
-                            <entry key="outputName" value="ic_description_black_24dp" />
+                            <entry key="color" value="ff6649" />
+                            <entry key="outputName" value="ic_delete_black_24dp" />
                             <entry key="sourceFile" value="D:\android\bin\C:\Users\HP" />
                           </map>
                         </option>

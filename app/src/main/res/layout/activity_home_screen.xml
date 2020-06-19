@@ -13,6 +13,8 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+
+
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigationView"
         android:layout_width="match_parent"
@@ -21,9 +23,10 @@
         android:layout_marginStart="0dp"
         android:background="?android:attr/windowBackground"
         android:layout_gravity="bottom"
-        app:itemIconTint="@android:color/white"
+        app:itemIconTint="@drawable/nav_item_color_state"
         app:itemTextColor="@android:color/white"
         app:menu="@menu/activity_list_of_words_drawer"/>
+
 
 
 
@@ -72,7 +75,8 @@
 
                         android:layout_width="match_parent"
                         android:layout_height="170dp"
-                        android:background="@drawable/maincardtwo"
+
+                        android:background="#ffcdd2"
                         android:orientation="vertical">
 
                         <LinearLayout
@@ -89,7 +93,7 @@
                                 android:text="BENEVOLENT"
                                 android:id="@+id/w1"
                                 android:gravity="center"
-                                android:textColor="#ffffff"
+                                android:textColor="#121212"
                                 android:textSize="30dp" />
 
                             <TextView
@@ -97,7 +101,7 @@
                                 android:layout_height="wrap_content"
                                 android:paddingTop="10dp"
                                 android:text="/bI`nev(a)l(a)nt/"
-                                android:textColor="#ffffff"
+                                android:textColor="#121212"
                                 android:gravity="center"
                                 android:textSize="25dp"
                                 android:textStyle="italic" />
@@ -152,6 +156,7 @@
                             android:layout_marginTop="10dp"
 
                             android:text="LEARN MORE"
+
                             android:onClick="card1"/>
 <!--                        <android.support.design.widget.FloatingActionButton-->
 <!--                            android:layout_width="wrap_content"-->
@@ -186,7 +191,8 @@
 
                         android:layout_width="match_parent"
                         android:layout_height="170dp"
-                        android:background="@drawable/maincardfour"
+
+                        android:background="#e1bee7"
                         android:orientation="vertical">
 
                         <LinearLayout
@@ -201,7 +207,7 @@
                                 android:text="ACQUISITION"
                                 android:id="@+id/w2"
                                 android:gravity="center"
-                                android:textColor="#ffffff"
+                                android:textColor="#121212"
                                 android:textSize="30dp" />
 
                             <TextView
@@ -209,7 +215,7 @@
                                 android:layout_height="wrap_content"
                                 android:paddingTop="10dp"
                                 android:text="/akwI`zIf(a)n/"
-                                android:textColor="#ffffff"
+                                android:textColor="#121212"
                                 android:gravity="center"
                                 android:textSize="25dp"
                                 android:textStyle="italic" />
@@ -260,12 +266,15 @@
                                        android:textSize="15dp" />
 
                                     <Button
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="120dp"
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="10dp"
                                         android:text="LEARN MORE"
+
                                         android:layout_gravity="right"
                                         android:onClick="card2"/>
+
+
 
 
                     </LinearLayout>
@@ -293,7 +302,7 @@
 
                         android:layout_width="match_parent"
                         android:layout_height="170dp"
-                        android:background="@drawable/maincardthree"
+                        android:background="#b2ebf2"
                         android:orientation="vertical">
 
                         <LinearLayout
@@ -308,7 +317,7 @@
                                 android:text="QUINTESSENTIAL"
                                 android:id="@+id/w3"
                                 android:gravity="center"
-                                android:textColor="#ffffff"
+                                android:textColor="#121212"
                                 android:textSize="30dp" />
 
                             <TextView
@@ -316,7 +325,7 @@
                                 android:layout_height="wrap_content"
                                 android:paddingTop="10dp"
                                 android:text="/kwIntI`senf(a)l/"
-                                android:textColor="#ffffff"
+                                android:textColor="#121212"
                                 android:gravity="center"
                                 android:textSize="25dp"
                                 android:textStyle="italic" />
@@ -360,7 +369,7 @@
                             android:textSize="15dp" />
 
                         <Button
-                            android:layout_width="wrap_content"
+                            android:layout_width="120dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="right"
                             android:layout_marginTop="10dp"
@@ -392,7 +401,7 @@
 
                         android:layout_width="match_parent"
                         android:layout_height="170dp"
-                        android:background="@drawable/maincardback"
+                        android:background="#d7ccc8"
                         android:orientation="vertical">
 
                         <LinearLayout
@@ -407,7 +416,7 @@
                                 android:text="PROCRASTINATE"
                                 android:id="@+id/w4"
                                 android:gravity="center"
-                                android:textColor="#ffffff"
+                                android:textColor="#121212"
                                 android:textSize="30dp" />
 
                             <TextView
@@ -415,7 +424,7 @@
                                 android:layout_height="wrap_content"
                                 android:paddingTop="10dp"
                                 android:text="/pra(u)krastIneIt/"
-                                android:textColor="#ffffff"
+                                android:textColor="#121212"
                                 android:gravity="center"
                                 android:textSize="25dp"
                                 android:textStyle="italic" />
@@ -459,7 +468,7 @@
                             android:textSize="15dp" />
 
                         <Button
-                            android:layout_width="wrap_content"
+                            android:layout_width="120dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="right"
                             android:layout_marginTop="10dp"
