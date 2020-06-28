@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
@@ -36,7 +37,7 @@ public class MyFirebaseInstanceMessagingService extends FirebaseMessagingService
             String title,message,img_url;
             title = remoteMessage.getData().get("title");
             message = remoteMessage.getData().get("message");
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, ListOfWords.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
             Uri sounduri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             final NotificationCompat.Builder notification_Builder = new NotificationCompat.Builder(this);
@@ -44,7 +45,9 @@ public class MyFirebaseInstanceMessagingService extends FirebaseMessagingService
             notification_Builder.setContentText(message);
             notification_Builder.setContentIntent(pendingIntent);
             notification_Builder.setSound(sounduri);
-            notification_Builder.setSmallIcon(R.drawable.icon);
+            if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                notification_Builder.setColor(getResources().getColor(R.color.colorPrimary));
+            }
 
 
         }

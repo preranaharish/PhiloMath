@@ -1,60 +1,54 @@
 package com.rahulbuilds.philomath;
-import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Build;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.view.KeyEvent;
 import android.view.MenuItem;
-import android.view.ViewGroup;
+import android.view.MotionEvent;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
-import android.support.v7.widget.AppCompatAutoCompleteTextView;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import com.google.gson.Gson;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.github.mikephil.charting.utils.Utils;
-import com.rahulbuilds.philomath.DBHelper;
-import com.rahulbuilds.philomath.MainActivity;
-import com.rahulbuilds.philomath.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Scanner;
+import java.util.concurrent.ThreadPoolExecutor;
 
 import javax.net.ssl.HttpsURLConnection;
-
-import static com.rahulbuilds.philomath.SignIn.SHARED_PREFS;
 
 
 public class add extends AppCompatActivity {
@@ -66,10 +60,14 @@ public class add extends AppCompatActivity {
     Intent intent;
     String myurl;
     String def;
+    int finish1=0,finish2=0;
+    String graph_words[] = new String[4];
+    String graph_score[] = new String[4];
+    String sword1,sword2,sword3,sword4,sword5,sword6;
     CharSequence text;
     String synonyms;
     String def1;
-    int importance;
+    int catimportance=0,greimportance=0;
     ProgressBar Progress;
     ArrayList<String>arr=new ArrayList<>();
     String word;
@@ -78,28 +76,60 @@ public class add extends AppCompatActivity {
     String senderFirstLetter;
     String Recents[]=new String[3];
     Button recent1,recent2,recent3;
+    int graph=1,pie=1;
+    private long backPressedTime;
     String[] synonyms_array = new String[4];
-    String[] words = new String[60000];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
-        String[] word = {"rahul"};
-        try {
-            Scanner scan = new Scanner(getAssets().open("words_english.txt"));
-            int i=0;
-
-            // scan through file to make sure that it holds the text
-            // we think it does, and that scanner works.
-            while (scan.hasNextLine()) {
-                String line = scan.nextLine();
-                line=line.trim();
-                arr.add(line);
+        FirebaseDatabase instance2 = FirebaseDatabase.getInstance();
+        DatabaseReference mDatabase = instance2.getInstance().getReference("wordsfortheday");
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String sxword1 = (String) dataSnapshot.child("word1").getValue();
+                String sxword2 = (String) dataSnapshot.child("word2").getValue();
+                String sxword3 = (String) dataSnapshot.child("word3").getValue();
+                String sxword4 = (String) dataSnapshot.child("word4").getValue();
+                SharedPreferences shared = getSharedPreferences("words",MODE_PRIVATE);
+                SharedPreferences.Editor editor = shared.edit();
+                editor.putString("word1",sxword1);
+                editor.putString("word2",sxword2);
+                editor.putString("word3",sxword3);
+                editor.putString("word4",sxword4);
+                editor.commit();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot!=null && dataSnapshot.exists()){
+                    dataSnapshot.getValue();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        SharedPreferences shared = getSharedPreferences("words",MODE_PRIVATE);
+        sword1 = shared.getString("word1","Ostentatious");
+        sword2 = shared.getString("word2","Ostensible");
+        sword3 = shared.getString("word3","Insidious");
+        sword4 = shared.getString("word4","Ingenuity");
+        text = getIntent()
+                .getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT);
+        Bundle extras = getIntent().getExtras();
+        arr=MySingleton.getStringArrayList();
         CardView c1 = (CardView)findViewById(R.id.recentcard);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>
                 (this,android.R.layout.select_dialog_item,arr);
@@ -110,10 +140,34 @@ public class add extends AppCompatActivity {
 //        text = getIntent()
 //                .getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT);
 //        name.setText(text);
-        actv.setOnClickListener(new View.OnClickListener() {
+        actv.setText(text);
+        actv.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                // If the event is a key-down event on the "enter" button
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    // Perform action on key press
+                   clicked();
+                    return true;
+                }
+                return false;
+            }
+        });
+        actv.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                clicked();
+            public boolean onTouch(View v, MotionEvent event) {
+                final int DRAWABLE_LEFT = 0;
+                final int DRAWABLE_TOP = 1;
+                final int DRAWABLE_RIGHT = 2;
+                final int DRAWABLE_BOTTOM = 3;
+
+                if(event.getAction() == MotionEvent.ACTION_UP) {
+                    if(event.getRawX() >= (actv.getRight() - actv.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        // your action here
+                        clicked();
+                        return true;
+                    }}
+                return false;
             }
         });
        b1=(TextView)findViewById(R.id.B);
@@ -122,6 +176,38 @@ public class add extends AppCompatActivity {
        recent1=(Button)findViewById(R.id.recent1);
        recent2=(Button)findViewById(R.id.recent2);
        recent3=(Button)findViewById(R.id.recent3);
+       Button trending1 = (Button)findViewById(R.id.trending1);
+       trending1.setText(sword1);
+       trending1.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               actv.setText(sword1.trim());
+           }
+       });
+       Button trending2 = (Button)findViewById(R.id.trending2);
+       trending2.setText(sword2);
+       trending2.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               actv.setText(sword2.trim());
+           }
+       });
+       Button trending4 = (Button)findViewById(R.id.trending4);
+       trending4.setText(sword3);
+       trending4.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               actv.setText(sword3.trim());
+           }
+       });
+       Button trending5 = (Button)findViewById(R.id.trending5);
+       trending5.setText(sword4);
+       trending5.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               actv.setText(sword4.trim());
+           }
+       });
        for(int i=0;i<3;i++){
            Recents[i]="empty";
        }
@@ -161,13 +247,13 @@ public class add extends AppCompatActivity {
                 return false;
             }
         });
-        DBHelper dbHelper = new DBHelper(add.this);
+        recentdb dbHelper = new recentdb(add.this);
         SQLiteDatabase db=dbHelper.getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM " + "words" + " ORDER by "+ "id" +" DESC LIMIT 3;" , null);
+        Cursor c = db.rawQuery("SELECT * FROM " + "recents" + " ORDER by "+ "id" +" DESC LIMIT 3;" , null);
             int i = 0;
             if (c.moveToFirst()) {
                 do {
-                    Recents[i] = c.getString(c.getColumnIndex("name"));
+                    Recents[i] = c.getString(c.getColumnIndex("word"));
                     i = i + 1;
                 } while (c.moveToNext());
             }
@@ -213,21 +299,21 @@ public class add extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String rec1= (String) recent1.getText();
-                actv.setText(rec1);
+                actv.setText(rec1.trim());
             }
         });
 recent2.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
         String rec2= (String) recent2.getText();
-        actv.setText(rec2);
+        actv.setText(rec2.trim());
     }
 });
 recent3.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
         String rec3= (String) recent3.getText();
-        actv.setText(rec3);
+        actv.setText(rec3.trim());
     }
 });
     }
@@ -241,8 +327,9 @@ recent3.setOnClickListener(new View.OnClickListener() {
             Toast.makeText(getApplicationContext(),"Provide word to search",Toast.LENGTH_LONG).show();
         }
         else{
-            new CallbackTask1().execute(wordimportance(word1));
-            new CallbackTask().execute(dictionaryEntries(word1));
+            new CallbackTask2().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,wordcompare(word1));
+            new CallbackTask1().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,wordimportance(word1));
+
         }
 
     }
@@ -254,6 +341,12 @@ recent3.setOnClickListener(new View.OnClickListener() {
     public String wordimportance(String word1){
         return "https://philomathapp.cf/words/exam?name="+word1;
     }
+    public String wordcompare(String word){
+        final String language = "en-gb";
+        final String word_id = word.toLowerCase();
+        return "https://api.datamuse.com/words?ml="+word_id+"&max=4";
+    }
+
     public class CallbackTask extends AsyncTask<String, Integer, String> {
         ProgressDialog dialog = new ProgressDialog(add.this);
         protected void onPreExecute() {
@@ -334,7 +427,7 @@ recent3.setOnClickListener(new View.OnClickListener() {
 
                     }
                     catch (Exception j){
-                        Toast.makeText(getApplicationContext(),"Synonoyms not found",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"Example not found",Toast.LENGTH_LONG).show();
                         for(int i=0;i<4;i++){
                             synonyms_array[i]="Not found";
                         }
@@ -342,7 +435,7 @@ recent3.setOnClickListener(new View.OnClickListener() {
 
                 }
                 catch (Exception i){
-                    Toast.makeText(getApplicationContext(),"Example not found",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Synonyms not found",Toast.LENGTH_SHORT).show();
                 }
                 if (def1==null){
                     def1="Examples not found";
@@ -359,6 +452,8 @@ recent3.setOnClickListener(new View.OnClickListener() {
                 SharedPreferences.Editor editor = prefs.edit();
                 editor.putInt(currentTime,noofwordstoday);
                 editor.commit();
+                recentdb r = new recentdb(add.this);
+                r.insertWordDetails(word1);
                 if (this.dialog.isShowing()) {
                     this.dialog.dismiss();
                 }
@@ -372,7 +467,12 @@ recent3.setOnClickListener(new View.OnClickListener() {
                 intent.putExtra("synonyms_array2",synonyms_array[1]);
                 intent.putExtra("synonyms_array3",synonyms_array[2]);
                 intent.putExtra("synonyms_array4",synonyms_array[3]);
-                intent.putExtra("imp",importance);
+                intent.putExtra("pie",pie);
+                intent.putExtra("cat",catimportance);
+                intent.putExtra("gre",greimportance);
+                intent.putExtra("graph",graph);
+                intent.putExtra("graph_words",graph_words);
+                intent.putExtra("graph_score",graph_score);
                 startActivity(intent);
                 finish();
 
@@ -381,7 +481,7 @@ recent3.setOnClickListener(new View.OnClickListener() {
                     this.dialog.dismiss();
                 }
                 e.printStackTrace();
-                Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"I am afraid that I couldn't get results for the word",Toast.LENGTH_SHORT).show();
             }
             System.out.println(result);
         }
@@ -409,7 +509,6 @@ recent3.setOnClickListener(new View.OnClickListener() {
                 // read the output from the server
                 BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
                 StringBuilder stringBuilder = new StringBuilder();
-
                 String line = null;
                 while ((line = reader.readLine()) != null) {
                     stringBuilder.append(line + "\n");
@@ -426,27 +525,127 @@ recent3.setOnClickListener(new View.OnClickListener() {
 
         @Override
         protected void onPostExecute(String result) {
+            new CallbackTask().execute(dictionaryEntries(word1));
             super.onPostExecute(result);
             try{
+
               Log.d("api result:",result);
                 result.trim();
                 JSONObject jsonObject = new JSONObject(result);
-                String i = jsonObject.getString("total");
-                float inum = Float.parseFloat(i);
-                inum=inum*100;
-                importance = (int)inum;
+                String total = jsonObject.getString("total");
+                JSONObject jsonObj = new JSONObject(total);
+                String cat = jsonObj.getString("CAT");
+                String gre = jsonObj.getString("GRE");
+                float catscore = Float.parseFloat(cat);
+                float grescore = Float.parseFloat(gre);
+                catscore=catscore*100;
+                grescore=grescore*100;
+                catimportance = (int)catscore;
+                greimportance = (int)grescore;
+                finish1=1;
                 if(dialog1.isShowing()){
                     dialog1.dismiss();
                 }
             }catch(Exception e){
+                pie=0;
                 e.printStackTrace();
                 if(dialog1.isShowing()){
                     dialog1.dismiss();
                 }
-                Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Philomath servers unreachable",Toast.LENGTH_SHORT).show();
             }
             System.out.println(result);
         }
     }
+    public ArrayList<String> read(String fileName) throws IOException, ClassNotFoundException {
+        File path = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_MOVIES);
+        File file = new File(path, "/" + fileName);
+        FileInputStream fin= new FileInputStream(file);
+        ObjectInputStream ois = new ObjectInputStream(fin);
+        arr= (ArrayList<String>)ois.readObject();
+        fin.close();
+        return arr;
+    }
+
+    public class CallbackTask2 extends AsyncTask<String, Integer, String> {
+
+
+        protected void onPreExecute() {
+
+            super.onPreExecute();
+
+        }
+        @Override
+        protected String doInBackground(String... params) {
+            myurl=params[0];
+            //TODO: replace with your own app id and app key
+            try {
+
+                URL url = new URL(myurl);
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod("GET");
+                urlConnection.setRequestProperty("Accept","application/json");
+
+                // read the output from the server
+                BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                StringBuilder stringBuilder = new StringBuilder();
+
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    stringBuilder.append(line + "\n");
+                }
+
+                return stringBuilder.toString();
+
+            }
+            catch (Exception e) {
+                graph=0;
+                e.printStackTrace();
+                return e.toString();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            try{
+
+                Log.d("api result:",result);
+                result=result.trim();
+                if(result.equals("[]")){
+                    graph=0;
+                }
+                else{
+                JSONArray js = new JSONArray(result);
+                for(int i=0;i<js.length();i++) {
+
+                    JSONObject js1 = (JSONObject) js.get(i);
+                    graph_words[i]=js1.getString("word");
+                    graph_score[i]=js1.getString("score");
+                    finish2=1;
+                }}
+            }catch(Exception e){
+                graph=0;
+                e.printStackTrace();
+
+                }
+
+
+        }
+    }
+    @Override
+    public void onBackPressed() {
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
+
+        } else {
+            Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
+        }
+
+        backPressedTime = System.currentTimeMillis();
+    }
 
 }
+
+
+

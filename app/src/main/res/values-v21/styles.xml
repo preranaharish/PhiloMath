@@ -2,10 +2,16 @@
             <style name="NoActionBar" parent="Theme.AppCompat">
             <item name="windowActionBar">false</item>
             <item name="windowNoTitle">true</item>
-                <item name="android:statusBarColor">@color/colorPrimary</item>
+                <item name="android:statusBarColor">@color/cardview_dark_background</item>
         </style>
     <style name="MyTheme" parent="@android:style/Theme.Holo.Light">
         <item name="android:actionBarStyle">@drawable/search_gradient</item>
+        <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
+
+    </style>
+
+    <style name="CustomActivityAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/right_to_left</item>
     </style>
 
 

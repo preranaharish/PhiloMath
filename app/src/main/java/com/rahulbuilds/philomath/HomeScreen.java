@@ -1,5 +1,6 @@
 package com.rahulbuilds.philomath;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.content.SharedPreferences;
 import android.icu.util.Calendar;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
@@ -17,21 +19,33 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -47,9 +61,15 @@ public class HomeScreen extends AppCompatActivity {
     int importance;
     String word;
     ScrollView scrollView;
+    private long backPressedTime;
+    String word1,word2,word3,word4;
+    int catimportance=0,greimportance=0;
     BottomNavigationView bottomNavigationView;
+    String graph_words[] = new String[4];
+    String graph_score[] = new String[4];
     String[] synonyms_array = new String[4];
-
+    int graph=1,pie=1;
+    ArrayList<String> arr=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +92,7 @@ public class HomeScreen extends AppCompatActivity {
 
                     case R.id.nav_search:
                         Intent intent1 = new Intent(HomeScreen.this, add.class);
+                        intent1.putExtra("words",arr);
                         startActivity(intent1);
                         finish();
                         break;
@@ -165,44 +186,55 @@ public class HomeScreen extends AppCompatActivity {
     public void card1(View view) {
         word = w1.getText().toString();
         if (word.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Check Internet Connection", Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(this, "Revealing " + word.toUpperCase() + " Please Wait", Toast.LENGTH_LONG).show();
-            new HomeScreen.CallbackTask1().execute(wordimportance(word));
-            new HomeScreen.CallbackTask().execute(dictionaryEntries(word));
+            try {
+                new HomeScreen.CallbackTask2().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,wordcompare(word));
+                new HomeScreen.CallbackTask1().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,wordimportance(word));
+            }catch (Exception e){
+                Toast.makeText(getApplicationContext(),"Can't get graph data",Toast.LENGTH_LONG).show();
+            }
+
         }
     }
 
     public void card2(View view) {
         word = w2.getText().toString();
         if (word.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Check Internet Connection", Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(this, "Revealing " + word.toUpperCase() + " Please Wait", Toast.LENGTH_LONG).show();
-            new HomeScreen.CallbackTask1().execute(wordimportance(word));
-            new HomeScreen.CallbackTask().execute(dictionaryEntries(word));
+            try {
+                new HomeScreen.CallbackTask2().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,wordcompare(word));
+                new HomeScreen.CallbackTask1().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,wordimportance(word));
+            }catch (Exception e){
+                Toast.makeText(getApplicationContext(),"Can't get graph data",Toast.LENGTH_LONG).show();
+            }
+
+
         }
     }
 
     public void card3(View view) {
         word = w3.getText().toString();
         if (word.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Check Internet Connection", Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(this, "Revealing " + word.toUpperCase() + " Please Wait", Toast.LENGTH_LONG).show();
-            new HomeScreen.CallbackTask1().execute(wordimportance(word));
-            new HomeScreen.CallbackTask().execute(dictionaryEntries(word));
+            try {
+                new HomeScreen.CallbackTask2().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,wordcompare(word));
+                new HomeScreen.CallbackTask1().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,wordimportance(word));
+            }catch (Exception e){
+                Toast.makeText(getApplicationContext(),"Can't get graph data",Toast.LENGTH_LONG).show();
+            }
         }
     }
 
     public void card4(View view) {
         word = w4.getText().toString();
         if (word.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Check Internet Connection", Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(this, "Revealing " + word.toUpperCase() + " Please Wait", Toast.LENGTH_LONG).show();
-            new HomeScreen.CallbackTask1().execute(wordimportance(word));
-            new HomeScreen.CallbackTask().execute(dictionaryEntries(word));
+                new HomeScreen.CallbackTask2().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,wordcompare(word));
+                new HomeScreen.CallbackTask1().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,wordimportance(word));
 
         }
     }
@@ -216,6 +248,12 @@ public class HomeScreen extends AppCompatActivity {
     public String wordimportance(String word1) {
         return "https://philomathapp.cf/words/exam?name=" + word1;
     }
+    public String wordcompare(String word){
+        final String language = "en-gb";
+        final String word_id = word.toLowerCase();
+        return "https://api.datamuse.com/words?ml="+word_id+"&max=4";
+    }
+
 
     public class CallbackTask extends AsyncTask<String, Integer, String> {
         ProgressDialog dialog = new ProgressDialog(HomeScreen.this);
@@ -331,8 +369,13 @@ public class HomeScreen extends AppCompatActivity {
                 intent.putExtra("synonyms_array2", synonyms_array[1]);
                 intent.putExtra("synonyms_array3", synonyms_array[2]);
                 intent.putExtra("synonyms_array4", synonyms_array[3]);
-                intent.putExtra("imp", importance);
-                dialog.dismiss();
+                intent.putExtra("cat",catimportance);
+                intent.putExtra("pie",pie);
+                intent.putExtra("cat",catimportance);
+                intent.putExtra("gre",greimportance);
+                intent.putExtra("graph",graph);
+                intent.putExtra("graph_words",graph_words);
+                intent.putExtra("graph_score",graph_score);
                 startActivity(intent);
                 finish();
 
@@ -375,20 +418,114 @@ public class HomeScreen extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
+            new HomeScreen.CallbackTask().execute(dictionaryEntries(word));
             super.onPostExecute(result);
             try {
                 Log.d("api result:", result);
                 result.trim();
                 JSONObject jsonObject = new JSONObject(result);
-                String i = jsonObject.getString("total");
-                float inum = Float.parseFloat(i);
-                inum = inum * 100;
-                importance = (int) inum;
-            } catch (Exception e) {
+                String total = jsonObject.getString("total");
+                JSONObject jsonObj = new JSONObject(total);
+                String cat = jsonObj.getString("CAT");
+                String gre = jsonObj.getString("GRE");
+                float catscore = Float.parseFloat(cat);
+                float grescore = Float.parseFloat(gre);
+                catscore=catscore*100;
+                grescore=grescore*100;
+                catimportance = (int)catscore;
+                greimportance = (int)grescore;
+            }catch(Exception e){
+                pie=0;
                 e.printStackTrace();
-                Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Philomath servers unreachable",Toast.LENGTH_SHORT).show();
             }
             System.out.println(result);
         }
+    }
+    public ArrayList<String> read(String fileName) throws IOException, ClassNotFoundException {
+        File path = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_MOVIES);
+        File file = new File(path, "/" + fileName);
+        FileInputStream fin= new FileInputStream(file);
+        ObjectInputStream ois = new ObjectInputStream(fin);
+        arr= (ArrayList<String>)ois.readObject();
+        fin.close();
+        return arr;
+    }
+
+    public class CallbackTask2 extends AsyncTask<String, Integer, String> {
+        private Gson gson = new Gson();
+ProgressDialog dialog2 = new ProgressDialog(HomeScreen.this);
+
+        protected void onPreExecute() {
+
+            super.onPreExecute();
+            dialog2.setMessage("Searching Oxford Dictionary...");
+            dialog2.show();
+
+        }
+        @Override
+        protected String doInBackground(String... params) {
+            myurl=params[0];
+            //TODO: replace with your own app id and app key
+            try {
+
+                URL url = new URL(myurl);
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod("GET");
+                urlConnection.setRequestProperty("Accept","application/json");
+
+                // read the output from the server
+                BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                StringBuilder stringBuilder = new StringBuilder();
+
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    stringBuilder.append(line + "\n");
+                }
+
+                return stringBuilder.toString();
+
+            }
+            catch (Exception e) {
+                if(dialog2.isShowing())
+                    dialog2.dismiss();
+                e.printStackTrace();
+                return e.toString();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            if(dialog2.isShowing())
+                dialog2.dismiss();
+            super.onPostExecute(result);
+            try{
+                Log.d("api result:",result);
+                result.trim();
+                JSONArray js = new JSONArray(result);
+                for(int i=0;i<js.length();i++) {
+
+                    JSONObject js1 = (JSONObject) js.get(i);
+                    graph_words[i]=js1.getString("word");
+                    graph_score[i]=js1.getString("score");
+                }
+            }catch(Exception e){
+                graph=0;
+                e.printStackTrace();
+
+            }
+
+
+        }
+    }
+    @Override
+    public void onBackPressed() {
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
+        } else {
+            Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
+        }
+
+        backPressedTime = System.currentTimeMillis();
     }
 }

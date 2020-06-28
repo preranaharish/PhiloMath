@@ -36,6 +36,8 @@ public class MainQuiz extends AppCompatActivity {
     private RadioButton rb1;
     private RadioButton rb2;
     private RadioButton rb3;
+    private int answer=0;
+    Button option1,option2,option3;
     private Button buttonConfirmNext;
     private long backPressedTime;
     private ColorStateList textColorDefaultRb;
@@ -63,13 +65,17 @@ public class MainQuiz extends AppCompatActivity {
         textViewQuestionCount = findViewById(R.id.text_view_question_count);
 
         textViewCountDown = findViewById(R.id.text_view_countdown);
-        rbGroup = findViewById(R.id.radio_group);
-        rb1 = findViewById(R.id.radio_button1);
-        rb2 = findViewById(R.id.radio_button2);
-        rb3 = findViewById(R.id.radio_button3);
+        option1 = (Button)findViewById(R.id.button_option1);
+        option2 = (Button)findViewById(R.id.button_option2);
+        option3 = (Button)findViewById(R.id.button_option3);
+//        rbGroup = findViewById(R.id.radio_group);
+//        rb1 = findViewById(R.id.radio_button1);
+//        rb2 = findViewById(R.id.radio_button2);
+//        rb3 = findViewById(R.id.radio_button3);
         buttonConfirmNext = findViewById(R.id.button_confirm_next);
+        buttonConfirmNext.setVisibility(View.INVISIBLE);
 
-        textColorDefaultRb = rb1.getTextColors();
+        textColorDefaultRb = option1.getTextColors();
         textColorDefaultCds = textViewCountDown.getTextColors();
 
         QuizDbHelper dbHelper = new QuizDbHelper(this);
@@ -78,37 +84,55 @@ public class MainQuiz extends AppCompatActivity {
         Collections.shuffle(questionList);
 
         showNextQuestion();
+        option1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                answer=1;
+                buttonConfirmNext.setText("Next");
+                buttonConfirmNext.setVisibility(View.VISIBLE);
+                checkAnswer();
+            }
+        });
+option2.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        answer=2;
+        buttonConfirmNext.setText("Next");
+        buttonConfirmNext.setVisibility(View.VISIBLE);
+        checkAnswer();
+    }
+});
+option3.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        answer=3;
+        buttonConfirmNext.setText("Next");
+        buttonConfirmNext.setVisibility(View.VISIBLE);
+        checkAnswer();
 
+    }
+});
         buttonConfirmNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!answered) {
-                    if (rb1.isChecked() || rb2.isChecked() || rb3.isChecked()) {
-                        checkAnswer();
-
-                    } else {
-                        Toast.makeText(MainQuiz.this, "Please select an answer", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
                     showNextQuestion();
-                }
             }
         });
     }
 
     private void showNextQuestion() {
-        rb1.setTextColor(textColorDefaultRb);
-        rb2.setTextColor(textColorDefaultRb);
-        rb3.setTextColor(textColorDefaultRb);
-        rbGroup.clearCheck();
+        buttonConfirmNext.setVisibility(View.INVISIBLE);
+        option1.setBackgroundResource(R.drawable.optionbutton);
+        option2.setBackgroundResource(R.drawable.optionbutton);
+        option3.setBackgroundResource(R.drawable.optionbutton);
 
         if (questionCounter < questionCountTotal) {
             currentQuestion = questionList.get(questionCounter);
 
             textViewQuestion.setText(currentQuestion.getQuestion());
-            rb1.setText(currentQuestion.getOption1());
-            rb2.setText(currentQuestion.getOption2());
-            rb3.setText(currentQuestion.getOption3());
+            option1.setText(currentQuestion.getOption1());
+            option2.setText(currentQuestion.getOption2());
+            option3.setText(currentQuestion.getOption3());
 
             questionCounter++;
             textViewQuestionCount.setText("Question: " + questionCounter + "/" + questionCountTotal);
@@ -156,10 +180,7 @@ public class MainQuiz extends AppCompatActivity {
         countDownTimer.cancel();
         answered = true;
 
-        RadioButton rbSelected = findViewById(rbGroup.getCheckedRadioButtonId());
-        int answerNr = rbGroup.indexOfChild(rbSelected) + 1;
-
-        if (answerNr == currentQuestion.getAnswerNr()) {
+        if (answer == currentQuestion.getAnswerNr()) {
             score++;
             textViewScore.setText("Score: " + score);
         }
@@ -168,22 +189,19 @@ public class MainQuiz extends AppCompatActivity {
     }
 
     private void showSolution() {
-        rb1.setTextColor(Color.RED);
-        rb2.setTextColor(Color.RED);
-        rb3.setTextColor(Color.RED);
+        option1.setBackgroundResource(R.drawable.optionbuttonred);
+        option2.setBackgroundResource(R.drawable.optionbuttonred);
+        option3.setBackgroundResource(R.drawable.optionbuttonred);
 
         switch (currentQuestion.getAnswerNr()) {
             case 1:
-                rb1.setTextColor(Color.GREEN);
-                textViewQuestion.setText("Answer 1 is correct");
+                option1.setBackgroundResource(R.drawable.optionbuttongreen);
                 break;
             case 2:
-                rb2.setTextColor(Color.GREEN);
-                textViewQuestion.setText("Answer 2 is correct");
+                option2.setBackgroundResource(R.drawable.optionbuttongreen);
                 break;
             case 3:
-                rb3.setTextColor(Color.GREEN);
-                textViewQuestion.setText("Answer 3 is correct");
+                option3.setBackgroundResource(R.drawable.optionbuttongreen);
                 break;
         }
 

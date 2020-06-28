@@ -17,7 +17,7 @@
         <item
             android:id="@+id/nav_search"
             android:icon="@drawable/ic_search_black_24dp"
-            android:title="List" />
+            android:title="PhiloSearch" />
         <item
             android:id="@+id/nav_quiz"
             android:icon="@drawable/ic_live_help_black_24dp"

@@ -3,7 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.rahulbuilds.philomath.MainActivity">
 
-        <item android:id="@+id/Backup" android:title="Backup"></item>
-        <item android:id="@+id/Restore" android:title="Restore"></item>
+
+        <item android:id="@+id/revise"
+            android:title="Revise all words"
+            android:icon="@drawable/ic_volume_up_black_24dp"
+            ></item>
 
 </menu>

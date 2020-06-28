@@ -2,346 +2,346 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#121212"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="400dp">
         <LinearLayout
-            android:background="@drawable/search_gradient"
-            android:layout_width="match_parent"
-            android:layout_height="280dp"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_marginTop="35dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/icon"/>
-
-            <AutoCompleteTextView
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:id="@+id/txtName"
-                android:background="@drawable/curson_color"
-                android:backgroundTint="@android:color/white"
-                android:ems="14"
-                android:textColor="@android:color/black"
-                android:layout_gravity="center"
-                android:drawableRight="@drawable/ic_search_black_24dp"
-                android:padding="10dp"
-                android:hint="Search"
-                android:textColorHint="@color/colorPrimary"
-                android:gravity="center"
-                />
-
-<!--            <AutoCompleteTextView-->
-<!--                android:id="@+id/txtName"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="50dp"-->
-<!--                android:layout_centerHorizontal="true"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:background="@drawable/curson_color"-->
-<!--                android:backgroundTint="@android:color/white"-->
-<!--                android:drawablePadding="50dp"-->
-<!--                android:ems="10"-->
-<!--                android:focusable="true"-->
-<!--                android:focusableInTouchMode="true"-->
-<!--                android:focusedByDefault="true"-->
-<!--                android:elevation="10dp"-->
-<!--                android:drawableRight="@drawable/ic_search_black_24dp"-->
-<!--                android:clickable="true"-->
-<!--                android:onClick="clicked"-->
-<!--                android:paddingRight="15dp"-->
-<!--                android:paddingBottom="5dp"-->
-<!--                android:gravity="left"-->
-<!--                android:paddingLeft="25dp"-->
-<!--                android:paddingTop="5dp"-->
-<!--                android:imeOptions="actionNone"-->
-<!--                android:autoText="true"-->
-<!--                android:inputType="text|textAutoComplete|textAutoCorrect|textShortMessage"-->
-<!--                android:hint="Enter a word"-->
-<!--                android:textColor="@android:color/black"-->
-<!--                android:textColorHint="@android:color/darker_gray"-->
-<!--                android:textSize="25dp"-->
-<!--                />-->
-
-         <!--   <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="300dp"
-                android:layout_marginTop="-50dp"
-               android:padding="10dp"
-                android:contextClickable="true"
-                android:elevation="1dp"
-                android:layout_toRightOf="@+id/txtName"
-                android:backgroundTint="@android:color/transparent"
-                android:clickable="true"
-                android:onClick="clicked"
-                app:srcCompat="@drawable/ic_search_black_24dp" />-->
-
-        </LinearLayout>
-        <android.support.v7.widget.CardView
-            android:layout_marginTop="210dp"
-            android:id="@+id/trendingcard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-
-            android:foregroundGravity="center"
-            app:cardElevation="10dp"
-            app:cardCornerRadius="20dp">
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-
-                >
-
-                <ImageView
-                    android:id="@+id/trending"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:maxHeight="2dp"
-                    app:srcCompat="@drawable/ic_trending_up_black_24dp"
-                    android:layout_marginLeft="18dp"
-                    android:layout_marginTop="15dp"/>
-
-                <TextView
-                    android:id="@+id/secTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_toRightOf="@+id/trending"
-                    android:gravity="center"
-                    android:paddingTop="10dp"
-                    android:text="Trending"
-                    android:textColor="@android:color/white"
-                    android:textColorHint="@android:color/darker_gray"
-                    android:textSize="20dp"
-                    android:visibility="visible" />
-
+                android:layout_height="400dp">
                 <LinearLayout
-                    android:layout_below="@id/trending"
-                    android:id="@+id/firstrow"
+                    android:background="@drawable/search_gradient"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content"
-                    android:text="Hello1"
-                    android:theme="@style/PrimaryFlatButton" />
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content"
+                    android:layout_height="280dp"
+                    android:orientation="vertical">
 
-                    android:text="Hello2"
+                    <ImageView
+                        android:layout_marginTop="35dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/icon"/>
 
-                    android:theme="@style/PrimaryFlatButton" />
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content"
-                    android:text="hello3"
-                    android:theme="@style/PrimaryFlatButton" />
+                    <AutoCompleteTextView
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:id="@+id/txtName"
+                        android:background="@drawable/curson_color"
+                        android:backgroundTint="@android:color/white"
+                        android:ems="14"
+                        android:textColor="@android:color/black"
+                        android:layout_gravity="center"
+                        android:drawableRight="@drawable/ic_search_black_24dp"
+                        android:padding="10dp"
+                        android:hint="Search"
+                        android:imeOptions="actionSearch"
+                        android:inputType="text"
+                        android:textColorHint="@color/colorPrimary"
+                        android:gravity="center"
+                        />
+
+                    <!--            <AutoCompleteTextView-->
+                    <!--                android:id="@+id/txtName"-->
+                    <!--                android:layout_width="wrap_content"-->
+                    <!--                android:layout_height="50dp"-->
+                    <!--                android:layout_centerHorizontal="true"-->
+                    <!--                android:layout_gravity="center"-->
+                    <!--                android:background="@drawable/curson_color"-->
+                    <!--                android:backgroundTint="@android:color/white"-->
+                    <!--                android:drawablePadding="50dp"-->
+                    <!--                android:ems="10"-->
+                    <!--                android:focusable="true"-->
+                    <!--                android:focusableInTouchMode="true"-->
+                    <!--                android:focusedByDefault="true"-->
+                    <!--                android:elevation="10dp"-->
+                    <!--                android:drawableRight="@drawable/ic_search_black_24dp"-->
+                    <!--                android:clickable="true"-->
+                    <!--                android:onClick="clicked"-->
+                    <!--                android:paddingRight="15dp"-->
+                    <!--                android:paddingBottom="5dp"-->
+                    <!--                android:gravity="left"-->
+                    <!--                android:paddingLeft="25dp"-->
+                    <!--                android:paddingTop="5dp"-->
+                    <!--                android:imeOptions="actionNone"-->
+                    <!--                android:autoText="true"-->
+                    <!--                android:inputType="text|textAutoComplete|textAutoCorrect|textShortMessage"-->
+                    <!--                android:hint="Enter a word"-->
+                    <!--                android:textColor="@android:color/black"-->
+                    <!--                android:textColorHint="@android:color/darker_gray"-->
+                    <!--                android:textSize="25dp"-->
+                    <!--                />-->
+
+                    <!--   <ImageButton
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_marginLeft="300dp"
+                           android:layout_marginTop="-50dp"
+                          android:padding="10dp"
+                           android:contextClickable="true"
+                           android:elevation="1dp"
+                           android:layout_toRightOf="@+id/txtName"
+                           android:backgroundTint="@android:color/transparent"
+                           android:clickable="true"
+                           android:onClick="clicked"
+                           app:srcCompat="@drawable/ic_search_black_24dp" />-->
 
                 </LinearLayout>
-    <LinearLayout
-        android:layout_below="@+id/firstrow"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    <Button
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="wrap_content"
-                  android:text="hello4"
-                    android:theme="@style/PrimaryFlatButton" />
-                <Button
-                    android:layout_weight="2"
-                    android:layout_width="0dp"
-                    android:text="hello5"
-                    android:layout_height="wrap_content"
-                    android:theme="@style/PrimaryFlatButton" />
+                <android.support.v7.widget.CardView
+                    android:layout_marginTop="210dp"
+                    android:id="@+id/trendingcard"
 
-        <Button
-            android:id="@+id/hello4"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="hello6"
-            android:theme="@style/PrimaryFlatButton" />
-    </LinearLayout>
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+
+                    android:foregroundGravity="center"
+                    app:cardElevation="1dp"
+                    app:cardCornerRadius="20dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+
+
+                        >
+
+                        <ImageView
+                            android:id="@+id/trending"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:maxHeight="2dp"
+                            app:srcCompat="@drawable/ic_trending_up_black_24dp"
+                            android:layout_marginLeft="18dp"
+                            android:layout_marginTop="15dp"/>
+
+                        <TextView
+                            android:id="@+id/secTxt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_toRightOf="@+id/trending"
+                            android:gravity="center"
+                            android:paddingTop="10dp"
+                            android:text="Trending"
+                            android:textColor="@android:color/white"
+                            android:textColorHint="@android:color/darker_gray"
+                            android:textSize="20dp"
+                            android:visibility="visible" />
+
+                        <LinearLayout
+                            android:layout_below="@id/trending"
+                            android:id="@+id/firstrow"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <Button
+                                android:layout_width="0dp"
+                                android:layout_weight="2"
+                                android:layout_height="wrap_content"
+                                android:text="Hello1"
+                                android:gravity="center"
+                                android:id="@+id/trending1"
+                                android:theme="@style/PrimaryFlatButton" />
+                            <Button
+                                android:layout_width="0dp"
+                                android:layout_weight="2"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/trending2"
+                                android:text="Hello2"
+                                android:gravity="center"
+
+                                android:theme="@style/PrimaryFlatButton" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_below="@+id/firstrow"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <Button
+                                android:layout_width="0dp"
+                                android:layout_weight="2"
+                                android:layout_height="wrap_content"
+                                android:text="hello4"
+                                android:gravity="center"
+                                android:id="@+id/trending4"
+                                android:theme="@style/PrimaryFlatButton" />
+                            <Button
+                                android:layout_weight="2"
+                                android:layout_width="0dp"
+                                android:text="hello5"
+                                android:gravity="center"
+                                android:id="@+id/trending5"
+                                android:layout_height="wrap_content"
+                                android:theme="@style/PrimaryFlatButton" />
+
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+                </android.support.v7.widget.CardView>
+
+
 
             </RelativeLayout>
-        </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/recentcard"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:layout_below="@+id/trendingcard"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:foregroundGravity="center"
+                app:cardCornerRadius="20dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#80121212"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/recent"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:maxHeight="2dp"
+                        app:srcCompat="@drawable/ic_history_black_24dp"
+                        android:layout_marginLeft="18dp"
+                        android:layout_marginTop="25dp"/>
+
+                    <TextView
+                        android:id="@+id/thirdTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_toRightOf="@+id/recent"
+                        android:gravity="center"
+                        android:paddingTop="10dp"
+                        android:text="Recent"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="@android:color/darker_gray"
+                        android:textSize="20dp"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/B"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_below="@+id/thirdTxt"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="43dp"
+                        android:background="@drawable/square"
+                        android:gravity="center"
+                        android:maxHeight="2dp"
+                        android:text="B"
+                        android:textColor="#A598EA"
+                        android:textSize="30dp"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/recent1"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/thirdTxt"
+                        android:layout_toRightOf="@+id/B"
+                        android:layout_marginTop="40dp"
+                        android:text="Benevolent"
+                        android:layout_marginLeft="10dp"
+                        android:theme="@style/PrimaryFlatButton" />
 
 
 
-    </RelativeLayout>
+                    <TextView
+                        android:id="@+id/B1"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:maxHeight="2dp"
+                        android:background="@drawable/square"
+                        android:layout_below="@+id/B"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="40dp"
+                        android:text="B"
+                        android:textColor="#A598EA"
+                        android:textSize="30dp"
+                        android:textStyle="bold"
+                        android:gravity="center"/>
+
+                    <Button
+                        android:id="@+id/recent2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/recent1"
+                        android:layout_toRightOf="@+id/B"
+                        android:layout_marginTop="42dp"
+                        android:text="Benevolent"
+                        android:layout_marginLeft="10dp"
+                        android:theme="@style/PrimaryFlatButton" />
 
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/recentcard"
-        android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:layout_below="@+id/trendingcard"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:foregroundGravity="center"
-        app:cardCornerRadius="20dp">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/B2"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:maxHeight="2dp"
+                        android:background="@drawable/square"
+                        android:layout_below="@+id/B1"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="40dp"
+                        android:text="B"
+                        android:textColor="#A598EA"
+                        android:textSize="30dp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        />
 
-            <ImageView
-                android:id="@+id/recent"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:maxHeight="2dp"
-                app:srcCompat="@drawable/ic_history_black_24dp"
-                android:layout_marginLeft="18dp"
-                android:layout_marginTop="25dp"/>
-
+                    <Button
+                        android:id="@+id/recent3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/recent2"
+                        android:layout_toRightOf="@+id/B"
+                        android:layout_marginTop="43dp"
+                        android:text="Benevolent"
+                        android:layout_marginLeft="10dp"
+                        android:theme="@style/PrimaryFlatButton" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
             <TextView
-                android:id="@+id/thirdTxt"
+                android:id="@+id/powered"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_toRightOf="@+id/recent"
                 android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="70dp"
+                android:layout_below="@+id/recentcard"
                 android:paddingTop="10dp"
-                android:text="Recent"
-                android:textColor="@android:color/white"
+                android:text="Powered By Oxford Dictionary"
+                android:textColor="#ffffff"
                 android:textColorHint="@android:color/darker_gray"
                 android:textSize="20dp"
                 android:visibility="visible" />
 
 
-            <TextView
-                android:id="@+id/B"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_below="@+id/thirdTxt"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="43dp"
-                android:background="@drawable/square"
-                android:gravity="center"
-                android:maxHeight="2dp"
-                android:text="B"
-                android:textColor="#5880f4"
-                android:textSize="30dp"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/recent1"
-                android:layout_width="wrap_content"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/thirdTxt"
-                android:layout_toRightOf="@+id/B"
-                android:layout_marginTop="40dp"
-                android:text="Benevolent"
-                android:layout_marginLeft="10dp"
-                android:theme="@style/PrimaryFlatButton" />
 
 
-
-            <TextView
-                android:id="@+id/B1"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:maxHeight="2dp"
-                android:background="@drawable/square"
-                android:layout_below="@+id/B"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="40dp"
-                android:text="B"
-                android:textColor="#5880f4"
-                android:textSize="30dp"
-                android:textStyle="bold"
-                android:gravity="center"/>
-
-            <Button
-                android:id="@+id/recent2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/recent1"
-                android:layout_toRightOf="@+id/B"
-                android:layout_marginTop="42dp"
-                android:text="Benevolent"
-                android:layout_marginLeft="10dp"
-                android:theme="@style/PrimaryFlatButton" />
-
-
-
-            <TextView
-                android:id="@+id/B2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:maxHeight="2dp"
-                android:background="@drawable/square"
-                android:layout_below="@+id/B1"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="40dp"
-                android:text="B"
-                android:textColor="#5880f4"
-                android:textSize="30dp"
-                android:textStyle="bold"
-                android:gravity="center"
-                />
-
-            <Button
-                android:id="@+id/recent3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/recent2"
-                android:layout_toRightOf="@+id/B"
-                android:layout_marginTop="43dp"
-                android:text="Benevolent"
-                android:layout_marginLeft="10dp"
-                android:theme="@style/PrimaryFlatButton" />
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
-    <TextView
-        android:id="@+id/powered"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="70dp"
-        android:layout_below="@+id/recentcard"
-        android:paddingTop="10dp"
-        android:text="Powered By Oxford Dictionary"
-        android:textColor="#ffffff"
-        android:textColorHint="@android:color/darker_gray"
-        android:textSize="20dp"
-        android:visibility="visible" />
-
-
-
-
-</LinearLayout>
+        </LinearLayout>
 
 
     </ScrollView>
@@ -359,13 +359,11 @@
         android:layout_marginEnd="0dp"
         android:layout_marginStart="0dp"
         android:background="?android:attr/windowBackground"
-       android:layout_alignParentBottom="true"
-        app:itemBackground="@color/colorPrimary"
-        app:itemIconTint="@android:color/white"
+        android:layout_alignParentBottom="true"
+        app:itemIconTint="@drawable/nav_item_color_state"
         app:itemTextColor="@android:color/white"
         app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
         app:menu="@menu/activity_list_of_words_drawer"/>
 
 </RelativeLayout>
-
 

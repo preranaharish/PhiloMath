@@ -8,36 +8,54 @@
     app:contentPaddingBottom="1dp"
     app:contentPaddingRight="2dp"
     app:contentPaddingLeft="2dp"
-    app:cardCornerRadius="4dp"
-    app:cardElevation="5dp"
+
+    app:cardElevation="1dp"
     android:soundEffectsEnabled="true"
-    android:foreground="?attr/selectableItemBackground"
+
     android:clickable="true"
-    android:background="#081B33"
+
+
     app:cardUseCompatPadding="true"
     >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#152642"
-      >
+        android:layout_height="match_parent"
+        android:background="#80121212">
+        <!--        android:background="@drawable/cardbackground"-->
+        <!--        >-->
 
 
+        <TextView
+            android:id="@+id/firstcharacter"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/simplecircle"
+            android:gravity="center"
+            android:maxHeight="2dp"
+            android:text="B"
+            android:textColor="#ffffff"
+            android:textSize="20dp"
+            android:textStyle="bold" />
         <ImageView
             android:id="@+id/iv_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="-1dp"
+            android:layout_marginRight="3dp"
             android:backgroundTint="@android:color/holo_red_dark"
-            app:srcCompat="@drawable/ic_more_vert_black_24dp" />
+            app:srcCompat="@drawable/ic_delete_black_24dp"
+            android:hapticFeedbackEnabled="true"/>
 
 
         <TextView
             android:id="@+id/tv_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/firstcharacter"
             android:layout_below="@+id/tv_name"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
@@ -49,6 +67,7 @@
             android:id="@+id/tv_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/firstcharacter"
             android:layout_below="@+id/tv_address"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
@@ -59,6 +78,7 @@
             android:id="@+id/tv_profession"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/firstcharacter"
             android:layout_below="@id/tv_phone"
             android:paddingLeft="5dp"
             android:textColor="@android:color/white"
@@ -70,6 +90,7 @@
             android:id="@+id/tv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/firstcharacter"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:paddingTop="2dp"
@@ -78,54 +99,50 @@
             android:textAllCaps="true"
             android:textSize="20dp"
             android:textStyle="bold" />
-        <TextView
+
+            />
+        <LinearLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/notes"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:paddingTop="2dp"
-            android:layout_below="@id/tv_profession"
-            android:textStyle="italic"
-            android:text="additional note"
-            />
-<LinearLayout
-    android:paddingTop="25dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/tv_profession">
-        <Button
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="50dp"
-            android:layout_below="@id/notes"
-            android:drawableLeft="@drawable/ic_volume_up_black_24dp"
-            android:text="Phonetics"
-            android:textSize="10dp"
-            android:background="#040E1A"
-            android:id="@+id/speakword"/>
-        <Button
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="50dp"
-            android:layout_toRightOf="@id/speakword"
-            android:layout_below="@id/notes"
-            android:drawableLeft="@drawable/ic_search_black_24dp"
-            android:text="PhiloSearch"
-            android:textSize="10dp"
-            android:background="#040E1A"
-            android:id="@+id/searchword"/>
-        <Button
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="50dp"
-            android:textSize="10dp"
-            android:background="#040E1A"
-            android:drawableLeft="@drawable/ic_delete_forever_black_24dp"
-            android:id="@+id/deleteword"
+            android:layout_below="@+id/tv_profession"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="5"
+                android:layout_height="wrap_content"
+                android:id="@+id/notes"
+                android:paddingLeft="25dp"
+                android:textStyle="italic"
+                android:text="additional note"/>
 
-            android:text="delete" />
-</LinearLayout>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_volume_up_black_24dp"
+                android:id="@+id/speakword1"
+              />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_description_black_24dp"
+                android:id="@+id/searchword1"
+                />
+            <!--            <Button-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_weight="1"-->
+            <!--                android:layout_height="50dp"-->
+            <!--                android:textSize="10dp"-->
+            <!--                android:background="@drawable/borderbutton"-->
+            <!--                android:="@drawable/ic_trending_up_black_24dp"-->
+            <!--                android:id="@+id/deleteword"/>-->
+
+            <!--                android:text="delete" />-->
+        </LinearLayout>
 
     </RelativeLayout>
 

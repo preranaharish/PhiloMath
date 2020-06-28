@@ -83,11 +83,15 @@ public class Word_Result extends AppCompatActivity {
     String note;
     RelativeLayout rl;
     Question1 q;
-    String options[]=new String[3];
+    String graph_words[] = new String[4];
+    String graph_score[] = new String[4];
+    int scores[] = new int[4];
+     String options[]=new String[3];
     AutoCompleteTextView additionalnote;
     BarChart horizontalChart ;
+    int graph=1,pie=1;
     String synonym1,synonym2,synonym3,synonym4,note1;
-int importance;
+int catimportance,greimportance;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,7 +112,25 @@ int importance;
             synonym2=extras.getString("synonyms_array2");
             synonym3=extras.getString("synonyms_array3");
             synonym4=extras.getString("synonyms_array4");
-            importance=extras.getInt("imp");
+            graph=extras.getInt("graph");
+            catimportance=extras.getInt("cat");
+            greimportance=extras.getInt("gre");
+            pie=extras.getInt("pie");
+            graph_words=extras.getStringArray("graph_words");
+            graph_score=extras.getStringArray("graph_score");
+            try{
+                int max=0;
+            for(int i =0;i<graph_score.length;i++){
+                scores[i]=Integer.parseInt(graph_score[i]);
+                if(scores[i]>max)
+                    max=scores[i];
+            }
+            for(int j=0;j<graph_score.length;j++){
+                scores[j]=(scores[j]*100)/max;
+            }
+            }catch (Exception e){
+                Toast.makeText(this,"Graph data not available",Toast.LENGTH_LONG).show();
+            }
             if (save_visibility==0){
                 note1=extras.getString("note");
                 note=note1;
@@ -218,7 +240,7 @@ int importance;
         //TODO:remove save button and use the save near additional instead
         if(save_visibility==1) {
             Save.setVisibility(View.VISIBLE);
-            if(!(synonyms.equals("synonyms not found"))){
+            if(graph!=0){
                 //TODO: Barchart need to remove values from bottom and add top
                 BarDataSet barDataSet = new BarDataSet(getData(), "Words");
                 barDataSet.setBarBorderWidth(0.9f);
@@ -227,8 +249,8 @@ int importance;
 
                 XAxis xAxis = horizontalChart.getXAxis();
                 xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-                final String[] months = new String[]{synonym1, synonym2, synonym3,synonym4};
-                xAxis.setTextSize(0.1f);
+                final String[] months = new String[]{graph_words[0], graph_words[1], graph_words[2],graph_words[3]};
+                xAxis.setTextSize(0.5f);
                 IndexAxisValueFormatter formatter = new IndexAxisValueFormatter(months);
                 xAxis.setGranularity(1f);
                 xAxis.setDrawGridLines(false);
@@ -270,7 +292,7 @@ int importance;
                 horizontalChart.getAxisRight().setTextColor(getResources().getColor(R.color.thumb_inactive));
                 horizontalChart.getAxisRight().setAxisLineColor(getResources().getColor(R.color.thumb_inactive));
                 horizontalChart.getXAxis().setTextColor(getResources().getColor(R.color.thumb_inactive));
-                horizontalChart.getXAxis().setTextSize(8);
+                horizontalChart.getXAxis().setTextSize(10);
                 horizontalChart.animateY(5000);
                 horizontalChart.invalidate();
 
@@ -287,7 +309,7 @@ int importance;
                 String mean1 = meaning;
                 DBHelper dbhelper2 = new DBHelper(Word_Result.this);
                 SQLiteDatabase db2= dbhelper2.getReadableDatabase();
-                Cursor cur2 = db2.rawQuery("SELECT  * FROM " + "words" + " WHERE "+" Meaning = '" +  meaning +"'" ,null);
+                Cursor cur2 = db2.rawQuery("SELECT  * FROM " + "words" + " WHERE "+" Meaning = ?"   ,new String[] {meaning});
                 int exists = cur2.getCount();
                 if(exists<=0){
                     if(word1.equals("\n") | mean1.isEmpty()){
@@ -339,72 +361,73 @@ int importance;
             }
         });
 
+if(pie==1) {
+    //TODO: pie chart 1 need to add another
+    Resources res = getResources();
+    Drawable drawable = res.getDrawable(R.drawable.circular);
+    PieChart pieChart = (PieChart) findViewById(R.id.CATS);
+    pieChart.setUsePercentValues(true);
+    pieChart.getDescription().setEnabled(false);
+    pieChart.setExtraOffsets(5, 10, 5, 5);
 
-        //TODO: pie chart 1 need to add another
-        Resources res = getResources();
-        Drawable drawable = res.getDrawable(R.drawable.circular);
-        PieChart pieChart = (PieChart)findViewById(R.id.CATS);
-        pieChart.setUsePercentValues(true);
-        pieChart.getDescription().setEnabled(false);
-        pieChart.setExtraOffsets(5, 10, 5, 5);
-
-        pieChart.setDragDecelerationFrictionCoef(0.95f);
+    pieChart.setDragDecelerationFrictionCoef(0.95f);
 
 //        pieChart.setCenterTextTypeface(tfLight);
-        pieChart.setCenterText("CAT");
-        pieChart.setCenterTextColor(Color.WHITE);
+    pieChart.setCenterText("CAT");
+    pieChart.setCenterTextColor(Color.WHITE);
 
-        pieChart.setDrawHoleEnabled(true);
-        pieChart.setHoleColor(16777215);
+    pieChart.setDrawHoleEnabled(true);
+    pieChart.setHoleColor(16777215);
 
 
-        pieChart.setTransparentCircleColor(Color.WHITE);
-        pieChart.setTransparentCircleAlpha(80);
+    pieChart.setTransparentCircleColor(Color.WHITE);
+    pieChart.setTransparentCircleAlpha(80);
 
-        pieChart.setHoleRadius(60f);
-        pieChart.setTransparentCircleRadius(90f);
+    pieChart.setHoleRadius(60f);
+    pieChart.setTransparentCircleRadius(90f);
 
-        pieChart.setDrawCenterText(true);
+    pieChart.setDrawCenterText(true);
 
-        pieChart.setRotationAngle(0);
-        // enable rotation of the pieChart by touch
-        pieChart.setRotationEnabled(true);
-        pieChart.setHighlightPerTapEnabled(true);
+    pieChart.setRotationAngle(0);
+    // enable rotation of the pieChart by touch
+    pieChart.setRotationEnabled(true);
+    pieChart.setHighlightPerTapEnabled(true);
 
-        // pieChart.setUnit(" €");
-        // pieChart.setDrawUnitsInChart(true);
+    // pieChart.setUnit(" €");
+    // pieChart.setDrawUnitsInChart(true);
 
-        // add a selection listener
+    // add a selection listener
 //        pieChart.setOnChartValueSelectedListener(findViewById(R.id.CATS));
 
-        // pieChart.spin(2000, 0, 360);
+    // pieChart.spin(2000, 0, 360);
 
-        Legend l = pieChart.getLegend();
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
-        l.setOrientation(Legend.LegendOrientation.VERTICAL);
-        l.setDrawInside(false);
-        l.setXEntrySpace(7f);
-        l.setYEntrySpace(0f);
-        l.setYOffset(0f);
+    Legend l = pieChart.getLegend();
+    l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+    l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+    l.setOrientation(Legend.LegendOrientation.VERTICAL);
+    l.setDrawInside(false);
+    l.setXEntrySpace(7f);
+    l.setYEntrySpace(0f);
+    l.setYOffset(0f);
 
-        // entry label styling
-        pieChart.setEntryLabelColor(Color.WHITE);
+    // entry label styling
+    pieChart.setEntryLabelColor(Color.WHITE);
 //        pieChart.setEntryLabelTypeface(tfRegular);
-        pieChart.setEntryLabelTextSize(12f);
-        PieDataSet pieDataSet = new PieDataSet(
-                getPieData(), "");
+    pieChart.setEntryLabelTextSize(12f);
+    pieChart.setEntryLabelColor(Color.GREEN);
+    PieDataSet pieDataSet = new PieDataSet(
+            getPieData(), "");
 
-        pieDataSet.setDrawIcons(false);
+    pieDataSet.setDrawIcons(false);
 
-        pieDataSet.setSliceSpace(3f);
+    pieDataSet.setSliceSpace(3f);
 
-        pieDataSet.setIconsOffset(new MPPointF(0, 40));
-        pieDataSet.setSelectionShift(10f);
-        pieDataSet.setFormLineWidth(50f);
+    pieDataSet.setIconsOffset(new MPPointF(0, 40));
+    pieDataSet.setSelectionShift(10f);
+    pieDataSet.setFormLineWidth(50f);
 
 
-        ArrayList<Integer> colors = new ArrayList<>();
+    ArrayList<Integer> colors = new ArrayList<>();
 
 //        for (int c : ColorTemplate.COLORFUL_COLORS)
 //            colors.add(c);
@@ -421,27 +444,128 @@ int importance;
 //        for (int c : ColorTemplate.PASTEL_COLORS)
 //            colors.add(c);
 
-        colors.add(Color.WHITE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            colors.add(getColor(R.color.colorPrimaryDark));
-        }
+    colors.add(Color.WHITE);
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        colors.add(getColor(R.color.colorPrimaryDark));
+    }
 
 
-        pieDataSet.setColors(colors);
-        //dataSet.setSelectionShift(0f);
+    pieDataSet.setColors(colors);
+    //dataSet.setSelectionShift(0f);
 
-        PieData data = new PieData(pieDataSet);
-        data.setValueFormatter(new PercentFormatter(pieChart));
-        data.setValueTextSize(11f);
-        data.setValueTextColor(R.color.colorPrimaryDark);
+    PieData data = new PieData(pieDataSet);
+    data.setValueFormatter(new PercentFormatter(pieChart));
+    data.setValueTextSize(11f);
+    data.setValueTextColor(R.color.colorPrimaryDark);
 //        data.setValueTypeface(tfLight);
-        pieChart.setData(data);
-        pieChart.animateY(1400, Easing.EaseInOutQuad);
-        pieChart.highlightValues(null);
+    pieChart.setData(data);
+    pieChart.animateY(1400, Easing.EaseInOutQuad);
+    pieChart.highlightValues(null);
 
-        pieChart.invalidate();
+    pieChart.invalidate();
 
 
+    //TODO:2nd one
+    Resources res1 = getResources();
+    Drawable drawable1 = res1.getDrawable(R.drawable.circular);
+    PieChart pieChart1 = (PieChart) findViewById(R.id.GATS);
+    pieChart1.setUsePercentValues(true);
+    pieChart1.getDescription().setEnabled(false);
+    pieChart1.setExtraOffsets(5, 10, 5, 5);
+
+    pieChart1.setDragDecelerationFrictionCoef(0.95f);
+
+//        pieChart.setCenterTextTypeface(tfLight);
+    pieChart1.setCenterText("GRE");
+    pieChart1.setCenterTextColor(Color.WHITE);
+
+    pieChart1.setDrawHoleEnabled(true);
+    pieChart1.setHoleColor(16777215);
+
+
+    pieChart1.setTransparentCircleColor(Color.WHITE);
+    pieChart1.setTransparentCircleAlpha(80);
+
+    pieChart1.setHoleRadius(60f);
+    pieChart1.setTransparentCircleRadius(90f);
+
+    pieChart1.setDrawCenterText(true);
+
+    pieChart1.setRotationAngle(0);
+    // enable rotation of the pieChart by touch
+    pieChart1.setRotationEnabled(true);
+    pieChart1.setHighlightPerTapEnabled(true);
+
+    // pieChart.setUnit(" €");
+    // pieChart.setDrawUnitsInChart(true);
+
+    // add a selection listener
+//        pieChart.setOnChartValueSelectedListener(findViewById(R.id.CATS));
+
+    // pieChart.spin(2000, 0, 360);
+
+    Legend l1 = pieChart1.getLegend();
+    l1.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+    l1.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+    l1.setOrientation(Legend.LegendOrientation.VERTICAL);
+    l1.setDrawInside(false);
+    l1.setXEntrySpace(7f);
+    l1.setYEntrySpace(0f);
+    l1.setYOffset(0f);
+
+    // entry label styling
+    pieChart1.setEntryLabelColor(Color.RED);
+//        pieChart.setEntryLabelTypeface(tfRegular);
+    pieChart1.setEntryLabelTextSize(12f);
+    PieDataSet pieDataSet1 = new PieDataSet(
+            getPieData1(), "");
+
+    pieDataSet1.setDrawIcons(false);
+
+    pieDataSet1.setSliceSpace(3f);
+
+    pieDataSet1.setIconsOffset(new MPPointF(0, 40));
+    pieDataSet1.setSelectionShift(10f);
+    pieDataSet1.setFormLineWidth(50f);
+
+
+    ArrayList<Integer> colors1 = new ArrayList<>();
+
+//        for (int c : ColorTemplate.COLORFUL_COLORS)
+//            colors.add(c);
+//
+//        for (int c : ColorTemplate.JOYFUL_COLORS)
+//            colors.add(c);
+//
+//        for (int c : ColorTemplate.COLORFUL_COLORS)
+//            colors.add(c);
+//
+//        for (int c : ColorTemplate.LIBERTY_COLORS)
+//            colors.add(c);
+//
+//        for (int c : ColorTemplate.PASTEL_COLORS)
+//            colors.add(c);
+
+    colors1.add(Color.WHITE);
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        colors1.add(getColor(R.color.colorAccent));
+    }
+
+
+    pieDataSet1.setColors(colors1);
+    //dataSet.setSelectionShift(0f);
+
+    PieData data1 = new PieData(pieDataSet1);
+    data1.setValueFormatter(new PercentFormatter(pieChart1));
+    data1.setValueTextSize(11f);
+    data1.setValueTextColor(R.color.colorPrimaryDark);
+//        data.setValueTypeface(tfLight);
+    pieChart1.setData(data1);
+    pieChart1.animateY(1400, Easing.EaseInOutQuad);
+    pieChart1.highlightValues(null);
+
+    pieChart1.invalidate();
+}
 
 
 
@@ -527,18 +651,24 @@ int importance;
 
     private ArrayList getData(){
         ArrayList<BarEntry> entries = new ArrayList<>();
-        entries.add(new BarEntry(0f, 30f));
-        entries.add(new BarEntry(1f, 80f));
-        entries.add(new BarEntry(2f, 60f));
-        entries.add(new BarEntry(3f, 50f));
+        entries.add(new BarEntry(0f, scores[0]));
+        entries.add(new BarEntry(1f, scores[1]));
+        entries.add(new BarEntry(2f, scores[2]));
+        entries.add(new BarEntry(3f, scores[3]));
         return entries;
     }
 
     private ArrayList getPieData(){
         ArrayList<PieEntry> entries = new ArrayList<>();
-        entries.add(new PieEntry(100-importance));
-        entries.add(new PieEntry(importance));
+        entries.add(new PieEntry(100-catimportance));
+        entries.add(new PieEntry(catimportance));
         return entries;
+    }
+    private ArrayList getPieData1(){
+        ArrayList<PieEntry> entries1 = new ArrayList<>();
+        entries1.add(new PieEntry(100-greimportance));
+        entries1.add(new PieEntry(greimportance));
+        return entries1;
     }
 
     @Override

@@ -34,6 +34,7 @@ public class settings_screen extends AppCompatActivity {
     String usernametext,emailtext,url;
 Switch reminder;
     String TAG = "RemindMe";
+    private long backPressedTime;
     LocalData localData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +88,7 @@ Switch reminder;
                         break;
 
                     case R.id.nav_quiz:
-                        Intent intent3 = new Intent(settings_screen.this,MainQuiz.class);
+                        Intent intent3 = new Intent(settings_screen.this,Quiz_start.class);
                         startActivity(intent3);
                         finish();
                         break;
@@ -222,6 +223,16 @@ Switch reminder;
     }
     public void logout(){
         SignIn.signOut();
+    }
+    @Override
+    public void onBackPressed() {
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
+            super.onBackPressed();
+        } else {
+            Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
+        }
+
+        backPressedTime = System.currentTimeMillis();
     }
 
 }

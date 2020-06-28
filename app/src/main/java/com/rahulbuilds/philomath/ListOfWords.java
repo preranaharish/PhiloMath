@@ -15,6 +15,8 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import com.google.android.gms.ads.MobileAds;
+import android.speech.tts.Voice;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
@@ -24,10 +26,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
@@ -59,6 +63,10 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.github.mikephil.charting.utils.Utils;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -73,9 +81,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
+import com.google.android.gms.ads.MobileAds;
+import com.google.gson.Gson;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import static android.speech.tts.Voice.LATENCY_NORMAL;
+import static android.speech.tts.Voice.QUALITY_VERY_HIGH;
 import static com.rahulbuilds.philomath.SignIn.SHARED_PREFS;
 
 public class ListOfWords extends AppCompatActivity implements RecyclerViewItemListener,NavigationView.OnNavigationItemSelectedListener{
@@ -88,10 +100,16 @@ String usernametext,emailtext;
     List<UserDetails> userDetailsList;
     String TAG = "RemindMe";
     LocalData localData;
+    String word_final;
     String synonym;
+    private  long backPressedTime;
+    int catimportance=0,greimportance=0;
     AlertDialog alertDialog;
     int daycounter;
     DrawerLayout drawer;
+    String graph_words[] = new String[4];
+    String graph_score[] = new String[4];
+    int graph=1,pie=1;
     FloatingActionButton add1;
     LinearLayout linearlayout;
     Intent intent;
@@ -128,6 +146,7 @@ String usernametext,emailtext;
 FloatingActionButton fab;
     int hour, min;
 String wordname,Example,sy1,sy2,sy3,sy4,note;
+
     ClipboardManager myClipboard;
     public final static String EXTRA_MESSAGE = "MESSAGE";
     private ListView obj;
@@ -144,7 +163,6 @@ BottomNavigationView bottomNavigationView;
         usernametext = prefs.getString("keyname", "Unknown");
         emailtext = prefs.getString("Email", "Unknown");
         url = prefs.getString("url","Unknown");
-
         int restoredText = prefs.getInt("set", 0);
         recyclerView = (RecyclerView) findViewById(R.id.rv_users);
         layoutManager = new LinearLayoutManager(this);
@@ -216,7 +234,7 @@ BottomNavigationView bottomNavigationView;
              daycounter = sharedPreferences.getInt("datecounter",0);
             Toolbar toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
-            toolbar.inflateMenu(R.menu.settings_menu);
+
             fab = findViewById(R.id.add);
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -317,8 +335,25 @@ BottomNavigationView bottomNavigationView;
                     || super.onSupportNavigateUp();
 
         }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.settings_menu, menu);
+        return true;
+    }
 
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // action with ID action_refresh was selected
+            case R.id.revise:
+               reviser();
+                break;
+            default:
+                break;
+        }
+        return true;
+    }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
@@ -386,30 +421,38 @@ BottomNavigationView bottomNavigationView;
         }}
     };
     public void delete(String word,int pos){
+        try{
         DBHelper dbHandler = new DBHelper(ListOfWords.this);
         SQLiteDatabase sqlDB = dbHandler.getWritableDatabase();
         Cursor cursor = sqlDB.rawQuery("Delete FROM words WHERE name = ?", new String[]{ word });
         if (cursor != null && cursor.moveToFirst()) {
         }
-
-
-        userAdapter.notifyItemRemoved(pos);
+        Toast.makeText(ListOfWords.this,"Deleted "+word.toLowerCase(),Toast.LENGTH_SHORT).show();
+        userDetailsList.remove(pos);
+        recyclerView.getRecycledViewPool().clear();
         userAdapter.notifyDataSetChanged();
-
-        Toast.makeText(ListOfWords.this,word.toUpperCase() +"  will be deleted",Toast.LENGTH_LONG).show();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
     private void speak(String title1) {
 
         String text = title1;
         mTTS.setPitch(0.9f);
         mTTS.setSpeechRate(0.85f);
-        mTTS.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+        mTTS.speak(text, TextToSpeech.QUEUE_ADD, null);
+
+
+    }
+    private void stop(){
+        mTTS.stop();
     }
     public void say(int position) {
         String word=userDetailsList.get(position).getName();
         String meaning=userDetailsList.get(position).getAddress();
         String ex=userDetailsList.get(position).getProfessiion();
-        speak(word);
+       speak(word);
     }
 
 
@@ -444,8 +487,15 @@ BottomNavigationView bottomNavigationView;
         }
         String meaning=userDetailsList.get(position).getAddress();
         String ex=userDetailsList.get(position).getProfessiion();
-        new ListOfWords.CallbackTask1().execute(wordimportance(word));
-        new ListOfWords.CallbackTask().execute(dictionaryEntries(word));
+        try {
+            word_final=word;
+            new ListOfWords.CallbackTask2().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,wordcompare(word));
+            new ListOfWords.CallbackTask1().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,wordimportance(word));
+        }catch (Exception e){
+            Toast.makeText(getApplicationContext(),"Can't get graph data",Toast.LENGTH_LONG).show();
+        }
+
+
 
     }
     public  boolean isStoragePermissionGranted() {
@@ -502,6 +552,12 @@ BottomNavigationView bottomNavigationView;
     }
     public String wordimportance(String word1){
         return "https://philomathapp.cf/words/exam?name="+word1;
+    }
+    public String wordcompare(String word){
+        final String language = "en-gb";
+        word=word.trim();
+        final String word_id = word.toLowerCase();
+        return "https://api.datamuse.com/words?ml="+word_id+"&max=4";
     }
     public class CallbackTask extends AsyncTask<String, Integer, String> {
 
@@ -624,13 +680,20 @@ BottomNavigationView bottomNavigationView;
                 intent.putExtra("meaning",def);
                 intent.putExtra("example",def1);
                 intent.putExtra("synonyms",synonyms);
-                intent.putExtra("visibility",0);
+                intent.putExtra("visibility",1);
                 intent.putExtra("synonyms_array1",synonyms_array[0]);
                 intent.putExtra("synonyms_array2",synonyms_array[1]);
                 intent.putExtra("synonyms_array3",synonyms_array[2]);
                 intent.putExtra("synonyms_array4",synonyms_array[3]);
                 intent.putExtra("note",note);
-                intent.putExtra("imp",importance);
+                intent.putExtra("pie",pie);
+                intent.putExtra("cat",catimportance);
+                intent.putExtra("gre",greimportance);
+                intent.putExtra("graph",graph);
+                intent.putExtra("graph_words",graph_words);
+                intent.putExtra("graph_score",graph_score);
+                startActivity(intent);
+                finish();
                 startActivity(intent);
                 finish();
 
@@ -650,7 +713,7 @@ BottomNavigationView bottomNavigationView;
         protected void onPreExecute() {
             super.onPreExecute();
             if (!ListOfWords.this.isFinishing()){
-                dialog1.setMessage("Retrieving statistics for "+word+" from Philomath servers");
+                dialog1.setMessage("Retrieving statistics for "+word_final+" from Philomath servers");
                 dialog1.show();
             }
         }
@@ -683,26 +746,35 @@ BottomNavigationView bottomNavigationView;
 
         @Override
         protected void onPostExecute(String result) {
+            word_final=word_final.trim();
+            word_final=word_final.toLowerCase();
+            new ListOfWords.CallbackTask().execute(dictionaryEntries(word_final));
             super.onPostExecute(result);
             try{
+
                 Log.d("api result:",result);
-                result.trim();
+                result=result.trim();
                 JSONObject jsonObject = new JSONObject(result);
-                String i = jsonObject.getString("total");
-                float inum = Float.parseFloat(i);
-                inum=inum*100;
-                importance = (int)inum;
-                if (dialog1.isShowing()) {
+                String total = jsonObject.getString("total");
+                JSONObject jsonObj = new JSONObject(total);
+                String cat = jsonObj.getString("CAT");
+                String gre = jsonObj.getString("GRE");
+                float catscore = Float.parseFloat(cat);
+                float grescore = Float.parseFloat(gre);
+                catscore=catscore*100;
+                grescore=grescore*100;
+                catimportance = (int)catscore;
+                greimportance = (int)grescore;
+                if(dialog1.isShowing()){
                     dialog1.dismiss();
-                    dialog1.cancel();
                 }
             }catch(Exception e){
                 e.printStackTrace();
-                if (dialog1.isShowing()) {
+                if(dialog1.isShowing()){
                     dialog1.dismiss();
-                    dialog1.cancel();
                 }
-                Toast.makeText(getApplicationContext(),"Something went wrong",Toast.LENGTH_SHORT).show();
+                pie=0;
+                Toast.makeText(getApplicationContext(),"Philomath servers unreachable",Toast.LENGTH_SHORT).show();
             }
             System.out.println(result);
         }
@@ -710,13 +782,105 @@ BottomNavigationView bottomNavigationView;
     @Override
     public void onPause() {
         super.onPause();
+        stop();
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
 
     }
 @Override
     public void onDestroy(){
         super.onDestroy();
+        stop();
     LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
 }
 
+public void reviser(){
+    DBHelper db = new DBHelper(this);
+    SQLiteDatabase userList = db.getReadableDatabase();
+    LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("message_subject_intent"));
+    Cursor c1 = userList.query("words", null, null, null, null, null, null);
+    if (c1.getCount()==0){
+       speak("No words to revise");
+    }
+    if (c1 != null && c1.getCount() != 0) {
+        while (c1.moveToNext()) {
+            UserDetails userDetailsItem = new UserDetails();
+
+
+            String word=c1.getString(c1.getColumnIndex("name"));
+            String meaning=c1.getString(c1.getColumnIndex("Meaning"));
+           speak(word + meaning);
+
+
+
+
+        }
+    }
+}
+    public class CallbackTask2 extends AsyncTask<String, Integer, String> {
+        protected void onPreExecute() {
+
+            super.onPreExecute();
+
+        }
+        @Override
+        protected String doInBackground(String... params) {
+            myurl=params[0];
+            //TODO: replace with your own app id and app key
+            try {
+
+                URL url = new URL(myurl);
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod("GET");
+                urlConnection.setRequestProperty("Accept","application/json");
+
+                // read the output from the server
+                BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+                StringBuilder stringBuilder = new StringBuilder();
+
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    stringBuilder.append(line + "\n");
+                }
+
+                return stringBuilder.toString();
+
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                return e.toString();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            try{
+                Log.d("api result:",result);
+                result.trim();
+                JSONArray js = new JSONArray(result);
+                for(int i=0;i<js.length();i++) {
+
+                    JSONObject js1 = (JSONObject) js.get(i);
+                    graph_words[i]=js1.getString("word");
+                    graph_score[i]=js1.getString("score");
+                }
+            }catch(Exception e){
+                graph=0;
+                e.printStackTrace();
+
+            }
+
+
+        }
+    }
+    @Override
+    public void onBackPressed() {
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
+            super.onBackPressed();
+        } else {
+            Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
+        }
+
+        backPressedTime = System.currentTimeMillis();
+    }
 }

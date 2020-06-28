@@ -7,6 +7,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
+import java.util.ArrayList;
+
 /**
  * Created by rahul on 20-08-2017.
  */
@@ -23,6 +25,7 @@ public class MySingleton {
     private static MySingleton mInstance;
     public static String name;
     public static String email;
+    public static ArrayList<String> arr=new ArrayList<>();
     public static String url;
     public static Uri urls;
     private static String baseUrl;
@@ -32,6 +35,7 @@ public class MySingleton {
     public static int maxCount = 0;
     public static String user;
     public static int updatedelay = 180;
+
     private MySingleton(Context context){
         this.context = context;
         requestQueue = getRequestQueue();
@@ -52,6 +56,9 @@ public class MySingleton {
         if(mInstance==null)
             mInstance = new MySingleton((context));
         return mInstance;
+    }
+    public static ArrayList<String> getStringArrayList(){
+        return arr;
     }
     public <T>void addToRequestQue(Request<T> request)
     {
