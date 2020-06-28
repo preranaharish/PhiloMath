@@ -18,10 +18,12 @@
 
     <color name="thumb_active">#069ECF</color>
     <color name="track_active">#f70d1a</color>
-
+    <color name="warning">#FFEB3B</color>
     <color name="colorBackground">#000000</color>
     <color name="colorSurface">#121212</color>
     <color name="thumb_inactive">#A5A5A5</color>
     <color name="track_inactive">#66A5A5A5</color>
+
+    <color name="search_card">#661B1A1A</color>
 
 </resources>
