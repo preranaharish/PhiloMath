@@ -100,6 +100,7 @@ public class add extends AppCompatActivity {
                 editor.putString("word3",sxword3);
                 editor.putString("word4",sxword4);
                 editor.commit();
+
             }
 
             @Override

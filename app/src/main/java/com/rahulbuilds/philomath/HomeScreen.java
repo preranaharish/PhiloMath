@@ -5,6 +5,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.icu.util.Calendar;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -52,7 +54,7 @@ import javax.net.ssl.HttpsURLConnection;
 
 
 public class HomeScreen extends AppCompatActivity {
-    TextView w1, w2, w3, w4;
+    TextView words[]=new TextView[4];
     String myurl;
     String def;
     CharSequence text;
@@ -65,6 +67,10 @@ public class HomeScreen extends AppCompatActivity {
     String word1,word2,word3,word4;
     int catimportance=0,greimportance=0;
     BottomNavigationView bottomNavigationView;
+    TextView p1[]=new TextView[4];
+    TextView c[]=new TextView[4];
+    TextView e1[]=new TextView[4];
+    TextView d1[]=new TextView[4];
     String graph_words[] = new String[4];
     String graph_score[] = new String[4];
     String[] synonyms_array = new String[4];
@@ -76,7 +82,48 @@ public class HomeScreen extends AppCompatActivity {
         setContentView(R.layout.activity_home_screen);
 //        FloatingActionButton fl =(FloatingActionButton)findViewById(R.id.skip);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigationView);
+        words[0] = (TextView) findViewById(R.id.w1);
+        words[1] = (TextView) findViewById(R.id.w2);
+        words[2] = (TextView) findViewById(R.id.w3);
+        words[3] = (TextView) findViewById(R.id.w4);
+        p1[0]=(TextView)findViewById(R.id.phonetic1);
+        p1[1]=(TextView)findViewById(R.id.phonetic2);
+        p1[2]=(TextView)findViewById(R.id.phonetic3);
+        p1[3]=(TextView)findViewById(R.id.phonetic4);
+        c[0]=(TextView)findViewById(R.id.category1);
+        c[1]=(TextView)findViewById(R.id.category2);
+        c[2]=(TextView)findViewById(R.id.category3);
+        c[3]=(TextView)findViewById(R.id.category4);
+        d1[0]=(TextView)findViewById(R.id.meaning1);
+        d1[1]=(TextView)findViewById(R.id.meaning2);
+        d1[2]=(TextView)findViewById(R.id.meaning3);
+        d1[3]=(TextView)findViewById(R.id.meaning4);
+        e1[0]=(TextView)findViewById(R.id.example1);
+        e1[1]=(TextView)findViewById(R.id.example2);
+        e1[2]=(TextView)findViewById(R.id.example3);
+        e1[3]=(TextView)findViewById(R.id.example4);
+
+        HotwordsDB db = new HotwordsDB(this);
+        SQLiteDatabase userList = db.getReadableDatabase();
+        Cursor c1 = userList.rawQuery("SELECT * FROM " + "hotwords" + " ORDER by "+ "id" +" DESC LIMIT 4;" , null);
+        if (c1 != null && c1.getCount() != 0) {
+            int i=0;
+            while (c1.moveToNext()) {
+                if(i==4)
+                    break;
+
+                words[i].setText(c1.getString(c1.getColumnIndex("word")).trim());
+                d1[i].setText(c1.getString(c1.getColumnIndex("Meaning")).trim());
+                c[i].setText(c1.getString(c1.getColumnIndex("category")).trim());
+                e1[i].setText(c1.getString(c1.getColumnIndex("examples")).trim());
+                p1[i].setText("/"+c1.getString(c1.getColumnIndex("phonetics")).trim()+"/");
+                i++;
+
+            }}
+
+
         bottomNavigationView.setSelectedItemId(R.id.nav_home);
+
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -162,10 +209,7 @@ public class HomeScreen extends AppCompatActivity {
 //                finish();
 //            }
 //        });
-        w1 = (TextView) findViewById(R.id.w1);
-        w2 = (TextView) findViewById(R.id.w2);
-        w3 = (TextView) findViewById(R.id.w3);
-        w4 = (TextView) findViewById(R.id.w4);
+
 //       w1.setText("Ostentatious");
 //       w2.setText("Sacrosanct");
 //       w3.setText("Ostensible");
@@ -184,7 +228,7 @@ public class HomeScreen extends AppCompatActivity {
     }
 
     public void card1(View view) {
-        word = w1.getText().toString();
+        word = words[0].getText().toString();
         if (word.isEmpty()) {
             Toast.makeText(getApplicationContext(), "Check Internet Connection", Toast.LENGTH_LONG).show();
         } else {
@@ -199,7 +243,7 @@ public class HomeScreen extends AppCompatActivity {
     }
 
     public void card2(View view) {
-        word = w2.getText().toString();
+        word = words[1].getText().toString();
         if (word.isEmpty()) {
             Toast.makeText(getApplicationContext(), "Check Internet Connection", Toast.LENGTH_LONG).show();
         } else {
@@ -215,7 +259,7 @@ public class HomeScreen extends AppCompatActivity {
     }
 
     public void card3(View view) {
-        word = w3.getText().toString();
+        word = words[2].getText().toString();
         if (word.isEmpty()) {
             Toast.makeText(getApplicationContext(), "Check Internet Connection", Toast.LENGTH_LONG).show();
         } else {
@@ -229,7 +273,7 @@ public class HomeScreen extends AppCompatActivity {
     }
 
     public void card4(View view) {
-        word = w4.getText().toString();
+        word = words[3].getText().toString();
         if (word.isEmpty()) {
             Toast.makeText(getApplicationContext(), "Check Internet Connection", Toast.LENGTH_LONG).show();
         } else {
@@ -522,6 +566,8 @@ ProgressDialog dialog2 = new ProgressDialog(HomeScreen.this);
     @Override
     public void onBackPressed() {
         if (backPressedTime + 2000 > System.currentTimeMillis()) {
+            finishAffinity();
+            finish();
         } else {
             Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
         }

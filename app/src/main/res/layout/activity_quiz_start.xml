@@ -48,7 +48,7 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:background="@drawable/roundedbutton"
-        android:text="Start Quiz"
+        android:text="Take revision quiz"
 
         android:layout_marginTop="100dp"
         android:layout_gravity="center_horizontal"
@@ -56,7 +56,25 @@
         android:textColor="#000000"
         android:textSize="10dp" />
 
+    <Button
+        android:id="@+id/RCquiz"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/roundedbutton"
+        android:text="Take RC quiz"
+        android:textColor="#000000"
+        android:textSize="10dp" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="Reading Comprehension collection from CAT, XAT and all other management exams' previous year question papers "
+/>
 </LinearLayout>
 
     </ScrollView>
@@ -77,6 +95,7 @@
         android:layout_alignParentBottom="true"
         app:itemIconTint="@drawable/nav_item_color_state"
         app:itemTextColor="@android:color/white"
+        app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
         app:menu="@menu/activity_list_of_words_drawer"/>
 
 </LinearLayout>

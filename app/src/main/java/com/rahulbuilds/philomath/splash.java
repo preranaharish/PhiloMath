@@ -24,6 +24,7 @@ import com.google.gson.Gson;
 import com.rahulbuilds.philomath.HotwordsDB;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -31,6 +32,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -66,6 +68,12 @@ public class splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+        RCDB db = new RCDB(splash.this);
+
+
+
+
+
         new CallbackTask2().execute(wordoftheday());
 //        QuizDbHelper quizDbHelper = new QuizDbHelper(splash.this);
 //        String countQuery = "SELECT  * FROM " + "quiz_questions";
@@ -98,7 +106,108 @@ public class splash extends AppCompatActivity {
             editor.commit();
         } catch (IOException e) {
             e.printStackTrace();
-        }}}
+        }
+        int j=0;
+
+            try {
+                JSONObject rc = new JSONObject(loadJSONFromAsset());
+                JSONArray userArray = rc.getJSONArray("RC");
+                for (int i = 0; i < userArray.length(); i++) {
+                    // create a JSONObject for fetching single user data
+                    JSONObject userDetail = userArray.getJSONObject(i);
+                    // fetch email and name and store it in arraylist
+                    String passage=userDetail.getString("Passage");
+                    String q1 = userDetail.getString("Q1");
+                    JSONObject question1 = new JSONObject(q1);
+                    String question = question1.getString("Question");
+                    String o1 = question1.getString("O1");
+                    String o2 = question1.getString("O2");
+                    String o3 = question1.getString("O3");
+                    String o4 = question1.getString("O4");
+                    String answer = question1.getString("Answer");
+                    int ans=Integer.parseInt(answer);
+
+                    db.insertquestion(i,passage,question,o1,o2,o3,o4,ans);
+
+                    String q2 = userDetail.getString("Q2");
+                    JSONObject question2 = new JSONObject(q2);
+                    question = question2.getString("Question");
+                    o1 = question2.getString("O1");
+                    o2 = question2.getString("O2");
+                    o3 = question2.getString("O3");
+                    o4 = question2.getString("O4");
+                    answer = question2.getString("Answer");
+                    ans=Integer.parseInt(answer);
+
+                    db.insertquestion(i,passage,question,o1,o2,o3,o4,ans);
+
+
+                    String q3 = userDetail.getString("Q3");
+                    JSONObject question3 = new JSONObject(q3);
+                    question = question3.getString("Question");
+                    o1 = question3.getString("O1");
+                    o2 = question3.getString("O2");
+                    o3 = question3.getString("O3");
+                    o4 = question3.getString("O4");
+                    answer = question3.getString("Answer");
+                    ans=Integer.parseInt(answer);
+
+                    db.insertquestion(i,passage,question,o1,o2,o3,o4,ans);
+
+
+                    if(userDetail.has("Q4")) {
+                        String q4 = userDetail.getString("Q4");
+                        JSONObject question4 = new JSONObject(q4);
+                        question = question4.getString("Question");
+                        o1 = question4.getString("O1");
+                        o2 = question4.getString("O2");
+                        o3 = question4.getString("O3");
+                        o4 = question4.getString("O4");
+                        answer = question4.getString("Answer");
+                        ans = Integer.parseInt(answer);
+
+                        db.insertquestion(i, passage, question, o1, o2, o3, o4, ans);
+                    }
+                    if(userDetail.has("Q5")) {
+                        String q5 = userDetail.getString("Q5");
+                        JSONObject question5 = new JSONObject(q5);
+                        question = question5.getString("Question");
+                        o1 = question5.getString("O1");
+                        o2 = question5.getString("O2");
+                        o3 = question5.getString("O3");
+                        o4 = question5.getString("O4");
+                        answer = question5.getString("Answer");
+                        ans = Integer.parseInt(answer);
+
+                        db.insertquestion(i, passage, question, o1, o2, o3, o4, ans);
+                    }
+j++;
+
+                }
+
+                SharedPreferences prefs3 = getSharedPreferences("rcquiz", MODE_PRIVATE);
+                SharedPreferences.Editor editor4 = prefs3.edit();
+                editor4.putInt("rcquiz",j);
+                editor4.commit();
+
+                SharedPreferences prefs4 = getSharedPreferences("rccurrent", MODE_PRIVATE);
+                SharedPreferences.Editor editor5 = prefs4.edit();
+                editor5.putInt("rccurrent",0);
+                editor5.commit();
+
+                // scan through file to make sure that it holds the text
+                // we think it does, and that scanner works.
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+        else{
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+        }
+        }
         SharedPreferences prefer = getSharedPreferences("streaks_count",MODE_PRIVATE);
         int count = prefer.getInt("streaks_count",0);
         if (count == 0){
@@ -225,7 +334,14 @@ public class splash extends AppCompatActivity {
                 String meaning = JS1.getString("definition");
                 meaning=meaning.trim().replace('[',' ').replace(']',' ').replaceAll("\""," ");
                 String category = JS1.getString("category");
-                hb.insertWordDetails(value,meaning,category);
+                String example = JS1.getString("examples");
+                    String phonetic = JS1.getString("phonetics");
+                    phonetic=phonetic.trim().replace('[',' ').replace(']',' ');
+                    JSONObject JS2=new JSONObject(phonetic);
+                    String phonetics=JS2.getString("phoneticSpelling");
+
+
+                    hb.insertWordDetails(value,meaning,category,example,phonetics);
                 }
 hb.close();
             }catch(Exception e){
@@ -235,5 +351,20 @@ hb.close();
 
 
         }
+    }
+    public String loadJSONFromAsset() {
+        String json = null;
+        try {
+            InputStream is = getAssets().open("RCfile.json");
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
     }
 }

@@ -48,8 +48,9 @@
                 android:layout_toRightOf="@+id/today"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Words For The Day"
-                android:textSize="22dp"
+                android:text="Today's Must Learn Words For GRE"
+                android:textSize="18dp"
+                android:textAllCaps="true"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"/>
@@ -104,6 +105,7 @@
                                 android:textColor="#121212"
                                 android:gravity="center"
                                 android:textSize="25dp"
+                                android:id="@+id/phonetic1"
                                 android:textStyle="italic" />
 
 
@@ -126,13 +128,14 @@
                             android:layout_marginTop="10dp"
                             android:text="adjective"
                             android:textSize="15dp"
+                            android:id="@+id/category1"
                             android:textStyle="italic" />
 
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-
+                            android:id="@+id/meaning1"
                             android:text="well meaning and kindly"
                             android:layout_gravity="center"
                             android:layout_marginLeft="20dp"
@@ -146,6 +149,7 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="20dp"
                             android:layout_marginRight="20dp"
+                            android:id="@+id/example1"
                             android:text="he was something of a benevolent despot"
                             android:textSize="16dp" />
 
@@ -218,6 +222,7 @@
                                 android:textColor="#121212"
                                 android:gravity="center"
                                 android:textSize="25dp"
+                                android:id="@+id/phonetic2"
                                 android:textStyle="italic" />
 
 
@@ -244,6 +249,7 @@
                             android:layout_marginTop="10dp"
                             android:text="noun"
                             android:textSize="15dp"
+                            android:id="@+id/category2"
                             android:textStyle="italic" />
 
                         <TextView
@@ -252,6 +258,7 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="20dp"
                             android:layout_marginRight="20dp"
+                            android:id="@+id/meaning2"
                             android:text="an asset or object bought or obtained ,typically by a library or museum"
                             android:textColor="#ffffff"
                             android:textSize="18dp" />
@@ -262,6 +269,7 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="20dp"
                             android:layout_marginRight="20dp"
+                            android:id="@+id/example2"
                             android:text="The legacy will be used for new acquisitions"
                             android:textSize="15dp" />
 
@@ -328,6 +336,7 @@
                                 android:textColor="#121212"
                                 android:gravity="center"
                                 android:textSize="25dp"
+                                android:id="@+id/phonetic3"
                                 android:textStyle="italic" />
 
                         </LinearLayout>
@@ -347,6 +356,7 @@
                             android:layout_gravity="left"
                             android:text="adjective"
                             android:textSize="15dp"
+                            android:id="@+id/category3"
                             android:textStyle="italic" />
 
                         <TextView
@@ -357,6 +367,7 @@
                             android:layout_marginRight="20dp"
                             android:text="representing the most perfecr or typical example of a quality or class"
                             android:textColor="#ffffff"
+                            android:id="@+id/meaning3"
                             android:textSize="18dp" />
 
                         <TextView
@@ -365,6 +376,7 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="20dp"
                             android:layout_marginRight="20dp"
+                            android:id="@+id/example3"
                             android:text="He was the quintessential tough guy-strong,silent and self-contained"
                             android:textSize="15dp" />
 
@@ -427,6 +439,7 @@
                                 android:textColor="#121212"
                                 android:gravity="center"
                                 android:textSize="25dp"
+                                android:id="@+id/phonetic4"
                                 android:textStyle="italic" />
 
                         </LinearLayout>
@@ -446,6 +459,7 @@
                             android:layout_marginTop="10dp"
                             android:text="verb"
                             android:textSize="15dp"
+                            android:id="@+id/category4"
                             android:textStyle="italic" />
 
                         <TextView
@@ -454,6 +468,7 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="20dp"
                             android:layout_marginRight="20dp"
+                            android:id="@+id/meaning4"
                             android:text="delay or postone action"
                             android:textColor="#ffffff"
                             android:textSize="18dp" />
@@ -464,6 +479,7 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="20dp"
                             android:layout_marginRight="20dp"
+                            android:id="@+id/example4"
                             android:text="If I didnt procrastinate so much, I could get more done"
                             android:textSize="15dp" />
 

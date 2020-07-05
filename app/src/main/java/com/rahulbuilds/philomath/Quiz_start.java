@@ -3,6 +3,7 @@ package com.rahulbuilds.philomath;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -14,6 +15,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 public class Quiz_start extends AppCompatActivity {
 int questions;
 private long backPressedTime;
@@ -21,16 +28,42 @@ private long backPressedTime;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_start);
-                QuizDbHelper quizDbHelper = new QuizDbHelper(Quiz_start.this);
+
+
+
+
+
+
+        QuizDbHelper quizDbHelper = new QuizDbHelper(Quiz_start.this);
         String countQuery = "SELECT  * FROM " + "quiz_questions";
         SQLiteDatabase db1 = quizDbHelper.getReadableDatabase();
         Cursor cursor1 = db1.rawQuery(countQuery, null);
         questions = cursor1.getCount();
+
+        RCDB rcdb = new RCDB(Quiz_start.this);
+        String countQuery1 = "SELECT * FROM "+" rcpassage ";
+        SQLiteDatabase db2 = rcdb.getReadableDatabase();
+        final Cursor c2 = db2.rawQuery(countQuery1,null);
+        final int count2 = c2.getCount();
+        Button RC = (Button)findViewById(R.id.RCquiz);
+        RC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(count2>=5){
+                    Intent intent = new Intent(Quiz_start.this,RCQUIZ.class);
+                    startActivity(intent);
+                    finish();
+                }
+                else{
+                    Toast.makeText(Quiz_start.this,"No RC available, please make sure you have given storage access",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
         Button start = (Button)findViewById(R.id.start_quiz);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(questions>4){
+                if(questions>0){
                 Intent intent = new Intent(Quiz_start.this,MainQuiz.class);
                 startActivity(intent);
                 finish();
