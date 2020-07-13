@@ -33,7 +33,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         Log.d(TAG, "onReceive: ");
 
         //Trigger the notification
-        NotificationScheduler.showNotification(context, MainActivity.class,
+        NotificationScheduler.showNotification(context, ListOfWords.class,
                 "No Words", "Time to learn new words");
 
     }

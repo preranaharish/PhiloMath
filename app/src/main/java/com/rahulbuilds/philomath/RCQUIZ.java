@@ -9,8 +9,10 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -18,12 +20,22 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.anubhav.android.customdialog.CustomDialog;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
 public class RCQUIZ extends AppCompatActivity {
-
+    int questioncounter_solution=0;
+    public boolean quizfinished=false;
+    private boolean quizcompleted;
     public static final String EXTRA_SCORE = "extraScore";
     private static final long COUNTDOWN_IN_MILLIS = 1500000;
     private TextView textViewQuestion,passage;
@@ -31,6 +43,7 @@ public class RCQUIZ extends AppCompatActivity {
     private TextView textViewQuestionCount;
     private TextView textViewCountDown;
     private RadioGroup rbGroup;
+    int minutes1,seconds1;
     private RadioButton rb1;
     private RadioButton rb2;
     private RadioButton rb3;
@@ -42,21 +55,132 @@ public class RCQUIZ extends AppCompatActivity {
 
     private CountDownTimer countDownTimer;
     private long timeLeftInMillis;
-
+    private int answersfinal[];
     private List<RCQUESTION> questionList;
     private int questionCounter;
     private int questionCountTotal;
     private RCQUESTION currentQuestion;
-
+    private InterstitialAd mInterstitialAd;
     private int score;
     private boolean answered;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_r_c_q_u_i_z);
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-2769616951461681/9929566651");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.setAdListener(new AdListener(){
+
+            @Override
+            public void onAdClosed() {
+                int accuracy=((score*3*100)/(questionCountTotal*3));
+                int pic;
+                int beginner=R.drawable.beginner;
+                int intermediate=R.drawable.intermediate;
+                int master = R.drawable.master_new;
+                int champion = R.drawable.champion;
+                if(accuracy==100){
+                    pic=champion;
+                }
+                else if(accuracy>=80){
+                    pic=master;
+                }
+                else if(accuracy>=50){
+                    pic=intermediate;
+                }
+                else{
+                    pic=beginner;
+                }
+                String timeFormatted = String.format(Locale.getDefault(), "%02d:%02d", 24-minutes1, 60-minutes1);
+                new CustomDialog.Builder(RCQUIZ.this)
+                        .setTitle("Quiz Finished!", true)
+                        .setContent("You have attempted "+ questionCountTotal +" questions and got "+score+" questions correct\n\n\nScore: "+((score*3)-(questionCountTotal-score))+"/"+questionCountTotal*3+" \n\nAccuracy: "+((score*3*100)/(questionCountTotal*3))+"%"+"\n\nTime Taken: "+timeFormatted)
+                        .setGuideImage(pic)
+                        .setGuideImageSizeDp(150, 150)
+                        .onConfirm(new CustomDialog.BtnCallback() {
+                            @Override
+                            public void onClick(@NonNull CustomDialog customDialog, @NonNull CustomDialog.BtnAction btnAction) {
+                                ShowSolution();
+                            }
+                        })
+                        .onCancel(new CustomDialog.BtnCallback() {
+                            @Override
+                            public void onClick(@NonNull CustomDialog customDialog, @NonNull CustomDialog.BtnAction btnAction) {
+                              ShowSolution();
+                            }
+                        })
+                        .onConfirm(new CustomDialog.BtnCallbackWithPermanentCheck() {
+                            @Override
+                            public void onClick(@NonNull CustomDialog dialog, @NonNull CustomDialog.BtnAction which, boolean isPermanentChecked) {
+                             ShowSolution();
+                            }
+                        })
+                        .setBtnConfirmText("See correct answers")
+                        .setBtnConfirmTextColor("#e6b115")
+                        // I thought cancel button is not necessary, it's unavailable unless there're requests
+
+
+                        // Customizing (You can find more in Wiki)
+
+                        //.setTitle("Hello !", true)
+                        //.setBtnPermanentCheckText("다시 보지 않기", true)
+                        //.setGuideImagePaddingDp(10)
+                        //.setGuideImageSizeDp(100, 100)
+                        .showIfPermanentValueIsFalse();
+                // Code to be executed when when the user is about to return
+                // to the app after tapping on an ad.
+            }
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                Log.d("errorcode",""+errorCode);
+                // Code to be executed when an ad request fails.
+            }
+
+
+
+        });
+        AdRequest adRequest = new AdRequest.Builder().build();
+        AdView adView = new AdView(this);
+        adView.setAdSize(AdSize.BANNER);
+        adView.setAdUnitId("ca-app-pub-2769616951461681/4453329957");
+        // Display Banner ad
+        adView.loadAd(adRequest);
+        adView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                Log.d("errorcode",""+errorCode);
+Toast.makeText(RCQUIZ.this,"No solutions available without Internet connection",Toast.LENGTH_LONG).show();
+                // Code to be executed when an ad request fails.
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                // Code to be executed when the user has left the app.
+            }
+
+            @Override
+            public void onAdClosed() {
+                // Code to be executed when when the user is about to return
+                // to the app after tapping on an ad.
+
+            }
+        });
         textViewQuestion = findViewById(R.id.text_view_question);
         textViewQuestion.setMovementMethod(new ScrollingMovementMethod());
         textViewScore = findViewById(R.id.text_view_score);
+        textViewScore.setVisibility(View.INVISIBLE);
         textViewQuestionCount = findViewById(R.id.text_view_question_count);
         passage = findViewById(R.id.passage);
         textViewCountDown = findViewById(R.id.text_view_countdown);
@@ -89,24 +213,40 @@ public class RCQUIZ extends AppCompatActivity {
         RCDB dbHelper = new RCDB(this);
         questionList = dbHelper.getQuestions(currentpassage);
         questionCountTotal = questionList.size();
+        answersfinal = new int[questionCountTotal+1];
         Collections.shuffle(questionList);
         timeLeftInMillis = COUNTDOWN_IN_MILLIS;
         startCountDown();
+        quizcompleted=false;
         showNextQuestion();
 
         buttonConfirmNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!answered) {
+                if(quizcompleted){
+                    if(quizfinished)
+                        finishQuiz();
+                    else
+                   {
+                       ShowSolution();
+                   }
+                }
+                else if (!answered) {
                     if (rb1.isChecked() || rb2.isChecked() || rb3.isChecked() || rb4.isChecked()) {
+                        if(rb1.isChecked())
+                        answersfinal[questionCounter]=1;
+                        else if(rb2.isChecked())
+                            answersfinal[questionCounter]=2;
+                        else if(rb3.isChecked())
+                            answersfinal[questionCounter]=3;
+                        else if(rb4.isChecked())
+                            answersfinal[questionCounter]=4;
                         checkAnswer();
+                        showNextQuestion();
 
                     } else {
                         Toast.makeText(RCQUIZ.this, "Please select an answer", Toast.LENGTH_SHORT).show();
                     }
-                } else {
-
-                    showNextQuestion();
                 }
             }
         });
@@ -132,7 +272,15 @@ public class RCQUIZ extends AppCompatActivity {
             answered = false;
             buttonConfirmNext.setText("Confirm");
         } else {
-            finishQuiz();
+            if (mInterstitialAd.isLoaded()) {
+                quizcompleted=true;
+                mInterstitialAd.show();
+            }
+            else{
+                Toast.makeText(RCQUIZ.this,"No Internet connection to show solutions",Toast.LENGTH_LONG).show();
+                finishQuiz();
+            }
+
         }
     }
     private void startCountDown() {
@@ -156,7 +304,8 @@ public class RCQUIZ extends AppCompatActivity {
         int seconds = (int) (timeLeftInMillis / 1000) % 60;
 
         String timeFormatted = String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds);
-
+        minutes1=minutes;
+        seconds1=seconds;
         textViewCountDown.setText(timeFormatted);
 
         if (timeLeftInMillis < 10000) {
@@ -178,7 +327,6 @@ public class RCQUIZ extends AppCompatActivity {
             textViewScore.setText("Score: " + score);
         }
 
-        showSolution();
     }
 
     private void showSolution() {
@@ -217,13 +365,15 @@ public class RCQUIZ extends AppCompatActivity {
         Intent resultIntent = new Intent();
         resultIntent.putExtra(EXTRA_SCORE, score);
         setResult(RESULT_OK, resultIntent);
-        finish();
     }
 
     @Override
     public void onBackPressed() {
         if (backPressedTime + 2000 > System.currentTimeMillis()) {
-            finishQuiz();
+            Intent intent = new Intent(RCQUIZ.this,ListOfWords.class);
+            startActivity(intent);
+            finish();
+
         } else {
             Toast.makeText(this, "Press back again to finish", Toast.LENGTH_SHORT).show();
         }
@@ -236,6 +386,7 @@ public class RCQUIZ extends AppCompatActivity {
         if (countDownTimer != null) {
             countDownTimer.cancel();
         }
+
     }
     class BackGround extends AsyncTask<String, String, String> {
 
@@ -249,13 +400,83 @@ public class RCQUIZ extends AppCompatActivity {
         }
         @Override
         protected void onPostExecute(String s) {
-            if(s.equals("")){
-                s="You have scored:"+score+" out of 5";
                 Intent intent = new Intent(RCQUIZ.this,ListOfWords.class);
                 startActivity(intent);
                 finish();
+
+            if(s.equals("")){
+                s="You have scored:"+score+" out of 5";
+
             }
-            Toast.makeText(RCQUIZ.this, s, Toast.LENGTH_LONG).show();
         }
     }
+
+
+    public void ShowSolution(){
+if(questioncounter_solution<questionCountTotal){
+    textViewQuestionCount.setText(questioncounter_solution+"/"+questionCountTotal);
+    rb1.setTextColor(textColorDefaultRb);
+    rb2.setTextColor(textColorDefaultRb);
+    rb3.setTextColor(textColorDefaultRb);
+    rb4.setTextColor(textColorDefaultRb);
+    rbGroup.clearCheck();
+
+
+    RCQUESTION current = questionList.get(questioncounter_solution);
+    int answerselected=answersfinal[questioncounter_solution+1];
+
+
+    passage.setText(current.getPassage());
+    textViewQuestion.setText(current.getQuestion());
+    rb1.setText(current.getOption1());
+    rb2.setText(current.getOption2());
+    rb3.setText(current.getOption3());
+    rb4.setText(current.getOption4());
+    textViewQuestionCount.setText("Question: " + questionCounter + "/" + questionCountTotal);
+    rb1.setTextColor(Color.RED);
+    rb2.setTextColor(Color.RED);
+    rb3.setTextColor(Color.RED);
+    rb4.setTextColor(Color.RED);
+if(answerselected==1)
+    rb1.setChecked(true);
+if(answerselected==2)
+    rb2.setChecked(true);
+if(answerselected==3)
+    rb3.setChecked(true);
+if(answerselected==4)
+    rb4.setChecked(true);
+
+    switch (current.getAnswerNr()) {
+        case 1:
+            rb1.setTextColor(Color.GREEN);
+            textViewQuestion.setText(current.getQuestion());
+            break;
+        case 2:
+            rb2.setTextColor(Color.GREEN);
+            textViewQuestion.setText(current.getQuestion());
+            break;
+        case 3:
+            rb3.setTextColor(Color.GREEN);
+            textViewQuestion.setText(current.getQuestion());
+            break;
+        case 4:
+            rb4.setTextColor(Color.GREEN);
+            textViewQuestion.setText(current.getQuestion());
+    }
+    questioncounter_solution++;
+
+    if (questioncounter_solution < questionCountTotal) {
+        buttonConfirmNext.setText("Next");
+    } else {
+        quizfinished=true;
+        buttonConfirmNext.setText("Finish");
+    }
+
+
+
+}
+
+    }
+
+
 }

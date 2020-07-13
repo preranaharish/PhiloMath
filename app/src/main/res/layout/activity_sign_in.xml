@@ -16,7 +16,8 @@
         android:orientation="vertical">
     <ImageView
         android:layout_width="146dp"
-        android:layout_height="253dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
         android:src="@drawable/icon" />
@@ -24,20 +25,20 @@
     <TextView
         android:id="@+id/welcome"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_gravity="center"
         android:text="Philomath"
         android:textStyle="bold"
-        android:layout_marginTop="-60dp"
         android:textColor="#80FFFFFF"
         android:textSize="30dp" />
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Insired by average students who dream big \u2665️"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Inspired by average students who dream big \u2665️"
         android:layout_gravity="center"
         android:fontFamily="cursive"
-        android:layout_marginTop="80dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:textAlignment="center"

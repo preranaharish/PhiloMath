@@ -11,14 +11,11 @@
     android:background="@android:color/white"
     tools:context="com.rahulbuilds.philomath.splash">
 
-    <ImageView
+    <pl.droidsonroids.gif.GifImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="5"
-        android:src="@drawable/icon"
-        android:id="@+id/splash_logo"
-        />
-
+        android:src="@drawable/splash"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -27,7 +24,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="20dp"
-        android:text="Elitist's weapon against egalitarianism is vocal eloquence!!!"
+        android:text="Not just an app it's a companion for every philomath"
         android:textColor="@android:color/black"
         android:layout_gravity="bottom"
         android:gravity="center"

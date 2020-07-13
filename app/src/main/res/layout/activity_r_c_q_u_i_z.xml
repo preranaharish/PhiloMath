@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/anaida">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -24,11 +25,12 @@
                     android:layout_height="wrap_content"
                     android:text="In the past, credit for telling the tale of Aladdin has often gone to Antoine Galland . . . the first European translator of . . . Arabian Nights [which] started as a series of translations of an incomplete manuscript of a medieval Arabic story collection. . . But, though those tales were of medieval origin, Aladdin may be a more recent invention. Scholars have not found a manuscript of the story that predates the version published in 1712 by Galland, who wrote in his diary that he first heard the tale from a Syrian storyteller from Aleppo named Hanna Diyab . . .  Despite the fantastical elements of the story, scholars now think the main character may actually be based on a real person’s real experiences. . . . Though Galland never credited Diyab in his published translations of the Arabian Nights stories, Diyab wrote something of his own: a travelogue penned in the mid-18th century. In it, he recalls telling Galland the story of Aladdin [and] describes his own hard-knocks upbringing and the way he marveled at the extravagance of Versailles. The descriptions he uses were very similar to the descriptions of the lavish palace that ended up in Galland’s version of the Aladdin story. [Therefore, author Paulo Lemos] Horta believes that “Aladdin might be the young Arab Maronite from Aleppo, marveling at the jewels and riches of Versailles.” . . .  For 300 years, scholars thought that the rags-to-riches story of Aladdin might have been inspired by the plots of French fairy tales that came out around the same time, or that the story was invented in that 18th century period as a byproduct of French Orientalism, a fascination with stereotypical exotic Middle Eastern luxuries that was prevalent then. The idea that Diyab might have based it on his own life — the experiences of a Middle Eastern man encountering the French, not vice-versa — flips the script. [According to Horta,] “Diyab was ideally placed to embody the overlapping world of East and West, blending the storytelling traditions of his homeland with his youthful observations of the wonder of 18th-century France.” . . .  To the scholars who study the tale, its narrative drama isn’t the only reason storytellers keep finding reason to return to Aladdin. It reflects not only “a history of the French and the Middle East, but also [a story about] Middle Easterners coming to Paris and that speaks to our world today,” as Horta puts it. “The day Diyab told the story of Aladdin to Galland, there were riots due to food shortages during the winter and spring of 1708 to 1709, and Diyab was sensitive to those people in a way that Galland is not. When you read this diary, you see this solidarity among the Arabs who were in Paris at the time. . . . There is little in the writings of Galland that would suggest that he was capable of developing a character like Aladdin with sympathy, but Diyab’s memoir reveals a narrator adept at capturing the distinctive psychology of a young protagonist, as well as recognizing the kinds of injustices and opportunities that can transform the path of any youthful adventurer."
                     android:textSize="20dp"
-                    android:textColor="@android:color/white"
-                    android:padding="10dp"
+                    android:textColor="@android:color/black"
+                    android:padding="15dp"
+                android:fontFamily="serif"
                     android:id="@+id/passage"
-                    android:lineSpacingExtra="10dp"
-                    android:background="@android:color/transparent"
+                    android:lineSpacingExtra="5dp"
+                    android:background="@drawable/rc"
                     />
 
             </android.support.v7.widget.CardView>
@@ -175,7 +177,17 @@
 
     </ScrollView>
 
-</LinearLayout>
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-2769616951461681/4453329957"></com.google.android.gms.ads.AdView>
+
+
+</RelativeLayout>
 
     <!--<?xml version="1.0" encoding="utf-8"?>-->
     <!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->

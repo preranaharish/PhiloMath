@@ -2,6 +2,7 @@ package com.rahulbuilds.philomath;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.AsyncTask;
@@ -13,7 +14,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.anubhav.android.customdialog.CustomDialog;
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -59,6 +62,7 @@ public class splash extends AppCompatActivity {
     public int answers[]= new int[5];
     Question1 q[] = new Question1[5];
     Intent intent;
+    String version,appversion;
     String word1,word2,word3,word4;
     public static DataSnapshot[] getInstance(){
         return data;
@@ -67,6 +71,9 @@ public class splash extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+
+
 
         RCDB db = new RCDB(splash.this);
 
@@ -230,6 +237,7 @@ j++;
                   Thread.sleep(100);
                     startActivity(intent);
                     finish();
+
                 }catch (InterruptedException e){
                     e.printStackTrace();
                 }}
