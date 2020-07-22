@@ -6,7 +6,7 @@
     <string name="sett_reminder_desc">We will remind you the entiries of new words you Learnt!!! Keep Learning :)</string>
     <string name="sett_reminder_time_label">Set Reminder Time</string>
     <string name="sett_reminder_time_content">8 : 00 PM</string>
-    <string name="title_activity_list_of_words">ListOfWords</string>
+    <string name="title_activity_list_of_words">List of words</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>

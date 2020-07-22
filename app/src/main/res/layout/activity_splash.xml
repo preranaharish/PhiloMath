@@ -9,7 +9,7 @@
     android:layout_centerHorizontal="true"
     android:orientation="vertical"
     android:background="@android:color/white"
-    tools:context="com.rahulbuilds.philomath.splash">
+    tools:context="com.rahuldevelops.philomathapp.splash">
 
     <pl.droidsonroids.gif.GifImageView
         android:layout_width="match_parent"

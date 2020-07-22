@@ -196,7 +196,7 @@
     <!--    android:layout_width="match_parent"-->
     <!--    android:layout_height="match_parent"-->
     <!--    android:background="@drawable/maincardfour"-->
-    <!--    tools:context="com.rahulbuilds.philomath.MainQuiz">-->
+    <!--    tools:context="com.rahuldevelops.philomathapp.MainQuiz">-->
 
     <!--    <TextView-->
     <!--        android:id="@+id/text_view_score"-->

@@ -16,7 +16,7 @@
     <TextView
         android:textSize="13dp"
         android:textColor="#000"
-        android:text="Testing"
+        android:text="App needs an update"
         android:id="@+id/title"
         android:textStyle="bold"
         android:layout_width="wrap_content"
@@ -26,7 +26,7 @@
     <TextView
         android:textSize="13dp"
         android:textColor="#000"
-        android:text="Testing is awecome"
+        android:text="Update the Philomath app for best learning experience"
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

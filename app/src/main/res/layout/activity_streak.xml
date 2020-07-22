@@ -1,80 +1,353 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@drawable/signupgradient">
+    android:weightSum="10"
+    android:background="#121212">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Choose a daily target and challenge yourself"
-        android:layout_marginTop="30dp"
-        android:textSize="30dp"
-        android:textAlignment="center"
-        android:textStyle="bold"/>
-
-    <RadioGroup
-        android:id="@+id/radio_group"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_marginTop="100dp"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="2"
         >
-        <RadioButton
-            android:id="@+id/five_words"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:freezesText="true"
-            android:paddingTop="10dp"
-            android:padding="10dp"
-            android:paddingBottom="10dp"
-            android:text="5 words a day"
-            android:textColor="#ffffff"
-            android:buttonTint="#58CEF4"
-            android:textSize="30sp" />
 
-        <RadioButton
-            android:id="@+id/ten_words"
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="10 words a day"
-            android:freezesText="true"
-            android:paddingTop="10dp"
-            android:padding="10dp"
-            android:paddingBottom="10dp"
-            android:textColor="#ffffff"
-            android:buttonTint="#58CEF4"
-            android:textSize="30sp"/>
+            android:text="Choose a daily target based on your goals"
+            android:layout_marginTop="30dp"
 
-        <RadioButton
-            android:id="@+id/fifteen_words"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:freezesText="true"
-            android:paddingTop="10dp"
-            android:padding="10dp"
-            android:paddingBottom="10dp"
-            android:text="15 words a day"
-            android:textColor="#ffffff"
-            android:buttonTint="#58CEF4"
-            android:textSize="30sp" />
+            android:textSize="34sp"
+            android:textAlignment="center"
+            android:textStyle="bold"/>
 
-    </RadioGroup>
-    <Button
-        android:id="@+id/streakcontinue"
+
+    </RelativeLayout>
+
+    <GridLayout
+        android:columnCount="2"
+        android:rowCount="2"
+        android:alignmentMode="alignMargins"
+        android:columnOrderPreserved="false"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:background="@drawable/roundedbutton"
-        android:text="Continue"
-        android:layout_gravity="center_horizontal"
-        android:textColor="#FFFFFF"
-        android:textSize="20dp" />
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        android:padding="14dp">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_marginBottom="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="8dp"
+            android:clickable="true"
+            android:onClick="curious"
+
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="16dp"
+
+                android:orientation="vertical">
+
+                <!--                <ImageView-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:src="@drawable/background5"-->
+                <!--                    android:layout_gravity="center_horizontal"/>-->
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="BEGINNER"
+                    android:textColor="#EC8484"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:textSize="25dp"
+                    android:src="@drawable/beginner"
+                    android:layout_marginBottom="30dp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="CURIOUS LEARNER"
+                    android:textColor="#EC8484"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:textSize="15dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="2 words/day"
+                    android:textColor="#ffffff"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_marginBottom="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="8dp"
+            android:clickable="true"
+            android:onClick="avid"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="16dp"
+                android:orientation="vertical">
+
+                <!--                <ImageView-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:src="@drawable/background5"-->
+                <!--                    android:layout_gravity="center_horizontal"/>-->
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="MID WAY"
+                    android:src="@drawable/intermediate"
+                    android:textColor="#EC84EC"
+                    android:textAlignment="center"
+                    android:layout_gravity="center"
+                    android:textSize="25dp"
+                    android:layout_marginBottom="30dp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="AVID \nREADER"
+                    android:textColor="#EC8484"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:textSize="15dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="4 words/day"
+                    android:textColor="#ffffff"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_marginBottom="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            app:cardElevation="8dp"
+            app:cardCornerRadius="8dp"
+            android:onClick="cat"
+            android:clickable="true"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="16dp"
+                android:orientation="vertical">
+
+                <!--                <ImageView-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:src="@drawable/background5"-->
+                <!--                    android:layout_gravity="center_horizontal"/>-->
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="MASTER"
+                    android:src="@drawable/master_new"
+                    android:textColor="#84DEEC"
+                    android:textAlignment="center"
+                    android:layout_gravity="center"
+                    android:textSize="25dp"
+                    android:layout_marginBottom="30dp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="CAT \nASPIRANT"
+                    android:textColor="#EC8484"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:textSize="15dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="10 words/day"
+                    android:textColor="#ffffff"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:layout_marginBottom="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            app:cardElevation="8dp"
+            android:onClick="gre"
+            app:cardCornerRadius="8dp"
+            android:clickable="true"
+            >
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="16dp"
+                android:orientation="vertical">
+
+                <!--                <ImageView-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:src="@drawable/background5"-->
+                <!--                    android:layout_gravity="center_horizontal"/>-->
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="EXPERT"
+                    android:src="@drawable/champion"
+                    android:textColor="#E9EC84"
+                    android:textAlignment="center"
+                    android:layout_gravity="center"
+                    android:textSize="25dp"
+                    android:layout_marginBottom="30dp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="GRE \nASPIRANT"
+                    android:textColor="#EC8484"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:textSize="15dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:text="15 words/day"
+                    android:textColor="#ffffff"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+    </GridLayout>
+
+
+    <!--    <RadioGroup-->
+    <!--        android:id="@+id/radio_group"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:gravity="center"-->
+    <!--        android:layout_marginTop="100dp"-->
+    <!--        android:layout_gravity="center"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        >-->
+    <!--        <RadioButton-->
+    <!--            android:id="@+id/five_words"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:freezesText="true"-->
+    <!--            android:paddingTop="10dp"-->
+    <!--            android:padding="10dp"-->
+    <!--            android:paddingBottom="10dp"-->
+    <!--            android:text="5 words a day"-->
+    <!--            android:textColor="#ffffff"-->
+    <!--            android:buttonTint="#58CEF4"-->
+    <!--            android:textSize="30sp" />-->
+
+    <!--        <RadioButton-->
+    <!--            android:id="@+id/ten_words"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="10 words a day"-->
+    <!--            android:freezesText="true"-->
+    <!--            android:paddingTop="10dp"-->
+    <!--            android:padding="10dp"-->
+    <!--            android:paddingBottom="10dp"-->
+    <!--            android:textColor="#ffffff"-->
+    <!--            android:buttonTint="#58CEF4"-->
+    <!--            android:textSize="30sp"/>-->
+
+    <!--        <RadioButton-->
+    <!--            android:id="@+id/fifteen_words"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:freezesText="true"-->
+    <!--            android:paddingTop="10dp"-->
+    <!--            android:padding="10dp"-->
+    <!--            android:paddingBottom="10dp"-->
+    <!--            android:text="15 words a day"-->
+    <!--            android:textColor="#ffffff"-->
+    <!--            android:buttonTint="#58CEF4"-->
+    <!--            android:textSize="30sp" />-->
+
+    <!--    </RadioGroup>-->
+    <!--    <Button-->
+    <!--        android:id="@+id/streakcontinue"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="70dp"-->
+    <!--        android:layout_marginTop="120dp"-->
+    <!--        android:layout_marginLeft="30dp"-->
+    <!--        android:layout_marginRight="30dp"-->
+    <!--        android:background="@drawable/roundedbutton"-->
+    <!--        android:text="Continue"-->
+    <!--        android:layout_gravity="center_horizontal"-->
+    <!--        android:textColor="#FFFFFF"-->
+    <!--        android:textSize="20dp" />-->
 
 
 </LinearLayout>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
     android:id="@+id/cv_user"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -8,15 +9,12 @@
     app:contentPaddingBottom="1dp"
     app:contentPaddingRight="2dp"
     app:contentPaddingLeft="2dp"
-
+    app:cardCornerRadius="8dp"
     app:cardElevation="1dp"
     android:soundEffectsEnabled="true"
-
+    card_view:cardCornerRadius="10dp"
     android:clickable="true"
-
-
-    app:cardUseCompatPadding="true"
-    >
+    app:cardUseCompatPadding="true">
 
     <RelativeLayout
         android:layout_width="match_parent"

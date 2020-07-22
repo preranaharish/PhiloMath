@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:fitsSystemWindows="true"
     android:background="@drawable/signupgradient"
     >
     <ScrollView
@@ -12,24 +13,35 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:gravity="center"
     android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/circle"
+       android:layout_gravity="center"
+        android:orientation="vertical">
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="100dp"
+        android:layout_height="50dp"
         android:layout_gravity="center"
         android:src="@drawable/icon"
+        android:visibility="visible"
         android:background="@android:color/transparent"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="40dp"/>
 
     <TextView
         android:id="@+id/quizline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Philo Quiz"
-        android:layout_marginTop="30dp"
+
+        android:layout_marginTop="25dp"
         android:layout_gravity="center"
         android:textAlignment="center"
-        android:textSize="30dp"
+        android:textSize="25dp"
         android:textColor="#ffffff"
         android:textStyle="bold"/>
     <TextView
@@ -41,19 +53,19 @@
         android:layout_gravity="center"
         android:textAlignment="center"
         android:textSize="15dp"
-        android:textColor="#ffffff"
         android:textStyle="bold"/>
+
+    </LinearLayout>
 
     <Button
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:background="@drawable/roundedbutton"
         android:text="Take revision quiz"
-
         android:layout_marginTop="100dp"
+        android:textColor="@android:color/white"
         android:layout_gravity="center_horizontal"
         android:id="@+id/start_quiz"
-        android:textColor="#000000"
         android:textSize="10dp" />
 
     <Button
@@ -62,9 +74,9 @@
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
+        android:textColor="@android:color/white"
         android:background="@drawable/roundedbutton"
         android:text="Take RC quiz"
-        android:textColor="#000000"
         android:textSize="10dp" />
 
     <TextView
@@ -72,12 +84,26 @@
         android:layout_height="wrap_content"
         android:textStyle="italic"
         android:gravity="center"
-        android:padding="15dp"
-        android:text="Reading Comprehension collection from CAT, XAT and all other management exams' previous year question papers "
-/>
+        android:padding="25dp"
+        android:textAlignment="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:text="Reading Comprehension collection from CAT, IIFT and all other management exams' previous year question papers"
+        />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="PRACTISE MAKES MAN PERFECT"
+        android:textStyle="italic"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="70dp"/>
 </LinearLayout>
 
     </ScrollView>
+
 
     <FrameLayout
         android:id="@+id/container"
@@ -91,11 +117,12 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="0dp"
         android:layout_marginStart="0dp"
-        android:background="?android:attr/windowBackground"
+    android:background="#2d3436"
         android:layout_alignParentBottom="true"
         app:itemIconTint="@drawable/nav_item_color_state"
         app:itemTextColor="@android:color/white"
         app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
         app:menu="@menu/activity_list_of_words_drawer"/>
 
-</LinearLayout>
+
+</RelativeLayout>

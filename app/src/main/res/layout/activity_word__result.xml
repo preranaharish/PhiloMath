@@ -273,7 +273,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Here is the Detailed anyalysis of the word with respect to exam"
+                android:text="Probabily of importance based on our data model of previous year question papers"
                 android:layout_below="@+id/meaningCard"
                 android:layout_marginTop="10dp"
                 android:gravity="center"
@@ -306,11 +306,24 @@
 
 </LinearLayout>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:textAlignment="center"
+                android:layout_below="@id/scores"
+                android:textStyle="italic"
+                android:id="@+id/graphs"
+                android:padding="10dp"
+                android:textSize="20dp"
+                android:text="Graph comparision of related words and it's frequency of usage"/>
+
+
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/barchart"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
-                android:layout_below="@id/scores"
+                android:layout_below="@id/graphs"
                 />
 
 

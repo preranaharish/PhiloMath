@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:padding="20dp"
-        android:text="Your bookmarked words will show up here\n\nAll the bookmarked words will be reminded on hourly basis to help you revise and remember\n\nNo words saved\n Learn 10 new words to unlock the quiz\n"
+        android:text="Your bookmarked words will show up here\n\nAll the bookmarked words will be reminded on hourly basis to help you revise and remember\n\nNo words saved\nLearn 10 new words to unlock the quiz\n"
         android:id="@+id/newtext"
         android:textSize="25dp"
         android:textStyle="italic"
