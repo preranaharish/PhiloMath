@@ -4,14 +4,16 @@
     <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
         <!-- Customize your theme here. -->
 
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">#2196f3</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:statusBarColor">@color/colorPrimary</item>
         <item name="android:navigationBarColor">@color/colorPrimary</item>
         <item name="android:background">@color/colorBackground</item>
         <item name="colorControlHighlight">@color/colorPrimaryRipple</item>
-        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorSecondary">#f50057</item>
+        <item name="android:windowContentTransitions">true</item>
+
 
         <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
     </style>
@@ -81,6 +83,8 @@
     </style>
     <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
+    <style name="Widget.Support.CoordinatorLayout" parent="android:Widget">
+        @null
+    </style>
 
 </resources>

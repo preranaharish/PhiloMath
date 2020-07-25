@@ -1,34 +1,127 @@
 {
   "project_info": {
-    "project_number": "631805374046",
-    "firebase_url": "https://philomath-7b2c7.firebaseio.com",
-    "project_id": "philomath-7b2c7",
-    "storage_bucket": "philomath-7b2c7.appspot.com"
+    "project_number": "62767728397",
+    "firebase_url": "https://philomath-d2157.firebaseio.com",
+    "project_id": "philomath-d2157",
+    "storage_bucket": "philomath-d2157.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:631805374046:android:80be0b91360066a8dbcecf",
+        "mobilesdk_app_id": "1:62767728397:android:817f87957328b0ef1c1244",
         "android_client_info": {
           "package_name": "com.rahulbuilds.philomath"
         }
       },
       "oauth_client": [
         {
-          "client_id": "631805374046-f1csjibbhjaupdh392dfgvhl089e7t60.apps.googleusercontent.com",
-          "client_type": 3
+          "client_id": "62767728397-2uubcq2d767k6re3pe0f91gl47v9brte.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rahulbuilds.philomath",
+            "certificate_hash": "d8bd6b66bd0327c977a68c51f08b4a2072c01b60"
+          }
+        },
+        {
+          "client_id": "62767728397-rhhb6jmv387h9ouj0u58de8n0ljfti1p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rahulbuilds.philomath",
+            "certificate_hash": "55468d6611ab9b528565d07b77d2bc8ad44ed29f"
+          }
+        },
+        {
+          "client_id": "62767728397-3dklij47mf0skkgsthrbmgiv5q3belm0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rahulbuilds.philomath",
+            "certificate_hash": "fce87548240c8320cbd4f63e41962c4e1d52412d"
+          }
+        },
+        {
+          "client_id": "62767728397-u24vs50b8o9cirb85b1j1casfd0m2s08.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rahulbuilds.philomath",
+            "certificate_hash": "edb4efb442325bd398de8d876caee7063a2d8ff4"
+          }
+        },
+        {
+          "client_id": "62767728397-j6aq3sm6fei6504kg8mim69hau0j7r4l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rahulbuilds.philomath",
+            "certificate_hash": "b3da329d0c1cd84e45c94f6aaf6997134f523ef0"
+          }
+        },
+        {
+          "client_id": "62767728397-i01spo6htqa8r4ubs7trnuigkjlqj7e8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rahulbuilds.philomath",
+            "certificate_hash": "387beb35e2f67db733fe7b4505d5aa873ddef72d"
+          }
+        },
+        {
+          "client_id": "62767728397-nv7v6hbe8t2ebtel1s7hqo85jrff6h5i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rahulbuilds.philomath",
+            "certificate_hash": "537e439b06287002a31e4f1b941d5c48f19742d5"
+          }
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBAhG8eIC6UdVbq8Jbl-vTyKzOed-l5YVA"
+          "current_key": "AIzaSyA_IzR8w1IIlgdkmsWTghnm1dAkvxUetn8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "631805374046-f1csjibbhjaupdh392dfgvhl089e7t60.apps.googleusercontent.com",
+              "client_id": "62767728397-r1n46d335nppbu24olhp7j4r35lrpveo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:62767728397:android:3c64ecd6110603721c1244",
+        "android_client_info": {
+          "package_name": "com.rahuldevelops.philomathapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "62767728397-ft0dio5eh76ofaso7g06knjmvmkrvuhh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rahuldevelops.philomathapp",
+            "certificate_hash": "55468d6611ab9b528565d07b77d2bc8ad44ed29f"
+          }
+        },
+        {
+          "client_id": "62767728397-jvuf565rekb188m14lp7h4i24f2nsmbh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rahuldevelops.philomathapp",
+            "certificate_hash": "537e439b06287002a31e4f1b941d5c48f19742d5"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_IzR8w1IIlgdkmsWTghnm1dAkvxUetn8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "62767728397-r1n46d335nppbu24olhp7j4r35lrpveo.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

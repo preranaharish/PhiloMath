@@ -1,6 +1,6 @@
 package com.rahuldevelops.philomathapp;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.view.MenuItem;
 
 public interface RecyclerViewItemListener {

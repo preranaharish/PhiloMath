@@ -7,7 +7,7 @@
     <group android:name="background">
         <path
             android:name="circle"
-            android:fillColor="@color/cardview_dark_background"
+            android:fillColor="@android:color/transparent"
             android:fillAlpha=".2"
             android:pathData="M12,12m-10,0a10,10 0,1 1,20 0a10,10 0,1 1,-20 0" />
     </group>

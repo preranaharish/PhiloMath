@@ -13,11 +13,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
-import android.support.design.widget.Snackbar;
-import android.support.v4.graphics.drawable.DrawableCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AppCompatDelegate;
-import android.support.v7.widget.CardView;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.cardview.widget.CardView;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
@@ -118,7 +118,7 @@ int catimportance,greimportance;
             sword2 = shared.getString("word2","Ostensible");
             sword3 = shared.getString("word3","Insidious");
             sword4 = shared.getString("word4","Ingenuity");
-            if(!((word.equals(sword1))|| (word.equals(sword2))||(word.equals(sword3))||(word.equals(sword4)))){
+            if(!((word.equals(sword1.toUpperCase()))|| (word.equals(sword2.toUpperCase()))||(word.equals(sword3.toUpperCase()))||(word.equals(sword4.toUpperCase())))){
             if((catimportance>50 || greimportance>50) && word.length()>3  ){
                 final int random = new Random().nextInt(100)/25;
                 if(random==1)
@@ -387,13 +387,13 @@ if(pie==1) {
 
 //        pieChart.setCenterTextTypeface(tfLight);
     pieChart.setCenterText("CAT");
-    pieChart.setCenterTextColor(Color.WHITE);
+    pieChart.setCenterTextColor(Color.BLACK);
 
     pieChart.setDrawHoleEnabled(true);
     pieChart.setHoleColor(16777215);
 
 
-    pieChart.setTransparentCircleColor(Color.WHITE);
+    pieChart.setTransparentCircleColor(Color.GRAY);
     pieChart.setTransparentCircleAlpha(80);
 
     pieChart.setHoleRadius(60f);
@@ -424,7 +424,7 @@ if(pie==1) {
     l.setYOffset(0f);
 
     // entry label styling
-    pieChart.setEntryLabelColor(Color.WHITE);
+    pieChart.setEntryLabelColor(Color.GRAY);
 //        pieChart.setEntryLabelTypeface(tfRegular);
     pieChart.setEntryLabelTextSize(12f);
     pieChart.setEntryLabelColor(Color.GREEN);
@@ -457,7 +457,7 @@ if(pie==1) {
 //        for (int c : ColorTemplate.PASTEL_COLORS)
 //            colors.add(c);
 
-    colors.add(Color.WHITE);
+    colors.add(Color.GRAY);
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         colors.add(getColor(R.color.colorPrimaryDark));
     }
@@ -490,13 +490,13 @@ if(pie==1) {
 
 //        pieChart.setCenterTextTypeface(tfLight);
     pieChart1.setCenterText("GRE");
-    pieChart1.setCenterTextColor(Color.WHITE);
+    pieChart1.setCenterTextColor(Color.BLACK);
 
     pieChart1.setDrawHoleEnabled(true);
     pieChart1.setHoleColor(16777215);
 
 
-    pieChart1.setTransparentCircleColor(Color.WHITE);
+    pieChart1.setTransparentCircleColor(Color.GRAY);
     pieChart1.setTransparentCircleAlpha(80);
 
     pieChart1.setHoleRadius(60f);
@@ -559,7 +559,7 @@ if(pie==1) {
 //        for (int c : ColorTemplate.PASTEL_COLORS)
 //            colors.add(c);
 
-    colors1.add(Color.WHITE);
+    colors1.add(Color.GRAY);
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
         colors1.add(getColor(R.color.colorAccent));
     }

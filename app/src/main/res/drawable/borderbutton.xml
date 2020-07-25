@@ -1,9 +1,12 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@drawable/ic_trending_up_black_24dp"
     android:shape="rectangle">
-    <stroke android:width="3dp"
-        android:color="#58cef4"
-        />
+    <gradient android:startColor="#DD000000" android:endColor="#DD2ECCFA"
+        android:angle="225"/>
+
+    <solid android:color="#AA181818" />
+
+
 
     <corners android:radius="200dp"  />
 </shape>

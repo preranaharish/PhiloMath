@@ -3,8 +3,8 @@ package com.rahuldevelops.philomathapp;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +33,7 @@ public class UserDetailsAdapter extends RecyclerView.Adapter<UserDetailsAdapter.
     private String senderFirstLetter;
     private TextView senderProfilePic;
     String ex;
-    ImageView search,speak;
+    Button search,speak;
             Button delete;
     RecyclerViewItemListener callback;
     private static final int MENU_ITEM_VIEW_TYPE = 0;
@@ -85,9 +85,9 @@ public class UserDetailsAdapter extends RecyclerView.Adapter<UserDetailsAdapter.
 
 // To retrieve first letter of the sender,
         StringBuilder name = new StringBuilder(userDetails.getName());
-        holder.chars.setText(name.charAt(0)+"");
+//        holder.chars.setText(name.charAt(0)+"");
         holder.tvAddress.setText(userDetails.getAddress());
-        holder.tvPhone.setText(userDetails.getMobileNo());
+//        holder.tvPhone.setText(userDetails.getMobileNo());
         holder.tvProfession.setText("Eg: "+ex+"\n");
         if(userDetails.getNote()==null){
             holder.note.setText("User Note: "+ "Not Saved");
@@ -178,15 +178,15 @@ public class UserDetailsAdapter extends RecyclerView.Adapter<UserDetailsAdapter.
             super(itemView);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
-            chars = (TextView)itemView.findViewById(R.id.firstcharacter);
+//            chars = (TextView)itemView.findViewById(R.id.firstcharacter);
             tvName = (TextView) itemView.findViewById(R.id.tv_name);
             tvAddress = (TextView) itemView.findViewById(R.id.tv_address);
-            tvPhone = (TextView) itemView.findViewById(R.id.tv_phone);
+//            tvPhone = (TextView) itemView.findViewById(R.id.tv_phone);
             tvProfession = (TextView) itemView.findViewById(R.id.tv_profession);
             note = (TextView)itemView.findViewById(R.id.notes);
             ivMenu = (ImageView) itemView.findViewById(R.id.iv_menu);
-            speak = (ImageView)itemView.findViewById(R.id.speakword1);
-            search = (ImageView)itemView.findViewById(R.id.searchword1);
+            speak = (Button)itemView.findViewById(R.id.speakword1);
+            search = (Button)itemView.findViewById(R.id.searchword1);
         }
         @Override
         public void onClick(View v) {

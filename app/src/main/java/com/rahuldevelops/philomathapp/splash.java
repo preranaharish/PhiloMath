@@ -1,14 +1,17 @@
 package com.rahuldevelops.philomathapp;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
 import com.rahuldevelops.philomathapp.Manifest;
@@ -49,8 +52,10 @@ public class splash extends AppCompatActivity {
     public String options[][]= new String[5][3];
     public int answers[]= new int[5];
     Question1 q[] = new Question1[5];
+    ActivityOptions option;
     Intent intent;
 int wordsofthedaydone;
+ArrayList<String> hotwordslist=new ArrayList<>();
     String version,appversion;
     String word1,word2,word3,word4;
     public static DataSnapshot[] getInstance(){
@@ -60,7 +65,12 @@ int wordsofthedaydone;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
+        HotwordsDB hb = new HotwordsDB(splash.this);
+        SQLiteDatabase sb = hb.getReadableDatabase();
+        Cursor c=sb.rawQuery("SELECT * FROM hotwords",null);
+        while (c.moveToNext()){
+            hotwordslist.add(c.getString(c.getColumnIndex("word")));
+        }
         Calendar calendar=Calendar.getInstance();
         SimpleDateFormat sdf=new SimpleDateFormat("ddMMyyyy");
         String currentTime=sdf.format(calendar.getTime())+"words";
@@ -217,9 +227,12 @@ j++;
         SharedPreferences prefer = getSharedPreferences("streaks_count",MODE_PRIVATE);
         int count = prefer.getInt("streaks_count",0);
         if (count == 0){
+            option = ActivityOptions.makeSceneTransitionAnimation(this);
             intent = new Intent(splash.this, streak.class);
+            startActivity(intent);
         }
         else{
+           option = ActivityOptions.makeSceneTransitionAnimation(this);
             intent = new Intent(splash.this, HomeScreen.class);
         }
         new Thread(new Runnable() {
@@ -333,8 +346,11 @@ j++;
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
+            int flag=1;
             try{
+
                 HotwordsDB hb = new HotwordsDB(splash.this);
+                SQLiteDatabase sb = hb.getReadableDatabase();
                 JSONObject JS=new JSONObject(result);
                 Iterator<String> keys = JS.keys();
                 while(keys.hasNext()){
@@ -351,17 +367,32 @@ j++;
                     String phonetics=JS2.getString("phoneticSpelling");
 
 
-                    hb.insertWordDetails(value,meaning,category,example,phonetics);
+
+
+                    if(hotwordslist.contains(value)){
+                        flag=0;
+                        break;
+                    }else {
+                        if(example.equals("{}")){
+                            example="No examples found";
+                        }
+                        hb.insertWordDetails(value, meaning, category, example, phonetics);
+                    }
+
 
 
                 }
-                Calendar calendar=Calendar.getInstance();
-                SimpleDateFormat sdf=new SimpleDateFormat("ddMMyyyy");
-                String currentTime=sdf.format(calendar.getTime())+"words";
-                SharedPreferences prefs5 = getSharedPreferences(currentTime, MODE_PRIVATE);
-                SharedPreferences.Editor editor1 = prefs5.edit();
-                editor1.putInt(currentTime,1);
-                editor1.commit();
+                if(flag==1) {
+                    Calendar calendar = Calendar.getInstance();
+                    SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyy");
+                    String currentTime = sdf.format(calendar.getTime()) + "words";
+                    SharedPreferences prefs5 = getSharedPreferences(currentTime, MODE_PRIVATE);
+                    SharedPreferences.Editor editor1 = prefs5.edit();
+                    editor1.putInt(currentTime, 1);
+                    editor1.commit();
+
+                }
+
 
                 startActivity(intent);
                 finish();

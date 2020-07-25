@@ -8,10 +8,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
+import androidx.annotation.NonNull;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -464,9 +464,9 @@ recent3.setOnClickListener(new View.OnClickListener() {
                     graph=0;
                 }
                 Intent intent = new Intent(add.this, Word_Result.class);
-                intent.putExtra("word",word1);
-                intent.putExtra("meaning",def);
-                intent.putExtra("example",def1);
+                intent.putExtra("word",word1.trim());
+                intent.putExtra("meaning",def.trim());
+                intent.putExtra("example",def1.trim());
                 intent.putExtra("synonyms",synonyms);
                 intent.putExtra("visibility",1);
                 intent.putExtra("synonyms_array1",synonyms_array[0]);

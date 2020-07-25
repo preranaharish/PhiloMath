@@ -1,5 +1,6 @@
 package com.rahuldevelops.philomathapp;
 
+import android.app.ActivityOptions;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.ClipboardManager;
@@ -14,21 +15,24 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SwitchCompat;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
+
+import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -140,6 +144,7 @@ BottomNavigationView bottomNavigationView;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_of_words);
+        CardView cv=(CardView)findViewById(R.id.cv_user);
         SharedPreferences prefs = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         usernametext = prefs.getString("keyname", "Unknown");
         emailtext = prefs.getString("Email", "Unknown");
@@ -373,6 +378,7 @@ BottomNavigationView bottomNavigationView;
     @Override
     public void onItemClicked(int position) {
 
+
     }
 
     @Override
@@ -408,7 +414,7 @@ BottomNavigationView bottomNavigationView;
         Cursor cursor = sqlDB.rawQuery("Delete FROM words WHERE name = ?", new String[]{ word });
         if (cursor != null && cursor.moveToFirst()) {
         }
-        Toast.makeText(ListOfWords.this,"Deleted "+word.toLowerCase(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(ListOfWords.this,word.toLowerCase().trim()+" deleted",Toast.LENGTH_SHORT).show();
         userDetailsList.remove(pos);
         recyclerView.getRecycledViewPool().clear();
         userAdapter.notifyDataSetChanged();

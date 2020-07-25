@@ -1,4 +1,4 @@
-<android.support.v7.widget.Toolbar android:id="@+id/toolbar"
+<androidx.appcompat.widget.Toolbar android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:elevation="5dp"
@@ -16,7 +16,7 @@
         android:orientation="vertical"
 
         android:gravity="center|right">
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="70dp"
             android:layout_gravity="left"
             android:layout_height="50dp"
@@ -49,4 +49,4 @@
 
     </LinearLayout>
 
-</android.support.v7.widget.Toolbar>
+</androidx.appcompat.widget.Toolbar>

@@ -1,7 +1,7 @@
 package com.rahuldevelops.philomathapp;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.rahuldevelops.philomathapp.R;

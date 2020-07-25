@@ -1,5 +1,6 @@
 package com.rahuldevelops.philomathapp;
 
+import android.app.ActivityOptions;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -13,27 +14,30 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.icu.util.Calendar;
-import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.TaskStackBuilder;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import androidx.cardview.widget.CardView;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.TaskStackBuilder;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.transition.Explode;
 import android.util.Log;
+import android.util.Pair;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.widget.RemoteViews;
+import android.view.Window;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.anubhav.android.customdialog.CustomDialog;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -81,6 +85,7 @@ public class HomeScreen extends AppCompatActivity {
     TextView e1[]=new TextView[4];
     TextView d1[]=new TextView[4];
     String appversion,version;
+    CardView cv;
     String graph_words[] = new String[4];
     String graph_score[] = new String[4];
     String[] synonyms_array = new String[4];
@@ -88,8 +93,16 @@ public class HomeScreen extends AppCompatActivity {
     ArrayList<String> arr=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        // Attach a callback used to capture the shared elements from this Activity to be used
+        // by the container transform transition
+
+
+        // Keep system bars (status bar, navigation bar) persistent throughout the transition.
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
+
 //        FloatingActionButton fl =(FloatingActionButton)findViewById(R.id.skip);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigationView);
         words[0] = (TextView) findViewById(R.id.w1);
@@ -184,7 +197,9 @@ version=appversion;
             }
         });
 
-
+        SharedPreferences preferences6 = getSharedPreferences("wordsshared",MODE_PRIVATE);
+        String wordsshared = preferences6.getString("wordsshared","instigate,,allure,,Impetuous,,Plethora,,");
+        String[] wordsoftheday = wordsshared.split(",,");
 
 
         HotwordsDB db = new HotwordsDB(this);
@@ -216,28 +231,28 @@ version=appversion;
                         //Add your action onClick
                         break;
                     case R.id.nav_list:
+                        ActivityOptions option = ActivityOptions.makeSceneTransitionAnimation(HomeScreen.this);
                         Intent intent = new Intent(HomeScreen.this, ListOfWords.class);
-                        startActivity(intent);
-                        finish();
+                        startActivity(intent,option.toBundle());
                         break;
 
                     case R.id.nav_search:
+                        ActivityOptions option1 = ActivityOptions.makeSceneTransitionAnimation(HomeScreen.this);
                         Intent intent1 = new Intent(HomeScreen.this, add.class);
                         intent1.putExtra("words",arr);
-                        startActivity(intent1);
-                        finish();
+                        startActivity(intent1,option1.toBundle());
                         break;
 
                     case R.id.nav_quiz:
+                        ActivityOptions option2 = ActivityOptions.makeSceneTransitionAnimation(HomeScreen.this);
                         Intent intent3 = new Intent(HomeScreen.this, Quiz_start.class);
-                        startActivity(intent3);
-                        finish();
+                        startActivity(intent3,option2.toBundle());
                         break;
 
                     case R.id.nav_settings:
+                        ActivityOptions option3 = ActivityOptions.makeSceneTransitionAnimation(HomeScreen.this);
                         Intent intent4 = new Intent(HomeScreen.this, settings_screen.class);
-                        startActivity(intent4);
-                        finish();
+                        startActivity(intent4,option3.toBundle());
                         break;
                 }
                 return false;
@@ -306,59 +321,6 @@ version=appversion;
 //            }
 //        });
 
-        if(!version.equals(appversion)){
-            new CustomDialog.Builder(HomeScreen.this)
-                    .setTitle("UPDATE REQUIRED", true)
-                    .setContent("Please update the app for better app experience")
-                    .onConfirm(new CustomDialog.BtnCallback() {
-                        @Override
-                        public void onClick(@NonNull CustomDialog customDialog, @NonNull CustomDialog.BtnAction btnAction) {
-                            final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
-                            try {
-                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-                            } catch (android.content.ActivityNotFoundException anfe) {
-                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
-                            }
-
-
-                        }
-                    })
-                    .onCancel(new CustomDialog.BtnCallback() {
-                        @Override
-                        public void onClick(@NonNull CustomDialog customDialog, @NonNull CustomDialog.BtnAction btnAction) {
-                          customDialog.dismiss();
-
-                        }
-                    })
-                    .onConfirm(new CustomDialog.BtnCallbackWithPermanentCheck() {
-                        @Override
-                        public void onClick(@NonNull CustomDialog dialog, @NonNull CustomDialog.BtnAction which, boolean isPermanentChecked) {
-                            final String appPackageName = getPackageName(); // getPackageName() from Context or Activity object
-                            try {
-                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-                            } catch (android.content.ActivityNotFoundException anfe) {
-                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
-                            }
-                        }
-                    })
-                    .setBtnConfirmText("Update now")
-                    .setBtnConfirmTextColor("#e6b115")
-                    .setBtnCancelText("Later")
-                    .setBtnCancelTextColor("#e6b115")
-                    .setCancelable(true)
-                    // I thought cancel button is not necessary, it's unavailable unless there're requests
-
-
-                    // Customizing (You can find more in Wiki)
-
-                    //.setTitle("Hello !", true)
-                    //.setBtnPermanentCheckText("다시 보지 않기", true)
-                    //.setGuideImagePaddingDp(10)
-                    //.setGuideImageSizeDp(100, 100)
-                    .showIfPermanentValueIsFalse();
-            // Code to be executed when when the user is about to return
-            // to the app after tapping on an ad.
-        }
 
 
     }

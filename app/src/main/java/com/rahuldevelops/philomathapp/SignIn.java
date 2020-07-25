@@ -1,15 +1,24 @@
 package com.rahuldevelops.philomathapp;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -46,10 +55,13 @@ public class SignIn extends AppCompatActivity {
     private static FirebaseAuth mAuth;
     public FirebaseUser currentUser;
     private SignInButton signInButton;
+    private Button sigin;
     private static final int RC_SIGN_IN = 1;
     private GoogleApiClient mGoogleapiclient;
 
     private GoogleApiClient mGoogleApiClient;
+    ImageView iv;
+    TextView philomath,welcome;
 
     // Firebase instance variables
 
@@ -57,7 +69,11 @@ public class SignIn extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-        isStoragePermissionGranted();
+        iv =(ImageView)findViewById(R.id.logo_image);
+        philomath=(TextView)findViewById(R.id.philomath);
+        welcome=(TextView)findViewById(R.id.welcome);
+        welcome.setAlpha(0);
+        handleanimation1(philomath);
         mFirebaseAuth = FirebaseAuth.getInstance();
         mAuth = FirebaseAuth.getInstance();
         // Assign fields
@@ -94,7 +110,7 @@ public class SignIn extends AppCompatActivity {
                 }
             }
         };
-        signInButton = (SignInButton) findViewById(R.id.sign_in_button);
+        sigin = (Button) findViewById(R.id.sign_in_button);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestId()
                 .requestIdToken("62767728397-r1n46d335nppbu24olhp7j4r35lrpveo.apps.googleusercontent.com")
@@ -112,9 +128,10 @@ public class SignIn extends AppCompatActivity {
                 })
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
-        signInButton.setOnClickListener(new View.OnClickListener() {
+        sigin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 signIn();
             }
         });
@@ -209,4 +226,14 @@ public class SignIn extends AppCompatActivity {
         }
     }
 
+    public void handleanimation1(View view){
+        welcome.animate().alpha(0).setDuration(1000).setInterpolator(new DecelerateInterpolator()).withEndAction(new Runnable() {
+            @Override
+            public void run() {
+                welcome.animate().alpha(1).setDuration(1000).setInterpolator(new AccelerateInterpolator()).start();
+
+            }
+        }).start();
+
+    }
 }

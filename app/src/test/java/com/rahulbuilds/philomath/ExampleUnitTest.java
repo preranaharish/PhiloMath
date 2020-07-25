@@ -1,4 +1,4 @@
-package com.rahulbuilds.philomath;
+package com.rahuldevelops.philomathapp;
 
 import org.junit.Test;
 

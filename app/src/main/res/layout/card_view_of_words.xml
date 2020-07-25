@@ -1,147 +1,248 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/tools"
     android:id="@+id/cv_user"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_margin="2dp"
     app:contentPaddingBottom="1dp"
     app:contentPaddingRight="2dp"
     app:contentPaddingLeft="2dp"
     app:cardCornerRadius="8dp"
     app:cardElevation="1dp"
     android:soundEffectsEnabled="true"
-    card_view:cardCornerRadius="10dp"
     android:clickable="true"
+
     app:cardUseCompatPadding="true">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#80121212">
-        <!--        android:background="@drawable/cardbackground"-->
-        <!--        >-->
+        android:layout_height="wrap_content"
+        android:background="#e3f2fd"
+        android:orientation="vertical">
 
-
-        <TextView
-            android:id="@+id/firstcharacter"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/simplecircle"
-            android:gravity="center"
-            android:maxHeight="2dp"
-            android:text="B"
-            android:textColor="#ffffff"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-        <ImageView
-            android:id="@+id/iv_menu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="3dp"
-            android:backgroundTint="@android:color/holo_red_dark"
-            app:srcCompat="@drawable/ic_delete_black_24dp"
-            android:hapticFeedbackEnabled="true"/>
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#42a5f5"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tv_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/firstcharacter"
-            android:layout_below="@+id/tv_name"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:text="Address"
-            android:textColor="@android:color/white"
-            android:textSize="18dp" />
-
-        <TextView
-            android:id="@+id/tv_phone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/firstcharacter"
-            android:layout_below="@+id/tv_address"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:textColor="@android:color/white"
-            android:text="TextView" />
-
-        <TextView
-            android:id="@+id/tv_profession"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/firstcharacter"
-            android:layout_below="@id/tv_phone"
-            android:paddingLeft="5dp"
-            android:textColor="@android:color/white"
-            android:paddingRight="5dp"
-            android:text="TextView" />
-
-
-        <TextView
             android:id="@+id/tv_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/firstcharacter"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:paddingTop="2dp"
-            android:text="Name"
+            android:text="WORD"
+            android:textStyle="bold"
+            android:layout_gravity="bottom"
+            android:gravity="center"
             android:textColor="@android:color/white"
-            android:textAllCaps="true"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+            android:textSize="20dp"/>
 
-            />
-        <LinearLayout
 
+    </LinearLayout>
+        
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_profession"
-            android:orientation="horizontal"
-            android:paddingBottom="5dp">
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="5"
-                android:layout_height="wrap_content"
-                android:id="@+id/notes"
-                android:paddingLeft="25dp"
-                android:textStyle="italic"
-                android:text="additional note"/>
+            android:layout_gravity="left"
+            android:text="Meaning"
+            android:id="@+id/tv_address"
+            android:textColor="@android:color/black"
+            android:textSize="18dp"
+            android:padding="5dp"/>
+        
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="example"
+            android:textColor="@android:color/black"
+            android:textSize="16dp"
+            android:textStyle="italic"
+            android:id="@+id/tv_profession"
+            android:layout_gravity="left"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/notes"
+            android:text="note:"
+            android:textColor="@android:color/black"
+            android:textSize="14dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"/>
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            <ImageView
+            <Button
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_volume_up_black_24dp"
-                android:id="@+id/speakword1"
-              />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_description_black_24dp"
+                android:text="VIEW"
                 android:id="@+id/searchword1"
-                />
-            <!--            <Button-->
-            <!--                android:layout_width="0dp"-->
-            <!--                android:layout_weight="1"-->
-            <!--                android:layout_height="50dp"-->
-            <!--                android:textSize="10dp"-->
-            <!--                android:background="@drawable/borderbutton"-->
-            <!--                android:="@drawable/ic_trending_up_black_24dp"-->
-            <!--                android:id="@+id/deleteword"/>-->
+                android:textAlignment="textStart"
+                android:layout_marginLeft="20dp"
+                android:textSize="18dp"
+                android:textColor="@color/colorPrimary"
+                android:background="@android:color/transparent"/>
 
-            <!--                android:text="delete" />-->
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Phonetics"
+                android:textAlignment="textStart"
+                android:textSize="18dp"
+                android:id="@+id/speakword1"
+               android:textColor="@android:color/black"
+                android:background="@android:color/transparent"/>
+
+            <ImageView
+                android:id="@+id/iv_menu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center"
+                android:layout_marginRight="3dp"
+                android:layout_weight="0.3"
+                android:backgroundTint="@android:color/holo_red_dark"
+                android:hapticFeedbackEnabled="true"
+                app:srcCompat="@drawable/ic_delete_black_24dp" />
+
+
         </LinearLayout>
+    </LinearLayout>
 
-    </RelativeLayout>
+</com.google.android.material.card.MaterialCardView>
 
-</android.support.v7.widget.CardView>
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:background="#80121212">-->
+<!--        &lt;!&ndash;        android:background="@drawable/cardbackground"&ndash;&gt;-->
+<!--        &lt;!&ndash;        >&ndash;&gt;-->
+
+
+<!--        <TextView-->
+<!--            android:id="@+id/firstcharacter"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_marginRight="20dp"-->
+<!--            android:layout_marginLeft="10dp"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            android:background="@drawable/simplecircle"-->
+<!--            android:gravity="center"-->
+<!--            android:maxHeight="2dp"-->
+<!--            android:text="B"-->
+<!--            android:textColor="#ffffff"-->
+<!--            android:textSize="20dp"-->
+<!--            android:textStyle="bold" />-->
+<!--        <ImageView-->
+<!--            android:id="@+id/iv_menu"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignParentRight="true"-->
+<!--            android:layout_marginRight="3dp"-->
+<!--            android:backgroundTint="@android:color/holo_red_dark"-->
+<!--            app:srcCompat="@drawable/ic_delete_black_24dp"-->
+<!--            android:hapticFeedbackEnabled="true"/>-->
+
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_address"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_toRightOf="@+id/firstcharacter"-->
+<!--            android:layout_below="@+id/tv_name"-->
+<!--            android:paddingLeft="5dp"-->
+<!--            android:paddingRight="5dp"-->
+<!--            android:text="Address"-->
+<!--            android:textColor="@android:color/white"-->
+<!--            android:textSize="18dp" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_phone"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_toRightOf="@+id/firstcharacter"-->
+<!--            android:layout_below="@+id/tv_address"-->
+<!--            android:paddingLeft="5dp"-->
+<!--            android:paddingRight="5dp"-->
+<!--            android:textColor="@android:color/white"-->
+<!--            android:text="TextView" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_profession"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_toRightOf="@+id/firstcharacter"-->
+<!--            android:layout_below="@id/tv_phone"-->
+<!--            android:paddingLeft="5dp"-->
+<!--            android:textColor="@android:color/white"-->
+<!--            android:paddingRight="5dp"-->
+<!--            android:text="TextView" />-->
+
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_name"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_toRightOf="@+id/firstcharacter"-->
+<!--            android:paddingLeft="5dp"-->
+<!--            android:paddingRight="5dp"-->
+<!--            android:paddingTop="2dp"-->
+<!--            android:text="Name"-->
+<!--            android:textColor="@android:color/white"-->
+<!--            android:textAllCaps="true"-->
+<!--            android:textSize="20dp"-->
+<!--            android:textStyle="bold" />-->
+
+<!--            />-->
+<!--        <LinearLayout-->
+
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@+id/tv_profession"-->
+<!--            android:orientation="horizontal"-->
+<!--            android:paddingBottom="5dp">-->
+<!--            <TextView-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_weight="5"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:id="@+id/notes"-->
+<!--                android:paddingLeft="25dp"-->
+<!--                android:textStyle="italic"-->
+<!--                android:text="additional note"/>-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:src="@drawable/ic_volume_up_black_24dp"-->
+<!--                android:id="@+id/speakword1"-->
+<!--              />-->
+
+<!--            <ImageView-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:src="@drawable/ic_description_black_24dp"-->
+<!--                android:id="@+id/searchword1"-->
+<!--                />-->
+<!--            &lt;!&ndash;            <Button&ndash;&gt;-->
+<!--            &lt;!&ndash;                android:layout_width="0dp"&ndash;&gt;-->
+<!--            &lt;!&ndash;                android:layout_weight="1"&ndash;&gt;-->
+<!--            &lt;!&ndash;                android:layout_height="50dp"&ndash;&gt;-->
+<!--            &lt;!&ndash;                android:textSize="10dp"&ndash;&gt;-->
+<!--            &lt;!&ndash;                android:background="@drawable/borderbutton"&ndash;&gt;-->
+<!--            &lt;!&ndash;                android:="@drawable/ic_trending_up_black_24dp"&ndash;&gt;-->
+<!--            &lt;!&ndash;                android:id="@+id/deleteword"/>&ndash;&gt;-->
+
+<!--            &lt;!&ndash;                android:text="delete" />&ndash;&gt;-->
+<!--        </LinearLayout>-->
+
+<!--    </RelativeLayout>-->
