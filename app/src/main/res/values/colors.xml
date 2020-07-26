@@ -7,13 +7,19 @@
     <color name="colorAccent">#FF0000</color>
     <color name="notification">#0072c6</color>
 <color name="transparentwhite">#cccccc</color>
-
+<color name="my_statusbar_color">#002171</color>
     <color name="textcolorHeader">#FFC0CB</color>
     <color name="textColorPrimary">#000000</color>
     <color name="textColorSecondary">#A5A5A5</color>
     <color name="colorControlHighlight">#ff726f</color>
     <color name="colorButtonNormal">#f70d1a</color>
     <color name="colorButtonActivated">#f70d1a</color>
+    <color name="solidCircle">#AAFFFFFF</color>
+    <color name="circleBorder">#50FFFFFF</color>
+    <color name="gradEnd">#67EFC8</color>
+    <color name="gradStart">#63C9FF</color>
+    <color name="toolbar">@android:color/transparent</color>
+
 
     <!--switch color-->
 

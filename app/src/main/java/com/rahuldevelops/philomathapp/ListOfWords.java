@@ -22,6 +22,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -37,6 +38,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -144,6 +147,16 @@ BottomNavigationView bottomNavigationView;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_of_words);
+        Window window =   this.getWindow();
+
+// clear FLAG_TRANSLUCENT_STATUS flag:
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+// finally change the color
+        window.setStatusBarColor(ContextCompat.getColor(this,R.color.my_statusbar_color));
         CardView cv=(CardView)findViewById(R.id.cv_user);
         SharedPreferences prefs = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         usernametext = prefs.getString("keyname", "Unknown");
@@ -771,13 +784,15 @@ BottomNavigationView bottomNavigationView;
         super.onPause();
         stop();
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
-
+        mTTS.shutdown();
     }
 @Override
     public void onDestroy(){
         super.onDestroy();
         stop();
     LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
+    mTTS.shutdown();
+    Runtime.getRuntime().gc();
 }
 
 public void reviser(){
@@ -871,4 +886,6 @@ public void reviser(){
 
         backPressedTime = System.currentTimeMillis();
     }
+
+
 }

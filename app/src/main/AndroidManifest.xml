@@ -14,7 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".Customview"></activity>
         <activity
             android:name=".Guidescreen"
             android:theme="@style/NoActionBar" />
@@ -25,7 +24,8 @@
         <activity
             android:name=".Quiz_start"
             android:theme="@style/NoActionBar" />
-        <activity android:name=".settings_screen" />
+        <activity android:name=".settings_screen"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".MainQuiz" />
         <activity
             android:name=".ListOfWords"

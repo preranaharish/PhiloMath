@@ -26,6 +26,7 @@ import androidx.cardview.widget.CardView;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.TaskStackBuilder;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.transition.Explode;
 import android.util.Log;
@@ -34,6 +35,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -231,28 +233,25 @@ version=appversion;
                         //Add your action onClick
                         break;
                     case R.id.nav_list:
-                        ActivityOptions option = ActivityOptions.makeSceneTransitionAnimation(HomeScreen.this);
                         Intent intent = new Intent(HomeScreen.this, ListOfWords.class);
-                        startActivity(intent,option.toBundle());
+                        startActivity(intent);
                         break;
 
                     case R.id.nav_search:
-                        ActivityOptions option1 = ActivityOptions.makeSceneTransitionAnimation(HomeScreen.this);
+
                         Intent intent1 = new Intent(HomeScreen.this, add.class);
                         intent1.putExtra("words",arr);
-                        startActivity(intent1,option1.toBundle());
+                        startActivity(intent1);
                         break;
 
                     case R.id.nav_quiz:
-                        ActivityOptions option2 = ActivityOptions.makeSceneTransitionAnimation(HomeScreen.this);
                         Intent intent3 = new Intent(HomeScreen.this, Quiz_start.class);
-                        startActivity(intent3,option2.toBundle());
+                        startActivity(intent3);
                         break;
 
                     case R.id.nav_settings:
-                        ActivityOptions option3 = ActivityOptions.makeSceneTransitionAnimation(HomeScreen.this);
                         Intent intent4 = new Intent(HomeScreen.this, settings_screen.class);
-                        startActivity(intent4,option3.toBundle());
+                        startActivity(intent4);
                         break;
                 }
                 return false;

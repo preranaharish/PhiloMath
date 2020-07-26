@@ -14,6 +14,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.speech.tts.TextToSpeech;
 import com.google.android.material.snackbar.Snackbar;
+
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -24,6 +26,8 @@ import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AutoCompleteTextView;
@@ -55,6 +59,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.rahuldevelops.philomathapp.R;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
@@ -77,6 +83,7 @@ public class Word_Result extends AppCompatActivity {
     String graph_words[] = new String[4];
     String graph_score[] = new String[4];
     int scores[] = new int[4];
+    List<String> listofwords = new LinkedList<>();
      String options[]=new String[3];
     AutoCompleteTextView additionalnote;
     BarChart horizontalChart ;
@@ -87,6 +94,33 @@ int catimportance,greimportance;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word__result);
+        Window window =   this.getWindow();
+
+// clear FLAG_TRANSLUCENT_STATUS flag:
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+// finally change the color
+        window.setStatusBarColor(ContextCompat.getColor(this,R.color.my_statusbar_color));
+
+        mTTS = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status == TextToSpeech.SUCCESS) {
+                    int result = mTTS.setLanguage(Locale.ENGLISH);
+
+                    if (result == TextToSpeech.LANG_MISSING_DATA
+                            || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                        Log.e("TTS", "Language not supported");
+                    } else {
+                    }
+                } else {
+                    Log.e("TTS", "Initialization failed");
+                }
+            }
+        });
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         FirebaseDatabase instance2 = FirebaseDatabase.getInstance();
         DatabaseReference mDatabase = instance2.getInstance().getReference("wordsfortheday");
@@ -115,10 +149,15 @@ int catimportance,greimportance;
 
             SharedPreferences shared = getSharedPreferences("words",MODE_PRIVATE);
             sword1 = shared.getString("word1","Ostentatious");
+            listofwords.add(sword1.toUpperCase());
             sword2 = shared.getString("word2","Ostensible");
+            listofwords.add(sword2.toUpperCase());
             sword3 = shared.getString("word3","Insidious");
+            listofwords.add(sword3.toUpperCase());
             sword4 = shared.getString("word4","Ingenuity");
-            if(!((word.equals(sword1.toUpperCase()))|| (word.equals(sword2.toUpperCase()))||(word.equals(sword3.toUpperCase()))||(word.equals(sword4.toUpperCase())))){
+            listofwords.add(sword4.toUpperCase());
+
+            if(!listofwords.contains(word)){
             if((catimportance>50 || greimportance>50) && word.length()>3  ){
                 final int random = new Random().nextInt(100)/25;
                 if(random==1)
@@ -152,22 +191,7 @@ int catimportance,greimportance;
 
             //The key argument here must match that used in the other activity
         }
-        mTTS = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if (status == TextToSpeech.SUCCESS) {
-                    int result = mTTS.setLanguage(Locale.ENGLISH);
 
-                    if (result == TextToSpeech.LANG_MISSING_DATA
-                            || result == TextToSpeech.LANG_NOT_SUPPORTED) {
-                        Log.e("TTS", "Language not supported");
-                    } else {
-                    }
-                } else {
-                    Log.e("TTS", "Initialization failed");
-                }
-            }
-        });
 
         horizontalChart = (BarChart)findViewById(R.id.barchart);
 // To get random color
@@ -692,6 +716,11 @@ if(pie==1) {
     }
 
 
+@Override
+    public void onDestroy(){
+        super.onDestroy();
+        mTTS.shutdown();
 
+}
 
 }

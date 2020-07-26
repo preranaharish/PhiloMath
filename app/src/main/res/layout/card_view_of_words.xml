@@ -9,11 +9,13 @@
     app:contentPaddingBottom="1dp"
     app:contentPaddingRight="2dp"
     app:contentPaddingLeft="2dp"
-    app:cardCornerRadius="8dp"
     app:cardElevation="1dp"
+    app:cardCornerRadius="4dp"
+    android:shape="ring"
+    card_view:cardPreventCornerOverlap="false"
+    card_view:cardUseCompatPadding="true"
     android:soundEffectsEnabled="true"
     android:clickable="true"
-
     app:cardUseCompatPadding="true">
 
     <LinearLayout
@@ -86,7 +88,7 @@
                 android:id="@+id/searchword1"
                 android:textAlignment="textStart"
                 android:layout_marginLeft="20dp"
-                android:textSize="18dp"
+                android:textSize="16dp"
                 android:textColor="@color/colorPrimary"
                 android:background="@android:color/transparent"/>
 
@@ -96,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:text="Phonetics"
                 android:textAlignment="textStart"
-                android:textSize="18dp"
+                android:textSize="16dp"
                 android:id="@+id/speakword1"
                android:textColor="@android:color/black"
                 android:background="@android:color/transparent"/>
