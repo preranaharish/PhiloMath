@@ -6,27 +6,36 @@
     <application
         android:allowBackup="true"
         android:appComponentFactory="whateverString"
-        android:hardwareAccelerated="false"
-        android:icon="@drawable/icon"
+        android:hardwareAccelerated="true"
+        android:icon="@drawable/icon1"
         android:label="@string/app_name"
+
         android:largeHeap="true"
-        android:roundIcon="@drawable/icon"
+        android:roundIcon="@drawable/icon1"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat"
         tools:replace="android:appComponentFactory">
+        <activity android:name=".HomeScreenNew"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity
+            android:name=".RCSTART"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".Guidescreen"
             android:theme="@style/NoActionBar" />
-        <activity android:name=".RCQUIZ" />
+        <activity android:name=".RCQUIZ"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".streak"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".Quiz_start"
             android:theme="@style/NoActionBar" />
-        <activity android:name=".settings_screen"
+        <activity
+            android:name=".settings_screen"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".MainQuiz"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity android:name=".MainQuiz" />
         <activity
             android:name=".ListOfWords"
             android:label="@string/title_activity_list_of_words"
@@ -54,7 +63,7 @@
         <activity
             android:name=".add"
             android:label="PhiloSearch"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.PROCESS_TEXT" />
@@ -77,7 +86,7 @@
             android:value="ca-app-pub-2769616951461681~2018738309" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/icon" />
+            android:resource="@drawable/icon1" />
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/notification" />
@@ -106,12 +115,12 @@
     </application>
 
     <permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 </manifest>

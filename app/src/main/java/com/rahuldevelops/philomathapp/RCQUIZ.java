@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
 import android.text.method.ScrollingMovementMethod;
@@ -40,6 +41,7 @@ import java.util.Locale;
 
 public class RCQUIZ extends AppCompatActivity {
     Dialog quizdialog;
+    TextView toolbarview;
     Button finishquiz;
     TextView title,scores,accuracy1,timetaken;
     ImageView quizimage,close;
@@ -47,7 +49,7 @@ public class RCQUIZ extends AppCompatActivity {
     public boolean quizfinished=false;
     private boolean quizcompleted;
     public static final String EXTRA_SCORE = "extraScore";
-    private static final long COUNTDOWN_IN_MILLIS = 1500000;
+    private static final long COUNTDOWN_IN_MILLIS = 900000;
     private TextView textViewQuestion,passage;
     private TextView textViewScore;
     private TextView textViewQuestionCount;
@@ -89,6 +91,9 @@ public class RCQUIZ extends AppCompatActivity {
 // finally change the color
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.my_statusbar_color));
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbarview = (TextView)findViewById(R.id.toolbarTextView);
+        setSupportActionBar(toolbar);
         quizdialog = new Dialog(RCQUIZ.this);
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId("ca-app-pub-2769616951461681/9929566651");
@@ -326,6 +331,7 @@ Toast.makeText(RCQUIZ.this,"No solutions available without Internet connection",
         minutes1=minutes;
         seconds1=seconds;
         textViewCountDown.setText(timeFormatted);
+        toolbarview.setText(timeFormatted);
 
         if (timeLeftInMillis < 10000) {
             textViewCountDown.setTextColor(Color.RED);

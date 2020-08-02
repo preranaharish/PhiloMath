@@ -234,7 +234,7 @@ public class add extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.nav_home:
-                        Intent intent1 = new Intent(add.this, HomeScreen.class);
+                        Intent intent1 = new Intent(add.this, HomeScreenNew.class);
                         startActivity(intent1);
                         finish();
                         break;

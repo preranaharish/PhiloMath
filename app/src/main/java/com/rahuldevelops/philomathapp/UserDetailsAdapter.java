@@ -3,6 +3,8 @@ package com.rahuldevelops.philomathapp;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+
+import androidx.cardview.widget.CardView;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
@@ -10,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,6 +29,7 @@ public class UserDetailsAdapter extends RecyclerView.Adapter<UserDetailsAdapter.
     DBHelper dbHelper;
     SQLiteDatabase db;
     Context context;
+    CardView cv;
     UserViewHolder viewHolder;
     private static final int LIST_AD_DELTA = 3;
     private static final int CONTENT = 0;
@@ -70,6 +74,9 @@ public class UserDetailsAdapter extends RecyclerView.Adapter<UserDetailsAdapter.
     }
     @Override
     public void onBindViewHolder(final UserViewHolder holder, final int position) {
+
+
+        holder.cv1.setAnimation(AnimationUtils.loadAnimation(context,R.anim.fadeout));
 
         UserDetails userDetails = userDetailsList.get(position);
         holder.tvName.setText(userDetails.getName());
@@ -172,12 +179,14 @@ public class UserDetailsAdapter extends RecyclerView.Adapter<UserDetailsAdapter.
         return userDetailsList.size();
     }
     public class UserViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnLongClickListener {
+        CardView cv1;
         TextView letter, tvName, tvAddress, tvPhone, tvProfession,note,chars;
         ImageView ivMenu;
         public UserViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
+            cv1 = (CardView) itemView.findViewById(R.id.cv_user);
 //            chars = (TextView)itemView.findViewById(R.id.firstcharacter);
             tvName = (TextView) itemView.findViewById(R.id.tv_name);
             tvAddress = (TextView) itemView.findViewById(R.id.tv_address);

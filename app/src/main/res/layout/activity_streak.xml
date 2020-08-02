@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:weightSum="10"
-    android:background="#1e88e5">
+    android:background="#63B8F1">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -49,7 +49,7 @@
             app:cardElevation="8dp"
             app:cardCornerRadius="8dp"
 
-            android:backgroundTint="#90caf9"
+            android:backgroundTint="#e3f2fd"
             android:clickable="true"
             android:onClick="curious"
 
@@ -59,7 +59,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="16dp"
-                android:background="#90caf9"
+                android:background="#e3f2fd"
                 android:orientation="vertical">
 
                 <!--                <ImageView-->
@@ -114,7 +114,7 @@
             android:layout_marginLeft="16dp"
             app:cardElevation="8dp"
             app:cardCornerRadius="8dp"
-            android:backgroundTint="#90caf9"
+            android:backgroundTint="#e3f2fd"
             android:clickable="true"
             android:onClick="avid"
             >
@@ -123,7 +123,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="16dp"
-                android:background="#90caf9"
+                android:background="#e3f2fd"
                 android:orientation="vertical">
 
                 <!--                <ImageView-->
@@ -180,7 +180,7 @@
             app:cardElevation="8dp"
             app:cardCornerRadius="8dp"
             android:onClick="cat"
-            android:backgroundTint="#90caf9"
+            android:backgroundTint="#e3f2fd"
 
             android:clickable="true"
             >
@@ -189,7 +189,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="16dp"
-                android:background="#90caf9"
+                android:background="#e3f2fd"
                 android:orientation="vertical">
 
                 <!--                <ImageView-->
@@ -246,7 +246,7 @@
             android:layout_marginLeft="16dp"
             app:cardElevation="8dp"
             android:onClick="gre"
-            android:backgroundTint="#90caf9"
+            android:backgroundTint="#e3f2fd"
             app:cardCornerRadius="8dp"
             android:clickable="true"
             >
@@ -255,7 +255,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_margin="16dp"
-                android:background="#90caf9"
+                android:background="#e3f2fd"
                 android:orientation="vertical">
 
                 <!--                <ImageView-->

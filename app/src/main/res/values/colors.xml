@@ -19,7 +19,10 @@
     <color name="gradEnd">#67EFC8</color>
     <color name="gradStart">#63C9FF</color>
     <color name="toolbar">@android:color/transparent</color>
-
+    <color name="color1">#fce4ec</color>
+    <color name="color2">#fff3e0</color>
+    <color name="color3">#e8f5e9</color>
+    <color name="color4">#efebe9</color>
 
     <!--switch color-->
 

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/signupgradient"
+    android:background="#e0f7fa"
     android:orientation="vertical">
 
     <ScrollView
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:text="Score: 0"
         android:visibility="visible"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:freezesText="true"/>
 
 
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/text_view_score"
         android:text="Question: 1/x"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:visibility="visible"
         android:freezesText="true"/>
 
@@ -41,7 +41,7 @@
         android:layout_alignParentEnd="true"
         android:text="00:30"
         android:layout_gravity="end"
-        android:textColor="#ffffff"
+        android:textColor="#1976d2"
         android:textSize="40sp"
         android:visibility="visible"
         android:layout_marginTop="-40dp"
@@ -52,14 +52,16 @@
             android:layout_height="100dp"
             android:paddingBottom="50dp"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/icon" />
+            android:src="@drawable/philomath_logo" />
 
         <androidx.cardview.widget.CardView
-        android:layout_width="370dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="-30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
         app:cardCornerRadius="20dp"
             android:backgroundTint="#2196f3"
         app:cardElevation="1dp">

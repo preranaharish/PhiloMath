@@ -1,6 +1,7 @@
 package com.rahuldevelops.philomathapp;
 
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -42,6 +43,7 @@ Switch reminder;
     String TAG = "RemindMe";
     private long backPressedTime;
     LocalData localData;
+    Dialog quizdialog1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,7 +63,7 @@ Switch reminder;
         usernametext = prefs1.getString("keyname", "Unknown");
         emailtext = prefs1.getString("Email", "Unknown");
         url = prefs1.getString("url","Unknown");
-
+        quizdialog1 = new Dialog(settings_screen.this);
         // add back arrow to toolbar
         androidx.appcompat.widget.Toolbar toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbar);
 
@@ -74,6 +76,17 @@ Switch reminder;
                finish();
             }
         });
+
+        Button button = (Button)findViewById(R.id.changemygoals);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(settings_screen.this,streak.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
 
         TextView username = (TextView) findViewById(R.id.usernames);
         username.setText(usernametext);

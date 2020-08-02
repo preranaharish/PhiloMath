@@ -4,7 +4,7 @@
     xmlns:card_view="http://schemas.android.com/tools"
     android:id="@+id/relative"
     android:orientation="vertical"
-    android:background="#121212"
+    android:background="@android:color/white"
     android:layout_width="match_parent"
     android:focusableInTouchMode="true"
     android:backgroundTint="#b3e5fc"
@@ -28,21 +28,24 @@
                 android:layout_centerHorizontal="true"
                 android:innerRadius="0dp"
                 card_view:cardCornerRadius="4dp"
-                card_view:cardElevation="5dp"
+                card_view:cardElevation="1dp"
+                app:cardUseCompatPadding="true"
                 android:shape="ring"
-                android:background="@drawable/layoutbg"
+
                 android:thicknessRatio="1.9"
                 android:elevation="12dp"
                 >
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/layoutbg">
+                    android:background="@drawable/wordresult">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="30dp"
+                        android:layout_marginTop="20dp"
                         android:id="@+id/linearword"
+
                         android:gravity="center">
                         <ImageButton
                             android:layout_width="wrap_content"
@@ -85,10 +88,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
                         android:layout_marginTop="10dp"
                         android:paddingTop="30dp"
                         android:text="Meaning"
-                        android:textColor="@android:color/white"
+                        android:textColor="@android:color/black"
                         android:paddingBottom="15dp"
                         android:layout_marginBottom="10dp"
                         android:textSize="19dp"
@@ -106,8 +110,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="8dp"
-                        android:paddingTop="8dp"
-                        android:textColor="@android:color/white"
+                        android:padding="8dp"
+                        android:textColor="@android:color/black"
                         android:text="The example sentence of the word"
                         android:textAllCaps="false"
                         android:textSize="19sp"
@@ -120,7 +124,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
-                        android:textColor="@android:color/white"
+                        android:textColor="@android:color/black"
                         android:layout_marginRight="8dp"            android:paddingTop="25dp"
                         android:text="Synonyms"
                         android:textAllCaps="false"
@@ -138,7 +142,7 @@
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="8dp"
                         android:paddingTop="10dp"
-                        android:textColor="@android:color/white"
+                        android:textColor="@android:color/black"
                         android:text="Synonym1, Synonym2,Synonym3"
                         android:textAllCaps="false"
                         android:textSize="16dp" />

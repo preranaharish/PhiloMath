@@ -175,7 +175,7 @@ BottomNavigationView bottomNavigationView;
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.nav_home:
-                        Intent intent = new Intent(ListOfWords.this, HomeScreen.class);
+                        Intent intent = new Intent(ListOfWords.this, HomeScreenNew.class);
                         startActivity(intent);
                         finish();
                         break;
@@ -184,6 +184,7 @@ BottomNavigationView bottomNavigationView;
                         break;
 
                     case R.id.nav_search:
+                        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(ListOfWords.this);
                         Intent intent1 = new Intent(ListOfWords.this, add.class);
                         startActivity(intent1);
                         finish();
@@ -221,10 +222,10 @@ BottomNavigationView bottomNavigationView;
                 UserDetails userDetailsItem = new UserDetails();
 
                 userDetailsItem.setUserId(c1.getInt(c1.getColumnIndex("id")));
-                userDetailsItem.setName(c1.getString(c1.getColumnIndex("name")));
-                userDetailsItem.setAddress(c1.getString(c1.getColumnIndex("Meaning")));
-                userDetailsItem.setProfessiion(c1.getString(c1.getColumnIndex("Examples")));
-                userDetailsItem.setNote(c1.getString(c1.getColumnIndex("Note")));
+                userDetailsItem.setName(c1.getString(c1.getColumnIndex("name")).trim());
+                userDetailsItem.setAddress(c1.getString(c1.getColumnIndex("Meaning")).trim());
+                userDetailsItem.setProfessiion(c1.getString(c1.getColumnIndex("Examples")).trim());
+                userDetailsItem.setNote(c1.getString(c1.getColumnIndex("Note")).trim());
                 userDetailsList.add(userDetailsItem);
 
 
@@ -366,7 +367,7 @@ BottomNavigationView bottomNavigationView;
             }
 
             case R.id.nav_home:{
-                Intent intent2 = new Intent(this, HomeScreen.class);
+                Intent intent2 = new Intent(this, HomeScreenNew.class);
                 startActivity(intent2);
                 finish();
                 break;
@@ -424,7 +425,7 @@ BottomNavigationView bottomNavigationView;
         try{
         DBHelper dbHandler = new DBHelper(ListOfWords.this);
         SQLiteDatabase sqlDB = dbHandler.getWritableDatabase();
-        Cursor cursor = sqlDB.rawQuery("Delete FROM words WHERE name = ?", new String[]{ word });
+        Cursor cursor = sqlDB.rawQuery("Delete FROM words WHERE name = ?", new String[]{ word+"\n"});
         if (cursor != null && cursor.moveToFirst()) {
         }
         Toast.makeText(ListOfWords.this,word.toLowerCase().trim()+" deleted",Toast.LENGTH_SHORT).show();

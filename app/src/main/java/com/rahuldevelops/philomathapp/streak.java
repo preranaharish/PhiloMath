@@ -50,7 +50,7 @@ public class streak extends AppCompatActivity {
         editor.putInt("streaks_count",2);
         editor.commit();
         Toast.makeText(streak.this,"Regular word reminders enabled",Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(streak.this, HomeScreen.class);
+        Intent intent = new Intent(streak.this, HomeScreenNew.class);
         startActivity(intent);
         finish();
 
@@ -68,7 +68,7 @@ public class streak extends AppCompatActivity {
         editor.putInt("streaks_count",4);
         editor.commit();
         Toast.makeText(streak.this,"Regular word reminders enabled",Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(streak.this, HomeScreen.class);
+        Intent intent = new Intent(streak.this, HomeScreenNew.class);
         startActivity(intent);
         finish();
     }
@@ -85,7 +85,7 @@ public class streak extends AppCompatActivity {
         editor.putInt("streaks_count",10);
         editor.commit();
         Toast.makeText(streak.this,"Regular word reminders enabled",Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(streak.this, HomeScreen.class);
+        Intent intent = new Intent(streak.this, HomeScreenNew.class);
         startActivity(intent);
         finish();
     }
@@ -102,7 +102,7 @@ public class streak extends AppCompatActivity {
         editor.putInt("streaks_count",15);
         editor.commit();
         Toast.makeText(streak.this,"Regular word reminders enabled",Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(streak.this, HomeScreen.class);
+        Intent intent = new Intent(streak.this, HomeScreenNew.class);
         startActivity(intent);
         finish();
     }
@@ -121,7 +121,7 @@ public class streak extends AppCompatActivity {
         editor.putInt("streaks_count",2);
         editor.commit();
         Toast.makeText(streak.this,"Regular word reminders enabled",Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(streak.this, HomeScreen.class);
+        Intent intent = new Intent(streak.this, HomeScreenNew.class);
         startActivity(intent);
         finish();
     }

@@ -2,7 +2,11 @@
 <project version="4">
   <component name="AndroidLayouts">
     <shared>
-      <config />
+      <config>
+        <device id="pixel_xl" />
+        <device id="wear_round" />
+        <device id="pixel_2" />
+      </config>
     </shared>
   </component>
   <component name="AndroidLogFilters">
@@ -10,16 +14,28 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20aa0277-1108-4833-9225-b609544e362d" name="Default Changelist" comment="Bottom Navigation bar">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_arch_core_core_runtime_2_0_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_constraintlayout_constraintlayout_2_0_0_beta4_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_test_core_1_2_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_test_ext_junit_1_1_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/circleprofile.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/logospace.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/mainquizbg.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/title.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/toolbarbg.xml" afterDir="false" />
+    <list default="true" id="20aa0277-1108-4833-9225-b609544e362d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/navEditor.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/Adapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/HomeScreenNew.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/Model.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/RCSTART.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/anim/fadeout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/homeback.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_keyboard_arrow_left_black_24dp.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_library_books_black_24dp.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/philomath_logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/rcpic.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ripple.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/search.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/wordresult.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_home_screen_new.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_r_c_s_t_a_r_t.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/itemforhomescreen.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/transition/explode.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileChanges/last-build.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.0-milestone-1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.0-milestone-1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.0-milestone-1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.0-milestone-1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.0-milestone-1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.0-milestone-1/javaCompile/classAnalysis.bin" afterDir="false" />
@@ -27,35 +43,33 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.0-milestone-1/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.0-milestone-1/taskHistory/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.0-milestone-1/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.0-milestone-1/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__android_arch_core_runtime_1_1_1_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_asynclayoutinflater_28_0_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_cardview_v7_28_0_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_customtabs_26_1_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_android_support_support_v4_27_0_2_aar.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/Customview.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/Guidescreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/Guidescreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/HomeScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/HomeScreen.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/ListOfWords.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/ListOfWords.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/MainQuiz.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/MainQuiz.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/NotificationScheduler.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/NotificationScheduler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/Quiz_start.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/Quiz_start.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/RCQUIZ.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/RCQUIZ.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/SignIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/SignIn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/Word_Result.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/Word_Result.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/UserDetailsAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/UserDetailsAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/add.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/add.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/settings_screen.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/settings_screen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/splash.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/splash.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/streak.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/streak.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/save_icon.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/save_icon.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/splash.gif" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/splash.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_customview.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ic_history_black_24dp.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_history_black_24dp.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ic_search_black_24dp.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_search_black_24dp.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/ic_trending_up_black_24dp.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_trending_up_black_24dp.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/optionbutton.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/optionbutton.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/pencil.png" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/pencil.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/quizgradient.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/quizgradient.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/drawable/rc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/rc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_add.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_add.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main_quiz.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main_quiz.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_quiz_start.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_quiz_start.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_r_c_q_u_i_z.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_r_c_q_u_i_z.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_settings_screen.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_settings_screen.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_streak.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_streak.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_word__result.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_word__result.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/app_bar_list_of_words.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/app_bar_list_of_words.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/card_view_of_words.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/card_view_of_words.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/colors.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/styles.xml" afterDir="false" />
     </list>
@@ -183,7 +197,7 @@
     <property name="ApkExportedModule" value="app" />
     <property name="BundleExportedModule" value="app" />
     <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="ZF62238WPC" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-07-19T09:27:57.658Z" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-08-01T18:15:08.512Z" />
     <property name="ExportApk.ApkPath" value="$PROJECT_DIR$/app" />
     <property name="ExportApk.BuildVariants" value="release" />
     <property name="ExportApk.SignV1" value="true" />
@@ -458,7 +472,14 @@
       <option name="project" value="LOCAL" />
       <updated>1595660513830</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Bottom Navigation bar">
+      <created>1595746434478</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1595746434478</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -710,48 +731,38 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/RCQUIZ.java</url>
-          <line>100</line>
+          <line>105</line>
           <option name="timeStamp" value="222" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/RCQUIZ.java</url>
-          <line>121</line>
+          <line>126</line>
           <option name="timeStamp" value="223" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/RCQUIZ.java</url>
-          <line>120</line>
+          <line>125</line>
           <option name="timeStamp" value="224" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/RCQUIZ.java</url>
-          <line>101</line>
+          <line>106</line>
           <option name="timeStamp" value="228" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/RCQUIZ.java</url>
-          <line>112</line>
+          <line>117</line>
           <option name="timeStamp" value="229" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/ListOfWords.java</url>
-          <line>407</line>
+          <line>408</line>
           <option name="timeStamp" value="231" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/UserDetailsAdapter.java</url>
-          <line>117</line>
+          <line>124</line>
           <option name="timeStamp" value="232" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/UserDetailsAdapter.java</url>
-          <line>48</line>
-          <option name="timeStamp" value="237" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/UserDetailsAdapter.java</url>
-          <line>51</line>
-          <option name="timeStamp" value="239" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/add.java</url>
@@ -813,6 +824,21 @@
           <line>351</line>
           <option name="timeStamp" value="270" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/ListOfWords.java</url>
+          <line>425</line>
+          <option name="timeStamp" value="272" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/ListOfWords.java</url>
+          <line>426</line>
+          <option name="timeStamp" value="273" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/ListOfWords.java</url>
+          <line>427</line>
+          <option name="timeStamp" value="274" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/rahulbuilds/philomath/NotificationScheduler.java</url>
           <line>214</line>
@@ -835,6 +861,12 @@
           <line>610</line>
           <properties class="com.rahulbuilds.philomath.add.CallbackTask2" />
           <option name="timeStamp" value="165" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/rahuldevelops/philomathapp/ListOfWords.java</url>
+          <line>423</line>
+          <properties class="com.rahuldevelops.philomathapp.ListOfWords" method="delete" />
+          <option name="timeStamp" value="271" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

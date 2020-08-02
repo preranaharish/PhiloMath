@@ -60,9 +60,8 @@ private long backPressedTime;
             @Override
             public void onClick(View v) {
                 if(count2>=5){
-                    Intent intent = new Intent(Quiz_start.this, RCQUIZ.class);
+                    Intent intent = new Intent(Quiz_start.this, RCSTART.class);
                     startActivity(intent);
-                    finish();
                 }
                 else{
                     Toast.makeText(Quiz_start.this,"No RC available, please make sure you have given storage access",Toast.LENGTH_LONG).show();
@@ -89,7 +88,7 @@ private long backPressedTime;
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.nav_home:
-                        Intent intent1 = new Intent(Quiz_start.this, HomeScreen.class);
+                        Intent intent1 = new Intent(Quiz_start.this, HomeScreenNew.class);
                         startActivity(intent1);
                         finish();
                         break;

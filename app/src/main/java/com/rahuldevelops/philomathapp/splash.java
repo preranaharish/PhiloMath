@@ -233,7 +233,7 @@ j++;
         }
         else{
            option = ActivityOptions.makeSceneTransitionAnimation(this);
-            intent = new Intent(splash.this, HomeScreen.class);
+            intent = new Intent(splash.this, HomeScreenNew.class);
         }
         new Thread(new Runnable() {
             @Override

@@ -281,7 +281,7 @@ public class NotificationScheduler
 
                 .setAutoCancel(true)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(content))
-                .setSmallIcon(R.drawable.icon)
+                .setSmallIcon(R.drawable.icon1)
                 .setContentIntent(pendingIntent).build();
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
