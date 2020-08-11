@@ -1,23 +1,6 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
-        <!-- Customize your theme here. -->
-
-        <item name="colorPrimary">#2196f3</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:statusBarColor">@color/colorPrimary</item>
-        <item name="android:navigationBarColor">@color/colorPrimary</item>
-        <item name="android:background">@color/colorBackground</item>
-        <item name="colorControlHighlight">@color/colorPrimaryRipple</item>
-        <item name="colorSecondary">#f50057</item>
-        <item name="android:windowContentTransitions">true</item>
-        <item name="android:windowEnterTransition">@transition/explode</item>
-        <item name="android:windowExitTransition">@transition/explode</item>
-
-        <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
-    </style>
     <style name="SCBSwitch" parent="Theme.AppCompat.Light">
         <!-- active thumb & track color (30% transparency) -->
         <item name="colorControlActivated">#2196f3</item>
@@ -29,10 +12,6 @@
         <!-- inactive track color (30% transparency) -->
         <item name="android:colorForeground">#42221f1f
         </item>
-    </style>
-    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
-        <item name="colorAccent">@color/colorPrimary</item>
-        <item name="colorControlNormal">#ffffff</item>
     </style>
 
     <style name="settings_item_layout">
@@ -47,32 +26,6 @@
 
     </style>
 
-    <style name="settings_header">
-        <item name="android:textColor">@color/textcolorHeader</item>
-        <item name="android:textSize">@dimen/large_text</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
-
-    <style name="settings_sub_header">
-        <item name="android:textColor">@color/textColorPrimary</item>
-        <item name="android:textSize">@dimen/medium_text</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
-
-    <style name="settings_details">
-        <item name="android:textColor">@color/textColorSecondary</item>
-        <item name="android:textSize">@dimen/small_text</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
-
-    <style name="switch_theme">
-        <item name="thumbTint">@color/switch_color</item>
-        <item name="trackTint">@color/track_color</item>
-    </style>
-
     <style name="PrimaryFlatButton" parent="Theme.AppCompat.Light">
         <item name="buttonStyle">@style/Widget.AppCompat.Button.Borderless.Colored</item>
         <item name="colorControlHighlight">@color/switch_color</item>
@@ -81,11 +34,19 @@
     <style name="NoActionBar" parent="Theme.AppCompat">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+
     </style>
     <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
     <style name="Widget.Support.CoordinatorLayout" parent="android:Widget">
         @null
+    </style>
+
+    <style name="CustomActivityAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_left</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_left</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_left</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_left</item>
     </style>
 
 </resources>

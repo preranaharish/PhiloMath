@@ -12,11 +12,14 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.TaskStackBuilder;
+import androidx.core.content.ContextCompat;
+
 import android.util.Log;
 import android.widget.RemoteViews;
 
@@ -278,7 +281,7 @@ public class NotificationScheduler
 
         Notification notification = builder.setContentTitle(title)
                 .setContentText(content)
-
+                .setColor(ContextCompat.getColor(context, R.color.notification))
                 .setAutoCancel(true)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(content))
                 .setSmallIcon(R.drawable.icon1)
@@ -292,6 +295,7 @@ public class NotificationScheduler
             channel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
             notificationManager.createNotificationChannel(channel);
             builder.setChannelId(channelId);
+            builder.setColor(Color.BLUE);
         }
 
         notification = builder.build();

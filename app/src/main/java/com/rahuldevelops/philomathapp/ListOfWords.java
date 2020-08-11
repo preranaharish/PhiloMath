@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.AudioManager;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,6 +33,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
+
+import android.transition.Fade;
 import android.util.Log;
 import android.util.Pair;
 import android.view.Menu;
@@ -147,6 +150,8 @@ BottomNavigationView bottomNavigationView;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_of_words);
+        getWindow().setExitTransition(null);
+        getWindow().setEnterTransition(null);
         Window window =   this.getWindow();
 
 // clear FLAG_TRANSLUCENT_STATUS flag:
@@ -271,7 +276,7 @@ BottomNavigationView bottomNavigationView;
                     super.onScrollStateChanged(recyclerView, newState);
                 }
             });
-            mTTS = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            mTTS = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
                 @Override
                 public void onInit(int status) {
                     if (status == TextToSpeech.SUCCESS) {
@@ -304,37 +309,37 @@ BottomNavigationView bottomNavigationView;
          sqlDB = dbHandler.getWritableDatabase();
 
     }
-        @Override
-        public boolean onSupportNavigateUp () {
-            TextView username = (TextView) findViewById(R.id.username);
-            username.setText(usernametext);
-            TextView email = (TextView) findViewById(R.id.email);
-            email.setText(emailtext);
-            ImageView imgProfilePic = (ImageView)findViewById(R.id.profilepic);
-            TextView streakhead =(TextView) findViewById(R.id.streakhead1);
-            TextView streaks =(TextView) findViewById(R.id.streak1);
-            String days =Integer.toString(daycounter);
-            streaks.setText(days);
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-                streakhead.setVisibility(View.INVISIBLE);
-                streaks.setVisibility(View.INVISIBLE);
-            }
-            try{
-
-//                Glide.with(getApplicationContext()).load(url)
-//                        .thumbnail(0.5f)
-//                        .crossFade()
-//                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-//                        .into(imgProfilePic);
-            }catch (Exception e){
-                imgProfilePic.setVisibility(View.INVISIBLE);
-            }
-
-            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-            return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                    || super.onSupportNavigateUp();
-
-        }
+//        @Override
+//        public boolean onSupportNavigateUp () {
+////            TextView username = (TextView) findViewById(R.id.username);
+////            username.setText(usernametext);
+////            TextView email = (TextView) findViewById(R.id.email);
+////            email.setText(emailtext);
+////            ImageView imgProfilePic = (ImageView)findViewById(R.id.profilepic);
+////            TextView streakhead =(TextView) findViewById(R.id.streakhead1);
+////            TextView streaks =(TextView) findViewById(R.id.streak1);
+////            String days =Integer.toString(daycounter);
+////            streaks.setText(days);
+////            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+////                streakhead.setVisibility(View.INVISIBLE);
+////                streaks.setVisibility(View.INVISIBLE);
+////            }
+////            try{
+////
+//////                Glide.with(getApplicationContext()).load(url)
+//////                        .thumbnail(0.5f)
+//////                        .crossFade()
+//////                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+//////                        .into(imgProfilePic);
+////            }catch (Exception e){
+////                imgProfilePic.setVisibility(View.INVISIBLE);
+////            }
+//
+//            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+//            return NavigationUI.navigateUp(navController, mAppBarConfiguration)
+//                    || super.onSupportNavigateUp();
+//
+//        }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -438,7 +443,11 @@ BottomNavigationView bottomNavigationView;
         }
     }
     private void speak(String title1) {
-
+        AudioManager audio = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        int currentVolume = audio.getStreamVolume(AudioManager.STREAM_MUSIC);
+        if(currentVolume<5){
+            Toast.makeText(this,"Please increase the volume to listen",Toast.LENGTH_LONG).show();
+        }
         String text = title1;
         mTTS.setPitch(0.9f);
         mTTS.setSpeechRate(0.85f);
@@ -681,7 +690,7 @@ BottomNavigationView bottomNavigationView;
                 intent.putExtra("meaning",def);
                 intent.putExtra("example",def1);
                 intent.putExtra("synonyms",synonyms);
-                intent.putExtra("visibility",1);
+                intent.putExtra("visibility",0);
                 intent.putExtra("synonyms_array1",synonyms_array[0]);
                 intent.putExtra("synonyms_array2",synonyms_array[1]);
                 intent.putExtra("synonyms_array3",synonyms_array[2]);

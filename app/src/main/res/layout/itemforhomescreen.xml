@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         card_view:cardUseCompatPadding="true"
-        app:cardElevation="0dp"
+        app:cardElevation="1dp"
         app:cardMaxElevation="4dp"
         app:cardCornerRadius="10dp"
         android:background="@drawable/rounded_edittext"
@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1.5"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="1dp"
             android:id="@+id/linearword"
             android:orientation="vertical"
             android:gravity="center">

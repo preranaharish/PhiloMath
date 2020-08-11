@@ -23,20 +23,19 @@ LayoutInflater layoutInflater;
 
     public int[] slideimage={
             R.drawable.guides,
-           R.drawable.notify,
-            R.drawable.quiz
+           R.drawable.notify1,
+            R.drawable.quiz1
     };
 
     public String[] heading={
             "PHILOSEARCH",
             "REVISE & REMEMBER",
-            "READING COMPREHENSION\n QUIZ"
+            "RC and REVISION\n TESTS"
     };
     public String[] messages={
-            "You can search and bookmark for the new word you come across in any app installed in your phone\n its not just an app it's an integrated tool in your android phone",
-            "Remembering new english words is hard unless someone repeatedly remind you the word and it's meaning\n Don't worry Philomath is just trained to do that\n Regular notifications of the words you learn to help you retain the words",
-            "Take Quiz from our collection of 200+ RCs which includes previous year CAT/IIFT/XAT questions\n 'Practise makes man perfect'\n So Don't forget to take words quiz which will generate a quiz from your bookmarked words list"
-    };
+            "Integrate tool to your android phone : Bookmark words from any app",
+            "Regular reminders of the words you learn to help you retain the words",
+            "Take Quiz from our collection of 200+ RCs which includes previous year CAT/IIFT/XAT questions and other official guides,\nRevison quiz to revise the words you learnt"};
     @Override
     public int getCount() {
         return slideimage.length;
@@ -55,11 +54,9 @@ LayoutInflater layoutInflater;
         layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         View view  = layoutInflater.inflate(R.layout.guidelayout,container,false);
         GifImageView iv = (GifImageView)view.findViewById(R.id.guides);
-        TextView slideviewheading = (TextView)view.findViewById(R.id.heading);
         TextView message = (TextView)view.findViewById(R.id.messages);
 
         iv.setImageResource(slideimage[position]);
-        slideviewheading.setText(heading[position]);
         message.setText(messages[position]);
 
         container.addView(view);

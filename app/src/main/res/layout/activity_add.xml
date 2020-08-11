@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
@@ -36,10 +35,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Philosearch"
+        android:text="PhiloSearch"
         android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textSize="30dp"
+        android:fontFamily="sans-serif-black"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -111,7 +111,6 @@
                                 android:layout_marginTop="15dp"/>
 
                             <TextView
-                                android:id="@+id/secTxt"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="right"
@@ -194,6 +193,7 @@
                     android:layout_marginRight="25dp"
                     app:cardUseCompatPadding="true"
                     android:foregroundGravity="center"
+                    android:background="#ffffff"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/trendingcard"
@@ -203,6 +203,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="#ffffff"
+                        android:layout_marginBottom="20dp"
                         android:orientation="vertical">
 
 
@@ -254,7 +255,7 @@
                                 android:layout_marginTop="10dp"
                                 android:maxHeight="2dp"
                                 android:text="B"
-                                android:textColor="#A598EA"
+                                android:textColor="#01579b"
                                 android:textSize="30dp"
                                 android:textStyle="bold" />
 
@@ -289,7 +290,7 @@
                                 android:layout_marginLeft="40dp"
                                 android:text="B"
                                 android:layout_marginTop="10dp"
-                                android:textColor="#A598EA"
+                                android:textColor="#01579b"
                                 android:textSize="30dp"
 
                                 android:textStyle="bold"
@@ -325,7 +326,7 @@
                                 android:layout_marginLeft="40dp"
                                 android:layout_marginTop="10dp"
                                 android:text="B"
-                                android:textColor="#A598EA"
+                                android:textColor="#01579b"
                                 android:textSize="30dp"
                                 android:textStyle="bold"
                                 android:gravity="center"
@@ -353,18 +354,18 @@
 
 
             <TextView
-                android:id="@+id/powered"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:layout_marginBottom="70dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="70dp"
                 android:layout_below="@+id/recents_layout2"
                 android:paddingTop="10dp"
                 android:text="Powered By Oxford Dictionary"
                 android:textColor="#000000"
                 android:textColorHint="@android:color/darker_gray"
-                android:textSize="20dp"
+                android:textSize="15dp"
+                android:layout_gravity="center"
                 android:visibility="visible" />
 
         </LinearLayout>
@@ -393,6 +394,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="0dp"
             android:layout_marginStart="0dp"
+            android:transitionName="sharedbottom"
             android:layout_alignParentBottom="true"
             android:background="#0d47a1"
             app:itemIconTint="@drawable/nav_item_color_state"

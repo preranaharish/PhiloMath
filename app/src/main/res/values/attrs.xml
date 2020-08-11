@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="absProgressBar1">
+        <attr name="progress1" format="integer" />
+        <attr name="backgroundColor1" format="reference|color" />
+        <attr name="textColor1" format="reference|color" />
+        <attr name="maxProgress1" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="progressBar1">
+        <attr name="startFillColor1" format="reference|color" />
+        <attr name="middleFillColor1" format="reference|color" />
+        <attr name="endFillColor1" format="reference|color" />
+        <attr name="arrowPointColor1" format="reference|color" />
+        <attr name="arrowPointRadius1" format="dimension|reference" />
+    </declare-styleable>
+    <declare-styleable name="floatTextProgressBar1">
+        <attr name="triangleColor1" format="reference|color" />
+        <attr name="rectColor1" format="reference|color" />
+        <attr name="fillColor1" format="reference|color" />
+    </declare-styleable>
+</resources>

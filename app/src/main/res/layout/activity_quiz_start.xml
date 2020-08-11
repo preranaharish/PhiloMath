@@ -98,8 +98,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="30dp"
-        android:text="Reading Comprehension collection\n
- from CAT, IIFT and all other management exams’\n
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="Reading Comprehension collection
+ from CAT, IIFT and all other management exams’
 previous year question papers"
         android:textColor="#0259CB"
         android:gravity="center"/>
@@ -111,6 +113,7 @@ previous year question papers"
         android:layout_marginEnd="0dp"
         android:layout_marginStart="0dp"
         android:background="#0d47a1"
+        android:transitionName="sharedbottom"
         android:layout_alignParentBottom="true"
         app:itemIconTint="@drawable/nav_item_color_state"
         app:itemTextColor="@android:color/white"

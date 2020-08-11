@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Guidescreen"
     android:orientation="vertical"
-    android:background="@drawable/anaida">
+    >
 
 
 
@@ -21,6 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:background="#0000a5"
         android:orientation="horizontal">
 
         <Button
@@ -40,6 +41,7 @@
         android:layout_below="@id/pager"
         android:id="@+id/dots"
         android:layout_gravity="center"
+        android:background="#0000a5"
         android:orientation="horizontal">
     </LinearLayout>
 

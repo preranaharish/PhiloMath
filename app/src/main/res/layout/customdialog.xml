@@ -55,7 +55,6 @@
                     android:textStyle="bold"
                     android:textSize="25dp"
                     android:textColor="@android:color/black"
-                    android:id="@+id/Title_box"
                     android:text="Test Finished"/>
 
                 <ImageView
@@ -137,7 +136,7 @@
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:background="@drawable/borderbutton"
+                    android:background="@drawable/quizgradient"
                     android:text="See Answers"
                     android:id="@+id/finishquizid"
                     android:textColor="@android:color/black"/>

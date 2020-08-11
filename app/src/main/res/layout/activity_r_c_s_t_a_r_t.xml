@@ -8,115 +8,20 @@
     tools:layout_editor_absoluteY="0dp"
     android:fillViewport="true">
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RCSTART"
     android:background="#1565c0">
 
-    <View
-        android:layout_width="311dp"
-        android:layout_height="204dp"
-        android:background="@drawable/rcpic"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="30dp"
-        android:id="@+id/rcquizbg"/>
-
-
-    <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:textColor="@android:color/white"
-    android:textSize="30dp"
-    android:text="Reading Comprehension\nQuiz"
-    android:textAlignment="center"
-    android:id="@+id/rcrules"
-    android:textStyle="bold"
-    app:layout_constraintTop_toBottomOf="@id/rcquizbg"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"/>
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="right"
-        android:text="Time:15:00"
-        android:textSize="25dp"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        android:layout_marginRight="10dp"
-        android:id="@+id/times"
-        app:layout_constraintTop_toBottomOf="@id/rcrules"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:textAlignment="textStart"
-        android:text="1.) There will be 1 passage with 4 or 5 questions."
-        app:layout_constraintTop_toBottomOf="@id/times"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"
-        android:id="@+id/rules"
-        android:textSize="20dp"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:textAlignment="textStart"
-        android:text="2.)Each right answer carries 3 marks and wrong answer -1"
-        app:layout_constraintTop_toBottomOf="@id/rules"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"
-        android:id="@+id/rules1"
-        android:textSize="20dp"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/white"
-        android:textAlignment="textStart"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:text="3.)You can check the right answer once the quiz is finished. "
-        app:layout_constraintTop_toBottomOf="@id/rules1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"
-        android:id="@+id/rules2"
-        android:textSize="20dp"/>
-
-
-    <Button
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:id="@+id/start"
-        app:layout_constraintTop_toBottomOf="@id/rules2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="Start Test"
-        android:textStyle="bold"
-        android:layout_marginTop="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@drawable/roundedbutton"
-        android:backgroundTint="#F72585"/>
-
-
-
+    <View android:layout_width="311dp" android:layout_height="204dp" android:background="@drawable/icon1" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="30dp" android:id="@+id/rcquizbg"/>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@android:color/white" android:textSize="30dp" android:text="Reading Comprehension\nQuiz" android:textAlignment="center" android:id="@+id/rcrules" android:textStyle="bold" app:layout_constraintTop_toBottomOf="@id/rcquizbg" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="right" android:text="Time:15:00" android:textSize="25dp" android:textColor="@android:color/white" android:textStyle="bold" android:layout_marginRight="10dp" android:id="@+id/times" app:layout_constraintTop_toBottomOf="@id/rcrules" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="@android:color/white" android:textAlignment="textStart" android:text="1) There will be 1 passage with 4 or 5 questions." app:layout_constraintTop_toBottomOf="@id/times" android:layout_marginLeft="20dp" android:layout_marginRight="20dp" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="20dp" android:id="@+id/rules" android:textSize="20dp"/>
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="@android:color/white" android:layout_marginLeft="20dp" android:layout_marginRight="20dp" android:textAlignment="textStart" android:text="2)Each question will carry 3 marks." app:layout_constraintTop_toBottomOf="@id/rules" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="20dp" android:id="@+id/rules1" android:textSize="20dp"/>
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="@android:color/white" android:layout_marginLeft="20dp" android:layout_marginRight="20dp" android:textAlignment="textStart" android:text="3)There wsill be negative marking of -1 each for a wrong answer.." app:layout_constraintTop_toBottomOf="@id/rules1" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="20dp" android:id="@+id/rules2" android:textSize="20dp"/>
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="@android:color/white" android:textAlignment="textStart" android:layout_marginLeft="20dp" android:layout_marginRight="20dp" android:text="4)You can check the right answer once the quiz is finished. " app:layout_constraintTop_toBottomOf="@id/rules2" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="20dp" android:id="@+id/rules3" android:textSize="20dp"/>
+    <Button android:layout_width="300dp" android:layout_height="50dp" android:id="@+id/start" app:layout_constraintTop_toBottomOf="@id/rules3" app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent" android:text="Start Test" android:textStyle="bold" android:layout_marginTop="10dp" app:layout_constraintBottom_toBottomOf="parent" android:backgroundTint="#03962a"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

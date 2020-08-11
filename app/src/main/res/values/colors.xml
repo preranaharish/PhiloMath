@@ -3,35 +3,16 @@
     <color name="colorPrimary">#58CEF4</color>
     <color name="colorSecondary">#18ffff</color>
     <color name="colorPrimaryDark">#017398</color>
-    <color name="colorPrimaryRipple">#423f51b5</color>
     <color name="colorAccent">#FF0000</color>
     <color name="notification">#0072c6</color>
 <color name="transparentwhite">#cccccc</color>
 <color name="my_statusbar_color">#002171</color>
-    <color name="textcolorHeader">#FFC0CB</color>
-    <color name="textColorPrimary">#000000</color>
-    <color name="textColorSecondary">#A5A5A5</color>
-    <color name="colorControlHighlight">#ff726f</color>
-    <color name="colorButtonNormal">#f70d1a</color>
-    <color name="colorButtonActivated">#f70d1a</color>
-    <color name="solidCircle">#AAFFFFFF</color>
     <color name="circleBorder">#50FFFFFF</color>
-    <color name="gradEnd">#67EFC8</color>
-    <color name="gradStart">#63C9FF</color>
-    <color name="toolbar">@android:color/transparent</color>
-    <color name="color1">#fce4ec</color>
-    <color name="color2">#fff3e0</color>
-    <color name="color3">#e8f5e9</color>
-    <color name="color4">#efebe9</color>
 
     <!--switch color-->
 
     <color name="thumb_active">#069ECF</color>
-    <color name="track_active">#f70d1a</color>
 
-    <color name="colorBackground">#000000</color>
-    <color name="colorSurface">#121212</color>
     <color name="thumb_inactive">#A5A5A5</color>
-    <color name="track_inactive">#66A5A5A5</color>
 
 </resources>

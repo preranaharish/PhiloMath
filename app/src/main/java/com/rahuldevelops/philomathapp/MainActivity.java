@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemL
 
 
             }
-        linearlayout=(LinearLayout)findViewById(R.id.search_option);
+//        linearlayout=(LinearLayout)findViewById(R.id.search_option);
 
         }
 

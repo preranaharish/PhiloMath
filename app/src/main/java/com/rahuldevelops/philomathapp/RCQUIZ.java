@@ -102,7 +102,7 @@ public class RCQUIZ extends AppCompatActivity {
 
             @Override
             public void onAdClosed() {
-                String timeFormatted = String.format(Locale.getDefault(), "%02d:%02d", 24-minutes1, 60-minutes1);
+                String timeFormatted = String.format(Locale.getDefault(), "%02d:%02d", 14-minutes1, 60-seconds1);
 
                 quizdialog.setContentView(R.layout.customdialog);
                 close=(ImageView)quizdialog.findViewById(R.id.close);
@@ -252,6 +252,7 @@ Toast.makeText(RCQUIZ.this,"No solutions available without Internet connection",
                         finishQuiz();
                     else
                    {
+
                        ShowSolution();
                    }
                 }
@@ -299,6 +300,7 @@ Toast.makeText(RCQUIZ.this,"No solutions available without Internet connection",
             if (mInterstitialAd.isLoaded()) {
                 quizcompleted=true;
                 mInterstitialAd.show();
+                countDownTimer.cancel();
             }
             else{
                 Toast.makeText(RCQUIZ.this,"No Internet connection to show solutions",Toast.LENGTH_LONG).show();
@@ -334,14 +336,16 @@ Toast.makeText(RCQUIZ.this,"No solutions available without Internet connection",
         toolbarview.setText(timeFormatted);
 
         if (timeLeftInMillis < 10000) {
+            toolbarview.setTextColor(Color.RED);
             textViewCountDown.setTextColor(Color.RED);
         } else {
+            toolbarview.setTextColor(textColorDefaultCds);
             textViewCountDown.setTextColor(textColorDefaultCds);
         }
     }
 
     private void checkAnswer() {
-        countDownTimer.cancel();
+
         answered = true;
 
         RadioButton rbSelected = findViewById(rbGroup.getCheckedRadioButtonId());

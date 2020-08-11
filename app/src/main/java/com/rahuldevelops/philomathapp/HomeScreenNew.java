@@ -20,12 +20,14 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.util.Pair;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -94,6 +96,8 @@ String words[]=new String[4];
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen_new);
+        getWindow().setExitTransition(null);
+        getWindow().setEnterTransition(null);
         Window window =   this.getWindow();
 
 // clear FLAG_TRANSLUCENT_STATUS flag:
@@ -144,7 +148,7 @@ String words[]=new String[4];
 
                     Notification notification = builder.setContentTitle("App needs an update")
                             .setContentText("Please update the Philomath app for the best learning  experience")
-
+                            .setColor(ContextCompat.getColor(context, R.color.notification))
                             .setAutoCancel(true)
                             .setStyle(new NotificationCompat.BigTextStyle().bigText("Please update the Philomath app for the best learning experience"))
                             .setSmallIcon(R.drawable.philomath_logo)
@@ -158,6 +162,7 @@ String words[]=new String[4];
                         channel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
                         notificationManager.createNotificationChannel(channel);
                         builder.setChannelId(channelId);
+                        builder.setColor(Color.BLUE);
                     }
 
                     notification = builder.build();
@@ -189,7 +194,7 @@ String words[]=new String[4];
                 words[i]=(c1.getString(c1.getColumnIndex("word")).trim());
                 d1[i]=(c1.getString(c1.getColumnIndex("Meaning")).trim());
                 c[i]=(c1.getString(c1.getColumnIndex("category")).trim());
-                e1[i]=(c1.getString(c1.getColumnIndex("examples")).trim());
+                e1[i]=("Eg:"+c1.getString(c1.getColumnIndex("examples")).trim());
                 p1[i]=("/"+c1.getString(c1.getColumnIndex("phonetics")).trim()+"/");
                 i++;
 
@@ -211,7 +216,6 @@ String words[]=new String[4];
                         break;
 
                     case R.id.nav_search:
-
                         Intent intent1 = new Intent(HomeScreenNew.this, add.class);
                         intent1.putExtra("words",arr);
                         startActivity(intent1);

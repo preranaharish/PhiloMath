@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
+import android.transition.Fade;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -88,6 +89,10 @@ public class add extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+        Fade fade = new Fade();
+        fade.excludeTarget(android.R.id.statusBarBackground, true);
+        fade.excludeTarget(android.R.id.navigationBarBackground, true);
+
         Window window =   this.getWindow();
 
 // clear FLAG_TRANSLUCENT_STATUS flag:

@@ -11,6 +11,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.transition.Fade;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -28,6 +29,9 @@ private long backPressedTime;
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_quiz_start);
+        Fade fade = new Fade();
+        fade.excludeTarget(android.R.id.statusBarBackground, true);
+        fade.excludeTarget(android.R.id.navigationBarBackground, true);
 
         Window window =   this.getWindow();
 

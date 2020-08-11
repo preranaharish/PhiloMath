@@ -100,7 +100,7 @@
                 android:textAlignment="textStart"
                 android:textSize="16dp"
                 android:id="@+id/speakword1"
-               android:textColor="@android:color/black"
+                android:textColor="@color/colorPrimary"
                 android:background="@android:color/transparent"/>
 
             <ImageView

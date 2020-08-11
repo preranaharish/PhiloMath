@@ -1,5 +1,7 @@
 package com.rahuldevelops.philomathapp;
 
+import android.animation.ObjectAnimator;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -9,6 +11,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
+import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -30,6 +33,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -56,7 +60,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.rahuldevelops.philomathapp.R;
+
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -80,6 +84,8 @@ public class Word_Result extends AppCompatActivity {
     String note;
     RelativeLayout rl;
     Question1 q;
+    CardView cv;
+  ImageView mImgCheck;
     String graph_words[] = new String[4];
     String graph_score[] = new String[4];
     int scores[] = new int[4];
@@ -105,7 +111,7 @@ int catimportance,greimportance;
 // finally change the color
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.my_statusbar_color));
 
-        mTTS = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+        mTTS = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
                 if (status == TextToSpeech.SUCCESS) {
@@ -133,7 +139,9 @@ int catimportance,greimportance;
             word = extras.getString("word");
             word=word.toUpperCase();
             meaning = extras.getString("meaning");
+            meaning=meaning.substring(0, 1).toUpperCase() + meaning.substring(1);
             example = extras.getString("example");
+            example="Eg: "+example;
             synonyms = extras.getString("synonyms");
             save_visibility = extras.getInt("visibility");
             synonym1 = extras.getString("synonyms_array1");
@@ -170,6 +178,8 @@ int catimportance,greimportance;
                     mDatabase.child("word4").setValue(word.toLowerCase());
 
             }}
+           cv = (CardView)findViewById(R.id.cardviewofwords);
+
             try{
                 int max=0;
             for(int i =0;i<graph_score.length;i++){
@@ -180,8 +190,39 @@ int catimportance,greimportance;
             for(int j=0;j<graph_score.length;j++){
                 scores[j]=(scores[j]*100)/max;
             }
+
+                TextView word1 = (TextView)findViewById(R.id.word1);
+                word1.setText(graph_words[0]);
+                FloatTextProgressBar floatTextProgressBar = findViewById(R.id.floatTextProgressBar1);
+                ObjectAnimator animation = ObjectAnimator.ofInt(floatTextProgressBar, "progress", scores[0]);
+                animation.setDuration(5000);
+                animation.setInterpolator(new DecelerateInterpolator());
+                animation.start();
+                TextView word2 = (TextView)findViewById(R.id.word2);
+                word2.setText(graph_words[1]);
+                FloatTextProgressBar floatTextProgressBar2 = findViewById(R.id.floatTextProgressBar2);
+                ObjectAnimator animation1 = ObjectAnimator.ofInt(floatTextProgressBar2, "progress", scores[1]);
+                animation1.setDuration(5000);
+                animation1.setInterpolator(new DecelerateInterpolator());
+                animation1.start();
+                TextView word3 = (TextView)findViewById(R.id.word3);
+                word3.setText(graph_words[2]);
+                FloatTextProgressBar floatTextProgressBar3 = findViewById(R.id.floatTextProgressBar3);
+                ObjectAnimator animation2 = ObjectAnimator.ofInt(floatTextProgressBar3, "progress", scores[2]);
+                animation2.setDuration(5000);
+                animation2.setInterpolator(new DecelerateInterpolator());
+                animation2.start();
+                TextView word4 = (TextView)findViewById(R.id.word4);
+                word4.setText(graph_words[3]);
+                FloatTextProgressBar floatTextProgressBar4 = findViewById(R.id.floatTextProgressBar4);
+                ObjectAnimator animation4 = ObjectAnimator.ofInt(floatTextProgressBar4, "progress", scores[3]);
+                animation4.setDuration(5000);
+                animation4.setInterpolator(new DecelerateInterpolator());
+                animation4.start();
+
             }catch (Exception e){
-                Toast.makeText(this,"Graph data not available",Toast.LENGTH_LONG).show();
+                cv.setVisibility(View.INVISIBLE);
+                Toast.makeText(this,"Similar words data not available",Toast.LENGTH_LONG).show();
             }
             if (save_visibility==0){
                 note1=extras.getString("note");
@@ -193,7 +234,6 @@ int catimportance,greimportance;
         }
 
 
-        horizontalChart = (BarChart)findViewById(R.id.barchart);
 // To get random color
         ImageButton phonetics = (ImageButton)findViewById(R.id.phoneitcs);
         phonetics.setOnClickListener(new View.OnClickListener() {
@@ -212,7 +252,7 @@ int catimportance,greimportance;
         Synonyms.setText(synonyms);
         ImageButton  Save = (ImageButton)findViewById(R.id.save);
         final CardView cardView = (CardView) findViewById(R.id.arrowBtn);
-        final ImageView mImgCheck = (ImageView) findViewById(R.id.savenote);
+       mImgCheck = (ImageView) findViewById(R.id.savenote);
         final ImageView mImgStar = (ImageView)findViewById(R.id.save);
         DrawableCompat.setTint(
                 mImgStar.getDrawable(),Color.WHITE
@@ -277,66 +317,21 @@ int catimportance,greimportance;
         //TODO:remove save button and use the save near additional instead
         if(save_visibility==1) {
             Save.setVisibility(View.VISIBLE);
+
             if(graph!=0){
                 //TODO: Barchart need to remove values from bottom and add top
-                BarDataSet barDataSet = new BarDataSet(getData(), "Words");
-                barDataSet.setBarBorderWidth(0.9f);
-                barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-                BarData barData = new BarData(barDataSet);
-
-                XAxis xAxis = horizontalChart.getXAxis();
-                xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-                final String[] months = new String[]{graph_words[0], graph_words[1], graph_words[2],graph_words[3]};
-                xAxis.setTextSize(0.5f);
-                IndexAxisValueFormatter formatter = new IndexAxisValueFormatter(months);
-                xAxis.setGranularity(1f);
-                xAxis.setDrawGridLines(false);
-                xAxis.setValueFormatter(formatter);
-
-
-
-                YAxis leftAxis = horizontalChart.getAxisLeft();
-                leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
-                leftAxis.setSpaceTop(15f);
-                leftAxis.setAxisMinimum(0f);
-
-                YAxis rightAxis = horizontalChart.getAxisRight();
-                rightAxis.setDrawGridLines(false);
-                rightAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
-                rightAxis.setSpaceTop(15f);
-                rightAxis.setAxisMinimum(0f);
-
-
-//                XYMarkerView mv = new XYMarkerView(this, IndexAxisValueFormatter);
-//                mv.setChartView(chart); // For bounds control
-//                chart.setMarker(mv);
-
-                Legend l = horizontalChart.getLegend();
-                l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-                l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
-                l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
-                l.setDrawInside(false);
-                l.setXEntrySpace(7f);
-                l.setYEntrySpace(0f);
-                l.setYOffset(0f);
-
-                horizontalChart.setDrawValueAboveBar(false);
-                horizontalChart.setData(barData);
-                horizontalChart.setNoDataTextColor(2);
-                horizontalChart.setFitBars(true);
-                horizontalChart.getAxisLeft().setTextColor(getResources().getColor(R.color.thumb_inactive));
-                horizontalChart.getAxisLeft().setAxisLineColor(getResources().getColor(R.color.thumb_inactive));
-                horizontalChart.getAxisRight().setTextColor(getResources().getColor(R.color.thumb_inactive));
-                horizontalChart.getAxisRight().setAxisLineColor(getResources().getColor(R.color.thumb_inactive));
-                horizontalChart.getXAxis().setTextColor(getResources().getColor(R.color.thumb_inactive));
-                horizontalChart.getXAxis().setTextSize(10);
-                horizontalChart.animateY(5000);
-                horizontalChart.invalidate();
-
-                horizontalChart.setVisibility(View.VISIBLE);
+               cv.setVisibility(View.VISIBLE);
             }
         }
         else{
+            if(graph!=0){
+                //TODO: Barchart need to remove values from bottom and add top
+                cv.setVisibility(View.VISIBLE);
+            }
+            ImageView iv = (ImageView)findViewById(R.id.pencil);
+            iv.setVisibility(View.INVISIBLE);
+            mImgCheck.setVisibility(View.INVISIBLE);
+            additionalnote.setVisibility(View.INVISIBLE);
             Save.setVisibility(View.INVISIBLE);
         }
         Save.setOnClickListener(new View.OnClickListener() {
@@ -678,7 +673,11 @@ if(pie==1) {
         speak(word);
     }
     private void speak(String title1) {
-
+        AudioManager audio = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        int currentVolume = audio.getStreamVolume(AudioManager.STREAM_MUSIC);
+        if(currentVolume<5){
+            Toast.makeText(this,"Please increase the volume to listen",Toast.LENGTH_LONG).show();
+        }
         String text = title1;
         mTTS.setPitch(0.9f);
         mTTS.setSpeechRate(0.85f);

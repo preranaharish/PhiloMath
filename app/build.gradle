@@ -4,6 +4,7 @@ apply plugin: 'com.google.gms.google-services'
 android {
     signingConfigs {
         config {
+
             keyAlias 'key0'
             keyPassword 'rahulleg'
             storeFile file('/Users/rahul/Documents/philomath')

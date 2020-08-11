@@ -10,7 +10,6 @@
 
 
     <FrameLayout
-        android:id="@+id/llReminder"
         style="@style/settings_item_layout"
         android:layout_height="match_parent">
 
